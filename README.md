@@ -42,8 +42,10 @@ Mas o projeto **Flash** morreu com a entrada dos dispositivos móveis e todos os
 
 Mas o sonho ainda era real, pois a necessidade era muito sólida aos nossos olhos, e no ano de 1012 iniciamos novamente o projeto.
 Agora com novas perspectivas, escolhemos como mascote uma **ovelha**, pois afinal de contas, quem não gosta de ovelhas? =)
+
 E batizamos o projeto de **WebSheep**.
 
-E assim o projeto começou a tomar corpo, sendo moldado varias vezes devido ao avanço da tecnologia.
+E assim o projeto começou a tomar corpo, com Israel no desenvolvimento, e Anereu com testes, referencias, e manutenção do código.
+O sistema foi moldado varias vezes devido ao avanço da tecnologia.
 E ao final de 5 anos de desenvolvimento, estamos trazendo a todos, com a esperança de fazer uma internet melhor.
 Sendo mais uma opção para quem desenvolve, seja ele iniciante, intermediário, experiente ou Jedi
