@@ -1,25 +1,16 @@
 ![WebSheep](https://raw.githubusercontent.com/websheep/cms/master/admin/App/Templates/img/websheep/logoEmail.png)
-# WebSheep - Content Management System
 O WebSheep é um aplicativo usado para criar, editar, gerenciar e publicar conteúdo de forma consistentemente organizada permitindo que o mesmo seja modificado, removido e adicionado com facilidade. Usados para armazenar, controlar, prover documentação, empresarial tais como notícias, artigos, manuais de operação, manuais técnicos, guias de vendas e brochuras de marketing. O conteúdo pode incluir imagens, áudios, vídeos, documentos eletrônicos e conteúdo Web.
 
-## License
+## Licença
 
-This software is distributed under the [LGPL 2.1](http://www.gnu.org/licenses/lgpl-2.1.html) license. Please read LICENSE for information on the
-software availability and distribution.
+Este software é distribuido sob a licença [LGPL 2.1](http://www.gnu.org/licenses/lgpl-2.1.html). Por favor, leia a LICENÇA para obter informações sobre disponibilidade e distribuição do websheep.
 
-## Installation & loading
+## Instalação simples e rápida
 
-PHPMailer is available via [Composer/Packagist](https://packagist.org/packages/phpmailer/phpmailer) (using semantic versioning), so just add this line to your `composer.json` file:
+Faça download do diretório **/ws-update/**  e jogue em seu FTP. 
+Execute o script e prossiga com a instalação normalmente. 
 
-```json
-"phpmailer/phpmailer": "~5.2"
-```
 
-or
-
-```sh
-composer require phpmailer/phpmailer
-```
 ### Minimal installation
 
 While installing the entire package manually or with composer is simple, convenient and reliable, you may want to include only vital files in your project. At the very least you will need [class.phpmailer.php](https://github.com/PHPMailer/PHPMailer/tree/master/class.phpmailer.php). If you're using SMTP, you'll need [class.smtp.php](https://github.com/PHPMailer/PHPMailer/tree/master/class.smtp.php), and if you're using POP-before SMTP, you'll need [class.pop3.php](https://github.com/PHPMailer/PHPMailer/tree/master/class.pop3.php). For all of these, we recommend you use [the autoloader](https://github.com/PHPMailer/PHPMailer/tree/master/PHPMailerAutoload.php) too as otherwise you will either have to `require` all classes manually or use some other autoloader. You can skip the [language](https://github.com/PHPMailer/PHPMailer/tree/master/language/) folder if you're not showing errors to users and can make do with English-only errors. You may need the additional classes in the [extras](extras/) folder if you are using those features, including NTLM authentication and ics generation. If you're using Google XOAUTH2 you will need `class.phpmaileroauth.php` and `class.oauth.php` classes too, as well as the composer dependencies.
