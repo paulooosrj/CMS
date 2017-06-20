@@ -26,7 +26,7 @@ Relate quaisquer problemas de segurança encontrados no email [websheep@feats.co
 Envie relatórios de erros, sugestões e solicitações de envio para o [GitHub issue tracker] (https://github.com/websheep/cms/issues).
 Nossa intenção é melhorar cada vez mais o sistema, ampliar a cobertura de testes e atualizar as traduções.
 
-##Requisitos de sistema
+## Requisitos de sistema
 
 Versão PHP 5.2.4 ou superior.
 MySQL versão 5.0 ou superior.
