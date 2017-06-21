@@ -307,24 +307,26 @@ function InsertCode(){
 				</div>
 			<div class="descricao">Você quer a classe em PHP ou uma TAG HTML5?</div>
 			<label>
-				<div style="width: 200px;margin: 10px;cursor:pointer;position: relative;float: left;padding: 10px 0;background: rgba(255, 255, 255, 0.58);top: 16px;left: 0px;">
+				<div style="width: 290px;margin: 10px;cursor:pointer;position: relative;float: left;padding: 10px 0;background: rgba(255, 255, 255, 0.58);top: 16px;left: 0px;">
 					Classe PHP: 
 					<input name="typeCode" value="classe" type="radio"/>
 				</div>
 			</label>
 			<label>
-				<div style="width: 170px;margin: 10px;cursor:pointer;position: relative;float: left;padding: 10px 0;background: rgba(255, 255, 255, 0.58);top: 16px;left: 0px;">
+				<div style="width: 290px;margin: 10px;cursor:pointer;position: relative;float: left;padding: 10px 0;background: rgba(255, 255, 255, 0.58);top: 16px;left: 0px;">
 					Tag HTML5: 
 					<input name="typeCode" value="tag" type="radio"/>
 				</div>
 			</label>
-			<label>
-				<div style="width: 170px;margin: 10px;cursor:pointer;position: relative;float: left;padding: 10px 0;background: rgba(255, 255, 255, 0.58);top: 16px;left: 0px;">
-					API RESTful: 
-					<input name="typeCode" value="rest" type="radio"/>
-				</div>
-			</label>
-
+			<!-- EM BREVE -->
+			<!--
+				<label>
+					<div style="width: 200px;margin: 10px;cursor:pointer;position: relative;float: left;padding: 10px 0;background: rgba(255, 255, 255, 0.58);top: 16px;left: 0px;">
+						API RESTful: 
+						<input name="typeCode" value="rest" type="radio"/>
+					</div>
+				</label>
+			-->
 
 			</form>
 		</div>';

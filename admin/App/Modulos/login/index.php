@@ -137,26 +137,8 @@ iframe{
 		})
 		$("#politica").click(function(e) {
 			e.preventDefault();
-			confirma({
-				conteudo:<? echo "'"
-				.'<h1 class="w1" style="font-size:20px;font-weight:bold;">'
-					.'<i class="icon-docs" style="margin-right: 10px;"></i>'
-					.'Política de privacidade'
-				.'</h1>'
-				.'<div id="termos" class="inputText" style="position: relative;background: #FFF;margin: 10px;padding: 10px;padding-right: 16px;text-align: justify;font-size: 14px;height: 300px;max-;overflow: auto;">'.str_replace(array(PHP_EOL,"'"),array("<br>","\'"),file_get_contents($_SERVER['DOCUMENT_ROOT'].'/admin/App/Templates/txt/'.ws::getlang("login>privacypolicyURL"))).'</div>'
-				."'";
-				?>,
-				posFn:function(e){},
-				newFun:function(){},
-				width:450,
-				height:'auto',
-				divScroll:"#body",
-				drag:false,
-				bot2:false,
-				bot1:"Ok, entendi",
-				Callback:function(e){},
-				check:function(e){return true}
-			})
+			window.open("/admin/LICENSE.md","_blank");
+
 		})
 
 		$("#tokenRequest").click(function(e) {
