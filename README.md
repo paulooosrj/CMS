@@ -9,6 +9,7 @@ Este software é distribuido sob a licença [LGPL 2.1](http://www.gnu.org/licens
 ## Instalação simples e rápida
 
 Faça download do diretório **/ws-install/**  e jogue na raiz do seu servidor ( *ex: /www/ws-install/* ). 
+
 Execute o script e prossiga com a instalação normalmente. 
 
 
