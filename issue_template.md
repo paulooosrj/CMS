@@ -1,32 +1,30 @@
-Issue tracker is **ONLY** used for reporting bugs. NO NEW FEATURE ACCEPTED! Use [stackoverflow](https://stackoverflow.com) for supporting issues.
+Issue tracker é usado **APENAS** para reportar bugs e erros. **NÃO ACEITA NOVAS FUNÇÕES**! 
 
-<!--- Provide a general summary of the issue in the Title above -->
+<!--- Forneça um resumo geral da questão no Título acima -->
 
-## Expected Behavior
-<!--- Tell us what should happen -->
+## Comportamento esperado
+<!--- Conte-nos o que deve acontecer -->
 
-## Current Behavior
-<!--- Tell us what happens instead of the expected behavior -->
+## Comportamento atual
+<!--- Conte-nos o que acontece em vez do comportamento esperado -->
 
-## Possible Solution
-<!--- Not obligatory, but suggest a fix/reason for the bug, -->
+## Possível solução
+<!--- Não é obrigatório, mas sugiro uma correção / razão para o bug -->
 
-## Steps to Reproduce
-<!--- Provide a link to a live example, or an unambiguous set of steps to -->
-<!--- reproduce this bug. Include code to reproduce, if relevant -->
+## Passos para reproduzir
+<!--- Forneça um link para um exemplo ao vivo ou um conjunto de etapas inequívocas para reproduzir esse bug. -->
+<!--- Incluir código para reproduzir, se relevante -->
 1.
 2.
 3.
 4.
 
-## Context (Environment)
-<!--- How has this issue affected you? What are you trying to accomplish? -->
-<!--- Providing context helps us come up with a solution that is most useful in the real world -->
+## Contexto (ambiente)
+<!--- Como esse problema o afetou? O que você está tentando realizar? -->
+<!--- Fornecer contexto que nos ajude a encontrar uma solução que seja mais útil no mundo real -->
 
-<!--- Provide a general summary of the issue in the Title above -->
+## Descrição detalhada
+<!--- Forneça uma descrição detalhada da mudança ou adição que você propõe -->
 
-## Detailed Description
-<!--- Provide a detailed description of the change or addition you are proposing -->
-
-## Possible Implementation
-<!--- Not obligatory, but suggest an idea for implementing addition or change -->
+## Possível implementação 
+<!--- Não é obrigatório, mas sugiro uma ideia para implementar adição ou alteração -->
