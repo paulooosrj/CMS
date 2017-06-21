@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+	AddType application/x-httpd-php .json
+	AddType application/x-httpd-php .conf
+	AddType application/x-httpd-php .html
+	RewriteEngine On
+	RewriteCond %{SCRIPT_FILENAME} !-f
+	RewriteRule ^(.*)$ index.php
+</IfModule>
