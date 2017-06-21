@@ -41,7 +41,7 @@ O projeto era ousado, pois na época o **Flash** estava nascendo como uma promes
 
 Tudo feito em **Flash**, porém com a entrada dos dispositivos móveis e todos os planos e centenas de horas de trabalho arduo foram jogadas no lixo junto com o Flash.
 
-Mas o sonho ainda era real, pois a necessidade era muito sólida aos nossos olhos, e no ano de 1012 iniciamos novamente o projeto.
+Mas o sonho ainda era real, pois a necessidade era muito sólida aos nossos olhos, e no ano de 2012 iniciamos novamente o projeto.
 Agora com novas perspectivas, escolhemos como mascote uma **ovelha**, pois afinal de contas, quem não gosta de ovelhas? =)
 
 E batizamos o projeto de **WebSheep**.
