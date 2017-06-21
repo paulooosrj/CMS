@@ -28,24 +28,24 @@ Nossa intenção é melhorar cada vez mais o sistema, ampliar a cobertura de tes
 
 ## Requisitos de sistema
 
-Versão PHP 5.2.4 ou superior.
+Versão PHP 5.6 ou superior.
 MySQL versão 5.0 ou superior.
 
 ## História
 O WebSheep foi idealizado no início de 2008 por **Israel Nogueira** e **Anereu Bighetti**, inicialmente seria um sistema de sites rápidos e barato chamado **Web Cheap**
 
-Mas nunca saiu do papel, e foi ao final de 2008 quando **Anereu** e seu irmão **Tcharles** trouxem a idéia de um sistema de CMS para leigos e iniciantes.
+Mas o projeto nunca saiu do papel, e foi ao final de 2008 quando **Anereu** e seu irmão **Tcharles** trouxem a idéia de um sistema de CMS para leigos e iniciantes.
 
-O projeto era ousado pois na época o **Flash** estava nascendo como uma promessa de inovação, e assim foi iniciada a produção do sistema que iria revolucionar o mercado feito em **Flash**.
+O projeto era ousado, pois na época o **Flash** estava nascendo como uma promessa de inovação, e assim foi iniciada a produção do sistema que iria revolucionar o mercado.
 
-Mas o projeto **Flash** morreu com a entrada dos dispositivos móveis e todos os sonhos e centenas de horas de trabalho arduo foram jogadas no lixo.
+Tudo feito em **Flash**, porém com a entrada dos dispositivos móveis e todos os planos e centenas de horas de trabalho arduo foram jogadas no lixo junto com o Flash.
 
 Mas o sonho ainda era real, pois a necessidade era muito sólida aos nossos olhos, e no ano de 1012 iniciamos novamente o projeto.
 Agora com novas perspectivas, escolhemos como mascote uma **ovelha**, pois afinal de contas, quem não gosta de ovelhas? =)
 
 E batizamos o projeto de **WebSheep**.
 
-E assim o projeto começou a tomar corpo, com Israel no desenvolvimento, e Anereu com testes, referencias, e manutenção do código.
+E assim o projeto começou a tomar corpo, com Israel no desenvolvimento, e Anereu com testes, referencias e manutenção do código.
 O sistema foi moldado varias vezes devido ao avanço da tecnologia.
 E ao final de 5 anos de desenvolvimento, estamos trazendo a todos, com a esperança de fazer uma internet melhor.
-Sendo mais uma opção para quem desenvolve, seja ele iniciante, intermediário, experiente ou Jedi
+Sendo mais uma opção para quem desenvolve, seja ele iniciante, intermediário, experiente ou Master Jedi.
