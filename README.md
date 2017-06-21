@@ -1,6 +1,6 @@
 ![WebSheep](https://raw.githubusercontent.com/websheep/cms/master/admin/App/Templates/img/websheep/logoEmail.png)
 
-[!(https://img.shields.io/badge/version-0.6-blue.svg)]
+[![Latest Stable Version](https://img.shields.io/badge/version-0.6-blue.svg)]
 
 O WebSheep é um aplicativo usado para criar, editar, gerenciar e publicar conteúdo de forma consistentemente organizada permitindo que o mesmo seja modificado, removido e adicionado com facilidade. Usados para armazenar, controlar, prover documentação, empresarial tais como notícias, artigos, manuais de operação, manuais técnicos, guias de vendas e brochuras de marketing. O conteúdo pode incluir imagens, áudios, vídeos, documentos eletrônicos e conteúdo Web.
 
