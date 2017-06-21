@@ -1,5 +1,5 @@
-<?php 
-
+<?
+	ini_set('max_execution_time',0);
 	function ws_copy_dir($src,$dst) { 
 		$dir = opendir($src); 
 		@mkdir($dst); 
@@ -31,19 +31,34 @@
 		rmdir($Dir);
 	}
 	if(isset($_GET['download']) && $_GET['download']=='1'){
-			$fp = fopen('master.zip', 'w');
-			fwrite($fp,file_get_contents("https://github.com/websheep/cms/archive/master.zip"));
+			$folderName = "CMS-".str_replace(".zip","",basename($_REQUEST['branche']));
+			$fp 		= fopen('ws-update.zip', 'w');
+			fwrite($fp,file_get_contents($_REQUEST['branche']));
 			fclose($fp);
 			$zip = new ZipArchive();
-			if ($zip->open("./master.zip")) {
+			if ($zip->open("./ws-update.zip")) {
 				$zip->extractTo("./");
 				$zip->close();
 				if(file_exists("./../admin")){ws_delete_dir("./../admin");}
 				verifyAdmin:
 				if(!file_exists("./../admin")){
-					ws_copy_dir("./cms-master/admin","./../admin");
-					ws_delete_dir("cms-master");
-					unlink("./master.zip");
+					$dst = "./../";
+					$dir = opendir("./".$folderName); 
+					while(false !== ( $file = readdir($dir)) ) { 
+						if (( $file != '.' ) && ( $file != '..' )) { 
+							$remetente = $folderName . '/' . $file;
+							$destino = $dst . '/' . $file;
+							if (is_dir($remetente)) { 
+								@mkdir($destino);
+								ws_copy_dir($remetente,$destino);
+							} else { 
+								copy($remetente,$destino); 
+							} 
+						} 
+					} 
+					closedir($dir); 
+					ws_delete_dir("./".$folderName);
+					unlink("./ws-update.zip");
 				}else{
 					goto verifyAdmin;
 				}
@@ -51,11 +66,7 @@
 			}
 		exit;
 	}
-
-	$remoteVersion = json_decode(@file_get_contents("https://raw.githubusercontent.com/websheep/cms/master/admin/App/Templates/json/ws-update.json"));
-
-
-
+	$remoteVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/websheep/cms/master/admin/App/Templates/json/ws-update.json"));
 ?>
 
 <head>
@@ -128,17 +139,7 @@
 		text-align: center;
 		font-family: 'Titillium Web', sans-serif;
 		font-style: normal;
-		font-weight: 400;
-		font-size: 12px;
-		background-color: #FFF;
-		margin: 0 10px;
-		padding: 10px;
-		border: solid 1px #c3c3c3;
-		-moz-border-radius: 7px;
-		-webkit-border-radius: 7px;
 		border-radius: 7px;
-
-
 	}
 	.txt b{
 		font-family:'Titillium Web', sans-serif;
@@ -236,6 +237,27 @@
 		-ms-user-select: none;
 		user-select: none;
 	}
+	#branches{
+		padding: 10px;
+		width: 100%;
+	   -webkit-appearance: button;
+	   -webkit-border-radius: 2px;
+	   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+	   -webkit-padding-end: 20px;
+	   -webkit-padding-start: 2px;
+	   -webkit-user-select: none;
+	   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+	   background-position: 97% center;
+	   background-repeat: no-repeat;
+	   border: 1px solid #AAA;
+	   color: #555;
+	   font-size: inherit;
+	   overflow: hidden;
+	   padding: 5px 10px;
+	   text-overflow: ellipsis;
+	   white-space: nowrap;
+	   width: 300px;
+	}
 	.version{
 		position: relative;
 		font-size: 14px;
@@ -245,32 +267,38 @@
 </style>
 </head>
 <div class="comboCentral">
-	<div class="logo"><b><?if(file_exists("./../admin")){echo "Update"; }else{echo "Setup";}?> WebSheep</b><span class="version"> v.<?=$remoteVersion->version?></span> <br>
+	<div class="logo"><b><?if(file_exists("./../admin")){echo "Update"; }else{echo "Setup";}?> WebSheep</b><br>
 	</div>
 	<div class="txt" id="txt">
-		<?php
-			if(is_array($remoteVersion->features)){
-				echo "• ".implode($remoteVersion->features,"<br>• ");
-			}else{
-				echo $remoteVersion->features;
-			}
-		?>
+		<select id="branches"></select>
 	</div>
+	<!--  -->
+
 	<div class="botao" id="botao">instalar WebSheep</div>
 	<div class="loader" id="loader" style="display:none"></div>
 
 </div>
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script type="text/javascript">
+
 window.setMsn = function(valor){$('#bytes').text(valor);}
 $(document).ready(function(){
+	$("#botao").hide();
+	$.getJSON("https://api.github.com/repos/websheep/cms/branches",function(a){
+		$.each(a,function(b,c){
+			var baseLink = "https://github.com/websheep/cms/archive/__.zip";
+			var realLink = baseLink.replace("__",c.name);
+			$("#branches").prepend('<option value="'+realLink+'">'+c.name+'</option>');
+		})
+		$("#botao").show();
+	})
 	$("#botao").bind("click press tap",function(){
 		$("#loader").show();
 		$("#txt,#botao").hide();
 
 		$.ajax({
 			url:"./<?=basename(__FILE__)?>",
-			data:{download:1},
+			data:{download:1,branche:$("#branches").val()},
 			beforeSend:function( xhr ) {}
 		}).done(function( data ) {
 			if(data=="sucesso"){
