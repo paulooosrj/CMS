@@ -1,0 +1,265 @@
+<!-- BEGIN BLOCK_CENTRAL_BKP -->
+<script type="text/javascript">
+include_css("/admin/App/Templates/css/websheep/modulos/_modulo_/templates.min.css","css_mod","All");
+</script>
+	<div id="topo_upload" class="bg01">
+		<div class="tapa_upload" style="display:none">
+			<div class="pct w1">{central_Bkp_wait}</div>
+			<div class="cont_up_center bg04">
+				<div class="bar bg05"></div>
+			</div>
+		</div>
+	</div>
+<div id="topoModulo" class="TitTop bg05 w1b">
+	<div class="comboTitleBot">
+	{central_Bkp_title}<div class="botTool 	bg06 w1">{central_Bkp_createBackup}</div>
+	</div>
+</div>
+	<div id="palco" class="palco_01" >
+	<ul class="listagem">
+			<!-- BEGIN BLOCK_TEMPLATES -->
+			<li class="bg01" data-file="{dataFILE}">
+				<div class="pluginItem {ClasseThumb}">
+					<div class="column-primary ">
+						<!-- BEGIN avatarTemplate -->
+							<img src="{newSplashScreen}" height="80" width="80px" style="position: relative;float: left;"/>
+						<!-- END avatarTemplate -->
+						<div class="plugin-title w1">{titulo}</div>
+						<div class="plugin-description w2" >{description}</div>
+						<div class="botao">{label}</div>
+					</div>
+				</div>
+			</li>
+			<!-- END BLOCK_TEMPLATES -->
+		</ul>
+	</div>
+<div class="c"></div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.popup').unbind('click tap press').bind('click tap press', function(e){
+				e.preventDefault();
+				var dataFile = $(this).data('href');
+				functions({
+					funcao:"loadInfosPlugin",
+					vars:"dataFile="+dataFile,
+					patch:"{PATH}",
+					Sucess:function(e){
+						confirma({
+							conteudo:"<div class='bodyInfosPlugin'>"+e+"</div>",
+							width:600,
+							bot1:0,
+							bot2:0,
+							drag:0,
+							botclose:1,
+							posFn:function(){
+								$("#ws_confirm #body").css({'padding-bottom':20});
+							},
+							newFun:function(){}
+						})
+					}
+				})
+				return false;
+	})
+
+	$('.inner').unbind('click tap press').bind('click tap press', function(e){
+			e.preventDefault();
+			var dataFile = $(this).data('href');
+			confirma({
+			width:"auto",
+			conteudo:"  {central_Bkp_loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+			drag:false,
+			posFn:function(){
+				$("#ws_confirm").css("line-height","20px");
+				$( "#conteudo" ).load( './plugins/'+dataFile , function( response, status, xhr ) {
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+				});
+			},
+			bot1:0,
+			bot2:0
+		})
+		return false;
+	})
+	$('.botTool').unbind('click tap press').bind('click tap press', function(e){
+		e.preventDefault();
+		confirma({
+			width:600,
+			conteudo:"<div style='float:left;padding:0 20px;text-align: left;line-height: 20px;margin-bottom: 0px;width: calc(100% - 40px);'>\
+			<form id='uploadfiles' action='./{PATH}/upload_avatar_bkp.php' method='post' enctype='multipart/form-data' name='formUpload'>\
+				<input type='file' name='arquivo' id='avatarbkp' style='display:none;'>\
+			</form>\
+			<div class='w1'style='font-size: 27px;font-weight:bold;width:100%;text-align: center;margin-bottom: 10px;'>{central_Bkp_creatingatemplate}</div>\
+			<div class='c'></div>\
+			<div class='thumbmail' style='border: solid 5px #3f6daa;background-color: #FFF;width: 200px;height:200px;position: relative;float: left;'>\
+				<div class='combo_upload' style='display: none; opacity: 1;'>\
+					<div class='pc' legenda='{central_Bkp_mycomputer}'>	<img src='/admin/App/Templates/img/websheep/up_m.png'></div>\
+					<div class='bb' legenda='{central_Bkp_library}'>	<img src='/admin/App/Templates/img/websheep/folder_m.png'></div>\
+					<div class='excl' legenda='{central_Bkp_delete}'>		<img src='/admin/App/Templates/img/websheep/delete.png' style='width:25px;margin-top:-1px;'></div>\
+				</div>\
+			<img class='avatarBKP' src='/ws-img/200/200/null'></div>\
+			<input type='hidden' class='avatar' >\
+			<div class='w1' style='position: relative; padding: 10px; margin-left: 10px; width: 100%; max-width: 300px; float: left;padding-top:0px;'>{central_Bkp_placeholderTitle}:</div>\
+			<input class='w1 inputText titleTemplate' style='position:relative;padding: 10px;margin-left: 10px;width: 100%;max-width: 330px;'>\
+			<div class='w1' style='position: relative; padding: 10px; margin-left: 10px; width: 100%; max-width: 300px; float: left;'>{central_Bkp_descrition}:</div>\
+			<textarea  class='w1 inputText contentTemplate' style='position:relative;padding: 10px;margin-left: 10px;width: 100%;max-width: 330px;float: left;margin-bottom:10px;height: 100px;'></textarea>\
+			\</div>",
+			drag:false,
+			posFn:function(){
+				//##################################################################
+				// FUNÇÃO UPLOAD
+				//##################################################################
+					$("#uploadfiles").ajaxForm({
+						beforeSend: function(xhr) {
+							$('.tapa_upload').show("fade", {}, 'fast');
+						},
+						uploadProgress: function(event, position, total, percentComplete, myForm) {
+							$('.tapa_upload').find('.pct').html(percentComplete + "%");
+							$('.tapa_upload').find('.bar').animate({
+								width: percentComplete + "%"
+							}, 50);
+						},
+						complete: function(e) {
+							$('.avatar').val('/ws-img/200/200/100/'+e.responseText)			
+							$('.avatarBKP').attr('src','/ws-img/200/200/100/'+e.responseText)			
+							$('.tapa_upload').find('.bar').animate({
+								width: 0
+							}, 500, function() {
+								$('.tapa_upload').hide("fade", {}, 'fast');
+								$("#UploadFile").trigger('reset');
+							});
+						}
+					})
+				//##################################################################
+				// FUNÇÃO OVER DOS BOTÕES DO AVATAR
+				//##################################################################
+				$(document).off("mouseenter").off("mouseleave");
+				$(document).on("mouseenter", ".thumbmail", function() {
+					$(this).find('.combo_upload').stop().fadeIn();
+				}).on("mouseleave", ".thumbmail", function() {
+				 	$(this).find('.combo_upload').stop().fadeOut();
+				});
+				//##################################################################
+				// SE FOR DA BIBLIOTECA RETORNA O NOME DA IMAGEM NO INPUTTEXT
+				//##################################################################
+					$(".thumbmail .combo_upload .bb").unbind('click').click(function() {
+						abreBiblioteca({
+							multiple: 0,
+							onSelect: function(a) {
+								$('.avatar').val('/ws-img/200/200/100/'+a)
+								$('.avatarBKP').attr('src','/ws-img/200/200/100/'+a)			
+							}
+						})
+					})
+				//##################################################################
+				// SE FOR DO PC RETORNA O NOME DA IMAGEM NO INPUTTEXT
+				//##################################################################
+					$(".thumbmail .combo_upload .pc").unbind('click').click(function() {$("#avatarbkp").click();})
+					$("#avatarbkp").change(function() {
+						$("#uploadfiles").submit();
+					})
+			},
+			newFun:function(){
+						$.ajax({
+						  type: "POST",
+						  url: "App/Modulos/_tools_/functions.php",
+						  beforeSend:function(){
+						  	setTimeout(function(){
+						  		confirma({width:"auto",conteudo:"{central_Bkp_creating}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
+						  	},1000)
+						  },
+						  cache: false,
+						  data: {
+						  	"function":	"createTheme",
+						  	"avatar":	$('.avatar').val(),
+						  	"title":	$('.titleTemplate').val(),
+						  	"content":	$('.contentTemplate').val(),
+						  },
+						}).done(function(e) {
+							out(e)
+							$("#ws_confirm").css("line-height","20px");
+							$( "#conteudo" ).load( './{PATH}/ws-central-bkps.php' , function( response, status, xhr ) {
+								$("#ws_confirm").remove();
+								$("#body").removeClass("scrollhidden");
+								$("*").removeClass("blur");
+							});
+						})
+			},
+			bot1:'{central_Bkp_export}',
+			bot2:'{central_Bkp_cancel}'
+		})
+		return false;
+	})
+
+	$('.pluginItem .botao').unbind('click tap press').bind('click tap press', function(e){
+			e.preventDefault();
+			var dataFile = $(this).parent().parent().parent().data('file');
+			confirma({
+			width:550,
+			conteudo:"<div style='float:left;height:300px;padding:0 20px;text-align: left;line-height: 20px;margin-bottom: 0;'><strong>{centralBkp_restoreModal_aboutTheFiles}</strong> <br><br> <label><input type='radio' name='typebkp' value='full'/>{centralBkp_restoreModal_restore100}</label><br><label><input type='radio' name='typebkp' value='replace'/>{centralBkp_restoreModal_applyReplace}</label><br> <label><input type='radio' name='typebkp' value='jump'/>{centralBkp_restoreModal_applyIgnore}</label><br><label><input type='radio' name='typebkp' value='tools'/>{centralBkp_restoreModal_tools}</label><br><br><strong>{centralBkp_restoreModal_dataBase}</strong><br><br><label><input type='radio' name='dataBase' value='none'/>{centralBkp_restoreModal_dontTouchDataBase}</label><br><label><input type='radio' name='dataBase' value='basic'/>{centralBkp_restoreModal_basicStructure}</label><br><label><input type='radio' name='dataBase' value='tools'/> Estrutura + Ferramentas instaladas</label> <br> <label><input type='radio' name='dataBase' value='content'/> Estrutura + Ferramentas + Conteúdo preenchido</label><br><br><span style='color: #d60000; font-weight: 700;'>{centralBkp_restoreModal_rememberIf}</span></div>",
+			drag:false,
+			posFn:function(){
+				$("input[name='typebkp'][value='full']").click();
+				$("input[name='dataBase'][value='none']").click();
+			},
+			ErrorCheck:function(){
+				TopAlert({mensagem: "{central_Bkp_error}", clickclose: true, height: 20, timer: 3000, type: 2, })
+			},
+			Check:function(){
+				if(!$("input[name='typebkp']:checked").val()){return false; }else{return true;}
+			},
+			newFun:function(){
+				var FileOption		= $("input[name='typebkp']:checked").val();
+				var DataBaseOption	= $("input[name='dataBase']:checked").val();
+				$.ajax({
+				  type: "POST",
+				  url: "App/Modulos/_tools_/functions.php",
+				  beforeSend:function(){
+				  	setTimeout(function(){
+				  		confirma({width:"auto",conteudo:"{central_Bkp_restoration}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
+				  	},1000)
+				  },
+				  cache: false,
+				  data: {
+				  	"function"	:	"apliqueTheme",
+				  	"dataFile"	:	dataFile,
+				  	"type"		:	FileOption,
+				  	"dataBase"	: 	DataBaseOption,
+				  },
+				}).done(function(e) {
+					out(e)
+					if(FileOption=='tools'){
+						window.bkp_tool = e;
+						$( "#conteudo" ).load( './App/Modulos/_tools_/tools.php?install=true' , function( response, status, xhr ) {
+						});
+					}else if(e=='true'){
+						confirma({
+							conteudo	: 	'<strong>{central_Bkp_update}</strong><br>{central_Bkp_refresh}',
+							bot1		: 	"{central_Bkp_recharge}",
+							bot2		: 	0,
+							drag		: 	0,
+							botclose	: 	0,
+							posFn		: 	function() {},
+							newFun		: 	function() {
+												window.location.reload()
+											}
+						})
+					}
+				})
+			},
+			bot1:'{central_Bkp_restore}',
+			bot2:'{central_Bkp_cancel}'
+		})
+		return false;
+	});
+});
+	setTimeout(function(){
+		$('#container').perfectScrollbar('destroy')
+		$('#container').animate({scrollTop: 0}, 200);
+	},200);
+
+</script>
+
+<!-- END BLOCK_CENTRAL_BKP -->
+
