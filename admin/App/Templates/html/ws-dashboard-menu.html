@@ -1,0 +1,131 @@
+<!-- BEGIN MENU_DASHBOARD -->
+	<ul class="reffer_menu" id="scrollnotify">
+
+		<!-- BEGIN NEW_VERSION -->
+		<li class="newVersionSpanLi">
+			<img src="/admin/App/Templates/img/websheep/star.png">
+			<span class="newVersionSpan" style="color: #FFF;">{label_newversion}<span>
+		</li>
+		<script type="text/javascript">
+		$(".newVersionSpanLi").click(function(){
+			ws.confirm({
+				conteudo:"<h1>Atualização WebSheep {newVersion}</h1><br>{newVersionContent}",
+				divBlur: "#menu_tools,#container,#header",
+						bots:[{
+							label: "Atualizar",
+							css         : {"color":"#FFF"},
+							style       : "font-weight:bolder;",
+							ErrorCheck  : function() {},
+							Check       : function() {return true},
+							action      : function(){
+								window.open("/ws-install",'_self');
+							}
+						 },
+						{
+							label      : "Ver no GitHub",
+							class       :"botao3",
+							css         : {"color":"#555"},
+							style       : "font-weight:600;",
+							ErrorCheck  : function() {},
+							Check       : function() {return true},
+							action      : function(){
+								window.open("https://github.com/websheep/cms",'_blank');
+							}
+					  },
+						{
+							label      : "Não obrigado",
+							class       :"botao2",
+							css         : {"color":"#FFF"},
+							style       : "font-weight:600;",
+							ErrorCheck  : function() {},
+							Check       : function() {return true},
+							action      : function(){console.log("CANCELAR")}
+					  }
+
+					  ]
+			})
+		})
+		</script>
+		<div class="container"></div>
+		<!-- END NEW_VERSION -->
+
+		<!-- BEGIN ADMIN -->
+				<li data-get="" class="ferramenta_especial"	data-ferramenta="0" data-path="./App/Modulos/_tools_/paginas.php">
+					<span class="icon fa-file"></span>{label_paginas}
+				</li>
+				<div class="container"></div>
+				<li class="path">
+					<span class="icon icon-link"></span>{label_links}
+				</li>
+				<div class="container">
+					<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_URL_includes/">
+						<span class="icon fa-link"></span>{label_url_includes}
+					</li>
+					<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_URL_amigavel/index.php">
+						<span class="icon icon-anchor"></span>{label_url_htaccess}
+					</li>
+					<li data-get="type=css" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_include_JS_CSS_/index.php">
+						<span class="icon fa fa-css3"></span>{label_include_css}
+					</li>
+					<li data-get="type=js" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_include_JS_CSS_/index.php">
+						<span class="icon fa fa-jsfiddle"></span>{label_include_js}
+					</li>
+				</div>
+				<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/webmaster/">
+					<span class="icon fa-code"></span>{label_editor}
+				</li>
+				<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_dominio_/">
+					<span class="icon fa-dashboard"></span>{label_Conf_Painel}
+				</li>
+
+		<!-- END ADMIN -->
+
+		<li class="path">
+			<span class="icon icon-wrench"></span>{label_ferramentas}
+		</li>
+		<div class="container">
+			<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_tools_/tools.php">
+				<span class="fa fa-cog" style="margin-right: 10px;"></span>{label_gerenciar_ferramentas}
+			</li>
+			<!-- BEGIN TOOL -->
+			<li class="ferramenta_especial " data-plugin="0" data-ferramenta="{ID}" data-path="./App/Modulos/_modulo_/index.php"><span class="icon fa-chevron-right"></span>{LABEL}</li>
+			<!-- END TOOL -->
+		</div>
+		<li class="path">
+			<span class="icon fa-plug"></span>{label_plugin}
+		</li>
+		<div class="container">
+			<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_modulo_/plugins.php"> <span class="icon fa-cogs"></span>{label_gerenciar_plugin}</li>
+			<li class="path" data-ferramenta="0" data-path="./App/Modulos/_modulo_/plugins.php"> 
+				<span class="icon fa-puzzle-piece"></span>{label_plugin_instalado}
+			</li>
+			<div class="container">
+				<!-- BEGIN PLUGIN -->
+				<li class="ferramenta_especial innerOpt tool" data-plugin="1" data-w="{W}" data-h="{H}" data-type="{TYPE}" data-ferramenta="0" data-path="{PATH}"><img src="{ICON}" />{LABEL}</li>
+				<!-- END PLUGIN -->
+
+			</div>
+		</div>
+		<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_keyfile_">
+			<span class="icon fa fa-key"></span>{label_Download_Senha}
+		</li>
+		<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_leads_/">
+			<span class="icon fa-envelope"></span>{label_Cadastros}
+		</li>
+		<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_modulo_/ws-central-bkps.php"> 
+			<span class="icon fa fa-history"></span>{label_BKP}
+		</li>
+		<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/usuarios/">
+			<span class="icon fa-users"></span>{label_Usuarios}
+		</li>
+		<li class="ferramenta_especial 	biblioteca" data-plugin="0" data-ferramenta="0" data-path="">
+			<span class="icon fa-picture-o"></span>{label_Biblioteca}
+		</li>
+		<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_hd_/">
+			<span class="icon fa-pie-chart"></span>{label_hd}
+		</li>
+		<li id="clicklogout">
+			<span class="icon fa-sign-out"></span>{label_logout}
+		</li>
+	</ul>
+<!-- END MENU_DASHBOARD -->

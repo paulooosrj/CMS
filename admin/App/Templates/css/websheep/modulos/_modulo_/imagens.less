@@ -1,0 +1,251 @@
+@charset "utf-8";
+/*##################################################  STAGE LIQUIDO  #####################################################################*/
+@media only screen and (max-width:450px) {
+	#bt_voltar_cat, #bt_search_files, #bt_search_biblioteca{
+		width: 100%!important;
+		max-width: ~'calc(100% - 50px)'!important;
+	}
+	#DraftKey{
+		width: 100%!important;
+		max-width: ~'calc(100% - 30px)'!important;
+	}
+}
+
+
+
+#ws_confirm{
+	#body{
+		#ws_confirm_conteudo{
+			#form-img{
+				#cke_textarea{
+					float: left;
+					width: 483px;
+					margin-left: 8px;
+					margin-top: 5px;
+					margin-bottom: 10px;
+    			}				
+				input{
+					position: relative;
+					padding: 14px;
+					width: 480px;
+				}
+				textarea{
+					width: 443px;
+					padding: 10px;
+					height: 200px;
+					margin-top: 8px;
+					resize: none;
+				}
+				.cleditorMain{
+					float: left;
+					margin-left: 6px;
+					margin-top: 10px;
+					margin-bottom: 10px;
+					width: 443px!important;
+					height: 265px!important;				
+				}
+			}
+		}
+	}
+}
+.centerTop{
+    position: relative;
+    height: 40px;
+    width: 100%;
+    left: 50%;
+    max-width: 980px;
+    transform: translateX(-50%);
+}
+
+#DraftKey{
+    position: relative;
+    height: 18px;
+    width: 100%;
+    float: left;
+    margin: 10px;
+    max-width: 225px;
+    text-align: center;
+    padding: 10px 0;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-family: 'Titillium Web', sans-serif;
+	font-style: normal;
+	font-weight: 800;
+
+    &.draft{
+		background-color: #b9ec37;
+		-moz-box-shadow: inset 0px 1px #f7ff79;
+		-webkit-box-shadow: inset 0px 1px #f7ff79;
+		box-shadow: inset 0px 1px #f7ff79;
+		border: solid 1px #97c71a;
+	    &::after { 
+			color: #5a7d00;
+			content: "Mostrando Rascunho";
+		}
+    }
+
+    &.original{
+		background-color: #f5e057;
+		-moz-box-shadow: inset 0px 1px #f7ff79;
+		-webkit-box-shadow: inset 0px 1px #f7ff79;
+		box-shadow: inset 0px 1px #f7ff79;
+		border: solid 1px #f5d157;
+        &::after { 
+			color: #bb5001;
+			content: "Mostrando Originais";
+		}
+    }
+
+
+}
+
+
+#topocadastro{
+		font-weight: 600;
+		font-size: 16px;
+		height: 32px;
+		padding-top: 11px;
+		padding-left: 12px;
+		color: #36568D;
+		text-shadow: 1px 1px 1px #fff;}
+#botaoVoltaDomain {
+		color: #FFFFFF;
+		top: -6px;
+		position: relative;
+		float: right;
+		right: 50%;
+		height: 15px;
+		padding: 8px 38px;
+		margin-right: -494px;}
+#botaoCadastraDomain{
+		color: #FFFFFF;
+		top: -12px;
+		position: relative;
+		float: right;
+		width: 61px;
+		height: 15px;
+		padding: 8px 18px;
+		margin-right: 6px;}
+#cdastrodominio {
+	#cadastretit{
+		top: 13px;
+		position: relative;
+		width: 350px;
+		}
+	}
+::-webkit-input-placeholder { 
+	font-family: "Myriad Pro Light";
+    color: rgb(83, 139, 190);
+	font-style:oblique;}
+:-moz-placeholder { 
+	font-family: "Myriad Pro Light";
+    color: rgb(83, 139, 190);
+	font-style:oblique;}
+::-moz-placeholder { 
+	font-family: "Myriad Pro Light";
+    color:rgb(83, 139, 190);
+	font-style:oblique;}
+:-ms-input-placeholder {
+	font-family: "Myriad Pro Light";
+    color: rgb(83, 139, 190);
+	font-style:oblique;}
+:-input[data-operaplaceholder] {
+	font-family: "Myriad Pro Light";
+	color: rgb(83, 139, 190);
+	font-style:oblique;}
+
+#palco{
+        position: relative;
+        max-width: 1000px;
+        width: 100%;
+        float: left;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 64px;
+        margin-top: 10px;
+		ul{
+			li{
+				position: relative;
+				float:  left;
+				margin: 4.5px;
+				border: solid 1px #BAD1DB;
+				width:  155px;
+				height: 155px;
+				&.original{
+					display: none;
+				}
+				&:not(.draft){
+					#detalhes_img{
+						display:none;
+					}
+				}
+				span{
+					&.editar,&.excluir{
+						cursor:pointer;
+						margin: 5px;
+					}
+				}
+				#combo{
+					position: relative;
+					width: 155px;
+					height: 155px;
+					img:not(.original){cursor:move;}
+					#detalhes_img{
+						position: absolute;
+						left: -1px;
+						top: 128px;
+						width: 100%;
+						padding: 5px 0px;
+						text-align: center;
+						span{
+							cursor: pointer;
+						}
+					}
+				}
+			}
+		}
+}
+
+
+		#bt_voltar_cat, #bt_search_files, #bt_search_biblioteca{
+			position: relative;
+			width: 100%;
+			padding: 10px 10px;
+			max-width: 115px;
+			left: 0;
+			text-align: center;
+			float: left;
+			margin: 10px;
+		}
+
+
+
+
+		#topo_upload{
+			height: auto;
+			min-height: 57px;
+			float: left;
+			width: 100%;
+			#progress_combo{
+				position: absolute;
+				left: 50%;
+				margin-left: -270px;
+				padding: 10px;
+				width: 420px;
+				height: 17px;
+				#progress_bar{
+					position: relative;
+					height: 14px;
+					border-left: 0;
+					border-right: 0;
+					width: 0px;
+				}				
+			}
+		}
+
+

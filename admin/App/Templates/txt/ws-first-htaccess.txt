@@ -1,0 +1,45 @@
+##########################################################################################
+############################# WebSheep Teconologia Integrada #############################
+##########################################################################################
+<Files .htaccess>
+	Order Allow,Deny
+	Deny from all
+</Files>
+	AddType application/x-httpd-php .conf
+	AddType application/x-httpd-php .html
+<IfModule mod_rewrite.c>
+	Options -Indexes -MultiViews +FollowSymLinks 
+	RewriteEngine On
+
+##########################################################################################
+################################# 	ARQUIVOS DO SISTEMA		##############################
+##########################################################################################	
+
+	RewriteRule ^getws.php$ 		getws.php										[L]
+
+##########################################################################################
+################################# ARQUIVOS DIRETOS DO SITE ###############################
+##########################################################################################
+
+	RewriteCond %{DOCUMENT_ROOT}/website/$1 -f 			[OR] 
+	RewriteCond %{DOCUMENT_ROOT}/website/$1 -d
+	RewriteRule ^(.*)$ 			/website/$1  		   [S=10]
+
+##########################################################################################
+##################################### URLS AMIGAVEIS E INTERNAS ##########################
+##########################################################################################
+	RewriteCond %{REQUEST_FILENAME} !-l
+	RewriteRule ^ws-class.php$ 			/admin/App/Lib/class-ws-v1.php					[L]
+	RewriteRule ^ws-download-now/(.*)$ 	/admin/App/Core/ws-download-now.php?filename=$1	[L]
+	RewriteRule ^ws-video/(.*)$ 		/admin/App/Core/ws-video.php 					[L]
+	RewriteRule ^ws-download/(.*)$ 		/admin/App/Core/ws-download.php 				[L]
+	RewriteRule ^ws-leads/(.*)$ 		/admin/App/Core/ws-leads.php 					[L]
+	RewriteRule ^ws-img/(.*)$ 			/admin/App/Core/ws-img.php 						[L]	
+	RewriteRule ^ws-rest/(.*)$ 			/admin/App/Core/ws-rest.php?rest=$1				[L]	
+	RewriteRule ^(.*)$ 					/admin/App/Core/ws-website.php					[L]
+
+##########################################################################################
+################################################ END #####################################
+##########################################################################################
+
+</IfModule>

@@ -1,0 +1,1077 @@
+<!-- BEGIN WEBMASTER -->
+<script type="text/javascript">
+	include_css('/admin/App/Templates/css/websheep/modulos/webmaster/style.min.css',  	'css_mod', 'All');
+</script>
+<style type="text/css">
+	#container {
+	z-index-ms-touch-action: none;
+	overflow: inherit!important;;
+	}
+	.nave_folders{overflow: hidden!important;}
+	.palco_02 .ps-container.ps-active-x>.ps-scrollbar-x-rail,
+	.palco_02 .ps-container.ps-active-y>.ps-scrollbar-y-rail {display: block;}
+	.palco_02 .ps-container>.ps-scrollbar-x-rail {
+	display: none;
+	position: absolute;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	border-radius: 4px;
+	opacity: 1;
+	bottom: 3px;
+	height: 8px;
+	}
+	#mode_chosen .chosen-single {
+	display: none;
+	}
+	#bkpsFile_chosen .chosen-single {
+	display: none;
+	}
+	.palco_02 .ps-container>.ps-scrollbar-x-rail>.ps-scrollbar-x {
+	background-color: #aaa;
+	}
+	.palco_02 .ps-container>.ps-scrollbar-y-rail {
+	opacity: 1;
+	}
+	.palco_02 .ps-container:hover>.ps-scrollbar-x-rail,
+	.palco_02 .ps-container:hover>.ps-scrollbar-y-rail {
+	background-color: rgba(255, 255, 255, 0.15)!important;
+	opacity: 1;
+	}
+	.palco_02 .ps-container.ps-in-scrolling.ps-x>.ps-scrollbar-x-rail,
+	.palco_02 .ps-container.ps-in-scrolling.ps-y>.ps-scrollbar-y-rail,
+	.palco_02 .ps-container:hover.ps-in-scrolling.ps-x>.ps-scrollbar-x-rail,
+	.palco_02 .ps-container:hover.ps-in-scrolling.ps-y>.ps-scrollbar-y-rail,
+	.palco_02 .ps-container:hover>.ps-scrollbar-x-rail:hover,
+	.palco_02 .ps-container:hover>.ps-scrollbar-y-rail:hover {
+	background-color: transparent!important;
+	opacity: 1;
+	}
+	.chosen-container .chosen-results li.highlighted {
+	background: none;
+	background-color: rgba(255, 255, 255, 0.07);
+	text-shadow: none;
+	}
+	.chosen-container-active.chosen-with-drop .chosen-single {
+	background: none;
+	border: 0;
+	box-shadow: none;
+	height: 33px;
+	}
+	.chosen-container .chosen-drop {
+	background: none;
+	border: 0;
+	box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.3);
+	text-shadow: 0 0 0 #000;
+	background-color: rgb(36, 36, 36);
+	border: solid 1px #1B1919;
+	}
+	.chosen-container .ace_string {
+	color: #ceb56c!important;
+	}
+	.chosen-container-single .chosen-single {
+	background: none;
+	border: 0;
+	box-shadow: none;
+	text-shadow: 0 0 0 #000;
+	color: #CCC;
+	}
+	.ace_print-margin {display: none;}
+	.ace-ambiance .ace_marker-layer .ace_selection {
+	background: rgba(0, 0, 0, 0.31);
+	}
+	.ace-ambiance {
+	color: #dcd6e8!important;
+	background-color: #211e25!important;
+	}
+	.ace_editor.ace_autocomplete.ace-ambiance.ace_dark  .ace_layer.ace_text-layer{
+	background-color: #FFF!important;
+	color: #7f5c88!important;
+	}
+	.ace_editor.ace_autocomplete.ace_dark.ace-ambiance  .ace_editor.ace_autocomplete .ace_completion-highlight{
+	color: #211e25!important;
+	}
+	.ace-ambiance .ace_keyword { color: #8c7496!important;}
+	.ace-ambiance .ace_string {
+	color: #9683c1!important;
+	}
+	.ace-ambiance .ace_comment {
+	color: #ffdf65!important;
+	background-color: rgba(159, 84, 218, 0.19)!important;
+	}
+	.ace-ambiance .ace_line:has(.ace_support.ace_class:contains("WS")) .ace_support.ace_class{
+	font-weight: bold; font-size: 17px; color: #00fff5;
+	}
+	.ace-ambiance .ace_line:has(span.ace_meta.ace_tag.ace_tag-name.ace_xml:contains("ws-tool")){background-color: #ff0055!important; color: #ffed00!important; font-weight: 900!important;}
+	.ace-ambiance .ace_line:has(span.ace_meta.ace_tag.ace_tag-name.ace_xml:contains("ws-tool")) .ace_string.ace_attribute-value.ace_xml{color:#fff!important;}
+	.ace-ambiance .ace_line:has(span.ace_meta.ace_tag.ace_tag-name.ace_xml:contains("ws-tool")) .ace_keyword.ace_operator.ace_attribute-equals.ace_xml{color:#fff!important}
+	.ace-ambiance .ace_line:has(.ace_text.ace_xml:contains("{{")) .ace_text.ace_xml:contains("{{"){color: #000!important;background-color: #ffc500;}
+</style>
+<div class="c"></div>
+<div class="nave_menu recolhido bg02 w1" style="z-index: 2;">
+	<div class="ul_icons">
+		<div id="" class="optEditor">
+			File
+			<div class="ul">
+				<div id="novoArquivo">New</div>
+				<div id="loadfile">Load 			<span>Ctrl+o</span></div>
+				<div id="salvarArquivo">Save 	 	<span>Ctrl+s</span></div>
+				<div id="exclFile">Delete this file</div>
+			</div>
+		</div>
+		<div id="" class="optEditor">
+			Folder
+			<div class="ul">
+				<div id="novodir">New folder</div>
+				<div id="exclFolder">Delete folder</div>
+			</div>
+		</div>
+		<div id="" class="optEditor">
+			Insert
+			<div class="ul">
+				<div id="addTool"  			style="display:block">Adicionar uma Ferramenta <span>Ctrl+'</span> </div>
+				<div id="plugin" 			style="display:block">Adicionar um Plugin <span>Ctrl+1</span> </div>
+				<div id="addPagination"  	style="display:block">Inserir Paginação </div>
+				<div id="addSendForm"		style="display:block">Adicionar formulário/cadastro</div>
+				<div id="templateBootstrap"	style="display:block">Adicionar template Bootstrap</div>
+			</div>
+		</div>
+		<div id="formatHTML" class="optEditor">
+			Format HTML 
+			<span style="color:#60ff00;font-size:10px;margin-top:-15px;position:absolute;float:right;right:-30px;letter-spacing:2px;">New!</span>
+		</div>
+	</div>
+	<form>
+		<select id="bkpsFile" style="width:310px;">
+			<option>Controle de versão</option>
+		</select>
+		<select id="mode" style="width:130px;">
+			<!-- BEGIN MODE_OPT -->
+			<option value="{VALUE_OPT}">{STRING_OPT}</option>
+			<!-- END MODE_OPT -->
+		</select>
+	</form>
+</div>
+<div class="nave_menu fileTabContainer recolhido bg02 w1">
+	<div class="container">
+		<div class="new"></div>
+	</div>
+</div>
+<div id="nave_folders" class="nave_folders recolhido">
+	{NAVE_FILES}
+</div>
+<div id="palco" class="palco_02 recolhido">
+	<div id="divEditor" class="recolhido">&lt;? ?&gt;</div>
+	<script type="text/javascript">
+		function setDestque(){ // experimental
+			// $('.ace-ambiance .ace_line:has(.ace_support.ace_class:contains("WS")) .ace_support.ace_class').attr("style","    font-weight: bold; font-size: 17px; color: #00fff5;");
+			// $('.ace-ambiance .ace_line:has(.ace_meta.ace_tag.ace_tag-name.ace_xml:contains("ws-tool"))').attr("style","    background-color: #ff0055!important; color: #ffed00!important; font-weight: 900!important;");
+			// $('.ace-ambiance .ace_line:has(.ace_meta.ace_tag.ace_tag-name.ace_xml:contains("ws-tool")) .ace_string.ace_attribute-value.ace_xml').attr("style","color:#fff!important");
+			// $('.ace-ambiance .ace_line:has(.ace_meta.ace_tag.ace_tag-name.ace_xml:contains("ws-tool")) .ace_keyword.ace_operator.ace_attribute-equals.ace_xml').attr("style","color:#fff!important");
+			// $('.ace-ambiance .ace_line:has(.ace_text.ace_xml:contains("{{")) .ace_text.ace_xml:contains("{{")').attr("style","color: #000!important;background-color: #ffc500;");
+		}
+		
+		
+		$(window).unbind('keydown').bind('keydown', function(event) {
+			setDestque();
+		})
+		$(window).unbind('keydown').bind('keydown', function(event) {
+			setDestque();
+			if (event.ctrlKey || event.metaKey) {
+				switch (String.fromCharCode(event.which).toLowerCase()) {
+					case 'à':
+						event.preventDefault();
+						$("#addTool").click();
+						break;
+					case '1':
+						event.preventDefault();
+						$("#plugin").click();
+						break;
+					case 's':
+						event.preventDefault();
+						$("#salvarArquivo").click();
+						break;
+					case 'o':
+						event.preventDefault();
+						$("#loadfile").click();
+						break;
+				}
+			}
+		});
+		$(document).ready(function() {
+		confirma({width: "auto",conteudo: "  Carregando API...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 })
+		$.getScript('/admin/App/Vendor/ace/src-min-noconflict/ace.js', function() {
+			$.getScript('/admin/App/Vendor/ace/src-min-noconflict/ext-language_tools.js', function() {
+		
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+		
+					window.funcTabs = function() {
+						$(".fileTabContainer .fileTab").unbind("tap click").bind("tap click", function() {
+							$(".fileTab").removeClass("active");
+							$(this).addClass("active");
+							window.pathFile = $(this).attr("data-pathFile");
+							window.loadFile = $(this).attr("data-loadFile");
+							window.htmEditor.setSession(window.listFilesWebmaster[$(this).attr("data-token")].session);
+							window.htmEditor.getSession().on('changeScrollTop', function(scroll) {setDestque()});
+		
+		
+							setDestque();
+						})
+						$(".fileTabContainer .fileTab .close").unbind("tap click").bind("tap click", function() {
+							var aba = $(this);
+							if ($(aba).parent().hasClass("unsave")) {
+								confirma({
+									conteudo: "Houve alterações neste arquivo, gostaria de salvar antes de fechar?",
+									width: 500,
+									posFn: function() {},
+									Init: function() {},
+									posClose: function() {},
+									bot1: "Salvar e fechar",
+									bot2: "Apenas fechar",
+									drag: false,
+									botclose: 1,
+									newFun: function() {
+										window.closeToSave = true;
+										setTimeout(function() {
+											$("#salvarArquivo").click();
+										}, 1000)
+									},
+									onCancel: function() {
+										if (window.pathFile == $(aba).parent().attr("data-pathFile") && window.loadFile == $(aba).parent().attr("data-loadFile")) {
+											delete window.listFilesWebmaster[$(aba).parent().attr("data-token")];
+											$(aba).parent().remove();
+											window.resizeTab()
+											if ($(".fileTabContainer .fileTab").length) {
+												$(".fileTabContainer .fileTab:last-child").click();
+											} else {
+												window.pathFile = null;
+												window.loadFile = null;
+												window.htmEditor.setValue("");
+		
+											}
+											window.resizeDesktop()
+										} else {
+											delete window.listFilesWebmaster[$(aba).parent().attr("data-token")];
+											$(aba).parent().remove();
+											window.resizeTab()
+											if (!$(".fileTabContainer .fileTab").length) {
+												window.pathFile = null;
+												window.loadFile = null;
+												window.htmEditor.setValue("");
+											}
+											window.resizeDesktop();
+										}
+									},
+									onClose: function() {},
+									Callback: function() {},
+									ErrorCheck: function() {},
+									Check: function() {
+										return true
+									}
+								})
+							} else {
+								if (window.pathFile == $(aba).parent().attr("data-pathFile") && window.loadFile == $(aba).parent().attr("data-loadFile")) {
+									delete window.listFilesWebmaster[$(aba).parent().attr("data-token")];
+									$(aba).parent().remove();
+									window.resizeTab()
+									if ($(".fileTabContainer .fileTab").length) {
+										$(".fileTabContainer .fileTab:last-child").click();
+									} else {
+										window.pathFile = null;
+										window.loadFile = null;
+										window.htmEditor.setValue("");
+									}
+									window.resizeDesktop();
+								} else {
+									delete window.listFilesWebmaster[$(aba).parent().attr("data-token")];
+									$(aba).parent().remove();
+									window.resizeTab()
+									if (!$(".fileTabContainer .fileTab").length) {
+										window.pathFile = null;
+										window.loadFile = null;
+										window.htmEditor.setValue("");
+									}
+									window.resizeDesktop();
+								}
+							}
+						})
+					};
+					window.addTab = function($newTokenFile, $pathFile, $loadFile, $saved) {
+						if (!$('.fileTabContainer .fileTab[data-pathFile="' + $pathFile + '"][data-loadFile="' + $loadFile + '"]').length) {
+							$(".tabSortable.fileTab.loader").remove();
+							$(".fileTab").removeClass("active");
+							$(".fileTabContainer .container").prepend('<div legenda="' + $pathFile.replace("./../../../website/", "") + '/' + $loadFile + '" class="tabSortable fileTab active ' + $saved + '" data-token="' + $newTokenFile + '" data-saved="true" data-pathFile="' + $pathFile + '" data-loadFile="' + $loadFile + '"> <div class="str">' + $pathFile.replace("./../../../website/", "") + '/' + $loadFile + '</div><div class="close"></div><div class="tab_shadow"></div><textarea style="display:none"></textarea> </div>');
+							if ($(".fileTabContainer .container.ui-sortable").length) {
+								$(".fileTabContainer .container").sortable("destroy");
+							}
+							$(".fileTabContainer .container").sortable({
+								axis: "x",
+								start: function(e, ui) {
+								//	out($(ui.placeholder))
+								},
+								beforeStop: function(e, ui) {
+								//	out($(ui.placeholder))
+								}
+							});
+							$(".fileTabContainer .container").disableSelection();
+						};
+						window.funcTabs();
+						window.resizeTab();
+						setDestque();
+					}
+					window.resizeTab = function() {
+						var qtdd = $(".fileTabContainer .container .fileTab").length;
+						var W_Aba = $(".fileTabContainer .fileTab").outerWidth();
+						var W_Container = $(".fileTabContainer").width();
+						var total_W_Abas = W_Aba * qtdd;
+						$('.fileTabContainer .fileTab').attr("style", "width:calc((100% / " + qtdd + ") - " + (47) + "px)");
+						$("*[legenda]").LegendaOver();
+						setDestque();
+					}
+					window.resizeDesktop = function() {
+						window.htmEditor.resize();
+						setDestque();
+						//	$(".ace_scrollbar").animate({scrollTop: 0}, 200);
+					}
+					ace.config.set('basePath', '/admin/App/Vendor/ace/src-min-noconflict');// SETA LOCAL DOS ARQUIVOS DO EDITOR
+					window.htmEditor = ace.edit("divEditor");
+					window.htmEditor.setTheme("ace/theme/ambiance");
+		
+					window.htmEditor.getSession().setUseWorker(false);
+		
+					window.htmEditor.getSession().setMode("ace/mode/php");
+					window.htmEditor.setShowPrintMargin(true); // mostra linha ativa atual
+					window.htmEditor.setHighlightActiveLine(true); // mostra linha ativa atual
+					window.htmEditor.setShowInvisibles(0); // frufru de tabulações
+					window.htmEditor.getSession().setUseSoftTabs(false); // usar tabs ao invez de espaço
+					//	window.htmEditor.setOptions({maxLines: Infinity,minLines: 1});
+					window.htmEditor.setDisplayIndentGuides(true);
+					window.htmEditor.getSession().setUseWrapMode(true);
+					setTimeout(function() {
+		
+						var wsCompleter = {
+							getCompletions: function(editor, session, pos, prefix, callback) {
+								if (prefix.length === 0) {
+									callback(null, []);
+									return
+								}
+								$.getJSON("./App/Modulos/webmaster/autoComplete.json", function(wordList) {
+									callback(null, wordList.map(function(ea) {
+										return {
+											name: ea.value,
+											value: ea.value,
+											meta: ea.meta
+										}
+									}));
+								})
+							}
+						}
+						var langTools = ace.require("ace/ext/language_tools");
+						langTools.setCompleters([langTools.snippetCompleter, langTools.textCompleter, wsCompleter])
+						window.htmEditor.setOptions({
+							enableBasicAutocompletion: false,
+							enableSnippets: true,
+							enableLiveAutocompletion: true
+						});
+						$('.chosen-results,.nave_folders').perfectScrollbar({suppressScrollX: true});
+						//window.htmEditor.setReadOnly(true); sem editar
+						// var UndoManager = require(["admin/App/Modulos/webmaster/src-min-noconflict/ace"]).UndoManager
+						window.htmEditor.getSession().getUndoManager().reset();
+						window.htmEditor.on('change', function() {
+							window.htmEditor.resize();
+							$("#Balao_ToolType").remove();
+							if ($(document.activeElement).closest("div").attr("id") == "divEditor") {
+								if (Object.keys(window.listFilesWebmaster).length) {
+									window.listFilesWebmaster[window.newTokenFile].saved = 'unsave';
+								}
+								$('.fileTabContainer .fileTab[data-pathFile="' + window.pathFile + '"][data-loadFile="' + window.loadFile + '"]').removeClass('saved').addClass('unsave');
+							}
+							setTimeout(function(){setDestque();},200)
+								
+						})
+		
+						if (!window.listFilesWebmaster) {
+							window.listFilesWebmaster = Object();
+						} else {
+							$.each(window.listFilesWebmaster, function(index) {
+								window.addTab(window.listFilesWebmaster[index].newTokenFile, window.listFilesWebmaster[index].pathFile, window.listFilesWebmaster[index].file, window.listFilesWebmaster[index].saved)
+							});
+							$('.fileTabContainer .fileTab.active').click();
+						}
+		
+							<!-- BEGIN GET_FILE -->
+								setTimeout(function() {$(".file[data-file='{GET_FILE}']").click();}, 500); 
+							<!-- END GET_FILE -->
+		
+					}, 1000);
+					$("#Balao_ToolType").remove();
+					sanfona('.folder');
+					$('.folder').click(function() {
+						setTimeout(function() {
+							$('.nave_folders,.chosen-results').perfectScrollbar('update');
+						}, 500)
+					})
+					$("*[legenda]").LegendaOver();
+					$("#bkpsFile").chosen({
+						disable_search_threshold: 0
+					}).change(function(e) {
+						var token = $('#bkpsFile').chosen().val();
+						if (token != "") {
+							functions({
+								funcao: "loadFileBKP",
+								vars: "token=" + token + "&pathFile=" + window.pathFile.replace(window.loadFile, "/") + "&filename=" + window.loadFile,
+								patch: "{PATH}",
+								Sucess: function(e) {
+									eval(e);
+								}
+							});
+						}
+					});
+					//####################################################################################  ALTERANDO O MODO E O ESTILO DO EDITOR
+					$('#mode').chosen({
+						disable_search_threshold: 5
+					}).change(function(e) {
+						e.preventDefault();
+						var theme = $('#mode').chosen().val();
+						window.htmEditor.setMode("ace/mode/" + theme);
+					}).find("option[value='php']").attr("selected", "true").trigger("chosen:updated");
+					setTimeout(function() {
+							$('#sintaxy').unbind('tap click hover').bind('tap click', function() {
+								$("#mode_chosen").addClass('chosen-container-active').addClass('chosen-with-drop');
+								setTimeout(function() {$("#mode_chosen").find('.chosen-drop').mousedown();}, 500);
+							})
+							$('#version').unbind('tap click hover').bind('tap click', function() {
+								$("#bkpsFile_chosen").addClass('chosen-container-active').addClass('chosen-with-drop');
+								setTimeout(function() {
+									$("#bkpsFile_chosen").find('.chosen-drop').mousedown();
+								}, 500);
+							})
+						}, 1000)
+						//####################################################################################  se alterar, precisa mudar no functiuons tb na função de checkin
+					window.refreshClick = function() {
+						$("#Balao_ToolType").remove();
+						$('.nave_folders,.chosen-results').perfectScrollbar('update');
+						$(".container .new").unbind('tap press click').bind('tap press click', function() {
+							$('#novoArquivo').click();
+						})
+						$('#addPagination').unbind('tap press click').bind('tap press click', function() {
+							functions({
+								funcao: "InsertPagination",
+								vars: "",
+								patch: "{PATH}",
+								Sucess: function(e) {
+									confirma({
+										conteudo: e,
+										width: 700,
+										height: 500,
+										bot1: 'Inserir Código',
+										bot2: 'Cancelar',
+										drag: 0,
+										botclose: 0,
+										Check: function() {
+											if (!$("#formTags input[type='radio']:checked") || $("#shortcodes").val() == "") {
+												return false;
+											} else {
+												return true;
+											}
+										},
+										ErrorCheck: function() {
+											alert("Preencha tipo e ferramenta desejados");
+										},
+										posFn: function() {
+											window.htmEditorPagination = ace.edit("editorHTML");
+											window.htmEditorPagination.setTheme("ace/theme/websheep.0.3");
+											window.htmEditorPagination.getSession().setMode("ace/mode/php");
+											window.htmEditorPagination.setHighlightActiveLine(true);
+											window.htmEditorPagination.setShowInvisibles(0);
+											window.htmEditorPagination.getSession().setUseSoftTabs(false);
+											window.htmEditorPagination.getSession().setUseWrapMode(true);
+											//window.htmEditorPagination.setOptions({maxLines: Infinity,minLines: 1});
+											$(".chosen-results,.nave_folders").perfectScrollbar({suppressScrollX: true });
+											window.htmEditorPagination.getSession().on('change', function(e) {
+												$("textarea[name='editorHTML']").val(window.htmEditorPagination.getSession().getValue())
+											})
+											window.htmEditorPagination.getSession().setValue(decodeURIComponent($("textarea[name='editorHTML']").val()))
+											window.htmEditorCountPage = ace.edit("editorCOUNT");
+											window.htmEditorCountPage.setTheme("ace/theme/websheep.0.3");
+											window.htmEditorCountPage.getSession().setMode("ace/mode/php");
+											window.htmEditorCountPage.setHighlightActiveLine(true);
+											window.htmEditorCountPage.setShowInvisibles(0);
+											window.htmEditorCountPage.getSession().setUseWrapMode(true);
+											window.htmEditorCountPage.getSession().setUseSoftTabs(false);
+											$(".chosen-results,.nave_folders").perfectScrollbar({suppressScrollX: true });
+											window.htmEditorCountPage.getSession().on('change', function(e) {
+												$("textarea[name='editorCOUNT']").val(window.htmEditorCountPage.getSession().getValue())
+											})
+											window.htmEditorCountPage.getSession().setValue(decodeURIComponent($("textarea[name='editorCOUNT']").val()))
+											window.htmEditorCountPage.setOptions({minLines:1});
+											window.htmEditorCountPageActive = ace.edit("editorCOUNTactive");
+											window.htmEditorCountPageActive.setTheme("ace/theme/websheep.0.3");
+											window.htmEditorCountPageActive.getSession().setMode("ace/mode/php");
+											window.htmEditorCountPageActive.setHighlightActiveLine(true);
+											window.htmEditorCountPageActive.setShowInvisibles(0);
+											window.htmEditorCountPageActive.getSession().setUseWrapMode(true);
+											window.htmEditorCountPageActive.getSession().setUseSoftTabs(false);
+											$(".chosen-results,.nave_folders").perfectScrollbar({suppressScrollX: true });
+											window.htmEditorCountPageActive.getSession().on('change', function(e) {
+												$("textarea[name='editorCOUNTactive']").val(window.htmEditorCountPageActive.getSession().getValue())
+											})
+											window.htmEditorCountPageActive.getSession().setValue(decodeURIComponent($("textarea[name='editorCOUNTactive']").val()))
+											setDestque()
+											//window.htmEditorCountPageActive.setOptions({maxLines: Infinity, minLines: 1 });
+										},
+										newFun: function() {
+											functions({
+												funcao: "InsertPaginationCampos",
+												vars: $("#formTags").serialize(),
+												patch: "{PATH}",
+												Sucess: function(e) {
+													window.htmEditor.insert(e)
+												}
+											})
+										}
+									})
+								}
+							})
+						})
+		
+						$('#formatHTML').unbind('tap press click').bind('tap press click', function() {
+							confirma({
+								conteudo: '<iframe id="bootstrap" src="./App/Modulos/webmaster/formatter/" width="100%" height="100%" scrolling="no"></iframe>',
+								width: 600,
+								height:370,
+								bot1: 'Formatar',
+								bot2: 'Cancelar',
+								drag: 0,
+								botclose: 0,
+								posFn: function() {},
+								newFun: function() {
+										$('#bootstrap')[0].contentWindow.beautify();
+								}
+							})
+		
+		
+		
+							//window.htmEditor.setValue(ws.string.formatHTML(window.htmEditor.getValue()));
+						})
+						$('#templateBootstrap').unbind('tap press click').bind('tap press click', function() {
+							confirma({
+								conteudo: '<iframe id="bootstrap" src="./App/Modulos/webmaster/templateBootstrap/" width="100%" height="100%"></iframe>',
+								width: 'calc(100% - 100px)',
+								height: 'calc(100% - 100px)',
+								bot1: 'Inserir',
+								bot2: 'Cancelar',
+								drag: 0,
+								botclose: 0,
+								posFn: function() {},
+								newFun: function() {
+									var $less = $("#bootstrap").contents().find(".html .output_container pre.mixins").text();
+									var $code = $("#bootstrap").contents().find(".html .output_container pre.markup").text();
+									var $insert = "<!--  LESS MIXINS --> \n " + $less + " \n <!--  END LESS MIXINS --> \n " + $code
+									if ($less != "") {
+										window.htmEditor.insert($insert);
+									} else {
+										window.htmEditor.insert($code);
+									}
+								}
+							})
+						})
+						$('#addSendForm').unbind('tap press click').bind('tap press click', function() {
+							functions({
+								funcao: "InsertCodeForm",
+								vars: "",
+								patch: "{PATH}",
+								Sucess: function(e) {
+									confirma({
+										conteudo: e,
+										width: 600,
+										bot1: 'Inserir formulário',
+										bot2: 'Cancelar',
+										drag: 0,
+										botclose: 0,
+										Check: function() {
+											if (!$("#formTags input[type='radio']:checked").val() || $("#shortcodes").val() == "") {
+												return false;
+											} else {
+												return true;
+											}
+										},
+										ErrorCheck: function() {
+											TopAlert({
+												mensagem: "Preencha tipo de envio desejado",
+												type: 2
+											});
+										},
+										posFn: function() {},
+										newFun: function() {
+											functions({
+												funcao: "InsertCodeFormCampos",
+												vars: $("#formTags").serialize(),
+												patch: "{PATH}",
+												Sucess: function(e) {
+													window.htmEditor.insert(e)
+												}
+											})
+										}
+									})
+								}
+							})
+						})
+		
+		
+						$('#addTool').unbind('tap press click').bind('tap press click', function() {
+							functions({
+								funcao: "InsertCode",
+								vars: "",
+								patch: "{PATH}",
+								Sucess: function(e) {
+									confirma({
+										conteudo: e,
+										width: 620,
+										bot1: 'Inserir Código',
+										bot2: 'Cancelar',
+										drag: 0,
+										botclose: 0,
+										Check: function() {
+											if (!$("#formTags input[type='radio']:checked") || $("#shortcodes").val() == "") {
+												return false;
+											} else {
+												return true;
+											}
+										},
+										ErrorCheck: function() {
+											alert("Preencha tipo e ferramenta desejados");
+										},
+										posFn: function() {},
+										newFun: function() {
+											functions({
+												funcao: "InsertCodeCampos",
+												vars: $("#formTags").serialize(),
+												patch: "{PATH}",
+												Sucess: function(e) {
+													window.htmEditor.insert(e)
+												}
+											})
+										}
+									})
+								}
+							})
+						})
+						$('#plugin').unbind('tap press click').bind('tap press click', function() {
+							functions({
+								funcao: "loadShortCodes",
+								vars: "",
+								patch: "{PATH}",
+								Sucess: function(e) {
+									confirma({
+										conteudo: e,
+										width: 600,
+										bot1: 'Inserir shortcode',
+										bot2: 'Cancelar',
+										drag: 0,
+										botclose: 0,
+										posFn: function() {
+		
+										},
+										newFun: function() {
+											var pathPlug = $("#shortcodes").val();
+											$.ajax({
+												type: "POST",
+												url: "./App/Modulos/webmaster/functions.php",
+												data: {
+													'function': 'getShortCodesPlugin',
+													'path': pathPlug
+												}
+											}).done(function(data) {
+												window.htmEditor.insert(data)
+											});
+										}
+									})
+								}
+							})
+						})
+		
+						$('#loadfile').unbind('tap click').bind('tap click', function() {
+							if (!$("#palco").hasClass('recolhido')) {
+								$("#palco, #divEditor").addClass("recolhido")
+							} else {
+								$("#palco, #divEditor").removeClass("recolhido")
+							}
+							if (!$(".nave_folders").hasClass('recolhido')) {
+								$(".nave_folders").addClass("recolhido")
+							} else {
+								$(".nave_folders").removeClass("recolhido")
+							}
+							if (!$(".nave_menu").hasClass('recolhido')) {
+								$(".nave_menu").addClass("recolhido")
+							} else {
+								$(".nave_menu").removeClass("recolhido")
+							}
+						})
+						$('#novoArquivo').unbind('tap click').bind('tap click', function() {
+							confirma({
+								width: "auto",
+								conteudo: "  Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+								drag: false,
+								bot1: 0,
+								bot2: 0
+							})
+							window.pathFile = $(this).data("file");
+							window.id_file_open = $(this).data("id");
+							functions({
+								funcao: "ListFolderNewFile",
+								vars: "pathFile=0",
+								patch: "{PATH}",
+								Sucess: function(e) {
+									confirma({
+										conteudo: e,
+										width: 500,
+										bot1: "Criar arquivo",
+										bot2: "Cancelar",
+										drag: false,
+										newFun: function() {
+											var newFile = $("input.path").val();
+											functions({
+												funcao: "createFile",
+												vars: "newFile=" + newFile,
+												patch: "{PATH}",
+												Sucess: function(e) {
+													if (e != "falha") {
+														eval(e)
+														functions({
+															funcao: "refreshFolders",
+															vars: "folders=1",
+															patch: "{PATH}",
+															Sucess: function(e) {
+																$("#nave_folders").html(e)
+																window.refreshClick();
+															}
+														})
+													}
+												}
+											});
+										},
+										onCancel: function() {}
+									})
+								}
+							});
+						});
+						$('#novodir').unbind('tap click').bind('tap click', function() {
+							confirma({
+								width: "auto",
+								conteudo: "  Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+								drag: false,
+								bot1: 0,
+								bot2: 0
+							})
+							window.pathFile = $(this).data("file");
+							window.id_file_open = $(this).data("id");
+							functions({
+								funcao: "ListFolderNewFolder",
+								vars: "pathFile=0",
+								patch: "{PATH}",
+								Sucess: function(e) {
+									confirma({
+										conteudo: e,
+										width: 500,
+										bot1: "Criar arquivo",
+										bot2: "Cancelar",
+										drag: false,
+										newFun: function() {
+											var newFile = $("input.path").val();
+											functions({
+												funcao: "createFolder",
+												vars: "newFile=" + newFile,
+												patch: "{PATH}",
+												Sucess: function(e) {
+													if (e == "sucesso") {
+														functions({
+															funcao: "refreshFolders",
+															vars: "folders=1",
+															patch: "{PATH}",
+															Sucess: function(e) {
+																$("#nave_folders").html(e)
+																window.refreshClick();
+															}
+														})
+													}
+												}
+											});
+										},
+										onCancel: function() {}
+									})
+								}
+							});
+						});
+						$('#exclFile').unbind('tap click').bind('tap click', function() {
+							confirma({
+								conteudo: "Você tem <b>CERTEZA</b> de que gostaria de excluir esse arquivo?<br><div class='bg08' style='position: relative;margin: 10px;padding: 20px;color: #F00;'>1 • Todos os BKPs deste arquivo também serão apagados.<br>2 • E lembre-se, esta ação <b>NÃO</b> terá mais volta.</div>",
+								width: 500,
+								bot1: "Sim tenho certeza",
+								bot2: "Cancelar",
+								drag: false,
+								newFun: function() {
+									functions({
+										funcao: "exclui_file",
+										vars: "&pathFile=" + window.pathFile + "&loadFile=" + window.loadFile,
+										patch: "{PATH}",
+										beforeSend: function() {
+											confirma({
+												width: "auto",
+												conteudo: "  Excluindo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+												drag: false,
+												bot1: 0,
+												bot2: 0
+											})
+										},
+										Sucess: function(e) {
+											$(".ferramenta_especial[data-path='./App/Modulos/webmaster/']").click();
+										}
+									});
+								}
+							})
+						});
+						$('#exclFolder').unbind('tap click').bind('tap click', function() {
+							confirma({
+								width: "auto",
+								conteudo: "  Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+								drag: false,
+								bot1: 0,
+								bot2: 0
+							})
+							window.pathFile = $(this).data("file");
+							window.id_file_open = $(this).data("id");
+							functions({
+								funcao: "ListFolderExclFolder",
+								vars: "_excl_dir_=0",
+								patch: "{PATH}",
+								Sucess: function(e) {
+									confirma({
+										conteudo: e,
+										width: 500,
+										bot1: "Excluir folder",
+										bot2: "Cancelar",
+										drag: false,
+										newFun: function() {
+											var excluiFolder = $('.nave_folders input[type="radio"]:checked').val();
+											setTimeout(function() {
+												confirma({
+													conteudo: "Você tem <b>CERTEZA</b> de que quer excluir o diretório: <br> <b>{/" + excluiFolder.replace('./../../../', '') + "}</b>?<br>Lembre-se, esta ação <b>NÃO</b> terá mais volta.",
+													width: 500,
+													bot1: "Sim tenho certeza",
+													bot2: "Cancelar",
+													drag: false,
+													newFun: function() {
+														functions({
+															funcao: "_excl_dir_",
+															vars: "exclFolder=" + excluiFolder,
+															patch: "{PATH}",
+															beforeSend: function() {
+																confirma({
+																	width: "auto",
+																	conteudo: "  Excluindo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+																	drag: false,
+																	bot1: 0,
+																	bot2: 0
+																})
+															},
+															Sucess: function(e) {
+																functions({
+																	funcao: "refreshFolders",
+																	vars: "var=0",
+																	patch: "{PATH}",
+																	Sucess: function(e) {
+																		$("#nave_folders").html(e)
+																		window.refreshClick();
+																		$("#ws_confirm").remove();
+																		$("#body").removeClass("scrollhidden");
+																		$("*").removeClass("blur");
+																	}
+																})
+															}
+														});
+													}
+												})
+											}, 500)
+										},
+										onCancel: function() {}
+									})
+								}
+							});
+						});
+						$('.nave_folders .file').unbind('tap click').bind('tap click', function() {
+							window.pathFile = $(this).data("file");
+							window.fileLoaded = $(this).text();
+							$("#exclFile").show();
+							$("#palco, #divEditor ,.nave_folders,.nave_menu").addClass("recolhido")
+		
+							if (!$('.fileTabContainer .fileTab[data-pathFile="' + window.pathFile + '"][data-loadFile="' + window.loadFile + '"]').length) {
+								functions({
+									funcao: "loadFile",
+									vars: "pathFile=" + window.pathFile,
+									patch: "{PATH}",
+									beforeSend: function() {
+										$(".fileTabContainer").prepend('<div class="tabSortable fileTab loader"></div>');
+									},
+									Sucess: function(e) {
+										eval(e);
+										$(".tabSortable.fileTab.loader").remove();
+										functions({
+											funcao: "returnBKP",
+											vars: "pathFile=" + window.pathFile.replace(window.loadFile, "/") + "&filename=" + window.loadFile,
+											patch: "{PATH}",
+											Sucess: function(e) {
+												$("#bkpsFile").html(e).trigger("chosen:updated");
+												$("#ws_confirm").remove();
+												$("#body").removeClass("scrollhidden");
+												$("*").removeClass("blur");
+											}
+										})
+									}
+								});
+							} else {
+								$('.fileTabContainer .fileTab[data-pathFile="' + window.pathFile + '"][data-loadFile="' + window.loadFile + '"]').click();
+							}
+						});
+						$('#salvarArquivo').unbind('tap click').bind('tap click', function() {
+							//window.newTokenFile	
+							//window.loadFile
+							//window.typeLoaded
+							var ConteudoDoc = encodeURIComponent(window.htmEditor.getValue())
+							//out(ConteudoDoc)
+							//out(window.pathFile)
+							//out(window.loadFile)
+							var GET = "pathFile=" + window.pathFile.replace(window.loadFile, "/") + "&filename=" + window.loadFile + "&token=" + window.newTokenFile + "&ConteudoDoc=" + ConteudoDoc;
+							confirma({
+								conteudo: "Espere um pouco <b>{USER_NOME}</b>;<br>Você gostaria de gravar uma versão de segurança antes de publicar?",
+								width: 500,
+								bot1: "Gravar cópia antes",
+								bot2: "Subscrever arquivo",
+								botclose: true,
+								newFun: function() {
+									$.ajax({
+										type: "POST",
+										url: "./App/Modulos/webmaster/functions.php",
+										beforeSend:function(){
+												confirma({width: "auto", conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 })
+										},
+										data: {
+											'function'	: 'geraBKPeAplica',
+											'bkp'		: 'true',
+											'GET'		:  GET,
+										}
+									}).done(function(e) {
+											out(e);
+											if (e == "sucesso") {
+												$("#ws_confirm").remove();
+												$("#body").removeClass("scrollhidden");
+												$("*").removeClass("blur");
+												window.listFilesWebmaster[window.newTokenFile].saved = 'saved';
+												$('.fileTab[data-pathFile="' + window.pathFile + '"][data-loadFile="' + window.loadFile + '"]').removeClass('unsave').addClass('saved')
+												if (window.closeToSave == true) {
+													window.closeToSave = false;
+													$('.fileTab[data-pathFile="' + window.pathFile + '"][data-loadFile="' + window.loadFile + '"] .close').click();
+												}
+												TopAlert({
+													mensagem: "Arquivo atualizado com BKP com sucesso!",
+													type: 3
+												});
+											};
+									});
+		
+		
+		
+		
+		
+									// functions({
+									// 	funcao: "geraBKPeAplica",
+									// 	vars: "bkp=true&" + GET,
+									// 	patch: "{PATH}",
+									// 	beforeSend: function() {
+									// 		confirma({
+									// 			width: "auto",
+									// 			conteudo: "  Salvando e gerando BKP...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+									// 			drag: false,
+									// 			bot1: 0,
+									// 			bot2: 0
+									// 		})
+									// 	},
+									// 	Sucess: function(e) {
+									// 		if (e == "sucesso") {
+									// 			functions({
+									// 				funcao: "returnBKP",
+									// 				vars: "pathFile=" + window.pathFile.replace(window.loadFile, "/") + "&filename=" + window.loadFile,
+									// 				patch: "{PATH}",
+									// 				Sucess: function(e) {
+									// 					$("#bkpsFile").html(e).trigger("chosen:updated");
+									// 					$("#ws_confirm").remove();
+									// 					$("#body").removeClass("scrollhidden");
+									// 					$("*").removeClass("blur");
+									// 				}
+									// 			})
+		
+									// 			window.listFilesWebmaster[window.newTokenFile].saved = 'saved';
+									// 			$('.fileTab[data-pathFile="' + window.pathFile + '"][data-loadFile="' + window.loadFile + '"]').removeClass('unsave').addClass('saved')
+									// 			if (window.closeToSave && window.closeToSave == true) {
+									// 				window.closeToSave = false;
+									// 				$('.fileTab[data-pathFile="' + window.pathFile + '"][data-loadFile="' + window.loadFile + '"] .close').click();
+									// 			}
+		
+									// 			TopAlert({
+									// 				mensagem: "BKP feito e arquivo atualizado com sucesso!",
+									// 				type: 3
+									// 			});
+									// 		};
+									// 	}
+									// });
+								},
+								onCancel: function() {
+									$.ajax({
+										type: "POST",
+										url: "./App/Modulos/webmaster/functions.php",
+										beforeSend:function(){
+												confirma({width: "auto", conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 })
+										},
+										data: {
+											'function'	: 'geraBKPeAplica',
+											'bkp'		: 'false',
+											'GET'		:  GET,
+										}
+									}).done(function(e) {
+											out(e);
+											if (e == "sucesso") {
+												$("#ws_confirm").remove();
+												$("#body").removeClass("scrollhidden");
+												$("*").removeClass("blur");
+												window.listFilesWebmaster[window.newTokenFile].saved = 'saved';
+												$('.fileTab[data-pathFile="' + window.pathFile + '"][data-loadFile="' + window.loadFile + '"]').removeClass('unsave').addClass('saved')
+												if (window.closeToSave == true) {
+													window.closeToSave = false;
+													$('.fileTab[data-pathFile="' + window.pathFile + '"][data-loadFile="' + window.loadFile + '"] .close').click();
+												}
+												TopAlert({
+													mensagem: "Arquivo atualizado com sucesso!",
+													type: 3
+												});
+											};
+									});
+								}
+							})
+						});
+						$(window).resize(function() {
+							window.htmEditor.resize();
+							$('.nave_folders,.chosen-results').perfectScrollbar('update');
+						});
+						$('#container').perfectScrollbar("destroy");
+					}
+					window.refreshClick();
+			});
+		});
+		})
+	</script>
+</div>
+<div class="c"></div>
+</div>
+<!-- END WEBMASTER -->
