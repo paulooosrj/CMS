@@ -24,7 +24,7 @@ Relate quaisquer problemas de segurança encontrados no email [websheep@feats.co
 
 ## Contribuição
 
-Envie relatórios de erros, sugestões e solicitações de envio para o [GitHub issue tracker] (https://github.com/websheep/cms/issues).
+Envie relatórios de erros, sugestões e solicitações de envio para o [GitHub issue tracker](https://github.com/websheep/cms/issues).
 Nossa intenção é melhorar cada vez mais o sistema, ampliar a cobertura de testes e atualizar as traduções.
 
 ## Requisitos de sistema
