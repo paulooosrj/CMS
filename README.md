@@ -1,12 +1,12 @@
 ![WebSheep](https://raw.githubusercontent.com/websheep/cms/master/admin/App/Templates/img/websheep/logoEmail.png)
 
-![Latest Stable Version](https://img.shields.io/badge/version-0.6.1-blue.svg)
+![Latest Stable Version](https://img.shields.io/badge/version-0.6.0-blue.svg)
 
 O WebSheep é um aplicativo usado para criar, editar, gerenciar e publicar conteúdo de forma consistentemente organizada permitindo que o mesmo seja modificado, removido e adicionado com facilidade. Usados para armazenar, controlar, prover documentação, empresarial tais como notícias, artigos, manuais de operação, manuais técnicos, guias de vendas e brochuras de marketing. O conteúdo pode incluir imagens, áudios, vídeos, documentos eletrônicos e conteúdo Web.
 
 ## Licença
 
-Este software é distribuido sob a licença [LGPL 2.1](http://www.gnu.org/licenses/lgpl-2.1.html). Por favor, leia a LICENÇA para obter informações sobre disponibilidade e distribuição do websheep.
+Este software é distribuido sob a licença [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0). Por favor, leia a LICENÇA para obter informações sobre disponibilidade e distribuição do websheep.
 
 ## Instalação simples e rápida
 
