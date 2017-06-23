@@ -14,9 +14,18 @@
 		Você deve ter recebido uma cópia da Licença Pública Geral GNU junto
 		com este programa, Se não, veja <http://www.gnu.org/licenses/>.
 	*/
+
 	ob_start();	
 	$r = $_SERVER["DOCUMENT_ROOT"];
 	$_SERVER["DOCUMENT_ROOT"] = (substr($r, -1) == '/') ? substr($r, 0, -1) : $r;
+
+
+	############################################################################################################################
+	# CASO NÃO TENHA SIDO VERIFICADO OU SEJA UMA NOVA INSTALAÇÃO/UPDATE IMPORTA VERIFICAÇÃO DO SERVIDOR
+	############################################################################################################################
+	if(!file_exists($_SERVER["DOCUMENT_ROOT"].'/admin/App/Config/ws-server-ok') || file_exists($_SERVER["DOCUMENT_ROOT"].'/admin/App/Config/firstacess')){
+		include($_SERVER["DOCUMENT_ROOT"].'/admin/App/Config/ws-verify-server.php');
+	}
 
 	############################################################################################################################
 	# CASO NÃO EXISTA O 'ws-config.php' IMPORTA A TELA DE SETUP
