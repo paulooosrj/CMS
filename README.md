@@ -1,6 +1,6 @@
 ![WebSheep](https://raw.githubusercontent.com/websheep/cms/master/admin/App/Templates/img/websheep/logoEmail.png)
 
-![Latest Stable Version](https://img.shields.io/badge/version-0.6.0-blue.svg)
+![Latest Stable Version](https://img.shields.io/badge/version-0.6.1-blue.svg)
 [![GitHub issues](https://img.shields.io/github/issues/websheep/CMS.svg)](https://github.com/websheep/CMS/issues)
 [![GitHub forks](https://img.shields.io/github/forks/websheep/CMS.svg)](https://github.com/websheep/CMS/network)
 [![GitHub stars](https://img.shields.io/github/stars/websheep/CMS.svg)](https://github.com/websheep/CMS/stargazers)
