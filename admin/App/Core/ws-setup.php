@@ -238,9 +238,10 @@ $(document).ready(function(){
 		var SERVIDOR_BD 	=	$("input[name='SERVIDOR_BD']").val();
 		$.ajax({
 			type: "POST",cache: false,url: "/admin/App/Core/ws-setup.php",
-			data: {function		:"testMySQL",NOME_BD			:NOME_BD,USUARIO_BD		:USUARIO_BD,SENHA_BD		:SENHA_BD,SERVIDOR_BD		:SERVIDOR_BD,},
+			data: {function:"testMySQL",NOME_BD:NOME_BD,USUARIO_BD:USUARIO_BD,SENHA_BD:SENHA_BD,SERVIDOR_BD:SERVIDOR_BD,},
 			error: function (xhr, ajaxOptions, thrownError) {alert(xhr.status);alert(thrownError);}
 		}).done(function(data) { 
+			
 			if(data=='1'){
 				$("input[name='NOME_BD'],input[name='USUARIO_BD'],input[name='SENHA_BD'],input[name='SERVIDOR_BD']").css({borderColor:"#b0d000",paddingLeft:33,'background-image':"url('/admin/App/Templates/img/websheep/tick-circle.png')",'background-position':10,'background-repeat':"no-repeat"})
 			}else{

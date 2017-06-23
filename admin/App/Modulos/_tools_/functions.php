@@ -620,7 +620,7 @@
 														var verifyBD = $.ajax({
 															type: "POST",
 															sync: true,
-															url: "./App/Modulos/_tools_/functions.php",
+															url: "/admin/App/Modulos/_tools_/functions.php",
 															data: { function: "excluirBibliotecaSelecionada", selectAntigo:selectAntigo}
 														}).done(function(msg) {
 															window.imgSelectedBiblioteca = Array();

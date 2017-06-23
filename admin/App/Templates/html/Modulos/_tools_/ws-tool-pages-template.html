@@ -51,7 +51,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 			})
 			$.ajax({
 			  type: "POST",
-			  url: "./App/Modulos/_tools_/functions.php",
+			  url: "/admin/App/Modulos/_tools_/functions.php",
 			  data: { 
 			  	function:"ordenaFerramenta",
 			  	posicoes:posicoes
@@ -106,7 +106,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 					var newName = $("#form_new_name input").serialize();
 					$.ajax({
 					  type: "POST",
-					  url: "./App/Modulos/_tools_/functions.php",
+					  url: "/admin/App/Modulos/_tools_/functions.php",
 					  data: { function:"addPage",formulario:newName}
 					}).done(function(data) {
 						out(data)
@@ -231,7 +231,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 								var newName 	= $("#form_new_name input[name='titulo_page']").val();
 								$.ajax({
 								  type: "POST",
-								  url: "./App/Modulos/_tools_/functions.php",
+								  url: "/admin/App/Modulos/_tools_/functions.php",
 								  data: { function:"salvaNomeFolder",id:id,formulario:formulario}
 								}).done(function(data) {
 									if(data=="sucesso"){
@@ -264,7 +264,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 				newFun:function(){
 					$.ajax({
 					  type: "POST",
-					  url: "./App/Modulos/_tools_/functions.php",
+					  url: "/admin/App/Modulos/_tools_/functions.php",
 					  data: { function:"excluiFolder",id_folder:id_folder,token:token,preservar:true}
 					}).done(function(data) {
 						console.log(data)
@@ -274,7 +274,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 				onCancel:function(){
 					$.ajax({
 					  type: "POST",
-					  url: "./App/Modulos/_tools_/functions.php",
+					  url: "/admin/App/Modulos/_tools_/functions.php",
 					  data: { function:"excluiFolder",id_folder:id_folder,token:token,preservar:false}
 					}).done(function(data) {
 						console.log(data)

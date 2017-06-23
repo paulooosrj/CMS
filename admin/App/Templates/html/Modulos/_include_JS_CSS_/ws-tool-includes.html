@@ -50,7 +50,7 @@ function reloadFunctions(){
 			newFun:function(){
 				$.ajax({
 				  type: "POST",
-				  url: "./App/Modulos/_URL_amigavel/functions.php",
+				  url: "/admin/App/Modulos/_URL_amigavel/functions.php",
 				  data: { function:"excluiRegistro",idPath:idPath}
 				}).done(function(data) {
 					out(data);
@@ -64,7 +64,7 @@ function reloadFunctions(){
 			onCancel:function(){
 				$.ajax({
 				  type: "POST",
-				  url: "./App/Modulos/_URL_amigavel/functions.php",
+				  url: "/admin/App/Modulos/_URL_amigavel/functions.php",
 				  data: { function:"excluiRegistroFile",id_include:id_include}
 				}).done(function(data) {
 					out(data);

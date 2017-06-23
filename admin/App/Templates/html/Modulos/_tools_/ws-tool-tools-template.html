@@ -125,7 +125,7 @@
 			})
 			$.ajax({
 			  type: "POST",
-			  url: "./App/Modulos/_tools_/functions.php",
+			  url: "/admin/App/Modulos/_tools_/functions.php",
 			  data: { 
 				function:"ordenaFerramenta",
 				posicoes:posicoes
@@ -200,7 +200,7 @@
 				$.ajax({
 					beforeSend:function(){confirma({width:600, conteudo:"{ToolsManager_Modal_WaitDel}<br>{ToolsManager_Modal_AllRegister}<br> <div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag:false, bot1:0, bot2:0 }) },
 					type: "POST",
-					url: "./App/Modulos/_tools_/functions.php",
+					url: "/admin/App/Modulos/_tools_/functions.php",
 					data: { 'function':"exclude_All_Tool_File","tools":ferramentas}
 				}).done(function(data) {
 					if(data=="sucesso"){
@@ -254,7 +254,7 @@
 						var filename = $("#nameFileTool").val()+'.ws';
 						$.ajax({
 						  type: "POST",
-						  url: "./App/Modulos/_tools_/functions.php",
+						  url: "/admin/App/Modulos/_tools_/functions.php",
 						  data: { 'function':"export_All_Tool_File", tools:ferramentas}
 						}).done(function(data) {
 								var pom = document.createElement('a');
@@ -308,7 +308,7 @@
 			var NamePlugin	= $(li).find('.titulo').text().split(" ").join("_");
 			$.ajax({
 			  type: "POST",
-			  url: "./App/Modulos/_tools_/functions.php",
+			  url: "/admin/App/Modulos/_tools_/functions.php",
 			  data: { function:"exportToolFile",id_tool:id}
 			}).done(function(data) {
 					var pom = document.createElement('a');
@@ -429,7 +429,7 @@
 							var newName 	= $("#form_new_name input[name='titulo_page']").val();
 							$.ajax({
 							  type: "POST",
-							  url: "./App/Modulos/_tools_/functions.php",
+							  url: "/admin/App/Modulos/_tools_/functions.php",
 							  data: { function:"salvaNomeFolder",id:id,formulario:formulario}
 							}).done(function(data) {
 								out(data)
@@ -498,7 +498,7 @@
 					var AppData = $("#detailsApp").serialize();
 					$.ajax({
 					  type: "POST",
-					  url: "./App/Modulos/_tools_/functions.php",
+					  url: "/admin/App/Modulos/_tools_/functions.php",
 					  data: { function:"addApp",id:id,AppData:AppData,plugin:"{GET_PLUGIN}"}
 					}).done(function(data) {
 						TopAlert({mensagem: "{ToolsManager_Modal_CreateOk}",type: 3})
@@ -535,7 +535,7 @@
 								posFn:function(){
 									$.ajax({
 									  type: "POST",
-									  url: "./App/Modulos/_tools_/functions.php",
+									  url: "/admin/App/Modulos/_tools_/functions.php",
 									  data: { function:"limparFerramenta",ws_id_ferramenta:patch}
 									}).done(function(data) {
 										$("#ws_confirm").css("line-height","20px");
@@ -574,7 +574,7 @@
 								posFn:function(){
 									$.ajax({
 									  type: "POST",
-									  url: "./App/Modulos/_tools_/functions.php",
+									  url: "/admin/App/Modulos/_tools_/functions.php",
 									  data: { function:"excluiFerramenta",ws_id_ferramenta:patch}
 									}).done(function(data) {
 										out(data)
@@ -676,7 +676,7 @@ function SetupTool(Base64Var){
 				}else{
 					$.ajax({
 					  type: "POST",
-					  url: "./App/Modulos/_tools_/functions.php",
+					  url: "/admin/App/Modulos/_tools_/functions.php",
 					  data: { 
 						function:"installToolPanel",
 						ToolInstall:ToolInstall

@@ -42,7 +42,7 @@ $(document).ready(function(){
 					$.ajax({
 						type: "POST",
 						cache: false,
-						url: "./App/Modulos/_tools_/functions.php",
+						url: "/admin/App/Modulos/_tools_/functions.php",
 						data: {function:"installSQLInit"},
 						error: function (xhr, ajaxOptions, thrownError) {
 							alert(xhr.status);

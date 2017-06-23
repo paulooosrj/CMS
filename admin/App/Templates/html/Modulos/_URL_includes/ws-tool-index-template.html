@@ -99,7 +99,7 @@ function reloadFunctions(){
 				var info = $("#formSalva input[type='radio']:checked").val();
 				$.ajax({
 					type: "POST",
-					url: "./App/Modulos/_URL_includes/functions.php",
+					url: "/admin/App/Modulos/_URL_includes/functions.php",
 		 			beforeSend:function(){confirma({width:"auto",conteudo:"  {urlIncludes_modal_rearranging_items}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 					data: { function:"salvaInclude",id_include:id_include, file:file ,info:info}
 				}).done(function(data) {
@@ -132,7 +132,7 @@ function reloadFunctions(){
 			newFun:function(){
 				$.ajax({
 					type: "POST",
-					url: "./App/Modulos/_URL_includes/functions.php",
+					url: "/admin/App/Modulos/_URL_includes/functions.php",
 		 			beforeSend:function(){confirma({width:"auto",conteudo:"{urlIncludes_modal_rearranging_items}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 					data: { "function":"SalvaPaths",Formulario:Formulario}
 				}).done(function(data) {
@@ -166,7 +166,7 @@ function reloadFunctions(){
 			newFun:function(){
 				$.ajax({
 				  type: "POST",
-				  url: "./App/Modulos/_URL_includes/functions.php",
+				  url: "/admin/App/Modulos/_URL_includes/functions.php",
 				  data: { function:"excluiRegistroFile",registro:"false",id_include:id_include}
 				}).done(function(data) {
 					out(data);
@@ -180,7 +180,7 @@ function reloadFunctions(){
 			onCancel:function(){
 				$.ajax({
 				  type: "POST",
-				  url: "./App/Modulos/_URL_includes/functions.php",
+				  url: "/admin/App/Modulos/_URL_includes/functions.php",
 				  data: { function:"excluiRegistroFile",registro:"true",id_include:id_include}
 				}).done(function(data) {
 					out(data);

@@ -97,7 +97,7 @@
 						$.ajax({
 							beforeSend:function(){$("#menu_tools").html("");},
 							type: "POST",
-							url: "./App/Modulos/_tools_/functions.php",
+							url: "/admin/App/Modulos/_tools_/functions.php",
 							data:{"function":"refreshMenuDesktop"}
 						}).done(function(data) {
 							$("#menu_tools").html(data);

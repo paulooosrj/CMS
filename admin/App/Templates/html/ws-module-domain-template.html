@@ -110,7 +110,7 @@
 						beforeSend:function(){confirma({width:"auto",conteudo:"  {domainPanel_modal_Saving}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 						cache: false,
 						type: "POST",
-						url: "./App/Modulos/_dominio_/functions.php",
+						url: "/admin/App/Modulos/_dominio_/functions.php",
 						data: {function:"substituiTopo",img:a},
 					}).done(function(e) {
 								$("#ws_confirm").remove();
@@ -146,7 +146,7 @@
 						beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 						cache: false,
 						type: "POST",
-						url: "./App/Modulos/_dominio_/functions.php",
+						url: "/admin/App/Modulos/_dominio_/functions.php",
 						data: {function:"substituiSplash",img:a},
 					}).done(function(e) {
 						out(e)
@@ -172,7 +172,7 @@
 									$.ajax({
 										type: "POST",
 										cache: false,
-										url: "./App/Modulos/_dominio_/functions.php",
+										url: "/admin/App/Modulos/_dominio_/functions.php",
 										data: {"function":"VerificaPacote" }
 									}).done(function(e) {
 										var json = jQuery.parseJSON(e);
@@ -203,7 +203,7 @@
 											newFun:function(){
 														setTimeout(function(){confirma({width:600,conteudo:" <div id='mensagemZIP'> {domainPanel_modal_Compacting}...</div><div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});},500)               
 												$.ajax({
-													url: "./App/Modulos/_dominio_/functions.php",
+													url: "/admin/App/Modulos/_dominio_/functions.php",
 													data: {"function":"CompactarZIPtoFTP" },
 													type: "POST",
 													cache: false,
@@ -234,7 +234,7 @@
 																					$("#body").removeClass("scrollhidden");
 																					$("*").removeClass("blur");
 																					$.ajax({
-																						url: "./App/Modulos/_dominio_/functions.php",
+																						url: "/admin/App/Modulos/_dominio_/functions.php",
 																						data: {"function":"delZIPtoFTP",namefile:objJSON.namefile},
 																						type: "POST",
 																						cache: false,
@@ -265,7 +265,7 @@
 												$.ajax({
 													type: "POST",
 													cache: false,
-													url: "./App/Modulos/_dominio_/functions.php",
+													url: "/admin/App/Modulos/_dominio_/functions.php",
 													data: {"function":"getFtpConnection" }
 												}).done(function(e) {
 													out(e)
@@ -292,7 +292,7 @@
 					$.ajax({
 						type: "POST",
 						cache: false,
-						url: "./App/Modulos/_dominio_/functions.php",
+						url: "/admin/App/Modulos/_dominio_/functions.php",
 						data: {function:"salvaDominio", inputs:inputs }
 					}).done(function(e) {
 					if(e=='{domainPanel_modal_ItemSavedSucces}'){var cor=3;}else{var cor=2;}
