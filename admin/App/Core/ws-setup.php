@@ -262,8 +262,8 @@ $(document).ready(function(){
 						$.ajax({
 								type: "POST",
 								cache: false,
-								beforeSend:function(){confirma({width:"auto",conteudo:"  Configurando MySQL...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
-								url: "./App/Modulos/_tools_/functions.php",
+								beforeSend:function(){confirma({width:"auto",conteudo:"  Configurando MySQL...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+								url: "/admin/App/Modulos/_tools_/functions.php",
 								data: {function:"installSQLInit",formulario:formulario},
 								error: function (xhr, ajaxOptions, thrownError) {alert(xhr.status);alert(thrownError);}
 							}).done(function(data) {
