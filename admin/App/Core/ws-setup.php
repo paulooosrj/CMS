@@ -253,7 +253,7 @@ $(document).ready(function(){
 		$.ajax({
 			type: "POST",
 			cache: false,
-			url: "/admin/App/Core/ws-setup.php",
+			url: "/admin/App/Modulos/_tools_/functions.php",
 		    beforeSend:function(){confirma({width:"auto",conteudo:"  Criando ws-config...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 			data: {function:"createWsConfig", form:formulario},
 		}).done(function(data) {
