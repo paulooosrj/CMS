@@ -1,9 +1,6 @@
 *~
 *\#
 *.swp
-config.php
-data/
-workspace/
 plugins/*
 !plugins/README.md
 themes/*
@@ -11,7 +8,6 @@ themes/*
 !themes/README.md
 .project
 .buildpath
-.settings/
 .svn/
 vendor/
 composer.lock
