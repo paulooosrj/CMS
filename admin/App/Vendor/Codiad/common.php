@@ -87,10 +87,11 @@
             }
             global $lang;
             if (isset($_SESSION['lang'])) {
-                include(BASE_PATH."/languages/{$_SESSION['lang']}.php");
-            } else {
-                include(BASE_PATH."/languages/".LANGUAGE.".php");
+                $pathLang   =  BASE_PATH."/languages/{$_SESSION['lang']}.php";
+            }else{
+               $pathLang    =   BASE_PATH."/languages/".LANGUAGE.".php";
             }
+            include($pathLang);
         }
 
         //////////////////////////////////////////////////////////////////
