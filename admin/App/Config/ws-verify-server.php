@@ -7,9 +7,19 @@ $config 				= (object) Array();
 $config->php_ini 		= (object) ini_get_all();
 $config->extensions 	= (object) Array();
 $config->apache 		= (object) Array();
-foreach (apache_get_modules() as $value) {
-	$config->apache->{$value} = true;
+
+
+
+if (function_exists('apache_get_modules')) {
+  $modules = apache_get_modules();
+  $mod_rewrite = in_array('mod_rewrite', $modules);
+} else {
+  $mod_rewrite =  getenv('HTTP_MOD_REWRITE')=='On' ? true : false ;
 }
+
+// foreach (apache_get_modules() as $value) {
+// 	$config->apache->{$value} = true;
+// }
 foreach (get_loaded_extensions() as $value) {
 	$config->extensions->{$value} = true;
 }
@@ -31,10 +41,16 @@ function return_bytes($val) {
     return $val;
 }
 $bug = 0;
-if(@$config->apache->mod_rewrite!=1){
+
+
+if(@$_SERVER["SERVER_SOFTWARE"]!="Apache"){
 	$bug = 1;
-	echo "<div>É necessário habilitar em seu Apache a função mod_rewrite </div>";
+	echo "<div>É necessário ter o Apache instalado em seu servidor</div>";
 }
+// if(@$config->apache->mod_rewrite!=1){
+// 	$bug = 1;
+// 	echo "<div>É necessário habilitar em seu Apache a função mod_rewrite </div>";
+// }
 if(@$config->php_ini->file_uploads["global_value"] != 1){
 	$bug = 1;
 	echo "<div>É necessário habilitar em seu php.ini a função file_uploads</div>";

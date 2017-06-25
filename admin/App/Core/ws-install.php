@@ -2,7 +2,10 @@
 	$_SERVER["DOCUMENT_ROOT"] = (substr($_SERVER["DOCUMENT_ROOT"], -1) == '/') ? substr($_SERVER["DOCUMENT_ROOT"], 0, -1) : $_SERVER["DOCUMENT_ROOT"];
 	include_once($_SERVER["DOCUMENT_ROOT"].'/ws-config.php');
 	$php_version = file_get_contents(ROOT_ADMIN.'/App/Templates/txt/ws-php-version.txt');
-	$ws_version  = file_get_contents(ROOT_ADMIN.'/App/Templates/txt/ws-version.txt');
+	##########################################################################################
+	#  VERSÃO DO SISTEMA   
+	##########################################################################################
+	$ws_version = json_decode(@file_get_contents(ROOT_ADMIN."/App/Templates/json/ws-update.json"));
 
 ?>
 <html lang="pt-br" class='bgradial01' id="html">
@@ -73,7 +76,7 @@ $(document).ready(function(){
 					<div id="resposta"></div>
 					<img src="/admin/App/Templates/img/websheep/logo_ws_install.jpg" style="">
 					<div class="c"></div>
-					<strong style="font-family: 'Titillium Web', sans-serif;font-size: 30px;line-height">Bemvindo ao WebSheep <?=$ws_version?></strong>
+					<strong style="font-family: 'Titillium Web', sans-serif;font-size: 30px;line-height">Bemvindo ao WebSheep <?=$ws_version->version?></strong>
 					<br>
 					Antes de começar, gostariamos de agradecer por escolher e utilizar nossa plataforma, 
 					pois ela é fruto de muito esforço e noites sem dormir.

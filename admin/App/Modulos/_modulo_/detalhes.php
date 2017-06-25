@@ -578,7 +578,7 @@
 			$_SET_TEMPLATE_INPUT->PLACE        = $k['place'];
 			$_SET_TEMPLATE_INPUT->BACKGROUND   = str_replace("#", "", $k['background']);
 			$_SET_TEMPLATE_INPUT->COLOR        = str_replace("#", "", $k['color']);
-			$_SET_TEMPLATE_INPUT->CONTEUDO     = stripslashes(urldecode($produto[$k['coluna_mysql']]));
+			$_SET_TEMPLATE_INPUT->CONTEUDO     = str_replace("\n","ws_eol",addslashes(urldecode($produto[$k['coluna_mysql']])));
 			$_SET_TEMPLATE_INPUT->block("BLOCK_TEXTAREA");
 			$_IPUNT_CAMPOS .= $_SET_TEMPLATE_INPUT->parse();
 		}

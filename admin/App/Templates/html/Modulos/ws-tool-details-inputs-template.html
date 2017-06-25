@@ -186,11 +186,12 @@
 	<div class="groupForm" style="height:auto; width:{WIDTH}px; position: relative; float: left;margin-right: 6px;">
 		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px;">{LABELSUP}</div>
 		<div class="textarea_adicional" style="margin: 3px;position: relative;float: left;">
-			<textarea class="textarea_adicional" id="{ID}" data-editor="{EDITOR}" class="inputText input_adicional" name="{NAME}" placeholder="{PLACE}" style="height:{INPUT_HEIGHT}px;width:{INPUT_WIDTH}px;margin-top:0;">{CONTEUDO}</textarea>
+			<textarea class="textarea_adicional" id="{ID}" data-editor="{EDITOR}" class="inputText input_adicional" name="{NAME}" placeholder="{PLACE}" style="height:{INPUT_HEIGHT}px;width:{INPUT_WIDTH}px;margin-top:0;"></textarea>
 		</div>
 	</div>
 	<script type="text/javascript">
-		out("{EDITOR}")
+		$val = "{CONTEUDO}";
+		$("#{ID}").val($val.split("ws_eol").join("\n"));
 
 		if({EDITOR} == 1) {
 			if(CKEDITOR.stylesSet.registered.estilos_{ID}) {
