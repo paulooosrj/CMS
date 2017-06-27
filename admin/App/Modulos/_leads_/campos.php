@@ -58,7 +58,23 @@
 	$template->PATH 		= 'App/Modulos/_leads_';
 	$template->TABELA 		= $_tabela_ = strtolower(PREFIX_TABLES.'wslead_'.$_GET['token_table']);
 	$template->TOKEN_TABLE 	= $_GET['token_table'];
-
+	
+	
+	#####################################################  
+	# BLOCO DE TRADUÇÃO
+	#####################################################
+	
+	$template->Leads_Fields_Back				=	ws::getLang("Leads>Fields>Back");
+	$template->Leads_Fields_AddField			=	ws::getLang("Leads>Fields>AddField");
+	$template->Leads_Fields_Delete				=	ws::getLang("Leads>Fields>Delete");
+	$template->Leads_Fields_Modal_AreSure		=	ws::getLang("Leads>Fields>Modal>AreSure");
+	$template->Leads_Fields_Modal_DataDelete	=	ws::getLang("Leads>Fields>Modal>DataDelete");
+	$template->Leads_Fields_Modal_Cancel		=	ws::getLang("Leads>Fields>Modal>Cancel");
+	$template->Leads_Fields_Modal_AddingField	=	ws::getLang("Leads>Fields>Modal>AddingField");
+	$template->Leads_Fields_Modal_Backing		=	ws::getLang("Leads>Fields>Modal>Backing");	
+	$template->Leads_Fields_Modal_TypeName		=	ws::getLang("Leads>Fields>Modal>TypeName");	
+	$template->Leads_Fields_Modal_SameName		=	ws::getLang("Leads>Fields>Modal>SameName");	
+	
 	##########################################################
 	# PESQUISAMOS NA BASE OS CAMPOS CADASTRADOS NESSA CAMPANHA 
 	##########################################################

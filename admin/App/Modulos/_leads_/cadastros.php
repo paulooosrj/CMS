@@ -67,6 +67,19 @@
 	$template->LEAD 	= $_GET['lead'];
 
 	#####################################################  
+	# BLOCO DE TRADUÇÃO
+	#####################################################
+	
+	$template->Leads_Register_Back						=	ws::getLang("Leads>Register>Back");
+	$template->Leads_Register_Backing					=	ws::getLang("Leads>Register>Backing");	
+	$template->Leads_Register_Modal_NumerForPage		=	ws::getLang("Leads>Register>Modal>NumerForPage");
+	$template->Leads_Register_Modal_WantDelete			=	ws::getLang("Leads>Register>Modal>WantDelete");
+	$template->Leads_Register_Modal_DataDelete			=	ws::getLang("Leads>Register>Modal>DataDelete");
+	$template->Leads_Register_Modal_Delete				=	ws::getLang("Leads>Register>Modal>Delete");
+	$template->Leads_Register_Modal_Cancel				=	ws::getLang("Leads>Register>Modal>Cancel");
+	$template->Leads_Register_Modal_DeleteLink			=	ws::getLang("Leads>Register>Modal>DeleteLink");
+
+	#####################################################  
 	# VARREMOS AS COLUNAS DO LEAD E BLOCAMOS O TEMPLATE 
 	#####################################################
 	$cads = new MySQL();

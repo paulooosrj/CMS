@@ -51,6 +51,7 @@
 	$template           	= new Template(TEMPLATE_LINK, true);
 	$template->DOMINIO 		= ws::protocolURL().DOMINIO;
 	$template->PATH 		= 'App/Modulos/_leads_';
+		
 	$s = new MySQL();
 	$s->set_table(PREFIX_TABLES.'ws_list_leads');
 	$s->select();
@@ -60,6 +61,25 @@
 		$template->LI_ID 	= $img['id']; 
 		$template->block('LI_LEAD'); 
 	}
+	
+	#####################################################  
+	# BLOCO DE TRADUÇÃO
+	#####################################################
+	
+	$template->Leads_Index_FormRegister				=	ws::getLang("Leads>Index>FormRegister");
+	$template->Leads_Index_CreateLink				=	ws::getLang("Leads>Index>CreateLink");
+	$template->Leads_Index_ViewRegister				=	ws::getLang("Leads>Index>ViewRegister");
+	$template->Leads_Index_Edit						=	ws::getLang("Leads>Index>Edit");
+	$template->Leads_Index_Delete					=	ws::getLang("Leads>Index>Delete");
+	$template->Leads_Index_Modal_LoadRegister		=	ws::getLang("Leads>Index>Modal>LoadRegister");
+	$template->Leads_Index_Modal_AreSure			=	ws::getLang("Leads>Index>Modal>AreSure");
+	$template->Leads_Index_Modal_NotBack			=	ws::getLang("Leads>Index>Modal>NotBack");
+	$template->Leads_Index_Modal_Delete				=	ws::getLang("Leads>Index>Modal>Delete");
+	$template->Leads_Index_Modal_Cancel				=	ws::getLang("Leads>Index>Modal>Cancel");
+	$template->Leads_Index_Modal_DeleteLink			=	ws::getLang("Leads>Index>Modal>DeleteLink");
+	$template->Leads_Index_Modal_CreateLead			=	ws::getLang("Leads>Index>Modal>CreateLead");
+
+	
 
 	#####################################################  
 	# FINALIZA O ARQUIVO, PUXA O BLOCO E RETORNA O HTML 

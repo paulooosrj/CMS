@@ -8,10 +8,10 @@
 </div>
 	<div id="topo_upload" class="bg01" >
 		<form name="formUpload" id="formUpload">
-		<div id="bt_voltar_cat_cad" class="botao">Voltar</div>
+		<div id="bt_voltar_cat_cad" class="botao">{Leads_Register_Back}</div>
 		<script>
 			$("#bt_voltar_cat_cad").unbind("click").click(function(){
-					confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+					confirma({width:"auto",conteudo:"  {Leads_Register_Backing}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 					$("#conteudo").load("./{PATH}/index.php",function(){
 						$("#ws_confirm").remove();
 						$("#body").removeClass("scrollhidden");
@@ -68,7 +68,7 @@ $(document).ready(function(){
 			"sPaginationType": "full_numbers",
 			'autoWidth': false,
 			'aoColumnDefs': [{'aTargets': ['nosort']}],
-			"oLanguage": {"sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel w1'>Quantidade p/ página:</span>",},
+			"oLanguage": {"sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel w1'>{Leads_Register_Modal_NumerForPage}:</span>",},
 		})
 		$("div.table_top select").addClass('tbl_length').addClass('selectNumResult').attr('id','selectNumResult');
 		$(".tbl_length").chosen({disable_search_threshold: 4});
@@ -81,12 +81,12 @@ $(document).ready(function(){
 			var divExcl = $(this).parent().parent();
 			confirma({
 				width: 600,
-				conteudo: "Tem certeza de que você quer excluir esse link?<br>Os dados inclusos na tabela também serão excluídos, e isso não terá mais volta! ",
-				drag: false,bot1:'Excluir',bot2: 'Cancelar',
+				conteudo: "{Leads_Register_Modal_WantDelete}<br>{Leads_Register_Modal_DataDelete} ",
+				drag: false,bot1:'{Leads_Register_Modal_Delete}',bot2: '{Leads_Register_Modal_Cancel}',
 				posFn:function(){},
 				newFun:function(){
 					$.ajax({
-						beforeSend: function() {confirma({width: "auto", conteudo: "  Excluindo link...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Register_Modal_DeleteLink}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
 						cache: false, type: "POST", url: "{PATH}/functions.php",
 						data: {
 							function: "exclRegistro",

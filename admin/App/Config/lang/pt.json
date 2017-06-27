@@ -724,5 +724,97 @@
 			"ColorPickerName": "Título que irá na listagem dos ítens",
 			"ColorPickerLabel": "Label interno do colorpicker"
 		}
+	},
+	"Leads" : {
+		"Register" : {
+			"Back"			: "Voltar",
+			"Backing"		: "Voltando",
+			"Modal"	: {
+				"NumerForPage"	: "Quantidade p/ página",				
+				"WantDelete"	: "Tem certeza de que você quer excluir esse link?",
+				"DataDelete"	: "Os dados inclusos na tabela também serão excluídos, e isso não terá mais volta!",
+				"Delete"		: "Excluir",
+				"Cancel"		: "Cancelar",
+				"DeleteLink"	: "Excluindo link..."}			
+		}
+		"Fields" : {
+			"Back"		: "voltar",
+			"AddField"	: "Adicionar um campo",
+			"Delete"	: "Excluir",
+			"Modal" : {
+				"AreSure"		: "Tem certeza de que você quer excluir essa coluna?",
+				"DataDelete"	: "Os dados inclusos nela também serão excluídos, e isso não terá mais volta!",
+				"Cancel"		: "cancelar",
+				"AddingField"	: "Adicionando campo...",
+				"Backing"		: "Voltando...",
+				"TypeName"		: "Digite um nome para o seu campo:",
+				"SameName"		: "(mesmo 'name' do input no seu formulário):"}
+		}
+		"Details" : {
+			"PleaseWait"	: "Por favor, aguarde...",
+			"BackList"		: "Voltar a listagem",
+			"SaveConfig"	: "Salvas configurações",
+			"URLSend"		: "URL de envio:",
+			"EditFieldForm"	: "Edite os campos do formulario.",
+			"EditField"		: "Editar campos",
+			"DataLead"		: "Dados do lead",
+			"RegisterName"	: "Nome deste cadastro:",
+			"Title"			: "Título:",
+			"ShortDesc"		: "Pequena descrição:",
+			"LeadConfig"	: "Configuração do lead",
+			"AboutForm"		: "Sobre a finalidade do formulário:",
+			"UserEmail"		: "Campo do email do usuário",
+			"JustSave"		: "Apenas gravar na base",
+			"JustSend"		: "Apenas enviar email",
+			"SaveSend"		: "Enviar e-mail e gravar na base",
+			"UserResponse"	: "Resposta ao usuário",
+			"SelectField"	: "Selecione um campo",
+			"ServerConfig"	: "Configurações do servidor:",
+			"SMTPSecure"	: "SMTPSecure:",
+			"Host"			: "Host:",
+			"Port"			: "Porta:",
+			"SMTPAuth"		: "SMTPAuth:",
+			"SenderEmail"	: "E-mail que fará o envio:",
+			"Password"		: "Senha do e-mail:",
+			"SMTPDomain"	: "SMTP do domínio",
+			"SMTPex"		: "ex: smtp.domain.com",
+			"Portex"		: "ex: 21",
+			"ReqAuth"		: "Requer autenticação",
+			"SendersName"	: "Nome do remetente:",
+			"ReceiveMail"	: "E-mail que receberá o envio principal:",
+			"Subject"		: "Assunto do e-mail principal:",
+			"SubjectUser"	: "Assunto do e-mail para o usuário:",
+			"AdminMessage"	: "Mensagem que o administrador irá receber:",
+			"UserMessage"	: "Mensagem resposta para o usuário:",
+			"URLSucess"		: "URL de sucesso:",
+			"URLError"		: "URL para erro:",
+			"NoAjax"		: "Esse parametro é caso você utilize o formulário sem ajax",
+			"ImageTop"		: "Imagem de topo do e-mail:",
+			"Signature"		: "Assinatura do e-mail:",
+			"MyComputer"	: "Meu computador",
+			"Library"		: "Na biblioteca",
+			"Modal" : {
+				"AccessData"	: "Acessando campos da tabela ...",
+				"Backing"		: "Voltando...",
+				"Saving"		: "Salvando...",
+				"Sucess"		: "Link de cadastro foi salvo com sucesso!",
+				"ProcessImage"	: "Processando imagem..."}
+		}
+		"Index" : {
+			"FormRegister"		: "Cadastros de formulário",
+			"CreateLink"		: "Criar um link cadastro",
+			"ViewRegister"		: "Visualizar registros",
+			"Edit"				: "Editar",
+			"Delete"			: "Excluir",
+			"Modal" : {
+				"LoadRegister"		: "Carregando cadastro...",
+				"AreSure"			: "Tem certeza de que você quer excluir esse link?",
+				"NotBack"			: "Os dados inclusos na tabela também serão excluídos, e isso não terá mais volta!",
+				"Delete"			: "Excluir",
+				"Cancel"			: "Cancelar",
+				"DeleteLink"		: "Excluindo link...",
+				"CreateLead"		: "Criando LeadCapture..."}
+		}
 	}
+	
 }

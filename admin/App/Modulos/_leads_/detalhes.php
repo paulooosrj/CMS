@@ -92,6 +92,78 @@
 	$template->lead_port		 		= $lead->port;
 	$template->lead_id			 		= $lead->id;
 	$template->token_group 				= (isset($_SESSION['token_group'])) ? $_SESSION['token_group']:_crypt();
+	
+	#####################################################  
+	# BLOCO DE TRADUÇÃO
+	#####################################################
+	
+	$template->Leads_Details_PleaseWait		=	ws::getLang("Leads>Details>PleaseWait");
+	$template->Leads_Details_BackList		=	ws::getLang("Leads>Details>BackList");
+	$template->Leads_Details_SaveConfig		=	ws::getLang("Leads>Details>SaveConfig");
+	$template->Leads_Details_URLSend		=	ws::getLang("Leads>Details>URLSend");
+	$template->Leads_Details_EditFieldForm	=	ws::getLang("Leads>Details>EditFieldForm");
+	$template->Leads_Details_EditField		=	ws::getLang("Leads>Details>EditField");
+	$template->Leads_Details_DataLead		=	ws::getLang("Leads>Details>DataLead");
+	$template->Leads_Details_RegisterName	=	ws::getLang("Leads>Details>RegisterName");
+	$template->Leads_Details_Title			=	ws::getLang("Leads>Details>Title");
+	$template->Leads_Details_ShortDesc		=	ws::getLang("Leads>Details>ShortDesc");
+	$template->Leads_Details_LeadConfig		=	ws::getLang("Leads>Details>LeadConfig");
+	$template->Leads_Details_AboutForm		=	ws::getLang("Leads>Details>AboutForm");
+	$template->Leads_Details_UserEmail		=	ws::getLang("Leads>Details>UserEmail");	
+	$template->Leads_Details_JustSave		=	ws::getLang("Leads>Details>JustSave");	
+	$template->Leads_Details_JustSend		=	ws::getLang("Leads>Details>JustSend");	
+	$template->Leads_Details_SaveSend		=	ws::getLang("Leads>Details>SaveSend");	
+	$template->Leads_Details_UserResponse	=	ws::getLang("Leads>Details>UserResponse");	
+	$template->Leads_Details_SelectField	=	ws::getLang("Leads>Details>SelectField");	
+	$template->Leads_Details_ServerConfig	=	ws::getLang("Leads>Details>ServerConfig");	
+	$template->Leads_Details_SMTPSecure		=	ws::getLang("Leads>Details>SMTPSecure");	
+	$template->Leads_Details_Host			=	ws::getLang("Leads>Details>Host");	
+	$template->Leads_Details_Port			=	ws::getLang("Leads>Details>Port");	
+	$template->Leads_Details_SMTPAuth		=	ws::getLang("Leads>Details>SMTPAuth");	
+	$template->Leads_Details_SenderEmail	=	ws::getLang("Leads>Details>SenderEmail");		
+	$template->Leads_Details_Password		=	ws::getLang("Leads>Details>Password");	
+ 	$template->Leads_Details_SMTPDomain		=	ws::getLang("Leads>Details>SMTPDomain");
+	$template->Leads_Details_SMTPex			=	ws::getLang("Leads>Details>SMTPex");			
+	$template->Leads_Details_Portex			=	ws::getLang("Leads>Details>Portex");			
+	$template->Leads_Details_ReqAuth		=	ws::getLang("Leads>Details>ReqAuth");
+	$template->Leads_Details_SendersName	=	ws::getLang("Leads>Details>SendersName");
+	$template->Leads_Details_ReceiveMail	=	ws::getLang("Leads>Details>ReceiveMail");
+	$template->Leads_Details_Subject		=	ws::getLang("Leads>Details>Subject");
+	$template->Leads_Details_SubjectUser	=	ws::getLang("Leads>Details>SubjectUser");
+	$template->Leads_Details_AdminMessage	=	ws::getLang("Leads>Details>AdminMessage");
+	$template->Leads_Details_UserMessage	=	ws::getLang("Leads>Details>UserMessage");
+	$template->Leads_Details_URLSucess		=	ws::getLang("Leads>Details>URLSucess");
+	$template->Leads_Details_URLError		=	ws::getLang("Leads>Details>URLError");
+	$template->Leads_Details_NoAjax			=	ws::getLang("Leads>Details>NoAjax");
+	$template->Leads_Details_ImageTop		=	ws::getLang("Leads>Details>ImageTop");
+	$template->Leads_Details_Signature		=	ws::getLang("Leads>Details>Signature");
+	$template->Leads_Details_MyComputer		=	ws::getLang("Leads>Details>MyComputer");
+	$template->Leads_Details_Library		=	ws::getLang("Leads>Details>Library");
+	$template->Leads_Details_Modal_AccessData		=	ws::getLang("Leads>Details>Modal>AccessData");	
+	$template->Leads_Details_Modal_Backing			=	ws::getLang("Leads>Details>Modal>Backing");	
+	$template->Leads_Details_Modal_Saving			=	ws::getLang("Leads>Details>Modal>Saving");	
+	$template->Leads_Details_Modal_Sucess			=	ws::getLang("Leads>Details>Modal>Sucess");	
+	$template->Leads_Details_Modal_ProcessImage		=	ws::getLang("Leads>Details>Modal>ProcessImage");	
+	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
+	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");		
+	
+	
+	
+		
  
 	############################################################### 
 	# LISTA AS COLUNAS CADASTRADAS PARA DEFINIR O CAMPO DE EMAIL 
