@@ -145,23 +145,7 @@
 	$template->Leads_Details_Modal_Sucess			=	ws::getLang("Leads>Details>Modal>Sucess");	
 	$template->Leads_Details_Modal_ProcessImage		=	ws::getLang("Leads>Details>Modal>ProcessImage");	
 	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");	
-	$template->Leads_Details_Modal_		=	ws::getLang("Leads>Details>Modal>XXXXXXX");		
-	
-	
+
 	
 		
  

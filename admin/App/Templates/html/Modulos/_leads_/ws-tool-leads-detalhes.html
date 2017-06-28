@@ -10,6 +10,7 @@
 	</div>
 </div>
 <div id="palco" class="palco_01">
+	<div class="label_separados w1">{Leads_Details_DataLead}</div>
 	<form id="UploadThumbmails" style="display:none" 	action="/admin/App/Core/ws-upload-files.php" 	method="post" enctype="multipart/form-data" name="formUpload">
 		<input name="arquivo" accept="image/jpg,image/png,image/jpeg,image/gif" id="myfile" type="file" style="display:none">
 		<input type="hidden" name="id" 			value="{lead_id}">
@@ -29,7 +30,6 @@
 		<input type="hidden" name="token" value="{lead_token}">
 		<div class="label_input w1" style="height:36px;width: calc(100% - 308px);">{Leads_Details_URLSend} <b>{DOMINIO}/ws-leads/{lead_token}</b></div>
 		<div style="width:238px;" class="botao botao_adicional" id="editarCampos" legenda="{Leads_Details_EditFieldForm}">{Leads_Details_EditField}</div>
-		<div class="label_separados w1">{Leads_Details_DataLead}</div>
 		<div class="label_input w1" style="height:36px;width:979px">{Leads_Details_RegisterName}</div>
 		<input type="text" id="title" class="inputText input_adicional" name="title" placeholder="{Leads_Details_Title}" maxlength="" style="height:44px;width:998px;" value="{lead_title}">
 		<div class="label_input w1" style="height:36px;width:979px">{Leads_Details_ShortDesc}</div>

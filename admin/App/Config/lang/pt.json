@@ -736,7 +736,7 @@
 				"Delete"		: "Excluir",
 				"Cancel"		: "Cancelar",
 				"DeleteLink"	: "Excluindo link..."}			
-		}
+		},
 		"Fields" : {
 			"Back"		: "voltar",
 			"AddField"	: "Adicionar um campo",
@@ -749,7 +749,7 @@
 				"Backing"		: "Voltando...",
 				"TypeName"		: "Digite um nome para o seu campo:",
 				"SameName"		: "(mesmo 'name' do input no seu formulário):"}
-		}
+		},
 		"Details" : {
 			"PleaseWait"	: "Por favor, aguarde...",
 			"BackList"		: "Voltar a listagem",
@@ -798,8 +798,9 @@
 				"Backing"		: "Voltando...",
 				"Saving"		: "Salvando...",
 				"Sucess"		: "Link de cadastro foi salvo com sucesso!",
-				"ProcessImage"	: "Processando imagem..."}
-		}
+				"ProcessImage"	: "Processando imagem..."
+			}
+		},
 		"Index" : {
 			"FormRegister"		: "Cadastros de formulário",
 			"CreateLink"		: "Criar um link cadastro",
