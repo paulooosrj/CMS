@@ -1495,14 +1495,13 @@
 	#	REPOSICIONA A ORDEM DOS ÍTENS (desabilitado temporariamente)
 	###############################################################################################################################
 	function OrdenaItem() {
-		$array_id       = $_REQUEST['ids'];
-		$array_posicoes = $_REQUEST['posicoes'];
+		$array_id       = $_REQUEST['posicoes'];
 		$i              = 0;
 		foreach ($array_id as $id) {
 			$Salva = new MySQL();
 			$Salva->set_table(PREFIX_TABLES . '_model_item');
 			$Salva->set_where('id="' . $id . '"');
-			$Salva->set_update('posicao', $array_posicoes[$i]);
+			$Salva->set_update('posicao',$i);
 			$Salva->salvar();
 			++$i;
 		}

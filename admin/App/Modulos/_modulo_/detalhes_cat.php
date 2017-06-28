@@ -16,6 +16,10 @@
 	$_CATEGORIA->select();
 	$_CATEGORIA = $_CATEGORIA->obj[0];
 
+	if(empty($_GET['LIMIT']))	{$_GET['LIMIT']="50";}
+	if(empty($_GET['PAGE']))	{$_GET['PAGE']="1";}
+
+
 	#################################################################################  
 	# INICIA CLASS TEMPLATE
 	#################################################################################
@@ -31,10 +35,11 @@
 	$_SET_TEMPLATE_INPUT->PATH 					= 'App/Modulos/_modulo_';
 	$_SET_TEMPLATE_INPUT->CAT_AVATAR 			= $_CATEGORIA->avatar;
 	$_SET_TEMPLATE_INPUT->CAT_PAI 				= $_CATEGORIA->id_cat;
-	$_SET_TEMPLATE_INPUT->TOKEN  				= _token(PREFIX_TABLES."ws_biblioteca","token");
+	$_SET_TEMPLATE_INPUT->PAGE 					= $_GET['LIMIT'];
+	$_SET_TEMPLATE_INPUT->LIMIT  				= $_GET['PAGE'];
 
-	$listIDCat 						= 	array();
-	$listCat 						= 	array();
+	$listIDCat 									= 	array();
+	$listCat 									= 	array();
 
 	#################################################################################  
 	# FUNÇÃO foreachCat  É A FUNÇÃO RECURSIVA ONDE PEGAMOS AS CATEGORIAS

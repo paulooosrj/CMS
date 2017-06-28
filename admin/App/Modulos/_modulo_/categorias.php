@@ -37,10 +37,12 @@
 										 ) :$_GET['token_group']
 										);
 #################################################################################  
-# CASO NÃO EXISTA UMA CATEGORIA VINCULADA OU NÍVEIS DEFINIDOS, FORÇAMOS O VALOR 0
+# CASO NÃO EXISTA UMA CATEGORIA VINCULADA OU NÍVEIS DEFINIDOS, FORÇAMOS O VALOR
 #################################################################################
-	if(empty($_GET['id_cat'])	){			$_GET['id_cat']			='0';			}
-	if(empty($_GET['ws_nivel'])	){			$_GET['ws_nivel']		='0';			}
+	if(empty($_GET['id_cat'])	)	{	$_GET['id_cat']			='0';			}
+	if(empty($_GET['ws_nivel'])	)	{	$_GET['ws_nivel']		='0';			}
+	if(empty($_GET['LIMIT']))		{	$_GET['LIMIT']			="50";			}
+	if(empty($_GET['PAGE']))		{	$_GET['PAGE']			="1";			}
 
 #################################################################################  
 # PESQUISA MYSQL DAS CATEGORIAS
@@ -76,9 +78,11 @@
 #################################################################################
 #  CASO TENHA LINK DE REFERENCIA 
 #################################################################################
-	$_SET_TEMPLATE_INPUT->LINK     = './'.PATH.'/itens.php?token_group='.$_GET['token_group'].'&ws_id_ferramenta='.$_GET['ws_id_ferramenta'];
+	$_SET_TEMPLATE_INPUT->LINK     = './'.PATH.'/itens.php?LIMIT='.$_GET['LIMIT'].'&PAGE='.$_GET['PAGE'].'&token_group='.$_GET['token_group'].'&ws_id_ferramenta='.$_GET['ws_id_ferramenta'];
 	$_SET_TEMPLATE_INPUT->block("BOT_BACK");
 
+	$_SET_TEMPLATE_INPUT->LIMIT 		= $_GET['LIMIT'];
+	$_SET_TEMPLATE_INPUT->PAGE 			= $_GET['PAGE'];
 #################################################################################
 #  RETORNA AS CATEGORIAS 
 #################################################################################

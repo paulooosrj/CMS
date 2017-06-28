@@ -64,7 +64,7 @@
 		$("#Balao_ToolType").remove();
 		$('#palco ul li .galeria').unbind('click tap press').bind("click tap press",function(){
 			var id_item = $(this).parent().parent().parent().parent().data('cat');
-			var link = './{PATH}/categorias.php?id_cat='+id_item+"&{GETVARS}";
+			var link = './{PATH}/categorias.php?LIMIT={LIMIT}&PAGE={PAGE}&id_cat='+id_item+"&{GETVARS}";
 			confirma({width:"auto",conteudo:"  Carregando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 			$("#conteudo").load(link,function(){
 				$("#ws_confirm").remove();
@@ -78,7 +78,7 @@
 			var cat_pai 			= $(this).parent().parent().parent().parent().data('cat-pai');
 			var ReloadDiv 			= $(this).parent().parent().parent().parent();
 			window.id_item_selected = id_cat;
-			$("#conteudo").load("./App/Modulos/_modulo_/detalhes_cat.php?token_group={WS_TOKENGROUP}&id_cat_pai="+cat_pai+"&id_cat="+id_cat+"&ws_id_ferramenta={ID_FERRAMENTA}",function(){
+			$("#conteudo").load("./App/Modulos/_modulo_/detalhes_cat.php?LIMIT={LIMIT}&PAGE={PAGE}&token_group={WS_TOKENGROUP}&id_cat_pai="+cat_pai+"&id_cat="+id_cat+"&ws_id_ferramenta={ID_FERRAMENTA}",function(){
 				$("#ws_confirm").remove();
 				$("#body").removeClass("scrollhidden");
 				$("*").removeClass("blur");
@@ -97,7 +97,10 @@
 					$("*").removeClass("blur");
 					var json = jQuery.parseJSON(data);
 					if(json.resposta=="sucesso"){
-						$("#conteudo").load("./App/Modulos/_modulo_/categorias.php?ws_id_ferramenta={ID_FERRAMENTA}",function(){
+
+
+
+						$("#conteudo").load("./App/Modulos/_modulo_/categorias.php?LIMIT={LIMIT}&PAGE={PAGE}&ws_id_ferramenta={ID_FERRAMENTA}",function(){
 							$("#ws_confirm").remove();
 							$("#body").removeClass("scrollhidden");
 							$("*").removeClass("blur");

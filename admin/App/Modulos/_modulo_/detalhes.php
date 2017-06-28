@@ -32,6 +32,11 @@
 	$_SESSION['ws_nivel'] = empty($_GET['ws_nivel']) ? "1" : $_GET['ws_nivel'];
 	define("ID_FERRAMENTA", $_GET['ws_id_ferramenta']);
 	
+	if(empty($_GET['LIMIT'])){$_GET['LIMIT']="50";}
+	if(empty($_GET['PAGE'])){$_GET['PAGE']="1";}
+
+
+
 	#####################################################  
 	# PEGA O SETUP DATA
 	#####################################################  
@@ -124,7 +129,7 @@
 		$_SESSION['id_cat'] = $produto['id_cat'];
 	}
 	if($_FERRAMENTA_['_niveis_'] >= 0) {
-		$link_back = './' . PATH . '/itens.php?token_group='.$_GET['token_group'].'&ws_id_ferramenta='.ID_FERRAMENTA;
+		$link_back = './' . PATH . '/itens.php?LIMIT='.$_GET['LIMIT'].'&PAGE='.$_GET['PAGE'].'&token_group='.$_GET['token_group'].'&ws_id_ferramenta='.ID_FERRAMENTA;
 	}
 	##########################################################################################################
 	# SEPARA TODOS OS CAMPOS DE
@@ -884,6 +889,10 @@
 	} else {
 		$_SET_TEMPLATE->clear('EXEC_JS_2');
 	}
+
+
+
+
 	$_SET_TEMPLATE->INPUTS_DETAILS = $_IPUNT_CAMPOS;
 	$_SET_TEMPLATE->block("BLOCK_INPUTS_DETAILS");
 	$_SET_TEMPLATE->block("BLOCK_WS_DETAILS");
