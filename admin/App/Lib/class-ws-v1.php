@@ -160,7 +160,21 @@
 			);
 			return $this;
 		}
-		
+		static	function closureCompilerJs($code, $level = 'SIMPLE_OPTIMIZATIONS'){
+			if(file_exists($code)){$code=file_get_contents($code);}
+			try {
+				$ch = curl_init('http://closure-compiler.appspot.com/compile'); 
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CURLOPT_POST, 1);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, 'output_info=compiled_code&output_format=text&compilation_level=' . $level . '&js_code=' . urlencode($code));
+				$minified = curl_exec($ch);
+				curl_close($ch);
+			} catch (Exception $e) {
+				$minified = $code;
+			}
+			return $minified;
+		}
+
 		static function getlang($path = null, $isso = "", $porisso = "") {
 			$json  = str_replace(array(
 				PHP_EOL,
