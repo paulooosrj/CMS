@@ -43,10 +43,10 @@ function return_bytes($val) {
 $bug = 0;
 
 
-if(@$_SERVER["SERVER_SOFTWARE"]!="Apache"){
-	$bug = 1;
-	echo "<div>É necessário ter o Apache instalado em seu servidor</div>";
-}
+// if(@$_SERVER["SERVER_SOFTWARE"]!="Apache"){
+// 	$bug = 1;
+// 	echo "<div>É necessário ter o Apache instalado em seu servidor</div>";
+// }
 // if(@$config->apache->mod_rewrite!=1){
 // 	$bug = 1;
 // 	echo "<div>É necessário habilitar em seu Apache a função mod_rewrite </div>";

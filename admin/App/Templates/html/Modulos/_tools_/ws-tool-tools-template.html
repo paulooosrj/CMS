@@ -237,44 +237,44 @@
 		return false;
 	})
 
-	$("#exportarTodos").unbind('click tap press').bind("click tap press",function(e){
+	$("#exportarTodos").unbind("click tap press").bind("click tap press",function(e){
 		e.preventDefault();
 		var selecteds = $("input[type='checkbox']:checked").length;
 		if(selecteds==1){
-			$("input[type='checkbox']:checked").parent().parent().parent().parent().parent().find(".exportar").click();
+			$("input[type='checkbox']:checked").parent().parent().parent().parent().find(".exportar").click();
 		}else{
 			var ferramentas = new Array();
-			$("input[type='checkbox']:checked").parent().parent().parent().parent().parent().each(function(index){ ferramentas.push($(this).data("id"));})
-
-				confirma({
-					width:"auto",
-					conteudo:'<div style="font-size: 30px; margin: 0px;">{ToolsManager_Modal_ExportTool}</div><br><input id="nameFileTool" class="inputText" placeholder="{ToolsManager_Modal_FileName}" style="padding: 10px; width: 450px; ">', drag:false,
-					width:500,
-					newFun:function(){
-						var filename = $("#nameFileTool").val()+'.ws';
-						$.ajax({
-						  type: "POST",
-						  url: "/admin/App/Modulos/_tools_/functions.php",
-						  data: { 'function':"export_All_Tool_File", tools:ferramentas}
-						}).done(function(data) {
-								var pom = document.createElement('a');
-								pom.setAttribute('href', 'data:text/plain;charset=utf-8,'+base64_encode(data));
-								pom.setAttribute("download",filename);
-								if (document.createEvent) {
-									var event = document.createEvent('MouseEvents');
-									event.initEvent('click', true, true);
-									pom.dispatchEvent(event);
-								}else{
-									pom.click().remove();
-								}
-								$("#ws_confirm").remove();$("#body").removeClass("scrollhidden"); $("*").removeClass("blur");
-						})
-
-					},
-					bot1:"{ToolsManager_Modal_ExportTools}",
-					bot2:"{ToolsManager_Modal_Cancel}"
-				})
+			$("input[type='checkbox']:checked").parent().parent().parent().parent().each(function(index){ ferramentas.push($(this).data("id"));})
+			confirma({
+				width:"auto",
+				conteudo:'<div style="font-size: 30px; margin: 0px;">{ToolsManager_Modal_ExportTool}</div><br><input id="nameFileTool" class="inputText" placeholder="{ToolsManager_Modal_FileName}" style="padding: 10px; width: 450px; ">', drag:false,
+				width:500,
+				newFun:function(){
+					var filename = $("#nameFileTool").val()+'.ws';
+					$.ajax({
+					  type: "POST",
+					  url: "/admin/App/Modulos/_tools_/functions.php",
+					  data: { 'function':"export_All_Tool_File", tools:ferramentas}
+					}).done(function(data) {
+							var pom = document.createElement('a');
+							pom.setAttribute('href', 'data:text/plain;charset=utf-8,'+base64_encode(data));
+							pom.setAttribute("download",filename);
+							if (document.createEvent) {
+								var event = document.createEvent('MouseEvents');
+								event.initEvent('click', true, true);
+								pom.dispatchEvent(event);
+							}else{
+								pom.click().remove();
+							}
+							$("#ws_confirm").remove();$("#body").removeClass("scrollhidden"); $("*").removeClass("blur");
+					})
+				},
+				bot1:"{ToolsManager_Modal_ExportTools}",
+				bot2:"{ToolsManager_Modal_Cancel}"
+			})
 		}
+				
+
 		return false;
 	})
 

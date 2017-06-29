@@ -63,7 +63,7 @@
 	#######################################################################
 	if(isset($_GET['keywork'])){
 			$link_back = "./".PATH."/itens.php?PAGE=".$_GET['PAGE']."&LIMIT=".$_GET['LIMIT']."&token_group=".$_GET['token_group']."&ws_id_ferramenta=".ID_FERRAMENTA.'&LIMIT='.$_GET['LIMIT'];
-			$_SET_TEMPLATE_INPUT->LINK_BACK = $link_back;
+			$_SET_TEMPLATE_INPUT->LINK_BACK = 	$link_back;
 			$_SET_TEMPLATE_INPUT->KEYWORK 	=	' - "'.$_GET['keywork'].'"';
 			$_SET_TEMPLATE_INPUT->clear("BT_CAT");
 			$_SET_TEMPLATE_INPUT->clear("BT_ADD");
@@ -80,7 +80,7 @@
 	####################################################################################
 	# CASO A PAGINAÇÃO SEJA "ALL" E Ñ TENHA PESQUISA, ELE MOSTRA O BOTÃO DE MOVER O ÍTEM
 	####################################################################################
-	$_SET_TEMPLATE_INPUT->STYLEMOVESHOW = (empty($_GET['keywork']) && isset($_GET['LIMIT']) && $_GET['LIMIT']=="All") ? "display:initial" : "display:none";
+	// $_SET_TEMPLATE_INPUT->STYLEMOVESHOW = (empty($_GET['keywork']) && isset($_GET['LIMIT']) && $_GET['LIMIT']=="All") ? "display:initial" : "display:none";
 	$_SET_TEMPLATE_INPUT->LIMIT			= $_GET['LIMIT'];
 
 
@@ -101,6 +101,7 @@
 	// $itens->set_where(' AND id_cat="' . $_GET['id_cat'] . '" ');
 	$itens->set_where(' AND ws_id_ferramenta="' . $_GET['ws_id_ferramenta'] . '" ');
 	$itens->set_colum('id');
+	$itens->set_colum('posicao');
 	$rows = explode(',', $colunas);
 	foreach ($rows as $value) {
 			$campo = new MySQL();
@@ -108,16 +109,12 @@
 			$campo->set_where('coluna_mysql="' . $value . '"');
 			$campo->select();
 			if ($colunas == "id") {
-					// $_SET_TEMPLATE_INPUT->CLASS     = "bg05";
 					$_SET_TEMPLATE_INPUT->NAMECOLUM = "ID";
 			} elseif ($value == "posicao") {
-					// $_SET_TEMPLATE_INPUT->CLASS     = "bg05 data-posicao";
 					$_SET_TEMPLATE_INPUT->NAMECOLUM = "Posição";
 			} elseif (@$campo->fetch_array[0]['type'] == 'thumbmail') {
-					// $_SET_TEMPLATE_INPUT->CLASS     = "nosort bg01";
 					$_SET_TEMPLATE_INPUT->NAMECOLUM = @$campo->fetch_array[0]['listaTabela'];
 			} else {
-					// $_SET_TEMPLATE_INPUT->CLASS     = "bg05";
 					$_SET_TEMPLATE_INPUT->NAMECOLUM = @$campo->fetch_array[0]['listaTabela'];
 			}
 			$_SET_TEMPLATE_INPUT->block("THEAD");
@@ -182,7 +179,10 @@
 	$itens->set_order("posicao","ASC");
 	$itens->select();
 	foreach ($itens->fetch_array as $item) {
-			$_SET_TEMPLATE_INPUT->ID_ITEM = $item['id'];
+			$_SET_TEMPLATE_INPUT->ID_ITEM 	= $item['id'];
+			$_SET_TEMPLATE_INPUT->POSITION 	= $item['posicao'];
+
+
 			foreach ($rows as $value) {
 					$campo = new MySQL();
 					$campo->set_table(PREFIX_TABLES . "_model_campos");

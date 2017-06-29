@@ -229,14 +229,7 @@
 			}
 		}
 		static function setTokenRest($timeout = "5 seconds") {
-			$Formats = array(
-				"seconds",
-				"minutes",
-				"hours",
-				"days",
-				"months",
-				"years"
-			);
+			$Formats = array("seconds", "minutes", "hours", "days", "months", "years");
 			if (is_string($timeout)) {
 				if (strpos(trim($timeout), " ")) {
 					$timeout = explode(' ', $timeout);

@@ -1,5 +1,4 @@
 <?
-include_once(ROOT_ADMIN.'/App/Core/ws-shortcode.php');
 class htmlProcess{
 	public function __construct(){}
 	public static function process_tag_ws_paginate	($key=null){
@@ -276,27 +275,27 @@ class htmlProcess{
 		}
 		return $metaTag;
 	}
-	public static function process_ws_shortcode	($key=null){
-		$outertext = $key->outertext();
-		$innertext = $key->innertext();
-		$atributos = $key->attr;
-
-		$vars = array($key->attr);
+	public static function process_ws_shortcode($key=null){
+		$outertext 		= $key->outertext();
+		$innertext 		= $key->innertext();
+		$atributos 		= $key->attr;
+		$ws 			= (object)array();
+		$ws->attr 		= (object)$atributos;
+		$ws->innertext 	= $innertext;
+		unset($ws->attr->function);
 		if(isset($atributos['function'])){
-			if(!function_exists($atributos['function'])){
-				$wsReturn = "FUNÇÃO NÃO EXISTE! ==>".$atributos['function'];
+			$file = ROOT_DOCUMENT.'/ws-shortcodes/'.$atributos['function'].'.php';
+			if(!file_exists($file)){
+				$wsReturn = "<pre>! shortcodes não existe - ".$atributos['function'].".php</pre>";
 			}else{
-				$params = Array(); 
-				$function = $atributos['function'];
-				unset($key->attr['function']);
-				$params['params']['attributes']	= $key->attr;
-				$params['params']['innertext'] 	= str_replace('_ws_php_eol_',PHP_EOL,$innertext);
-				$wsReturn = call_user_func_array($function,$params);
+				ob_start();
+				include($file);
+				$wsReturn = ob_get_contents();
+				ob_end_clean();
 			}
 		}else{
-			$wsReturn = '<pre>! function="?" !</pre>';
+			$wsReturn = _erro(ws::GetDebugError(debug_backtrace(),'Por favor, insira o atributo function="" na tag [ws-shortcode]'));
 		};
-
 		return $wsReturn;
 	}
 	public static function process_tag_ws_no_result	($key=null){
