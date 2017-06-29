@@ -1471,9 +1471,12 @@
 		$I     = new MySQL();
 		$I->set_table(PREFIX_TABLES . '_model_item');
 		$I->set_insert('token', $token);
-		$I->set_insert('ws_id_ferramenta', $_POST['ws_id_ferramenta']);
-		$I->set_insert('id_cat', $_POST['id_cat']);
-		$I->set_insert('ws_nivel', $_POST['ws_nivel']);
+		$I->set_insert('ws_id_ferramenta', 	$_POST['ws_id_ferramenta']);
+		$I->set_insert('id_cat', 			$_POST['id_cat']);
+		$I->set_insert('ws_nivel', 			$_POST['ws_nivel']);
+		$I->set_insert('ws_author', 		$_SESSION['user']['id']);
+
+
 		if ($I->insert()) {
 			$I = new MySQL();
 			$I->set_table(PREFIX_TABLES . '_model_item');

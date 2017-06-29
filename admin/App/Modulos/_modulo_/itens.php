@@ -102,6 +102,7 @@
 	$itens->set_where(' AND ws_id_ferramenta="' . $_GET['ws_id_ferramenta'] . '" ');
 	$itens->set_colum('id');
 	$itens->set_colum('posicao');
+	$itens->set_colum('ws_author');
 	$rows = explode(',', $colunas);
 	foreach ($rows as $value) {
 			$campo = new MySQL();
@@ -173,6 +174,7 @@
 		}
 	}
 
+
 	########################################################################
 	# INICIAMOS O FOREACH PARA EXIBIR O RESULTADO 
 	########################################################################
@@ -181,8 +183,6 @@
 	foreach ($itens->fetch_array as $item) {
 			$_SET_TEMPLATE_INPUT->ID_ITEM 	= $item['id'];
 			$_SET_TEMPLATE_INPUT->POSITION 	= $item['posicao'];
-
-
 			foreach ($rows as $value) {
 					$campo = new MySQL();
 					$campo->set_table(PREFIX_TABLES . "_model_campos");
@@ -246,12 +246,23 @@
 									$strn = substr($strn, 0, 70) . '...';
 							}
 							$_SET_TEMPLATE_INPUT->DATA_NAME  = $value;
-							// $_SET_TEMPLATE_INPUT->STYLE      = "";
-							$_SET_TEMPLATE_INPUT->LABEL_ITEM = $strn;
+							 $_SET_TEMPLATE_INPUT->LABEL_ITEM = $strn;
 							$_SET_TEMPLATE_INPUT->block("TD_ITEM");
 					}
 			}
-			$_SET_TEMPLATE_INPUT->block("TR_ITEM");
+
+			########################################################################
+			# CASO SEJA LIMITADO A VISUALIZAÇÃO AOS POSTS DO USUARIO 
+			########################################################################
+			if($_SESSION['user']['edit_only_own']==1 && $item['ws_author']!=$_SESSION['user']['id']){
+				$_SET_TEMPLATE_INPUT->block("COMBO_EDIT_BLOCK");
+			}else{
+				$_SET_TEMPLATE_INPUT->block("COMBO_EDIT");
+			}
+			########################################################################
+			# RETORNA A LINHA <TR> 
+			########################################################################
+			$_SET_TEMPLATE_INPUT->block("TR_ITEM");		
 	}
 	$_SET_TEMPLATE_INPUT->block("ITEM_LIST");
 	$_SET_TEMPLATE_INPUT->show();

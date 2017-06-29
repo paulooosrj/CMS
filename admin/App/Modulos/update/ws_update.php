@@ -426,8 +426,8 @@
 
 	$tab = "_model";
 	CreateTableIfNotExist($tab."_cat");
-	add_if_not_exist($tab."_cat",	'ws_author'			,'int(11) 		NOT NULL DEFAULT FALSE');
-	add_if_not_exist($tab."_cat",	'id_cat'			,'int 		(11)  		NOT NULL default "0"');
+	add_if_not_exist($tab."_cat",	'ws_author'			,'int(11) 			NOT NULL DEFAULT FALSE');
+	add_if_not_exist($tab."_cat",	'id_cat'			,'int(11)  			NOT NULL default "0"');
 	add_if_not_exist($tab."_cat",	'ws_type'			,'BOOLEAN  				NOT NULL DEFAULT FALSE');
 	add_if_not_exist($tab."_cat",	'ws_protect'		,'BOOLEAN 				NOT NULL DEFAULT FALSE');
 	add_if_not_exist($tab."_cat",	'ws_id_ferramenta'	,'int 		(11)  		NOT NULL default "0"');
@@ -444,23 +444,23 @@
 	add_if_not_exist($tab."_cat",	'ws_timestamp',		'TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP');
 	CreateTableIfNotExist($tab."_item");
 	
-	add_if_not_exist($tab."_item",	'ws_author'			,'int(11) 		NOT NULL DEFAULT FALSE');
+	add_if_not_exist($tab."_item",	'ws_author'			,'int(11) 				NOT NULL DEFAULT FALSE');
 	add_if_not_exist($tab."_item",	'ws_type'			,'BOOLEAN  				NOT NULL DEFAULT FALSE');
 	add_if_not_exist($tab."_item",	'ws_protect'		,'BOOLEAN  				NOT NULL DEFAULT FALSE');
 	add_if_not_exist($tab."_item",	'ws_draft'			,'BOOLEAN  				NOT NULL DEFAULT FALSE');
-	add_if_not_exist($tab."_item",	'ws_id_draft'		,'INT(11) 				NULL DEFAULT 0');
-	add_if_not_exist($tab."_item",	'ws_id_ferramenta'	,'INT(11) 				NULL DEFAULT 0');
-	add_if_not_exist($tab."_item",	'ws_tool_id'		,'INT(11) 				NULL DEFAULT 0');
-	add_if_not_exist($tab."_item",	'ws_tool_item'		,'INT(11) 				NULL DEFAULT 0');
-	add_if_not_exist($tab."_item",	'id_cat'			,'INT(11) 				NULL DEFAULT 0');
-	add_if_not_exist($tab."_item",	'ws_nivel'			,'INT(11) 				NULL DEFAULT 0');
-	add_if_not_exist($tab."_item",	'posicao'			,'INT(11) 				NULL DEFAULT 0');
+	add_if_not_exist($tab."_item",	'ws_id_draft'		,'INT(11) 					NULL DEFAULT 0');
+	add_if_not_exist($tab."_item",	'ws_id_ferramenta'	,'INT(11) 					NULL DEFAULT 0');
+	add_if_not_exist($tab."_item",	'ws_tool_id'		,'INT(11) 					NULL DEFAULT 0');
+	add_if_not_exist($tab."_item",	'ws_tool_item'		,'INT(11) 					NULL DEFAULT 0');
+	add_if_not_exist($tab."_item",	'id_cat'			,'INT(11) 					NULL DEFAULT 0');
+	add_if_not_exist($tab."_item",	'ws_nivel'			,'INT(11) 					NULL DEFAULT 0');
+	add_if_not_exist($tab."_item",	'posicao'			,'INT(11) 					NULL DEFAULT 0');
 	add_if_not_exist($tab."_item",	'avatar'			,'varchar	(300) 			NULL default ""');
 	add_if_not_exist($tab."_item",	'token',			'varchar	(300) 			NULL default ""');
 	add_if_not_exist($tab."_item",	'ws_timespam'		,'TIMESTAMP 			NOT NULL DEFAULT CURRENT_TIMESTAMP');
 
 	CreateTableIfNotExist($tab."_gal");
-	add_if_not_exist($tab."_gal",	'ws_author'				,'int(11) 		NOT NULL DEFAULT FALSE');
+	add_if_not_exist($tab."_gal",	'ws_author'				,'int(11) 			NOT NULL DEFAULT FALSE');
 	add_if_not_exist($tab."_gal",	'ws_draft'				,'BOOLEAN  				NOT NULL DEFAULT FALSE');
 	add_if_not_exist($tab."_gal",	'ws_id_draft'			,'INT(11) 				NULL DEFAULT 0');
 	add_if_not_exist($tab."_gal",	'ws_type'				,'BOOLEAN  				NOT NULL DEFAULT FALSE');
@@ -586,8 +586,8 @@
 	add_if_not_exist($tab."_link_prod_cat",		'ws_tool_id'		,'int 		(11)  		NOT NULL default 0');
 	add_if_not_exist($tab."_link_prod_cat",		'ws_tool_item'		,'int 		(11)  		NOT NULL default 0');
 	add_if_not_exist($tab."_link_prod_cat",		'ws_nivel'			,'int 		(11)  		NOT NULL default 0');
-	add_if_not_exist($tab."_link_prod_cat",		'token',			'varchar	(300) 			NULL default ""');
-	add_if_not_exist($tab."_link_prod_cat",		'ws_timestamp'		,	'TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP');
+	add_if_not_exist($tab."_link_prod_cat",		'token'				,'varchar	(300) 			NULL default ""');
+	add_if_not_exist($tab."_link_prod_cat",		'ws_timestamp'		,'TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP');
 
 	CreateTableIfNotExist($tab."_campos");
 	add_if_not_exist($tab."_campos",	'ws_id_ferramenta' 	,			"int 		(11)  		NOT NULL DEFAULT 0"		);

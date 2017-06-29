@@ -55,11 +55,21 @@
 			<div class="table-tr-colunm" data-name="{DATA_NAME}" >{LABEL_ITEM}</div>
 			<!-- END TD_ITEM -->
 			<div class="table-tr-colunm" >
-				<div class='combo' style='width:100%'>
-					<img data-id='{ID_ITEM}' style='cursor: move;  padding: 0 10%;' class='mover' src='/admin/App/Templates/img/websheep/arrow-move.png'/>
-					<img data-id='{ID_ITEM}' style='cursor:pointer;  padding: 0 10%;' class='excluir' src='/admin/App/Templates/img/websheep/cross-button.png'/>
-					<img data-id='{ID_ITEM}' style='cursor:pointer;  padding: 0 10%;' class='editar' 	src='/admin/App/Templates/img/websheep/magnifier.png'/>
-				</div>
+
+					<div class='combo' style='width:100%'>
+						<!-- BEGIN COMBO_EDIT -->
+							<img data-id='{ID_ITEM}' style='cursor: move;		padding: 0 10%;' class='mover'		src='/admin/App/Templates/img/websheep/arrow-move.png'/>
+							<img data-id='{ID_ITEM}' style='cursor:pointer;		padding: 0 10%;' class='excluir'	src='/admin/App/Templates/img/websheep/cross-button.png'/>
+							<img data-id='{ID_ITEM}' style='cursor:pointer;		padding: 0 10%;' class='editar'		src='/admin/App/Templates/img/websheep/magnifier.png'/>
+						<!-- END COMBO_EDIT -->
+
+						<!-- BEGIN COMBO_EDIT_BLOCK -->
+								<span style="color: rgba(73, 123, 190, 0.51);">Acesso restrito</span>
+						<!-- END COMBO_EDIT_BLOCK -->
+					</div>
+
+
+
 			</div>
 		</div>
 		<!-- END TR_ITEM -->
