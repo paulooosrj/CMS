@@ -17,9 +17,6 @@
 	if(empty($_GET['LIMIT']))	{$_GET['LIMIT']="50";}
 	if(empty($_GET['PAGE']))	{$_GET['PAGE']="1";}
 
-
-
-
 	$FERRAMENTA              = new MySQL();
 	$FERRAMENTA->set_table(PREFIX_TABLES . 'ws_ferramentas');
 	$FERRAMENTA->set_order('posicao', 'ASC');
