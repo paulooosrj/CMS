@@ -998,6 +998,7 @@ function _set_session($id){
 		session_start();
 };
 function _session(){
+	
 	if(session_status() != PHP_SESSION_ACTIVE && isset($_COOKIE['ws_session'])){
 		session_name('_WS_');
 		@session_id($_COOKIE['ws_session']);

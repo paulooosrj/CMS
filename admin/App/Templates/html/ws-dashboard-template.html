@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type = 'text/javascript' 		id="jquery220"		src='/admin/App/Vendor/jquery/2.2.0/jquery.min.js'></script>
 	<script type = 'text/javascript' 		id="preload"		src='/admin/App/Vendor/createjs/0.6.2/preloadjs.min.js'></script>
+	<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -45,6 +46,7 @@
 									{src:"/admin/App/Templates/css/colorpicker/colorpicker.css",							id:"CSS", 			include:true},
 									{src:"/admin/App/Templates/css/colorpicker/layout.css",									id:"CSS", 			include:true},
 									{src:"/admin/App/Vendor/intro.js-2.5.0/introjs.min.css",								id:"CSS",			include:true},
+
 									{src:"/admin/App/Vendor/jquery/1.11.3/jquery.min.js", 									id:"javascript", 	include:true},
 									{src:"/admin/App/Vendor/intro.js-2.5.0/intro.min.js",									id:"javascript",	include:true},
 									{src:"/admin/App/Vendor/jquery-ui/1.10.3/jquery.min.js", 								id:"javascript", 	include:true},
@@ -76,6 +78,8 @@
 									{src:"/admin/App/Vendor/textext/textext.plugin.arrow.min.js",							id:"javascript",	include:true},
 									{src:"/admin/App/Vendor/textext/textext.plugin.ajax.min.js",							id:"javascript",	include:true},
 									{src:"/admin/App/Vendor/CKeditor/ckeditor.js",											id:"javascript",	include:true},
+									 {src:"/admin/App/Vendor/artyom/artyom.min.js",											id:"javascript",	include:true},
+									{src:"/admin/App/Templates/js/websheep/dollySpeak.js", 									id:"javascript", 	include:true},
 									{src:"/admin/App/Templates/js/websheep/funcionalidades.min.js", 						id:"javascript", 	include:true},
 									{src:"/admin/App/Templates/js/websheep/functionsws.min.js", 							id:"javascript", 	include:true},
 									{src:"/admin/App/Vendor/require/require.js", 											id:"javascript", 	include:true},
@@ -110,6 +114,22 @@
 				//  END PRELOADER  
 				//############################################################################################################################################
 				function init(event){
+
+					//############################################################################################################################################
+					//  INICIANDO MÓDULO DE VOZ  
+					//############################################################################################################################################
+					// ws.alert.top({
+					// 	mensagem:"O WebSheep agora tem o seu próprio assistente virtual.(beta) <a id='TopAlertAtivarVoz'><b>Ative agora</b></a> ",
+					// 	clickclose:true,
+					// 	height:20,
+					// 	timer:7000,
+					// 	posFn:function(){ $("#TopAlertAtivarVoz").bind("click tap press",function(){wsAssistent.init();})},
+					// 	styleText:"color:#ffffff",
+					// 	background:"#94ca4f",
+					// 	bottomColor:"#000"
+					// })
+
+
 					window.CloseMenu = function(){
 						$("#menu_tools,#container").removeClass("open").addClass("closed"); 
 						$("#menu_tools .FolderOpen").click();
@@ -357,6 +377,7 @@
 		});
 	</script>
 	<body id="body">
+	<div id="dolly"></div>
 		<div id="preloadWS" style="background-repeat: no-repeat;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: #FFF;z-index:4;text-align: center;font-family: 'Titillium Web', sans-serif;color: #007CBD;">
 			<div id="splash" style="overflow: hidden;position: absolute; width: 460px; height: 393px; left: 50%; top: 50%; margin-left: -230px; margin-top: -196.5px; background-position: 0px 210px;background-repeat: no-repeat;background-color:#FFF;">
 						<div id="splashWS" style="z-index:2;position: absolute;background:none">

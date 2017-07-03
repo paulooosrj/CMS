@@ -243,7 +243,7 @@
 					} else {
 							$strn = strip_tags($item[$value]);
 							if (strlen($strn) > 70) {
-									$strn = substr($strn, 0, 70) . '...';
+								$strn = substr($strn, 0, 70) . '...';
 							}
 							$_SET_TEMPLATE_INPUT->DATA_NAME  = $value;
 							 $_SET_TEMPLATE_INPUT->LABEL_ITEM = $strn;

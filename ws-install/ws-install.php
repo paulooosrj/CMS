@@ -66,7 +66,7 @@
 			}
 		exit;
 	}
-	$remoteVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/websheep/cms/master/admin/App/Templates/json/ws-update.json"));
+//$remoteVersion = json_decode(file_get_contents("//raw.githubusercontent.com/websheep/cms/master/admin/App/Templates/json/ws-update.json"));
 ?>
 
 <head>
@@ -270,7 +270,10 @@
 	<div class="logo"><b><?if(file_exists("./../admin")){echo "Update"; }else{echo "Setup";}?> WebSheep</b><br>
 	</div>
 	<div class="txt" id="txt">
-		<select id="branches"></select>
+		<select id="branches">
+			<option value="null">Selecione uma versão</option>
+
+		</select>
 	</div>
 	<!--  -->
 
@@ -288,14 +291,14 @@ $(document).ready(function(){
 		$.each(a,function(b,c){
 			var baseLink = "https://github.com/websheep/cms/archive/__.zip";
 			var realLink = baseLink.replace("__",c.name);
-			$("#branches").prepend('<option value="'+realLink+'">'+c.name+'</option>');
+			$("#branches").append('<option value="'+realLink+'">'+c.name+'</option>');
 		})
 		$("#botao").show();
 	})
 	$("#botao").bind("click press tap",function(){
-		$("#loader").show();
+		var path = $("#branches").val().split('/');
+		$("#loader").css("background-image","url(https://raw.githubusercontent.com/websheep/cms/"+path[path.length-1].slice(0,-4)+"/admin/App/Templates/img/websheep/loading322.gif)").show();
 		$("#txt,#botao").hide();
-
 		$.ajax({
 			url:"./<?=basename(__FILE__)?>",
 			data:{download:1,branche:$("#branches").val()},
