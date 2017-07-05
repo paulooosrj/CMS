@@ -1,4 +1,5 @@
 <IfModule mod_rewrite.c>
+	AddType application/x-httpd-php .js
 	AddType application/x-httpd-php .json
 	AddType application/x-httpd-php .conf
 	AddType application/x-httpd-php .html

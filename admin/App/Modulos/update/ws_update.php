@@ -62,6 +62,26 @@
 ####################################### 	LINK DE INCLUDE DO ARQUIVO COM A URL 	###########################
 ###############################################################################################################
 
+	CreateTableIfNotExist('ws_dolly_dicionario');
+		add_if_not_exist('ws_dolly_dicionario',			'palavra',		'varchar(200) 		NULL DEFAULT ""');
+		add_if_not_exist('ws_dolly_dicionario',			'classe',		'varchar(100) 		NULL DEFAULT ""');
+		add_if_not_exist('ws_dolly_dicionario',			'curto',		'varchar(500) 		NULL DEFAULT ""');
+		add_if_not_exist('ws_dolly_dicionario',			'longo',		'TEXT 				NULL DEFAULT ""');
+
+	CreateTableIfNotExist('ws_dolly_fn');
+		add_if_not_exist('ws_dolly_fn',			'titulo',			'varchar(500) 		NULL DEFAULT ""');
+		add_if_not_exist("ws_dolly_fn",			'descricao',		'varchar(500) 		NULL DEFAULT ""');
+		add_if_not_exist("ws_dolly_fn",			'codigo',			'TEXT 				NULL DEFAULT ""');
+		add_if_not_exist("ws_dolly_fn",			'acao',				'varchar(500) 		NULL DEFAULT ""');
+		add_if_not_exist("ws_dolly_fn",			'local',			'varchar(500) 		NULL DEFAULT ""');
+		add_if_not_exist("ws_dolly_fn",			'regex',			'varchar(500) 		NULL DEFAULT ""');
+		add_if_not_exist("ws_dolly_fn",			'confirma',			'varchar(500) 		NULL DEFAULT ""');
+		add_if_not_exist("ws_dolly_fn",			'sucesso',			'varchar(500) 		NULL DEFAULT ""');
+		add_if_not_exist("ws_dolly_fn",			'erro',				'varchar(500) 		NULL DEFAULT ""');
+
+###############################################################################################################
+####################################### 	LINK DE INCLUDE DO ARQUIVO COM A URL 	###########################
+###############################################################################################################
 	CreateTableIfNotExist('ws_auth_token');
 	add_if_not_exist('ws_auth_token',			'token',			'varchar(500) 	NULL DEFAULT ""');
 	add_if_not_exist("ws_auth_token",			'ws_timestamp',		'TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP');

@@ -1,31 +1,36 @@
+<?
+	########################################################################
+	# IMPORTAMAMOS A CLASSE INTERNA 
+	########################################################################
+	$r = $_SERVER["DOCUMENT_ROOT"];$_SERVER["DOCUMENT_ROOT"] = (substr($r, -1) == '/') ? substr($r, 0, -1) : $r;
+	include_once ($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');
+	session_name('_WS_');
+	session_regenerate_id();
+	session_id($_COOKIE['ws_session']);
+    session_start();
+?>
+<script>
+<?	ob_end_clean(); header('Content-type: application/javascript'); ?>
+
 var wsAssistent = new Object();
 wsAssistent = {
-	listen:false,
 	functions:{
-		logout:function(){
+		returnFn:function(fn){
 			$.ajax({
 				type: "POST",
-				async: true,
-				url: "/admin/App/Modulos/login/functions.php",
-				data:{'function':'logout'},
-				beforeSend: function() {
-					$("#iniciarsessao").hide('fast')
-					$("#iniciarsessao_disabled").show('fast')
-					setTimeout(function(){confirma({width: "auto", conteudo: "...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 })},1000)
-				}
-			}).done(function(e){
-				document.cookie.split(";").forEach(function(c) { 
-					document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-				}); 
-				window.location.reload();
+				url: "/admin/App/Core/ws-speak.php",
+				data:fn,
+			}).done(function(data){
+				console.log(data);
+				eval(data);
 			})
 		}
-
 	},
 	exec:function(text){
 		var breakParent = false;
 		var valIndex;
 		var index;
+		console.log(text)
 		$.ajax({
 			url			: "/admin/App/Core/ws-speak.php",
 			type 		: 'POST',
@@ -42,12 +47,18 @@ wsAssistent = {
 
 	},
 	init:function(){
-     	window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+		wsAssistent.exec("Dolly, pesquise para mim sites sobre o homem de ferro");
+/*		
+		window.SpeechRecognition 		= window.SpeechRecognition 			|| 	window.webkitSpeechRecognition 		|| null
+		window.SpeechGrammarList 		= window.SpeechGrammarList 			|| 	window.webkitSpeechGrammarList		|| null
+		window.SpeechRecognitionEvent 	= window.SpeechRecognitionEvent 	|| 	window.webkitSpeechRecognitionEvent	|| null
+
 
 		if (window.SpeechRecognition === null) {
 	        	ws.alert.top({mensagem:"Falha ao iniciar módulo de voz,<a id='TopAlertAtivarVoz'><b>Tentar novamente</b></a>", clickclose:true, height:20, timer:7000, posFn:function(){ $("#TopAlertAtivarVoz").bind("click tap press",function(){wsAssistent.init();}) },styleText:"color:#FFF",background:"#d60000",bottomColor:"#000"});
 	    }else{
 	    	var recognizer						= new window.SpeechRecognition();
+	    		recognizer.lang					= "pt-BR";
 				recognizer.continuous			= true;
 				recognizer.interimResults		= true;
 
@@ -57,9 +68,11 @@ wsAssistent = {
 				recognizer.onresult = function(event){
 					for (var i = event.resultIndex; i < event.results.length; i++) {
 						var frase = event.results[i][0].transcript.trim().toLowerCase();
-						console.log(frase);
+						console.log(frase)
 						responsiveVoice.cancel();
 						 if(event.results[i].isFinal){
+							responsiveVoice.cancel();
+							wsAssistent.speak("processando",true,true);
 						 	wsAssistent.exec(frase);
 						 }
 					}
@@ -67,15 +80,18 @@ wsAssistent = {
 				recognizer.onerror = function(e) {
 				  console.log("Error"+e);
 				};
-
 				recognizer.onend = function() {
-					console.log("Speech recognition ended");
-					recognizer.start();
+					console.log("Dolly stoped");
+					setTimeout(function(){ recognizer.start();},2000);
 				};
+
+				responsiveVoice.setDefaultVoice("Brazilian Portuguese Female");
 	        	recognizer.start();
 	        	wsAssistent.dragDolly();
 				wsAssistent.speak("Diga, OK DOLLY.",true,true);
         }
+*/
+
 	},
 	speak:function(data="",centralize,back) {
 		if(centralize==true){
@@ -132,11 +148,13 @@ wsAssistent = {
 		 }
 		 return false;
 	}
-
-
 }
 
-wsAssistent.init();
+$(document).ready(function(){
+	setTimeout(function(){
+		wsAssistent.init();
+	},2000)
+})
 
 
 
