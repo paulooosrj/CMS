@@ -13,7 +13,7 @@
 	########################################################################
 	# FUNÇÕES PRE DEFINIDAS 
 	########################################################################
-	$artigos = Array("o","ao","aos","à","às","da","das","de","do","dos","a","as","na","nas","os","no","nos","num","nuns","em","numa","numas","um","uns","dum","duns","uma","umas","duma","dumas");
+	$artigos = Array("pra","mim","e","o","ao","aos","à","às","da","das","de","do","dos","a","as","na","nas","os","no","nos","num","nuns","em","numa","numas","um","uns","dum","duns","uma","umas","duma","dumas");
 
 
 	function search_in_Wiki($str){
@@ -34,7 +34,30 @@
 		$url 	= 'https://www.googleapis.com/customsearch/v1?q='.urlencode($_POST['termo']).'&hl=pt&alt=json&key=AIzaSyDB2CL5jO7KZ51ibfJ_hPM0uBCI_SsMiJA&cx=007902768968091743701:mbho57c0nru';
 		$url 	= file_get_contents($url);
 		$result = json_decode($url,TRUE);
-		return $result['items'];
+
+		if(isset($_POST['modal']) && $_POST['modal']==true){
+			$modal = '<div style="position: relative; overflow: auto; height: 400px; margin-bottom: -55px;background-color: #FFF;">';
+			foreach ($result['items'] as $key => $value) {
+
+				$link = parse_url($value['link']);
+
+				$modal .= '<div style="padding-bottom: 20px;overflow: hidden;">';
+				$modal .= '<a href="'.$value['link'].'" target="_blank" style="text-decoration: none; ">';
+				$modal .='	<div class="w1" style="text-align: left;font-weight: 600;padding: 4px 10px;font-size: 18px;color: #2752d2;">'.$value['title'].'</div>';
+				$modal .='	<div class="w1" style="text-align: left;font-weight: 400;padding: 3px 10px;font-size: 14px;color: #019e00;margin-top: -6px;width: 1000px">'.$link['host'].'<span style="color: #aac3aa;">'.$link['path'].'</span></div>';
+				$modal .='	<div class="w1" style="text-align: left;font-weight: 300;padding: 4px 10px;font-size: 16px;color: #001;margin-top: -4px;">'.strip_tags($value['snippet']).'</div>';
+				$modal .= "</a>";
+				$modal .= "</div>";
+			}
+			$modal .= "</div>";
+			$modal .= "<script>";
+			$modal .= "wsAssistent.speak('Encontrei ".count($result['items'])." resultados',false,false);";
+			$modal .= "</script>";
+			 $modal =  str_replace(array(PHP_EOL,"\n","\r"),"",addslashes($modal));
+			echo 'ws.confirm({conteudo:"'.$modal.'"});';
+		}else{
+			return $result['items'];
+		}
 	}
 
 	function speak($string,$open=true,$close=true) {
@@ -42,12 +65,140 @@
 		$close 	= ($close) 	? "true" : "false";
 		return 'wsAssistent.speak("'.addslashes($string).'",'.$open.','.$close.');';
 	}
+
 	function zeraTudo(){
 		$_SESSION['speakDolly'] = null;
 	}
+
 	function meaning(){
 		speak("funciona!",true,true);
 	}
+
+	function retira_artigos($array){
+		global $artigos;
+		$new_array = (is_array($array)) ? $array : explode(' ',$array);
+		$wheres = array();
+		foreach ($new_array as $value) {
+			if(!in_array($value,$artigos) && $value!=""){
+				$wheres[] = $value;
+			}
+		}
+		return (is_array($array)) ? $wheres : implode($wheres,' ');
+	}
+
+
+	function criaModalDesconexo($array){
+		global $artigos;
+		$new_array = (is_array($array)) ? $array : explode(' ',$array);
+		$wheres = array();
+		foreach ($new_array as $value) {
+			if(!in_array($value,$artigos) && $value!=""){
+				$wheres[] = $value;
+			}
+		}
+		return (is_array($array)) ? $wheres : implode($wheres,' ');
+	}
+
+
+
+	function processaFrase($text,$search,$array_local){
+		global $artigos;
+		$_LOCAL = array();
+		$_ACAO 	= array();
+
+		$local 	= explode(",",strtolower($array_local['local'])); 
+		$acao 	= explode(",",strtolower($array_local['acao'])); 
+		$search = strtolower($search);
+
+		foreach ($text as $itemLocal) {
+			 if(in_array(trim(strtolower($itemLocal)),$local)){
+			 	$_LOCAL[] = strtolower($itemLocal);
+			 }
+		}
+
+		foreach ($text as $itemAcao) {
+			 if(in_array(trim(strtolower($itemAcao)),$acao)){
+			 	$_ACAO[] = $itemAcao;
+			 }
+		}
+
+
+		$posLocal = (count($_LOCAL)>0) 	? strpos(strtolower($search), $_LOCAL[0]) 	: -1;
+		$posAcao  = (count($_ACAO)>0) 	? strpos(strtolower($search), $_ACAO[0]) 	: -1;
+		# SE TIVER APENAS AÇÃO
+		if($posAcao>-1 && $posLocal==-1){
+				$strelen 		= strlen($_ACAO[0]);
+				$strPos 		= strpos($search, $_ACAO[0]);
+				$substr 		= substr($search,$strPos+$strelen);
+				$trim 			= trim($substr);
+				$substantivos 	= retira_artigos($trim);
+				echo '/*'.__LINE__.':'.$substantivos.'*/'.PHP_EOL.PHP_EOL;
+
+				return $substantivos;
+				# SE TIVER APENAS LOCAL
+		}elseif($posLocal>-1 && $posAcao==-1){
+
+			# se não tiver ação
+			if($posLocal==0){
+				$strelen 		= strlen($_LOCAL[0]);
+				$substr 		= substr($search,$strelen);
+				$trim 			= trim($substr);
+				$substantivos 	= retira_artigos($trim);
+				echo '/*'.__LINE__.':'.$substantivos.'*/'.PHP_EOL.PHP_EOL;
+				return $substantivos;
+			}else{
+				$strelen 		= strlen($_LOCAL[0]);
+				$substr 		= substr($search,$posLocal+$strelen);
+				$trim 			= trim($substr);
+				$substantivos 	= retira_artigos($trim);
+				echo '/*'.__LINE__.':'.$substantivos.'*/'.PHP_EOL.PHP_EOL;
+				return (array(retira_artigos($search),$substantivos));
+			}
+
+		}elseif($posLocal<$posAcao){
+
+			# se o local for menor do que a ação
+			$strlen = strlen($_ACAO[0]);
+			$substr = substr($search,$posAcao+$strlen);
+			$trim 	= trim($substr);
+
+			echo '/*'.__LINE__.':'.$trim.'*/'.PHP_EOL.PHP_EOL;
+			return retira_artigos($trim);
+
+		}elseif($posAcao<$posLocal){
+			# se a ação for menor do que o local 
+			# verificamos os comandos entre eles
+			$stringPosAction 	= 	trim(substr($search,$posAcao+strlen($_ACAO[0])));
+			$stringMiolo 		=	trim(substr($stringPosAction,0,strpos($stringPosAction,$_LOCAL[0])));
+			$stringResto 		= 	trim(substr($search,(strpos($search,$_LOCAL[0])+strlen($_LOCAL[0]))));
+			#explode em array 
+			$arrayMiolo 		= 	explode(' ',$stringMiolo);
+			$arrayResto 		= 	explode(' ',$stringResto);
+
+
+			# se se não existe ações definidas entre eles... 
+			if(retira_artigos($stringMiolo)==""){
+					# verifica se existe comandos sobressalentes, se existir retorna, caso contrario dá erro 
+					echo '/*'.__LINE__.':'.retira_artigos($stringResto).'*/'.PHP_EOL.PHP_EOL;
+					return ((retira_artigos($stringResto)!="") ? retira_artigos($stringResto) : null);
+			# se existe um miolo 
+			}elseif(retira_artigos($stringMiolo)!=""){
+					# caso exista apenas o miolo retorna
+					# caso exista um sobressalente, retorna um array com 3 opções, miolo, restante, miolo + restante 
+					if(retira_artigos($stringResto)!=""){
+						#tiramos as strings que se repetem
+
+						$todos = array_unique(explode(' ',retira_artigos($stringMiolo).' '.retira_artigos($stringResto)));
+						$miolo = array_unique(explode(' ',retira_artigos($stringMiolo)));
+						$resto = array_unique(explode(' ',retira_artigos($stringResto)));
+
+						return (array(implode($miolo,' '),implode($resto,' '),implode($todos,' ')));
+					}else{
+						return ($stringMiolo);
+					}
+			}
+		}
+}
 
 
 	########################################################################
@@ -61,18 +212,16 @@
 	########################################################################
 	# DEFINE SE AINDA ESTÁ ESCUTANDO OU NÃO 
 	########################################################################
-	$_SESSION['speakDolly']['listen']	=(empty($_SESSION['speakDolly']['listen'])) 	? null 	: $_SESSION['speakDolly']['listen'];
-	$_SESSION['speakDolly']['continue']	=(empty($_SESSION['speakDolly']['continue'])) 	? null 	: $_SESSION['speakDolly']['continue'];
+	$_SESSION['speakDolly']['listen']		=(empty($_SESSION['speakDolly']['listen'])) 		? null 	: $_SESSION['speakDolly']['listen'];
+	$_SESSION['speakDolly']['continue']		=(empty($_SESSION['speakDolly']['continue'])) 		? null 	: $_SESSION['speakDolly']['continue'];
+	$_SESSION['speakDolly']['desconexo']	=(empty($_SESSION['speakDolly']['desconexo'])) 		? null 	: $_SESSION['speakDolly']['desconexo'];
+	$_SESSION['speakDolly']['dualidade']	=(empty($_SESSION['speakDolly']['dualidade'])) 		? null 	: $_SESSION['speakDolly']['dualidade'];
 
 
 	$search = str_replace(array('.',',',';')," ",$_POST['search']);
 	$text 	= explode(" ",$search);
 
 
-	########################################################################
-	# CASO SEJA CONTINUAÇÃO
-	########################################################################
-	if($_SESSION['speakDolly']['continue']==true){goto continueDolly;}
 
 	########################################################################
 	# INICIA A SESSÃO COM A DOLLY
@@ -80,7 +229,34 @@
 	$init 		=	array("bore","bori","dale","dolly","dori","dolly","dolly","dolly","dolly","dolly","italy","dolly" ,"idole","dali","idade","darling","dog","vale","lei");
 	$response 	=	array("sim?","o que?","olá?","pois não?","estou ouvindo","diga?");
 
-	if(in_array($search,$init) && $_SESSION['speakDolly']['listen']==null){
+	$Cancel				=	array("cancelar","cancela","cancele","esquece","esqueça","deixa pra lá","parar","pare","abortar","aborte");
+	$responseCancel 	=	array("ordem cancelada","comando cancelado","ok","ok, parei.","tá bom");
+
+
+	########################################################################
+	# CANCELAR VEM ANTES DE TUDO
+	########################################################################
+
+	if(in_array(strtolower($search),$Cancel) && $_SESSION['speakDolly']['listen']==true){
+		zeraTudo();
+		$total = array_rand($responseCancel,1);
+		echo speak($responseCancel[$total],true,false);
+		exit;	
+	}
+
+
+	########################################################################
+	# CASO SEJA CONTINUAÇÃO
+	########################################################################
+	if($_SESSION['speakDolly']['continue']==true)	{goto continueDolly;}
+	if($_SESSION['speakDolly']['desconexo']==true)	{goto desconexo;}
+	if($_SESSION['speakDolly']['dualidade']==true)	{goto dualidade;}
+
+
+
+
+
+	if(in_array(strtolower($search),$init) && $_SESSION['speakDolly']['listen']==null){
 		$_SESSION['speakDolly']['listen'] = true;
 		$total = array_rand($response,1);
 		echo speak($response[$total],true,false);
@@ -88,7 +264,7 @@
 	}
 
 
-	if(in_array($search,$init) && $_SESSION['speakDolly']['listen']==true){
+	if(in_array(strtolower($search),$init) && $_SESSION['speakDolly']['listen']==true){
 		echo speak("EU JÁ ESTOU TE ESCUTANDO.",true,false);
 		echo speak("CONTINUE.",true,false);
 		exit;	
@@ -100,6 +276,7 @@
 	########################################################################
 
 	if($_SESSION['speakDolly']['listen']==true){
+
 		$searchDolly= new MySQL();
 		$searchDolly->set_table(PREFIX_TABLES.'ws_dolly_fn');
 		$wheres = array();
@@ -108,32 +285,28 @@
 				$wheres[]=("(acao like '%".$value."%' OR local like '%".$value."%')");
 			}
 		}
+
 		$searchDolly->set_where(implode($wheres,"OR"));
 		$searchDolly->select();
-		echo "/*".$searchDolly->query."*/".PHP_EOL.PHP_EOL.PHP_EOL;
-
-		/*
-			sites sobre*
-			Dolly, pesquise para mim sites sobre (sair do sistema)
-			Dolly, pesquise para mim sites sobre sair do sistema
-
-		*/
-
 		if($searchDolly->_num_rows==0){
-			echo speak("Desculpe, não entendi sua pergunta.",true,false);
+			echo speak("Estranho, mas não entendi o seu comando.",true,false);
+			echo speak("Tente falar com outras palavras.",false,false);
+			# não zera o cache...
 		}elseif($searchDolly->_num_rows==1){
+
 			$_SESSION['speakDolly']['mysql'] = $searchDolly->fetch_array[0];
 			$confirma = $searchDolly->fetch_array[0]['confirma']; 
+
 			if($confirma!=""){
 				echo speak($confirma,true,false);
 				$_SESSION['speakDolly']['continue'] = true;
 				exit;
 				continueDolly:
 				if($search=="sim"){
-					echo $_SESSION['speakDolly']['mysql']['cod'];
+					echo $_SESSION['speakDolly']['mysql']['codigo'];
 					zeraTudo();
 				}elseif($search=="não"){
-					echo speak("ok",true,false);
+					echo speak("ok",true,true);
 					zeraTudo();
 				}else{
 					echo speak("Não entendi, diga sim ou não.",true,false);
@@ -141,237 +314,113 @@
 				exit;
 			}else{
 
-				echo "/*";
+
+				$result 	= processaFrase($text,$search,$searchDolly->fetch_array[0]);
+				$desconexo 	= $searchDolly->fetch_array[0]['desconexo'];
+
+				
+				if(is_array($result)){
+					echo speak("Desculpe, não entendi direito.",true,false);	
+					echo speak($desconexo,false,false);	
 
 
+					confirmaDesconexo:
 
-				###################################### separamos a ação do comando 
-				$_LOCAL = array();
-				$local 	= explode(" ",$searchDolly->fetch_array[0]['local']); 
-				foreach ($text as $itemLocal) {
-					 if(in_array(trim($itemLocal),$local)){
-					 	$_LOCAL[] = $itemLocal;
-					 }
-				}
-
-
-
-				if(count($_LOCAL)==0){
-
-					$_ACAO = array();
-					$acao 	= explode(" ",$searchDolly->fetch_array[0]['acao']); 
-					foreach ($text as $itemAcao) {
-						 if(in_array(trim($itemAcao),$acao)){
-						 	$_ACAO[] = $itemAcao;
-						 }
-					}
-
-					$newAction = trim(substr(strstr($search,$_ACAO[0]),strlen($_ACAO[0])));
-
+					echo 'ws.confirm({conteudo:\'<div style="margin-bottom: -30px;">';
+					foreach ($result as $key => $value) { echo '<div class="DollyDesconexo" style="padding: 10px 20px;text-align:left;"><span>•</span> <b>'.$value.'</b></div>';}
+					echo '<div>\',height:"auto",onClose:function(){
+							wsAssistent.exec("cancelar");
+						},posFn:function(){
+							$(".DollyDesconexo").click(function(){
+								var frase = $(this).find("b").text();
+								$("#ws_confirm").remove();
+								$("#body").removeClass("scrollhidden");
+								$("*").removeClass("blur");
+								wsAssistent.exec(frase);
+							})
+						}})';
+					$_SESSION['speakDolly']['dualidade'] 		= false;
+					$_SESSION['speakDolly']['desconexo'] 		= true;
+					$_SESSION['speakDolly']['mysql'] 			= $searchDolly->fetch_array;
+					exit;
+					desconexo:
+					echo str_replace('{search}', $search,$_SESSION['speakDolly']['mysql'][0]['codigo']);
+					zeraTudo();
 
 				}else{
-					$newAction = trim(substr(strstr($search,$_LOCAL[0]),strlen($_LOCAL[0])));
-				}
-
-				echo $newAction;
-				// echo $text;
-				echo "*/";
-				//echo $_SESSION['speakDolly']['mysql']['codigo'];
-
-
-
-
+					if($result!=null){
+						echo str_replace('{search}', $result,$searchDolly->fetch_array[0]['codigo']);
+					}
+					zeraTudo();
+					exit;
+				};
 			}
+
 		}elseif($searchDolly->_num_rows>1){
 
+			$functions = array();
+			$desconexo = $searchDolly->fetch_array[0]['desconexo'];
+			echo speak("Desculpe.",true,false);
+			echo speak("Não entendi direito.",true,false);
+			echo speak("Você quer fazer o quê?",true,false);
+			echo speak($desconexo,false,false);	
+
+			$itemOpt = 0;
+			foreach ($searchDolly->fetch_array as $value) {		
+					echo speak($value['descricao']."?",true,false);
+					$functions[] = '<div class="DollyDesconexo" style="padding: 10px 20px;text-align:left;" data-opt="'.$itemOpt.'"><span>•</span> <b>'.$value['descricao'].'</b></div>';
+					$itemOpt++;
+			}
+			echo 'ws.confirm({conteudo:\''.implode($functions,'').'\',height:38,onClose:function(){
+					wsAssistent.exec("cancelar");
+				},posFn:function(){
+					$(".DollyDesconexo").click(function(){
+						 var frase 	= $(this).find("b").text();
+						 var id 	= $(this).data("opt");
+						wsAssistent.functions.returnFn({search:frase,id:id});
+					})
+				}})';
+
+			$_SESSION['speakDolly']['dualidade'] 	= true;
+			$_SESSION['speakDolly']['text'] 		= $text;
+			$_SESSION['speakDolly']['search'] 		= $search;
+			$_SESSION['speakDolly']['mysql'] 		= $searchDolly->fetch_array;
+
+			exit;
+			dualidade:
+			foreach ($_SESSION['speakDolly']['mysql'] as $value) {
+				if(strtolower($value['descricao'])==strtolower($search)){
+					$_SESSION['speakDolly']['dualidade'] = false;
+					$searchDolly = (object)array();
+					$searchDolly->fetch_array 	= array($_SESSION['speakDolly']['mysql'][$_POST['id']]);
+					$result 					= processaFrase($_SESSION['speakDolly']['text'],$_SESSION['speakDolly']['search'],$value);	
+					$desconexo 					= $value['desconexo'];
 
 
-
-// ================== TUDO ANTES DO LOCAL DELETA ========= google :   **** *** *** localize        *** *** ***        
-
-
-
-				foreach ($searchDolly->fetch_array as $key => $value) {
-
-
-						//print_r($searchDolly->fetch_array);
+					if(is_array($result)){
+						goto confirmaDesconexo;
+					}else{
+						speak("até aqui ok!");
+					}
 
 
+					exit;
 				}
+			}
 
+			echo speak("Desculpe, não entendi, fale novamente ou clique em uma das opções",false,false);	
 
-				// $fn 					= new MySQL();
-				// $fn->set_table(PREFIX_TABLES.'ws_dolly_fn');
-				// $fn->set_where('id="'.$searchDolly->fetch_array[0]['id_fn'].'"');
-				// $fn->select();
-				// foreach ($searchDolly->fetch_array as $value) {
-				// 		print_r($value);
-				// }
+			zeraTudo();
 
-
-
-
-
-
+			exit;
 		}
 	}
 
 
-/*
-
-
-
-
-	########################################################################
-	# SISTEMAS DE BUSCA 
-	########################################################################
-
-	$searchSystem = array("wikipedia", "google", "dicionario");
-
-
-
-
-	########################################################################
-	# COMANDOS NATIVOS DA VERSÃO 
-	########################################################################
-	$basic_commands = (object) Array();
-	$basic_commands->commands 	=	Array();
-	$basic_commands->commands 	= 	array(
-										"logout"=>array(
-											"index"			=>array("sair do web chip","sair do websheep","sair","fazer logout","desligar"),
-										),
-										"corrigir"=>array(
-											"index"			=>array("não","cancelar","cancela","corrigindo","parar","pare","tchau"),
-										),
-										"okDolly"=>array(
-											"index"			=>array("bore","bori","dale","dolly","dori","olá dolly","oi dolly","ok dolly","hey dolly","ok dolly","ok italy","ok e dolly" ,"ok idole","ok e dali","ok idade","ok darling","ok dog","ok vale","ok da lei"),
-											"response"		=>array("sim?","o que?","olá?","pois não?","estou ouvindo","diga?")
-										),
-										"search"=>array(
-											"index"			=>array("procure por sites","pesquise por sites","procure sites sobre","pesquise sites sobre", "pesquise no google sobre","pesquisa no google sobre","procure no google sobre","pesquise no google","pesquisa no google","procure no google","pesquisa sobre","pesquise sobre","qual é a definição de","qual a definição de","o que é","o que e","o que são","o que sao","o que significa","o que quer dizer","pesquisa para","pesquise","pesquise por","pesquisar","pesquisar por","procure","procure por"),
-											"action"		=>'wsAssistent.speak("Aonde procuro?",true,true);'
-										),
-										"loadToll"=>array(
-											"index"			=>array("abrir ferramenta","abra ferramenta","acessar ferramenta","acesse a ferramenta","procure","ache"),
-											"action"		=>'wsAssistent.speak("Você quer saber sobre {text}",true,true);'
-										)
-									);
-
-
-
-$listen = $_SESSION['speakDolly']['listen'];
-
-foreach($basic_commands->commands as $key1=>$commands) {
-		// ORDENAMOS A ARRAY
-		uasort($commands['index'], 'ordenaArray');
-		$commands['index'] 	= array_reverse($commands['index']);
-		// se estiver cancelado, não faz mais nada.
-		if( $key1=="corrigir" &&  in_array($text,$commands['index'])){
-			zeraTudo();
-			echo speak("Ok, cancelado ",true,true);
-			exit;
-		}
-
-
-		if($_SESSION['speakDolly']['continue']!=null){
-			// infelizmente a função 'goto' não aceita variáveis
-			// então tive que fazer "no braço" mesmo os direcionamentos
-			 if($_SESSION['speakDolly']['continue']=='SearchLerOuEscutar'){	goto SearchLerOuEscutar;}
-			 if($_SESSION['speakDolly']['continue']=='confirmLogout'){		goto confirmLogout;}
-			exit;
-		}
-
-		if( $key1=="okDolly" &&  in_array($text,$commands['index']) &&  $listen==0){
-			$total = array_rand($commands['response'],1);
-			echo speak($commands['response'][$total],true,false);
-			$_SESSION['speakDolly']['listen']=1;
-			exit;
-		}elseif( $key1=="okDolly" &&  in_array($text,$commands['index']) &&  $listen==1){
-			echo speak("Já estava te ouvindo.",true,false);
-			echo speak("Continue",true,false);
-			exit;
-		}
-
-		if( $key1=="logout" &&  in_array($text,$commands['index']) &&  $listen==1){
-			echo speak("Você quer sair do web chip? Diga sim ou não.",true,false);
-			$_SESSION['speakDolly']['continue'] = "confirmLogout";
-			exit;
-			confirmLogout:
-			if($text=="sim"){
-				echo speak("Até mais!",false,true);
-				echo 'wsAssistent.functions.logout();';
-				zeraTudo();
-			}else{
-				echo speak("ok",false,true);
-				zeraTudo();
-			}
-			exit;
-		}
-
-
-		if( $key1=="search" &&  prefix_in_array($commands['index'],$text) && $listen==1){
-			search:
-				$palavra = get_prefix_in_array($commands['index'],$text);
-				$tipo = get_type_prefix_in_array($commands['index'],$text);
-				echo speak("Aguarde ",false,false);
-				echo speak("você gostaria de ler, ou escutar a definição de ".$palavra,false,false);
-				$_SESSION['speakDolly']['continue'] = "SearchLerOuEscutar";
-				$_SESSION['speakDolly']['term'] 	= $palavra;
-
-			exit;
-			SearchLerOuEscutar:
-				// $result 			= search_in_Wiki($_SESSION['speakDolly']['term']);
-				// $extractSpeak 	= str_replace(array(PHP_EOL,"\n","\r","."),"",$result['extract']);
-				// $extractText 	= str_replace(array(PHP_EOL,"\n","\r","."),"<br>",addslashes($result['extract']));
-				// echo speak("Pessquisa com o seguinte título, ".$result['title'],false,false);
-				$termo = trim($_SESSION['speakDolly']['term']);
-				$result = search_in_google($termo);
-				$modal = '<div style="position: relative; overflow: auto; height: 400px; margin-bottom: -55px; ">';
-				foreach ($result as $key => $value) {
-					$modal .= '<div><a href="'.$value['link'].'" target="_blank" style="text-decoration: none; ">';
-					$modal .='	<div class="w1" style="text-align: left; font-weight: 700; padding: 4px 10px; font-size: 18px; ">'.$value['title'].'</div>';
-					$modal .='	<div class="w1" style="text-align: left;font-weight: 300;padding: 4px 10px;font-size: 15px;border-bottom: solid 1px rgba(70, 121, 185, 0.25);">'.$value['snippet'].'</div>';
-					$modal .= "</a></div>";
-				}
-				$modal .= "</div>";
-				$modal =  str_replace(array(PHP_EOL,"\n","\r"),"<br>",addslashes($modal));
-
-
-
-				 echo speak("Foram encontraos ".count($result)." resultados para ".$termo,false,false);
-
-				echo 'ws.confirm({conteudo:"'.$modal.'"});';
-			 	zeraTudo();
-				exit;
-
-				 echo speak("Pessquisa com o seguinte título, ".$result['title'],false,false);
-				// echo speak($extract,false,false);
-
-
-
-
-				// $_SESSION['speakDolly']['continue'] = null;
-				// $_SESSION['speakDolly']['listen']   = 0;
-
-				// if(!in_array($engineSearch, $searchSystem)){
-				// 	echo speak("Desculpe, não sei ainda fazer pesquisas no ".$engineSearch,true,false);
-				// 	$_SESSION['speakDolly']['continue'] = null;
-				// 	$_SESSION['speakDolly']['listen']   = 0;
-				// }else{
-				// 	echo speak("ok, procurarei ".$_SESSION['speakDolly']['term']." no ".$engineSearch,true,false);
-				// 	$_SESSION['speakDolly']['continue'] = null;
-				// 	$_SESSION['speakDolly']['listen']   = 0;
-				// 	echo speak("aguarde",true,false);
-				// }
-			
-
-				break;
-		}
 
 
 
 
 
-}
-*/
+
 

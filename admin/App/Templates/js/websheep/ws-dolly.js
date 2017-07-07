@@ -47,8 +47,6 @@ wsAssistent = {
 
 	},
 	init:function(){
-		wsAssistent.exec("Dolly, pesquise para mim sites sobre o homem de ferro");
-/*		
 		window.SpeechRecognition 		= window.SpeechRecognition 			|| 	window.webkitSpeechRecognition 		|| null
 		window.SpeechGrammarList 		= window.SpeechGrammarList 			|| 	window.webkitSpeechGrammarList		|| null
 		window.SpeechRecognitionEvent 	= window.SpeechRecognitionEvent 	|| 	window.webkitSpeechRecognitionEvent	|| null
@@ -72,7 +70,6 @@ wsAssistent = {
 						responsiveVoice.cancel();
 						 if(event.results[i].isFinal){
 							responsiveVoice.cancel();
-							wsAssistent.speak("processando",true,true);
 						 	wsAssistent.exec(frase);
 						 }
 					}
@@ -88,9 +85,8 @@ wsAssistent = {
 				responsiveVoice.setDefaultVoice("Brazilian Portuguese Female");
 	        	recognizer.start();
 	        	wsAssistent.dragDolly();
-				wsAssistent.speak("Diga, OK DOLLY.",true,true);
+				wsAssistent.speak("Diga, DOLLY.",true,true);
         }
-*/
 
 	},
 	speak:function(data="",centralize,back) {
