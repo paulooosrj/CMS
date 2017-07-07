@@ -2809,6 +2809,7 @@
 			$zip->close();
 		}
 		
+
 		if ($_REQUEST['dataBase'] == 'none') {
 			echo 'none...' . PHP_EOL;
 		} elseif ($_REQUEST['dataBase'] == 'basic') {
@@ -2827,6 +2828,7 @@
 			exec_SQL($website);
 		}
 		
+		ob_end_clean();
 		echo 'true';
 		exit;
 	}

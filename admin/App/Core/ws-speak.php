@@ -10,14 +10,24 @@
     session_start();
 	if(isset($_GET['session'])){print_r($_SESSION);	exit;}
 
+
+	########################################################################
+	# ARRAYS COM OS VALORES PRE DEFINIDOS DO SISTEMA 
+	########################################################################
+	$artigos 			= 	array("pra","para","mim","e","o","ao","aos","à","às","da","das","de","do","dos","a","as","na","nas","os","no","nos","num","nuns","em","numa","numas","um","uns","dum","duns","uma","umas","duma","dumas");
+	$DICIONARIO 		= 	array("quem seriam","quem seria","quem são","quem foram","quem é","quem foi","quem será","o que é","o que quer dizer","o que significa","que significa","qual é o significado","qual o significado de","qual o significado", "qual é o significado de");
+	$init 				=	array("bore","bori","dale","dolly","dori","dolly","dolly","dolly","dolly","dolly","italy","dolly" ,"idole","dali","idade","darling","dog","vale","lei");
+	$response 			=	array("sim?","o que?","olá?","pois não?","estou ouvindo","diga?");
+	$Cancel				=	array("cancelar","cancela","cancele","esquece","esqueça","deixa pra lá","parar","pare","abortar","aborte");
+	$responseCancel 	=	array("ordem cancelada","comando cancelado","ok","ok, parei.","tá bom");
+
+	usort($DICIONARIO, function($a, $b){return (strlen($a)  < strlen($b)); }); 
+
 	########################################################################
 	# FUNÇÕES PRE DEFINIDAS 
 	########################################################################
-	$artigos = Array("pra","mim","e","o","ao","aos","à","às","da","das","de","do","dos","a","as","na","nas","os","no","nos","num","nuns","em","numa","numas","um","uns","dum","duns","uma","umas","duma","dumas");
-
-
-	function search_in_Wiki($str){
-		$url='http://pt.wikipedia.org/w/api.php?action=query&prop=extracts|info&exintro&titles='.urlencode($str).'&format=json&explaintext&redirects&inprop=url';
+	function search_in_Wiki(){
+		$url='http://pt.wikipedia.org/w/api.php?action=query&prop=extracts|info&exintro&titles='.urlencode($_POST['search']).'&format=json&explaintext&redirects&inprop=url';
 		$json = file_get_contents($url);
 		$json = json_decode($json, TRUE);
 		$result = array();
@@ -31,16 +41,14 @@
 	}
 
 	function search_in_google(){
-		$url 	= 'https://www.googleapis.com/customsearch/v1?q='.urlencode($_POST['termo']).'&hl=pt&alt=json&key=AIzaSyDB2CL5jO7KZ51ibfJ_hPM0uBCI_SsMiJA&cx=007902768968091743701:mbho57c0nru';
+		$url 	= 'https://www.googleapis.com/customsearch/v1?q='.urlencode($_POST['search']).'&hl=pt&alt=json&key=AIzaSyDB2CL5jO7KZ51ibfJ_hPM0uBCI_SsMiJA&cx=007902768968091743701:mbho57c0nru';
 		$url 	= file_get_contents($url);
 		$result = json_decode($url,TRUE);
 
 		if(isset($_POST['modal']) && $_POST['modal']==true){
 			$modal = '<div style="position: relative; overflow: auto; height: 400px; margin-bottom: -55px;background-color: #FFF;">';
 			foreach ($result['items'] as $key => $value) {
-
 				$link = parse_url($value['link']);
-
 				$modal .= '<div style="padding-bottom: 20px;overflow: hidden;">';
 				$modal .= '<a href="'.$value['link'].'" target="_blank" style="text-decoration: none; ">';
 				$modal .='	<div class="w1" style="text-align: left;font-weight: 600;padding: 4px 10px;font-size: 18px;color: #2752d2;">'.$value['title'].'</div>';
@@ -60,6 +68,30 @@
 		}
 	}
 
+	function search_in_internet(){
+			$wikki 		= search_in_Wiki();
+			if($wikki['extract']=="Sem descrição.."){
+				search_in_google();
+			}else{
+				$link = parse_url($wikki['fullurl']);
+				$modal = '<div style="position: relative;overflow: auto;background-color: #FFF;height: calc(100% + 60px);">';
+				$modal .= '		<div style="padding-bottom: 20px;">';
+				$modal .= '			<a href="'.$wikki['fullurl'].'" target="_blank" style="text-decoration: none; ">';
+				$modal .='			<div class="w1" style="text-align: left;font-weight: 600;padding: 4px 10px;font-size: 18px;color: #2752d2;">'.$wikki['title'].'</div>';
+				$modal .='			<div class="w1" style="text-align: left;font-weight: 400;padding: 3px 10px;font-size: 14px;color: #019e00;margin-top: -6px;width: 1000px">'.$link['host'].'<span style="color: #aac3aa;">'.$link['path'].'</span></div>';
+				$modal .='			<div class="w1" style="text-align: left;font-weight: 300;padding: 4px 10px;font-size: 16px;color: #001;margin-top: -4px;">'.str_replace(".",".<br>",$wikki['extract']).'</div>';
+				$modal .= "			</a>";
+				$modal .= "		</div>";
+				$modal .= "</div>";
+				$modal .= "<script>";
+				$modal .= "wsAssistent.speak('Encontrei a seguinte definição',false,false);";
+				$modal .= "</script>";
+				$modal =  str_replace(array(PHP_EOL,"\n","\r"),"",addslashes($modal));
+				echo 'ws.confirm({conteudo:"'.$modal.'",width:"calc(100% - 150px)", height:"calc(100% - 180px)"});';
+			}
+	}
+
+
 	function speak($string,$open=true,$close=true) {
 		$open 	= ($open) 	? "true" : "false";
 		$close 	= ($close) 	? "true" : "false";
@@ -74,6 +106,10 @@
 		speak("funciona!",true,true);
 	}
 
+	function console_log($string){
+		echo 'console.log("'.$string.'");';
+	}
+
 	function retira_artigos($array){
 		global $artigos;
 		$new_array = (is_array($array)) ? $array : explode(' ',$array);
@@ -86,7 +122,6 @@
 		return (is_array($array)) ? $wheres : implode($wheres,' ');
 	}
 
-
 	function criaModalDesconexo($array){
 		global $artigos;
 		$new_array = (is_array($array)) ? $array : explode(' ',$array);
@@ -98,9 +133,6 @@
 		}
 		return (is_array($array)) ? $wheres : implode($wheres,' ');
 	}
-
-
-
 	function processaFrase($text,$search,$array_local){
 		global $artigos;
 		$_LOCAL = array();
@@ -198,7 +230,7 @@
 					}
 			}
 		}
-}
+	}
 
 
 	########################################################################
@@ -209,6 +241,7 @@
 		exit;
 	}
 
+
 	########################################################################
 	# DEFINE SE AINDA ESTÁ ESCUTANDO OU NÃO 
 	########################################################################
@@ -217,21 +250,8 @@
 	$_SESSION['speakDolly']['desconexo']	=(empty($_SESSION['speakDolly']['desconexo'])) 		? null 	: $_SESSION['speakDolly']['desconexo'];
 	$_SESSION['speakDolly']['dualidade']	=(empty($_SESSION['speakDolly']['dualidade'])) 		? null 	: $_SESSION['speakDolly']['dualidade'];
 
-
 	$search = str_replace(array('.',',',';')," ",$_POST['search']);
 	$text 	= explode(" ",$search);
-
-
-
-	########################################################################
-	# INICIA A SESSÃO COM A DOLLY
-	########################################################################
-	$init 		=	array("bore","bori","dale","dolly","dori","dolly","dolly","dolly","dolly","dolly","italy","dolly" ,"idole","dali","idade","darling","dog","vale","lei");
-	$response 	=	array("sim?","o que?","olá?","pois não?","estou ouvindo","diga?");
-
-	$Cancel				=	array("cancelar","cancela","cancele","esquece","esqueça","deixa pra lá","parar","pare","abortar","aborte");
-	$responseCancel 	=	array("ordem cancelada","comando cancelado","ok","ok, parei.","tá bom");
-
 
 	########################################################################
 	# CANCELAR VEM ANTES DE TUDO
@@ -244,14 +264,12 @@
 		exit;	
 	}
 
-
 	########################################################################
 	# CASO SEJA CONTINUAÇÃO
 	########################################################################
-	if($_SESSION['speakDolly']['continue']==true)	{goto continueDolly;}
-	if($_SESSION['speakDolly']['desconexo']==true)	{goto desconexo;}
-	if($_SESSION['speakDolly']['dualidade']==true)	{goto dualidade;}
-
+	if($_SESSION['speakDolly']['continue']==true)	{goto continueDolly;	}
+	if($_SESSION['speakDolly']['desconexo']==true)	{goto desconexo;		}
+	if($_SESSION['speakDolly']['dualidade']==true)	{goto dualidade;		}
 
 
 
@@ -277,6 +295,38 @@
 
 	if($_SESSION['speakDolly']['listen']==true){
 
+
+
+	########################################################################
+	# CASO ESTEJA OUVINDO, INICIA A PESQUISA
+	########################################################################
+		foreach ($DICIONARIO as $key => $value) {
+			if(substr($search,0,strlen($value))==$value){
+				$parametros = trim(substr($search,(strpos($search,$value)+strlen($value))));
+				$parametros = explode(' ',$parametros);
+				if(count($parametros)>1){
+					$parametros = implode($parametros," ");
+					echo 'wsAssistent.exec("pesquise na internet '.$parametros. '");';
+				}else{
+					$searchDolly= new MySQL();
+					$searchDolly->set_table(PREFIX_TABLES.'ws_dolly_dicionario');
+					$searchDolly->set_where('palavra="'.$parametros[0].'"');
+					$searchDolly->select();
+					if($searchDolly->_num_rows>0){
+						echo speak($searchDolly->fetch_array[0]['palavra'].'.',true,false);
+						echo speak($searchDolly->fetch_array[0]['classe'].'.',false,false);
+						echo speak($searchDolly->fetch_array[0]['curto'].'.',false,false);
+						echo speak(strip_tags($searchDolly->fetch_array[0]['longo']).'.',false,true);
+						exit;
+					}else{
+						echo 'wsAssistent.exec("pesquise na internet '.$parametros[0]. '");';
+					}
+				}
+				exit;
+			}
+		}
+
+
 		$searchDolly= new MySQL();
 		$searchDolly->set_table(PREFIX_TABLES.'ws_dolly_fn');
 		$wheres = array();
@@ -288,6 +338,9 @@
 
 		$searchDolly->set_where(implode($wheres,"OR"));
 		$searchDolly->select();
+
+		console_log($searchDolly->query);
+
 		if($searchDolly->_num_rows==0){
 			echo speak("Estranho, mas não entendi o seu comando.",true,false);
 			echo speak("Tente falar com outras palavras.",false,false);
@@ -361,9 +414,7 @@
 			$functions = array();
 			$desconexo = $searchDolly->fetch_array[0]['desconexo'];
 			echo speak("Desculpe.",true,false);
-			echo speak("Não entendi direito.",true,false);
 			echo speak("Você quer fazer o quê?",true,false);
-			echo speak($desconexo,false,false);	
 
 			$itemOpt = 0;
 			foreach ($searchDolly->fetch_array as $value) {		

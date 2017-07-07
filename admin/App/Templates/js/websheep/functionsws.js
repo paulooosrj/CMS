@@ -23,7 +23,7 @@
 var ws = new Object();
 ws = {
 	info: {
-		version: "0.3.3",
+		version: "0.3.4",
 		compatible: "5.7+",
 		creator: "WebSheep Tecnology"
 	},
@@ -66,72 +66,8 @@ ws = {
 						}
 					});
 				})
-		},
-		listen:{
-			init:function(){
-/*		     	
-					artyom.initialize({
-					    lang:"pt-BR",
-					    debug:true,
-					    continuous:true,
-					    listen:true
-					}).then(function(){
-							var commands = [
-							    {
-							        indexes: ["oi","Olá web chip","web chip","high web chip"],
-							        action: function(){artyom.say("Olá, mestre");}
-							    },
-								{
-								    smart:true,
-								    indexes: ["Repita *"],
-								    action: function(i, wildcard){
-								    	console.log(wildcard)
-								        artyom.say(wildcard);
-								    }
-								}
-
-						];
-						artyom.addCommands(commands);
-					}).catch(function(){
-					    console.error("Ocorreu um erro na inicialização do artyom.initialize");
-					});
-
-
-
-
-
-
-
-
-
-
-window.SpeechRecognition = window.SpeechRecognition 	|| 	window.webkitSpeechRecognition || null;                             
-				if (window.SpeechRecognition === null) {
-					ws.log.error("window.SpeechRecognition == null")
-				}else {
-			    	var recognizer = new window.SpeechRecognition();
-		        	recognizer.continuous = true;
-
-		        	recognizer.onresult = function(event){
-		        		var textContent = "";
-		        		for (var i = event.resultIndex; i < event.results.length; i++) {
-		        			if(event.results[i].isFinal){
-		        				textContent = event.results[i][0].transcript;
-		        			}
-		        		}
-		        	}
-
-
-		      		try { recognizer.start();} 
-		      		catch(ex) {ws.log.error("error: "+ex.message);}
-			    }
-*/
-			}
 		}
-
 	},
-
-
 	form: {
 		sendLeads: function(token = null) {
 			return {
@@ -1110,11 +1046,7 @@ window.SpeechRecognition = window.SpeechRecognition 	|| 	window.webkitSpeechReco
 			closed = true;
 			$(options.divScroll).removeClass("scrollhidden");
 			$(options.divBlur).removeClass("blur");
-			$("#" + options.idModal).animate({
-				opacity: 0
-			}, 200, 'linear', function() {
-				$("#" + options.idModal).remove()
-			});
+			$("#" + options.idModal).animate({ opacity: 0 }, 200, 'linear', function() { $("#" + options.idModal).remove() });
 			options.posClose();
 		}
 		if(options.bots.length > 0) {

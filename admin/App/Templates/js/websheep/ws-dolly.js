@@ -1,17 +1,3 @@
-<?
-	########################################################################
-	# IMPORTAMAMOS A CLASSE INTERNA 
-	########################################################################
-	$r = $_SERVER["DOCUMENT_ROOT"];$_SERVER["DOCUMENT_ROOT"] = (substr($r, -1) == '/') ? substr($r, 0, -1) : $r;
-	include_once ($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');
-	session_name('_WS_');
-	session_regenerate_id();
-	session_id($_COOKIE['ws_session']);
-    session_start();
-?>
-<script>
-<?	ob_end_clean(); header('Content-type: application/javascript'); ?>
-
 var wsAssistent = new Object();
 wsAssistent = {
 	functions:{
@@ -21,7 +7,7 @@ wsAssistent = {
 				url: "/admin/App/Core/ws-speak.php",
 				data:fn,
 			}).done(function(data){
-				// console.log(data);
+				console.log(data);
 				eval(data);
 			})
 		}
@@ -36,7 +22,7 @@ wsAssistent = {
 			type 		: 'POST',
 			data 		: {search:text},
 			success: function(data, status, jqXHR) {
-				// console.log(data)
+				console.log(data)
 				eval(data)
 			}
 		})
@@ -50,8 +36,7 @@ wsAssistent = {
 		window.SpeechRecognition 		= window.SpeechRecognition 			|| 	window.webkitSpeechRecognition 		|| null
 		window.SpeechGrammarList 		= window.SpeechGrammarList 			|| 	window.webkitSpeechGrammarList		|| null
 		window.SpeechRecognitionEvent 	= window.SpeechRecognitionEvent 	|| 	window.webkitSpeechRecognitionEvent	|| null
-
-
+			
 		if (window.SpeechRecognition === null) {
 	        	ws.alert.top({mensagem:"Falha ao iniciar módulo de voz,<a id='TopAlertAtivarVoz'><b>Tentar novamente</b></a>", clickclose:true, height:20, timer:7000, posFn:function(){ $("#TopAlertAtivarVoz").bind("click tap press",function(){wsAssistent.init();}) },styleText:"color:#FFF",background:"#d60000",bottomColor:"#000"});
 	    }else{
@@ -59,14 +44,13 @@ wsAssistent = {
 	    		recognizer.lang					= "pt-BR";
 				recognizer.continuous			= true;
 				recognizer.interimResults		= true;
-
 				recognizer.onstart = function() {
-	        		console.log("Dolly started");
+	        		//console.log("Dolly started");
 				};
 				recognizer.onresult = function(event){
 					for (var i = event.resultIndex; i < event.results.length; i++) {
 						var frase = event.results[i][0].transcript.trim().toLowerCase();
-						console.log(frase)
+						//console.log(frase)
 						responsiveVoice.cancel();
 						 if(event.results[i].isFinal){
 							responsiveVoice.cancel();
@@ -78,14 +62,14 @@ wsAssistent = {
 				  console.log("Error"+e);
 				};
 				recognizer.onend = function() {
-					console.log("Dolly stoped");
+					//console.log("Dolly stoped");
 					setTimeout(function(){ recognizer.start();},2000);
 				};
-
+				$( "#dolly" ).show();
 				responsiveVoice.setDefaultVoice("Brazilian Portuguese Female");
 	        	recognizer.start();
 	        	wsAssistent.dragDolly();
-				wsAssistent.speak("Diga, DOLLY.",true,true);
+				wsAssistent.speak("DOLLY",true,true);
         }
 
 	},
@@ -148,7 +132,7 @@ wsAssistent = {
 
 $(document).ready(function(){
 	setTimeout(function(){
-		wsAssistent.init();
+	//	wsAssistent.init();
 	},2000)
 })
 

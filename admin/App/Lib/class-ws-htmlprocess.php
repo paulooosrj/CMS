@@ -507,10 +507,12 @@ class htmlProcess{
 				#caso queira retornar algo pelo PHP 
 				if(substr($value,0,6)=="return" ){ $value = eval(trim($value.';'));}
 				#para posicionar o slug antes de tudo (pra captar outros dados antes de processar)
-				if($key=="slug" && $FirstSlug==""){ 
-					$FirstSlug =  (is_numeric($value)) ? $key.'('.$value.')->' : $key.'("'.$value.'")->';
-				}else{ 
-					$classReturn[] = (is_numeric($value) || $key=="paginate") ? $key.'((int)'.$value.')' : $key.'("'.$value.'")';					
+				if($value!=""){
+					if($key=="slug" && $FirstSlug==""){ 
+						$FirstSlug =  (is_numeric($value) || is_int($value)) ? $key.'('.$value.')->' : $key.'("'.$value.'")->';
+					}else{ 
+						$classReturn[] = ((is_numeric($value) || is_int($value)) || $key=="paginate") ? $key.'((int)'.$value.')' : $key.'("'.$value.'")';					
+					}
 				}
 			}
 		}

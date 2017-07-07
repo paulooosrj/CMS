@@ -61,6 +61,8 @@
 ###############################################################################################################
 ####################################### 	LINK DE INCLUDE DO ARQUIVO COM A URL 	###########################
 ###############################################################################################################
+	CreateTableIfNotExist('ws_dolly_questoes');
+		add_if_not_exist('ws_dolly_questoes',			'questao',		'varchar(500) 		NULL DEFAULT ""');
 
 	CreateTableIfNotExist('ws_dolly_dicionario');
 		add_if_not_exist('ws_dolly_dicionario',			'palavra',		'varchar(200) 		NULL DEFAULT ""');
