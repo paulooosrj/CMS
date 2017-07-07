@@ -21,7 +21,7 @@ wsAssistent = {
 				url: "/admin/App/Core/ws-speak.php",
 				data:fn,
 			}).done(function(data){
-				console.log(data);
+				// console.log(data);
 				eval(data);
 			})
 		}
@@ -36,7 +36,7 @@ wsAssistent = {
 			type 		: 'POST',
 			data 		: {search:text},
 			success: function(data, status, jqXHR) {
-				console.log(data)
+				// console.log(data)
 				eval(data)
 			}
 		})

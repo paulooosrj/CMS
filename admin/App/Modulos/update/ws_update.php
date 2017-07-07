@@ -68,16 +68,20 @@
 		add_if_not_exist('ws_dolly_dicionario',			'curto',		'varchar(500) 		NULL DEFAULT ""');
 		add_if_not_exist('ws_dolly_dicionario',			'longo',		'TEXT 				NULL DEFAULT ""');
 
+
 	CreateTableIfNotExist('ws_dolly_fn');
 		add_if_not_exist('ws_dolly_fn',			'titulo',			'varchar(500) 		NULL DEFAULT ""');
 		add_if_not_exist("ws_dolly_fn",			'descricao',		'varchar(500) 		NULL DEFAULT ""');
 		add_if_not_exist("ws_dolly_fn",			'codigo',			'TEXT 				NULL DEFAULT ""');
 		add_if_not_exist("ws_dolly_fn",			'acao',				'varchar(500) 		NULL DEFAULT ""');
 		add_if_not_exist("ws_dolly_fn",			'local',			'varchar(500) 		NULL DEFAULT ""');
-		add_if_not_exist("ws_dolly_fn",			'regex',			'varchar(500) 		NULL DEFAULT ""');
+		add_if_not_exist("ws_dolly_fn",			'parametros',		'varchar(500) 		NULL DEFAULT ""');
 		add_if_not_exist("ws_dolly_fn",			'confirma',			'varchar(500) 		NULL DEFAULT ""');
 		add_if_not_exist("ws_dolly_fn",			'sucesso',			'varchar(500) 		NULL DEFAULT ""');
 		add_if_not_exist("ws_dolly_fn",			'erro',				'varchar(500) 		NULL DEFAULT ""');
+		add_if_not_exist("ws_dolly_fn",			'desconexo',		'varchar(500) 		NULL DEFAULT ""');
+
+
 
 ###############################################################################################################
 ####################################### 	LINK DE INCLUDE DO ARQUIVO COM A URL 	###########################
