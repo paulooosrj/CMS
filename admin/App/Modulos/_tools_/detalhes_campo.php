@@ -60,7 +60,7 @@
 	$setupdata->set_limit(1);
 	$setupdata->debug(0);
 	$setupdata->select();
-	$setupdata = $setupdata->fetch_array[0];
+	$setupdata = @$setupdata->fetch_array[0];
 	
 	
 	$CAMPOS = PREFIX_TABLES . '_model_campos';
@@ -69,7 +69,7 @@
 	$CAMPO->set_where('token="' . $_POST['token'] . '"');
 	$CAMPO->select();
 	$CAMPO = $CAMPO->fetch_array[0];
-	
+
 	##########################################################################  
 	# MONTAMOS A CLASSE DOS TEMPLATES 
 	##########################################################################
@@ -230,7 +230,8 @@
 		$grupos[] = $grupo['coluna_mysql'];
 	}
 	$template->CHECK_GROUP = '"' . implode($grupos, '","') . '"';
-	
+
+
 	$FERRAMENTA = new MySQL();
 	$FERRAMENTA->set_table(PREFIX_TABLES . 'ws_ferramentas');
 	$FERRAMENTA->set_where('App_Type="1"');

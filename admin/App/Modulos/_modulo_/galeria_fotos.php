@@ -22,7 +22,7 @@
 	@define("ID_ITEM"			,$_GET['id_item']);
 	@define("BACK"				,$_GET['back']);
 	@define("TOKEN_GROUP"		,$_GET['token_group']);
-	@define("PATCH"				,$_SESSION['PATCH']);
+	@define("PATCH"				,'App/Modulos/_modulo_');
 
 ##################################################################################
 # PESQUISA NA BASE DE DADOS AS IMAGENS DA GALERIA

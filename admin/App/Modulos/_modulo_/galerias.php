@@ -13,13 +13,14 @@
 # DELETA O CACHE INTERNO E CRIA UM RASCUNHO DO ÍTEM
 ##################################################################################
 	clearstatcache();
-	criaRascunho($_SESSION['ws_id_ferramenta'],$_GET['id_item']);
-
+	criaRascunho($_GET['ws_id_ferramenta'],$_GET['id_item']);
 ##################################################################################
 # DEFINE VARIAVEIS GET 
 ##################################################################################
 
-	if(empty($_GET['id_cat'])){$_GET['id_cat']=0;}
+	if(empty($_GET['id_cat'])){
+		$_GET['id_cat']=0;
+	}
 
 
 ##################################################################################
@@ -41,10 +42,10 @@
 	}
 
 	$_SET_TEMPLATE_INPUT->TOKEN_GROUP 			= TOKEN_GROUP;
-	$_SET_TEMPLATE_INPUT->_TITULO_FERRAMENTA_ 	= $_SESSION['_TITULO_FERRAMENTA_'];
-	$_SET_TEMPLATE_INPUT->PATCH 				= $_SESSION['PATCH'];
+	$_SET_TEMPLATE_INPUT->_TITULO_FERRAMENTA_ 	= "Galerias de fotos";//$_SESSION['_TITULO_FERRAMENTA_'];
+	$_SET_TEMPLATE_INPUT->PATCH 				= 'App/Modulos/_modulo_';
 	$_SET_TEMPLATE_INPUT->ID_ITEM 				= ID_ITEM;
-	$_SET_TEMPLATE_INPUT->WS_ID_FERRAMENTA 		= $_SESSION['ws_id_ferramenta'];
+	$_SET_TEMPLATE_INPUT->WS_ID_FERRAMENTA 		= $_GET['ws_id_ferramenta'];
 	$_SET_TEMPLATE_INPUT->BACK 					= $_GET['back'];
 
 
@@ -56,6 +57,11 @@
 	$draft->set_where('ws_draft="1"');
 	$draft->set_where('AND ws_id_draft="'.$_GET['id_item'].'"');
 	$draft->select();
+
+
+
+
+
 	$s 					= new MySQL();
 	$s->set_table(PREFIX_TABLES.'_model_gal');
 	$s->set_order('posicao','ASC');
@@ -74,7 +80,7 @@
 	foreach($s->fetch_array as $img){ 
 		$_SET_TEMPLATE_INPUT->ID_GAL 	= $img['id'];
 		$_SET_TEMPLATE_INPUT->AVATAR	= $img['avatar'];
-		$_SET_TEMPLATE_INPUT->PATCH 	= $_SESSION['PATCH'];
+		$_SET_TEMPLATE_INPUT->PATCH 	= 'App/Modulos/_modulo_';
 		$_SET_TEMPLATE_INPUT->ID_ITEM 	= $_GET['id_item'];
 		$_SET_TEMPLATE_INPUT->block("BLOCK_GALERIA");
 	 }

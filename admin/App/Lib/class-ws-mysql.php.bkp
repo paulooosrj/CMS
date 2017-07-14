@@ -4,6 +4,7 @@ class MySQL {
 				$this->like					=(object) array();
 				$this->InsertVars			=array();
 				$this->Insert_like			=array();
+				$this->Insert_like_AndOr	= " OR ";
 				$this->Insert_Update		=array();
 				$this->fetch_array			=array();
 				$this->obj					=array();
@@ -29,7 +30,7 @@ class MySQL {
 				$this->slug 				=null;
 				$this->galeria				=null;
 				$this->settable				=null;
-				$this->tabletoll			=null;
+				$this->tabletool			=null;
 				$this->setwhere 			=null;
 				$this->where_item 			=null;
 				$this->table 				=null;
@@ -72,7 +73,7 @@ class MySQL {
 				}else{
 					$this->colum = $this->setcolum;
 				}
-				if($this->colum==""){$this->colum="*";}
+				if($this->colum=="" && $this->DISTINCT==""){$this->colum="*";}
 			}
 			public function set_table($TABLES)  {
 				if(empty($this->settable) || $this->settable==null ){$this->settable = array();}
@@ -136,8 +137,11 @@ class MySQL {
 			public function url($var){		$this->url=$var;		}
 			public function slashes($var){	$this->slashes=$var;	}
 			public function on_duplicate($dados){$this->on_duplicate=' ON DUPLICATE KEY UPDATE '.$dados.' ';}
-			public function distinct() {$this->DISTINCT=' DISTINCT ';}
+			public function distinct($colunm="*") {$this->DISTINCT=' DISTINCT '.$colunm.' ';}
 			public function join($join="LEFT", $tabela, $on){ $this->rell .=$join.' JOIN '.$tabela.' ON '.$on;}
+			public function likeAndOr($value){
+				$this->Insert_like_AndOr = ' '.$value.' ';
+			}
 			public function like ($coluna, $palavra_chave){
 				global $_conectMySQLi_;
 				array_push ($this->Insert_like , ' LOWER('.$coluna.') LIKE  "'.$palavra_chave.'"' );
@@ -301,10 +305,22 @@ class MySQL {
 				global $_conectMySQLi_;
 				$this->query ='SELECT ';				
 				if(!empty($this->DISTINCT))	{$this->query .= $this->DISTINCT;}
-				if(!empty($this->colum))	{$this->query .= $this->colum;}else{$this->query .=' * ';} 	$this->query .= ' FROM ';
+
+			//	if(!empty($this->colum))	{
+				$this->query .= $this->colum;
+			//	}else{if($this->DISTINCT=="")	{$this->query .=' * ';}} 	
+
+				$this->query .= ' FROM ';
 				if($this->table!=null)	{$this->query .= $this->table;}
 				if(!empty($this->rell) && !empty($this->rell)){ $this->query .= $this->rell.'  ';}
-				if(count($this->Insert_like)>0){$array_like = implode(' OR ',$this->Insert_like) ;}else{$array_like = "";}
+
+				if(count($this->Insert_like)>0){
+
+						$array_like = implode($this->Insert_like_AndOr,$this->Insert_like) ;
+
+				}else{
+					$array_like = "";
+				}
 				if( $this->where!=""  ||  (count($this->Insert_like) > 0 ))	{
 					if($this->where!="" && $array_like!="" ){$this->where = $this->where." AND ";}
 					if($this->set_where_not_exist==true){$not=" NOT EXISTS ";}else{$not="";}
@@ -411,12 +427,12 @@ class MySQL {
 				$this->query='DELETE FROM ';
 				if(!empty($this->table))	{$this->query .= $this->table;}else{exit;}
 				if(!empty($this->where))	{$this->query .= ' WHERE ('.$this->where.')';}else{exit;}
+
 				if($this->debug==true)	{
 					if(mysqli_query($_conectMySQLi_,$this->query) or trigger_error(mysqli_error($_conectMySQLi_))){return true;}
 				}else{
 					if(@mysqli_query($_conectMySQLi_,$this->query)){return true;}
 				}
-				echo $this->query;
 			}
 	}
 

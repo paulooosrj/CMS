@@ -67,7 +67,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_modulo_/fotos.min.css',
 	 });
 
 	$("#bt_Back_Gal").unbind('click').click(function(){
-		$("#conteudo").load("./{PATCH}/galerias.php?token_group={TOKEN_GROUP}&ws_id_ferramenta={WS_ID_FERRAMENTA}&back={BACK}&id_item={ID_ITEM}&function=null");
+		$("#conteudo").load("/admin/{PATCH}/galerias.php?token_group={TOKEN_GROUP}&ws_id_ferramenta={WS_ID_FERRAMENTA}&back={BACK}&id_item={ID_ITEM}&function=null");
 	})
 
 
