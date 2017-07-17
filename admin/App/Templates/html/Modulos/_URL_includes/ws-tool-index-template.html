@@ -111,6 +111,14 @@ function reloadFunctions(){
 							timer: 3000,
 							type: 3,
 						})
+					}else{
+						TopAlert({
+							mensagem: data,
+							clickclose: true,
+							height: 20,
+							timer: 3000,
+							type: 2,
+						})
 					}
 					$("#ws_confirm").css("line-height","20px");
 					$("#ws_confirm").remove();

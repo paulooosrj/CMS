@@ -64,14 +64,14 @@ function salvaInclude(){
 	$Other->set_where('AND file="'.$file.'"');
 	$Other->select();
 
-	$Atual_Igual_Novo 			= $File_atual->fetch_array[0]['file']==$file;
-	$Se_file_BD_existe 			= file_exists('./../../../'.$File_atual->fetch_array[0]['file']);
-	$Se_novo_file_existe 		= file_exists('./../../../'.$file);
+	$Atual_Igual_Novo 			= ($File_atual->fetch_array[0]['file']==$file) 							? true : false;
+	$Se_file_BD_existe 			= (file_exists(ROOT_WEBSITE.'/'.$File_atual->fetch_array[0]['file'])) 	? true : false;
+	$Se_novo_file_existe 		= (file_exists(ROOT_WEBSITE.'/'.$file)) 								? true : false;
 	$Registro_Em_Outros_Tools 	= $Other->_num_rows >=1;
 	$registro_atual_vaziu 		= $File_atual->fetch_array[0]['file']=="";
 
-	if(!$registro_atual_vaziu && !$se_novo_file_existe && $Se_file_BD_existe && !$Registro_Em_Outros_Tools && !$Atual_Igual_Novo &&    $info=="renomear"){
-			if(rename('./../../../'.$File_atual->fetch_array[0]['file'],'./../../../'.$file)){
+	if(!$registro_atual_vaziu && !$Se_novo_file_existe && $Se_file_BD_existe && !$Registro_Em_Outros_Tools && !$Atual_Igual_Novo &&    $info=="renomear"){
+			if(rename(ROOT_WEBSITE.'/'.$File_atual->fetch_array[0]['file'],ROOT_WEBSITE.'/'.$file)){
 				$NewPage 					= new MySQL();
 				$NewPage->set_table(PREFIX_TABLES.'ws_pages');
 				$NewPage->set_where('id="'.$id_include.'"');
@@ -80,8 +80,8 @@ function salvaInclude(){
 				echo "sucesso";exit;
 			};
 
-		}elseif((!$Se_file_BD_existe || $registro_atual_vaziu) && !$se_novo_file_existe && !$Registro_Em_Outros_Tools  &&    $info=="renomear"){
-			if(file_put_contents('./../../../'.$file,'<?'.PHP_EOL.'# WebSheep;'.PHP_EOL.'# Novo arquivo;'.PHP_EOL.'?>')){
+		}elseif((!$Se_file_BD_existe || $registro_atual_vaziu) && !$Se_novo_file_existe && !$Registro_Em_Outros_Tools  &&    $info=="renomear"){
+			if(file_put_contents(ROOT_WEBSITE.'/'.$file,'<?'.PHP_EOL.'# WebSheep;'.PHP_EOL.'# Novo arquivo;'.PHP_EOL.'?>')){
 				$NewPage 					= new MySQL();
 				$NewPage->set_table(PREFIX_TABLES.'ws_pages');
 				$NewPage->set_where('id="'.$id_include.'"');
@@ -90,7 +90,7 @@ function salvaInclude(){
 				echo "sucesso";exit;
 			};
 	}elseif($Registro_Em_Outros_Tools &&  $info=="bd"){
-			echo "OPA! Já existe um registro com esse nome no servidor";exit;
+			echo ws::getlang('urlIncludes>modal>save>serverExists');
 	}elseif(!$Registro_Em_Outros_Tools &&  $info=="bd"){
 				$NewPage 					= new MySQL();
 				$NewPage->set_table(PREFIX_TABLES.'ws_pages');
@@ -99,7 +99,7 @@ function salvaInclude(){
 				$NewPage->salvar();
 				echo "sucesso";exit;
 	}elseif($Se_novo_file_existe || $Registro_Em_Outros_Tools){
-			echo "OPA! Já existe um arquivo com esse nome no servidor OU em outra ferramenta";exit;
+			echo ws::getlang('urlIncludes>modal>save>toolExists');
 	}
 }
 

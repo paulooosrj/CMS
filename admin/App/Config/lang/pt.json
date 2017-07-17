@@ -357,6 +357,8 @@
 				"likeToDoWhat": "Você gostaria de fazero que?",
 				"recordInTheDatabase": "Apenas alterar o registro na base de dados",
 				"renameFileAndCreate": "Renomear o arquivo, se não existir, cria",
+				"serverExists": "OPA! Já existe um registro com esse nome no servidor",
+				"toolExists": "OPA! Já existe um arquivo com esse nome no servidor OU em outra ferramenta",
 				"process": "Processar",
 				"cancel": "Cancelar",
 				"sucess": "Arquivo salvo com sucesso!",
