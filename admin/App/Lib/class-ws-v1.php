@@ -537,16 +537,20 @@
 			}
 			return implode('/', $parts);
 		}
-		static function urlPath($node = null, $debug = true) {
-			if (substr($_SERVER['REQUEST_URI'], 0, 1) == '/')
-				$_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], 1, strlen($_SERVER['REQUEST_URI']));
+		static function urlPath($node = null, $debug = true,$type="string") {
+
+			if (substr($_SERVER['REQUEST_URI'], 0, 1) == '/'){$_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], 1, strlen($_SERVER['REQUEST_URI']));}
 			if (is_string($node)) {
 				_erro(ws::GetDebugError(debug_backtrace(), "Erro: Isso não é um número ->	ws::urlPath('" . $node . "')"));
 				exit;
 			} elseif ($node == null && $node == 0) {
 				$REQUEST_URL = explode('?', $_SERVER['REQUEST_URI']);
 				$url         = $REQUEST_URL[0];
-				return $url;
+				if($type=='string'){return $url;}
+				if($type=='array'){
+					$url = explode('/',$url);
+					return $url;
+				}
 				exit;
 			} else {
 				$REQUEST_URL = explode('?', $_SERVER['REQUEST_URI']);

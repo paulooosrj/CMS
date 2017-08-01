@@ -55,6 +55,7 @@
 	#	CASO ESTEJA LOGADO IMPORTAMOS O DESKTOP
 	############################################################################################################################
 		if( SECURE==FALSE ||  (!empty($_COOKIE['ws_log']) && $_COOKIE['ws_log']=='true') && (!empty($_SESSION) && @$_SESSION['ws_log']==true)){	
+			gzipWebsite();
 			include(ROOT_ADMIN.'/App/Core/ws-dashboard.php');exit;
 		}
 

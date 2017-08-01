@@ -11,6 +11,13 @@
 	Options -Indexes -MultiViews +FollowSymLinks 
 	RewriteEngine On
 
+
+
+##########################################################################################
+################################# 	ARQUIVOS COMPACTADOS		##########################
+##########################################################################################
+	RewriteCond %{REQUEST_FILENAME} -f
+
 ##########################################################################################
 ################################# 	ARQUIVOS DO SISTEMA		##############################
 ##########################################################################################	
@@ -31,6 +38,8 @@
 	RewriteCond %{REQUEST_FILENAME} !-l
 	RewriteRule ^ws-class.php$ 			/admin/App/Lib/class-ws-v1.php					[L]
 	RewriteRule ^ws-download-now/(.*)$ 	/admin/App/Core/ws-download-now.php?filename=$1	[L]
+	RewriteRule ^ws-gz/(.*)$ 			/admin/App/Core/ws-gz.php?type=admin			[L]
+	RewriteRule ^ws-gzip/(.*)$ 			/admin/App/Core/ws-gz.php?type=website			[L]
 	RewriteRule ^ws-video/(.*)$ 		/admin/App/Core/ws-video.php 					[L]
 	RewriteRule ^ws-download/(.*)$ 		/admin/App/Core/ws-download.php 				[L]
 	RewriteRule ^ws-leads/(.*)$ 		/admin/App/Core/ws-leads.php 					[L]

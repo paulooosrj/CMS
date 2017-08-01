@@ -3,7 +3,6 @@
 	if(substr($_SERVER["DOCUMENT_ROOT"],-1)=='/'){$_SERVER["DOCUMENT_ROOT"]=substr($_SERVER["DOCUMENT_ROOT"],0,-1);}
 	include_once($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');	
 
-
 ######################################### tabelas basicas necessárias #################################
 
 	$tabelas = array();
@@ -30,7 +29,13 @@
 	$RewriteRule[] 	= array('urlAmigavel'=>'^ws-img/(.*)$'				, 'filePath'=>'/admin/App/Core/ws-img.php'							, 'type'=>'system'	,'alias'=>'ws-img'					, 'title'=>'URL padrão para as imagens do sistema');     
 	$RewriteRule[] 	= array('urlAmigavel'=>'^ws-download-now/(.*)$'		, 'filePath'=>'/admin/App/Core/ws-download-now.php?filename=$1'		, 'type'=>'system'	,'alias'=>'ws-download-now'			, 'title'=>'URL padrão para download de arquivos');      
 	$RewriteRule[] 	= array('urlAmigavel'=>'^ws-rest/(.*)$'				, 'filePath'=>'/admin/App/Core/ws-rest.php?rest=$1'					, 'type'=>'system'	,'alias'=>'ws-rest'					, 'title'=>'URL padrão para requisições ao BD');      
+	$RewriteRule[] 	= array('urlAmigavel'=>'^ws-gz/(.*)$'				, 'filePath'=>'/admin/App/Core/ws-gz.php?type=admin'				, 'type'=>'system'	,'alias'=>'ws-gz'					, 'title'=>'Processa arquivos .gz');      
+	$RewriteRule[] 	= array('urlAmigavel'=>'^ws-gzip/(.*)$'				, 'filePath'=>'/admin/App/Core/ws-gz.php?type=website'				, 'type'=>'system'	,'alias'=>'ws-gzip'					, 'title'=>'Processa arquivos .gz no website');      
 	 			
+
+
+
+
 	############################################### SEPARA AS TABELAS EXISTENTES ###############################
 	$GLOBALS["ConfigSQL"] = "";
 

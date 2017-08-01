@@ -84,7 +84,6 @@
 	$template->urlIncludes_modal_save_rename_file_and_create 	= ws::getlang('urlIncludes>modal>save>renameFileAndCreate');
 	$template->urlIncludes_modal_save_process 					= ws::getlang('urlIncludes>modal>save>process');
 	$template->urlIncludes_modal_save_cancel 					= ws::getlang('urlIncludes>modal>save>cancel');
-
 	$template->urlIncludes_modal_save_sucess 					= ws::getlang('urlIncludes>modal>save>sucess'); 
 	$template->urlIncludes_modal_save_sure_to_save 				= ws::getlang('urlIncludes>modal>save>sureToSave');
 	$template->urlIncludes_modal_save_save 						= ws::getlang('urlIncludes>modal>save>save');

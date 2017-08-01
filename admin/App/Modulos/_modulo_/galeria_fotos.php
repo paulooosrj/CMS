@@ -64,3 +64,21 @@
 ##################################################################################
 	$_SET_TEMPLATE_INPUT->block("GALERIA_IMAGENS");
 	$_SET_TEMPLATE_INPUT->show();
+
+
+?>
+<script type="text/javascript">
+var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+copyTextareaBtn.addEventListener('click', function(event) {
+  var copyTextarea = document.querySelector('.js-copytextarea');
+  copyTextarea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+});
