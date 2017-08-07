@@ -38,6 +38,7 @@
 	$_INNER_IMG				= new MySQL();
 	$_INNER_IMG->set_table(PREFIX_TABLES."_model_img");
 	$_INNER_IMG->set_where('ws_draft="0"');
+	$_INNER_IMG->set_where('AND ws_id_ferramenta="'.$_GET['ws_id_ferramenta'].'"');
 	$_INNER_IMG->set_where('AND id_item="'.$_GET['id_item'].'"');
 	$_INNER_IMG->select();
 
@@ -47,6 +48,7 @@
 	$_RASCUNHO_IMG				= new MySQL();
 	$_RASCUNHO_IMG->set_table(PREFIX_TABLES."_model_img");
 	$_RASCUNHO_IMG->set_where('ws_draft="1"');
+	$_RASCUNHO_IMG->set_where('AND ws_id_ferramenta="'.$_GET['ws_id_ferramenta'].'"');
 	$_RASCUNHO_IMG->set_where('AND id_item="'.$_GET['id_item'].'"');
 	$_RASCUNHO_IMG->select();
 
@@ -93,7 +95,8 @@
 	##########################################################################################################
 	# PUXAMOS APENAS AS IMAGENS DO RASCUNHO
 	##########################################################################################################
-	$s->set_where(' id_item="'.$_GET['id_item'].'" ');
+	$s->set_where('id_item="'.$_GET['id_item'].'" ');
+	$s->set_where('AND ws_id_ferramenta="'.$_GET['ws_id_ferramenta'].'"');
 	$s->set_order('posicao','ASC');
 	$s->select();
 	#########################################################################################################

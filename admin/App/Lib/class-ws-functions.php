@@ -1130,7 +1130,6 @@ function aplicaRascunho($ws_id_ferramenta,$id_item,$apenasAplica=false){
 						$ExclIMGs->set_where('AND '.$ApenasAplicaQuery->obj[0]->count.'>0');
 					}
 					$ExclIMGs->exclui();
-
 				##########################################################################################################
 				# AGORA HABILITA COMO ORIGINAL OS REGISTROS DO RASCUNHO
 				##########################################################################################################
