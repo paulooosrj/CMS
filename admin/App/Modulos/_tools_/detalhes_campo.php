@@ -109,7 +109,10 @@
 	$template->CEP                 = $CAMPO['cep'];
 	$template->BAIRRO              = $CAMPO['bairro'];
 	$template->COLOR               = $CAMPO['color'];
-	$template->VALUES_OPT_CHECKBOX = ($CAMPO['values_opt'] == "on") ? "checked" : "";
+
+	$template->VALUES_OPT_CHECKBOX 			= ($CAMPO['values_opt'] == "1") 	? "checked" : "";
+	$template->VALUES_CHECKBOX_TOP_SUBTITLE = ($CAMPO['labelTop'] == "1") 		? "checked" : "";
+
 	$template->DISABLED            = ($CAMPO['disabled'] == "1") ? "checked" : "";
 	$template->PASSWORD            = ($CAMPO['password'] == "1") ? "checked" : "";
 	$template->NUMERICO            = ($CAMPO['numerico'] == "1") ? "checked" : "";
@@ -214,6 +217,7 @@
 	$template->FieldDetails_ColorPicker			= ws::getLang('ToolsManager>FieldDetails>ColorPicker');
 	$template->FieldDetails_ColorPickerName		= ws::getLang('ToolsManager>FieldDetails>ColorPickerName');
 	$template->FieldDetails_ColorPickerLabel	= ws::getLang('ToolsManager>FieldDetails>ColorPickerLabel');
+	$template->FieldDetails_EnableTopCaption	= ws::getLang('ToolsManager>FieldDetails>EnableTopCaption');
 	
 	################################################################	
 	############## END   TRANLATIONS ###############################
@@ -286,7 +290,6 @@
 	}
 	$template->RADIOBOX_INPUTS = (count($coluna_mysql_array) > 0) ? '"' . implode($coluna_radiobox_array, '","') . '"' : "";
 	
-	
 	####################################################################################
 	#	VERIFICAMOS O TIPO DO CAMPO E RETORNAMOS O HTML
 	####################################################################################
@@ -299,7 +302,7 @@
 	} elseif ($CAMPO['type'] == 'radiobox') {
 		$template->block('RADIOBOX');
 	} elseif ($CAMPO['type'] == 'editor') {
-		$template->block('EDITOR');
+		$template->block('INPUT_EDITOR');
 	} elseif ($CAMPO['type'] == 'check') {
 		$template->block('CHECKBOX');
 	} elseif ($CAMPO['type'] == 'selectbox') {
@@ -327,12 +330,13 @@
 		$template->block('PLAYER_MP3');
 	} elseif ($CAMPO['type'] == 'playerVideo') {
 		$template->block('PLAYER_VIDEO');
-	} elseif ($CAMPO['type'] == 'label') {
-		$template->block('LABEL');
-	} elseif ($CAMPO['type'] == 'colorpicker') {
+	}  elseif ($CAMPO['type'] == 'colorpicker') {
 		$template->block('COLOR_PICKER');
 	} elseif ($CAMPO['type'] == 'thumbmail') {
 		$template->block('THUMBNAIL');
+	}elseif ($CAMPO['type'] == 'label') {
+		$template->block('INPUT_LABEL');
+
 	}
 
 	##########################################################################  

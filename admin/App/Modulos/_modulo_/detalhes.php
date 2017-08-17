@@ -212,14 +212,21 @@
 	
 	$_IPUNT_CAMPOS = "";
 	foreach($campos->fetch_array as $k) {
+
+
 		//#####################################################################    BOTÃO LINK DE FERRAMENTA
 		if($k['type'] == 'link_tool' || $k['type'] == '_ferramenta_interna_') {
 			$_SET_TEMPLATE_INPUT = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			if($k['legenda'] != '') {
 				$_SET_TEMPLATE_INPUT->LEGENDA = 'legenda="' . $k['legenda'] . '"';
 			} else {
 				$_SET_TEMPLATE_INPUT->clear('LEGENDA');
 			}
+
+
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -234,6 +241,7 @@
 		}
 		//#####################################################################        iFrame
 		if($k['type'] == 'iframe') {
+
 			$camposArray = array();
 			foreach($campos->fetch_array as $campoMySQL) {
 				if($k['coluna_mysql'] != $campoMySQL['coluna_mysql'] && $campoMySQL['coluna_mysql'] != "") {
@@ -246,6 +254,8 @@
 			$camposArray[]                      = 'ws[item]=' . ID_ITEM;
 			$vars                               = implode($camposArray, '&');
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -261,6 +271,8 @@
 		//#####################################################################        Key Works
 		if($k['type'] == 'key_works') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -297,7 +309,10 @@
 		//#####################################################################        thumbmail
 		if($k['type'] == 'thumbmail') {
 			$recuow= 2; /* X */ $recuoh=-20; $margin = 3;
-			$_SET_TEMPLATE_INPUT         = new Template(TEMPLATE_INPUT_LINK, true);
+			$_SET_TEMPLATE_INPUT         = new Template(TEMPLATE_INPUT_LINK, true);			
+
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->TOKEN  = $k['token'];
 			$_SET_TEMPLATE_INPUT->MYSQL  = $k['coluna_mysql'];
 			$_SET_TEMPLATE_INPUT->WIDTH  = $k['largura'] - $recuow - $margin;
@@ -309,6 +324,8 @@
 		//#####################################################################        PLAYER MP3
 		if($k['type'] == 'playerMP3') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -348,6 +365,8 @@
 		//#####################################################################        PLAYER VIDEO
 		if($k['type'] == 'playerVideo') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -392,6 +411,8 @@
 		//#####################################################################        UPLOAD ARQUIVO
 		if($k['type'] == 'file') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -420,6 +441,8 @@
 		//#####################################################################        LABEL SIMPLES
 		if($k['type'] == 'label') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -432,6 +455,8 @@
 		//#####################################################################        ESPAÇO EM VAZIU
 		if($k['type'] == 'vazio') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -445,12 +470,16 @@
 		//##################################################################### QUEBRA DE LINHA
 		if($k['type'] == 'quebra') {
 			$_SET_TEMPLATE_INPUT = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->block("BLOCK_BR");
 			$_IPUNT_CAMPOS .= $_SET_TEMPLATE_INPUT->parse();
 		}
 		//#####################################################################SEPARADOR
 		if($k['type'] == 'separador') {
 			$_SET_TEMPLATE_INPUT        = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->LABEL = $k['label'];
 			$_SET_TEMPLATE_INPUT->block("BLOCK_SEPARADOR");
 			$_IPUNT_CAMPOS .= $_SET_TEMPLATE_INPUT->parse();
@@ -458,6 +487,8 @@
 		//#####################################################################COLORPICKER
 		if($k['type'] == 'colorpicker') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -480,6 +511,8 @@
 		//#####################################################################    INPUT TEXT
 		if($k['type'] == 'input') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -545,6 +578,8 @@
 		//#####################################################################    TEXTAREA
 		if($k['type'] == 'textarea') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->TOKEN         = _crypt();
@@ -590,6 +625,8 @@
 		//#####################################################################    SINTAXY
 		if($k['type'] == 'editor') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -610,6 +647,8 @@
 		//#####################################################################    BOTÃO ARQUIVOS INTERNOS
 		if($_FERRAMENTA_['_arquivos_'] == "1" && $k['type'] == 'bt_files') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -623,6 +662,8 @@
 		//#####################################################################    BOTÃO GALERIAS DE FOTOS
 		if($_FERRAMENTA_['_galerias_'] == "1" && $k['type'] == 'bt_galerias') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->GROUP       	= $_GET['token_group'];
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
@@ -636,6 +677,8 @@
 		//#####################################################################        BOTÃO DE FOTOS
 		if($_FERRAMENTA_['_fotos_'] == "1" && $k['type'] == 'bt_fotos') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->GROUP       	= $_GET['token_group'];
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
@@ -649,6 +692,8 @@
 		//#####################################################################            CHECK BOX
 		if($k['type'] == 'check') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -679,6 +724,8 @@
 		//#####################################################################        RADIO BOX
 		if($k['type'] == 'radiobox') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -706,6 +753,8 @@
 		//#####################################################################        SELECT BOX
 		if($k['type'] == 'selectbox') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -744,6 +793,8 @@
 		//#####################################################################        LINK TOOL
 		if($k['type'] == 'linkTool') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
@@ -797,6 +848,8 @@
 		//#####################################################################        MULTIPLOS SELECT BOX
 		if($k['type'] == 'multiple_select') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
+			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
+
 			$_SET_TEMPLATE_INPUT->ID_ITEM       = ID_ITEM;
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;

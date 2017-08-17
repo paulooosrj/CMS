@@ -6,7 +6,7 @@
 			<input type="hidden" name="type" 		value="{TYPE}">
 			<input type="hidden" name="ws_id_ferramenta" 	value="{WS_ID_FERRAMENTA}">
 			<div class="label_titulo">{FieldDetails_Description}:</div>
-			<div class="label">{FieldDetails_EnteringKeywords}.</div><hr>
+			<div class="label">{FieldDetails_EnteringKeywords}.</div><hr>		
 			<div class="c"></div>
 			<div class="label" style="width: 419px;  float: left;">{FieldDetails_ID}:</div>
 			<input style="width: 420px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
@@ -22,6 +22,12 @@
 			<div class="label">{FieldDetails_LegendBalloon}</div>
 			<div class="c"></div>
 			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
 		</form>
 	</div>
 	<script type="text/javascript">
@@ -65,7 +71,6 @@
 			<div class="c"></div>
 			<div class="label" style="width: 100%;  float: left;">{FieldDetails_ID}:</div>
 				<input style="width: 410px;padding: 10px 10px;float: left;margin-left: 10px;;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
-
 			<div class="label " style="position: relative;width:100%;float: left;">{FieldDetails_PlaceHolder}:</div>
 			<input name="place" class="inputText campo_clone" style="width: 410px;padding: 10px 10px;float: left;margin-left: 10px;" value="{PLACE}">
 			<div class="c"></div>
@@ -77,6 +82,10 @@
 			<div class="c"></div>
 			<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
 			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
 			<div class="c"></div>
 			<div class="label">{FieldDetails_FieldLabel}</div>
 			<input name="label" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL}">
@@ -91,10 +100,6 @@
 			<input name="caracteres" class="inputText" onkeypress='return soNum(event)' type="number" style="width: 125px;  padding: 10px 10px;" value="{CARACTERES}">
 			<input name="filtro" class="inputText" style="width:270px;padding: 10px 10px;" value="{FILTRO}" >
 			<div class="c"></div>
-
-
-
-			
 			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
 				<input {VALUES_OPT_CHECKBOX} name="values_opt" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
 				{FieldDetails_FieldAddress}.
@@ -202,8 +207,6 @@
 	</style>
 	<div class="bg01 corpo_detalhes_campo" style="overflow-x: hidden;height: 370px;width:calc(100% - 10px);height:100%;">
 		<form id="form_campo" style="padding-bottom: 10px;">
-
-
 			<div style="position: relative;left: 50%;transform: translateX(-50%);max-width: 500px;background-color: #FFF;padding: 10px;margin-bottom: -30px;margin-top: 5px;">
 				<input type="hidden" name="tabelaMySQL" 		value="{CAMPOS}">
 				<input type="hidden" name="token" 				value="{TOKEN}">
@@ -226,9 +229,10 @@
 				<div class="c"></div>
 				<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
 				<div class="c"></div>
-
 				<div class="label" style="float: left;">{FieldDetails_NameTableItems}:</div>
 				<div class="label" style="float: right;">{FieldDetails_MaxLenght}:</div>
+		
+
 				<div class="c"></div>
 				<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;width: 300px;float: left;" value="{LISTA_TABELA}">
 				<input name="caracteres" type="number"  	class="inputText" style="padding: 10px 8px;width: 80px;float: left;margin-left: 15px;" value="{CARACTERES_COUNT}">
@@ -256,6 +260,11 @@
 					</div>
 				</div>
 
+				<div class="c"></div>
+				<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+					<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+					{FieldDetails_EnableTopCaption}.
+				</label>
 
 				<div class="c"></div>
 				<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
@@ -360,6 +369,13 @@
 			<div class="c"></div>
 			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
 			<div class="c"></div>
+
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
+
 		</form>
 	</div>
 	<script type="text/javascript">
@@ -403,7 +419,7 @@
 	</script>
 <!-- END RADIOBOX -->
 
-<!-- BEGIN EDITOR -->
+<!-- BEGIN INPUT_EDITOR -->
 	<style type="text/css">
 		.text-core .text-wrap .text-dropdown.text-position-below {
 		    overflow: hidden!important;
@@ -450,6 +466,14 @@
 					<option value="xml">xml</option>
 				</select>
 			<div class="c"></div>
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
+
+
 		</form>
 	</div>
 	<script type="text/javascript">
@@ -480,7 +504,7 @@
 				}
 		})
 	</script>
-<!-- END EDITOR -->
+<!-- END INPUT_EDITOR -->
 
 <!-- BEGIN CHECKBOX -->
 	<div class="bg01 corpo_detalhes_campo" style="height: 400px;">
@@ -514,6 +538,15 @@
 			<div class="c"></div>
 			<input name="label" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL}">
 			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
+
+
+
+
 		</form>
 	</div>
 	<script type="text/javascript">
@@ -588,6 +621,15 @@
 			<div class="c"></div>
 			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
 			<div class="c"></div>
+
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
+
+
 		</form>
 	</div>
 	<script type="text/javascript">
@@ -641,10 +683,15 @@
 			<div class="c"></div>
 			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
 			<div class="c"></div>
+
 			<div class="label">{FieldDetails_SuperiorLabelSelec}</div>
 			<div class="c"></div>
 			<input name="labelSup" class="inputText campo_clone" style="padding: 10px 8px;" value="{LABEL_SUP}">
 			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
 
 			<div class="label">{FieldDetails_LegendBalloon}</div>
 			<div class="c"></div>
@@ -904,6 +951,8 @@
 			<input type="hidden" name="token" 		value="{TOKEN}">
 			<input type="hidden" name="type" 		value="{TYPE}">
 			<input type="hidden" name="ws_id_ferramenta" value="{WS_ID_FERRAMENTA}">
+
+
 			<div class="label_titulo">{FieldDetails_Description}:</div>
 			<div class="label">
 				{FieldDetails_FileButton1}.<br>{FieldDetails_FileButton2}.
@@ -949,11 +998,11 @@
 			</div>
 			<hr>
 			<div class="c"></div>
-			<div class="label" style="position: relative;width:402px;float: left;">{FieldDetails_Identifier}:</div>
-				<input style="width: 127px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
-			<div class="c"></div>
-			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_Label}:</div>
-			<input name="label" class="inputText campo_clone" style="width: 410px;  padding: 10px 10px;" value="{LABEL}">
+			<div class="label" style="position: relative;width:122px;float: left;">{FieldDetails_Identifier}:</div>
+			<div class="label" style="position: relative;width: 270px;float: left;">{FieldDetails_Label}:</div>
+
+			<input style="width: 127px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
+			<input name="label" class="inputText campo_clone" style="width: 300px;  padding: 10px 10px;" value="{LABEL}">
 			<div class="c"></div>
 			<div class="label">{FieldDetails_NameTableItems}:</div>
 			<div class="c"></div>
@@ -963,6 +1012,15 @@
 				<input {DOWNLOAD} name="download" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
 				{FieldDetails_FileAuthorized}.
 			</label>
+
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+			<div class="c"></div>
+
+			
 		</form>
 	</div>
 	<script type="text/javascript">
@@ -1000,6 +1058,11 @@
 			<input style="width: 127px;padding: 10px 10px;float: left;"  name="identificador" class="inputText campo_matriz" onkeypress='return soLetras(event)' value="{COLUNA_MYSQL}" legenda="{FieldDetails_UniqueIdentifier}">
 			<input name="values_opt" 	class="inputText" style="width: 294px ;  padding: 10px 10px;" value="{VALUES_OPT}">
 
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
 			<div class="label" style="position: relative;width: 420px;float: left;">{FieldDetails_Variable}:</div>
 			<div class="label" style="position: relative;width: 100%;float: left;  top: -13px;">
 				<label for="get"		 ><input type="radio" name="filtro" style="width: 21px;"	value="get" id="get">{FieldDetails_GET}</label>
@@ -1012,6 +1075,11 @@
 			<div class="c"></div>
 			<div class="label" style="position: relative;width: 420px;float: left;  margin-top: -20px;font-weight: bold;">{FieldDetails_HowIframe}:</div>
 			<div class="label comoficaiframe" style="position: relative;width: 408px;float: left;margin-top: -20px;"></div>
+
+
+
+			<div class="c"></div>
+
 		</form>
 		<script type="text/javascript">
 		$(function(){
@@ -1058,6 +1126,11 @@
 			<div class="c"></div>
 			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
 			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+
 		</form>
 	</div>
 	<script type="text/javascript">
@@ -1101,6 +1174,13 @@
 			<div class="label">{FieldDetails_NameTableItems}:</div>
 			<div class="c"></div>
 			<input name="listaTabela" class="inputText campo_clone" style="padding: 10px 8px;" value="{LISTA_TABELA}">
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+
+
 		</form>
 		<script type="text/javascript">
 		$(function(){
@@ -1123,7 +1203,7 @@
 	</div>
 <!-- END PLAYER_VIDEO -->
 
-<!-- BEGIN LABEL -->
+<!-- BEGIN INPUT_LABEL -->
 	<div class="bg01 corpo_detalhes_campo" style="height: 180px;">
 		<form id="form_campo" style="padding-bottom: 10px;">
 			<input type="hidden" name="tabelaMySQL" value="{CAMPOS}">
@@ -1140,7 +1220,7 @@
 			<input name="label" class="inputText" style="width: 430px;  padding: 10px 10px;" value="{LABEL}">
 		</form>
 	</div>
-<!-- END LABEL -->
+<!-- END INPUT_LABEL -->
 
 <!-- BEGIN COLOR_PICKER -->
 	<div class="bg01 corpo_detalhes_campo">
@@ -1177,6 +1257,13 @@
 			<div class="c"></div>
 			<input name="legenda" class="inputText" style="padding: 10px 8px;" value="{LEGENDA}" legenda="> {FieldDetails_LegendEqual} <">
 			<div class="c"></div>
+			<div class="c"></div>
+			<label class="label" style="cursor: pointer;position: relative;text-align: left;float: left;width: 401px;height: 13px;border-bottom: dotted 1px #4E5157 !important;">
+				<input {VALUES_CHECKBOX_TOP_SUBTITLE} name="labelTop" type="checkbox" style="float: left;width: 19px;height: 20px;margin: 10px;top: -11px;position: relative;">
+				{FieldDetails_EnableTopCaption}.
+			</label>
+
+
 		</form>
 	</div>
 	<script type="text/javascript">

@@ -1833,52 +1833,20 @@
 		$Salva->set_table(PREFIX_TABLES . '_model_campos');
 		$Salva->set_where('token="' . $inputs['token'] . '"');
 		
-		if (@$inputs['desabilitado'] == "on") {
-			$inputs['desabilitado'] = "1";
-		} else {
-			$inputs['desabilitado'] = "0";
-		}
-		if (@$inputs['numerico'] == "on") {
-			$inputs['numerico'] = "1";
-		} else {
-			$inputs['numerico'] = "0";
-		}
-		if (@$inputs['financeiro'] == "on") {
-			$inputs['financeiro'] = "1";
-		} else {
-			$inputs['financeiro'] = "0";
-		}
-		if (@$inputs['editor'] == "on") {
-			$inputs['editor'] = "1";
-		} else {
-			$inputs['editor'] = "0";
-		}
-		if (@$inputs['autosize'] == "on") {
-			$inputs['autosize'] = "1";
-		} else {
-			$inputs['autosize'] = "0";
-		}
-		if (@$inputs['upload'] == "on") {
-			$inputs['upload'] = "1";
-		} else {
-			$inputs['upload'] = "0";
-		}
-		if (@$inputs['calendario'] == "on") {
-			$inputs['calendario'] = "1";
-		} else {
-			$inputs['calendario'] = "0";
-		}
-		if (@$inputs['password'] == "on") {
-			$inputs['password'] = "1";
-		} else {
-			$inputs['password'] = "0";
-		}
-		if (@$inputs['download'] == "on") {
-			$inputs['download'] = "1";
-		} else {
-			$inputs['download'] = "0";
-		}
+
 		
+
+		$inputs['desabilitado'] = (@$inputs['desabilitado'] == "on") 	? '1' : "0";
+		$inputs['numerico'] 	= (@$inputs['numerico'] 	== "on") 	? '1' : "0";
+		$inputs['financeiro'] 	= (@$inputs['financeiro'] 	== "on") 	? '1' : "0";
+		$inputs['editor'] 		= (@$inputs['editor'] 		== "on") 	? '1' : "0";
+		$inputs['autosize'] 	= (@$inputs['autosize'] 	== "on") 	? '1' : "0";
+		$inputs['upload'] 		= (@$inputs['upload'] 		== "on") 	? '1' : "0";
+		$inputs['calendario'] 	= (@$inputs['calendario'] 	== "on") 	? '1' : "0";
+		$inputs['password'] 	= (@$inputs['password'] 	== "on") 	? '1' : "0";
+		$inputs['download'] 	= (@$inputs['download'] 	== "on") 	? '1' : "0";
+		$inputs['labelTop']		= (@$inputs['labelTop'] == "on") 		? '1' : "0";
+	
 		$Salva->set_update('id_campo', @$inputs['identificador']);
 		$Salva->set_update('name', @$inputs['identificador']);
 		$Salva->set_update('coluna_mysql', @$inputs['identificador']);
@@ -1911,24 +1879,30 @@
 		$Salva->set_update('labelSup', @$inputs['labelSup']);
 		$Salva->set_update('download', @$inputs['download']);
 		$Salva->set_update('multiple', @$inputs['multiple']);
+		$Salva->set_update('labelTop', @$inputs['labelTop']);
 		
 		
-		if (in_array($inputs['identificador'], $colunas) && $VerificaToken->fetch_array[0]['coluna_mysql'] == $inputs['identificador'] && $VerificaMySQL->_num_rows > 0) {
-			
-		} elseif (in_array($inputs['identificador'], $colunas) && $VerificaToken->fetch_array[0]['coluna_mysql'] == "") {
+		if (
+			in_array($inputs['identificador'], $colunas) && 
+			$VerificaToken->fetch_array[0]['coluna_mysql'] == $inputs['identificador'] &&
+			$VerificaMySQL->_num_rows > 0
+		){
+			// apenas salva com novos dados
+		} elseif (in_array($inputs['identificador'], $colunas) && $inputs['type']!="radiobox" && $VerificaToken->fetch_array[0]['coluna_mysql'] == "") {
+
 			echo json_encode(array(
-				'status' => false,
-				'response' => 'Ops! A coluna ' . $inputs['identificador'] . ' já existe em nosso sistema',
-				'id_campo' => null,
-				'token' => null
+				'status' 	=> false,
+				'response' 	=> 'Ops! A coluna '.str_replace($VerificaPrefix->fetch_array[0]['_prefix_'], "", $inputs['identificador']) . ' já existe em nosso sistema',
+				'id_campo' 	=> null,
+				'token' 	=> null
 			));
 			exit;
-		} elseif (in_array($inputs['identificador'], $colunas) && $VerificaMySQL->_num_rows > 0) {
+		} elseif (in_array($inputs['identificador'], $colunas) && $VerificaMySQL->_num_rows > 0 && $inputs['type']!="radiobox") {
 			echo json_encode(array(
-				'status' => false,
-				'response' => 'Ops! A coluna ' . $inputs['identificador'] . ' já existe em nosso sistema',
-				'id_campo' => null,
-				'token' => null
+				'status'	=> false,
+				'response'	=> 'Ops! A coluna ' . $inputs['identificador'] . ' já existe em nosso sistema',
+				'id_campo'	=> null,
+				'token'		=> null
 			));
 			exit;
 			
@@ -1962,7 +1936,7 @@
 			$t_ferramentas->salvar();
 			echo json_encode(array(
 				'status' => true,
-				'response' => 'Coluna ' . $inputs['identificador'] . ' salva com sucesso!',
+				'response' => 'Coluna ' .str_replace($VerificaPrefix->fetch_array[0]['_prefix_'], "", $inputs['identificador'])  . ' salva com sucesso!',
 				'id_campo' => $VerificaToken->fetch_array[0]['id_campo'],
 				'token' => $inputs['token']
 			));
@@ -1970,7 +1944,7 @@
 		} else {
 			echo json_encode(array(
 				'status' => false,
-				'response' => 'Ops! Houve um erro desconhecido ao salvar a coluna ' . $inputs['identificador'],
+				'response' => 'Ops! Houve um erro desconhecido ao salvar a coluna ' . str_replace($VerificaPrefix->fetch_array[0]['_prefix_'], "", $inputs['identificador']) ,
 				'id_campo' => null,
 				'token' => null
 			));

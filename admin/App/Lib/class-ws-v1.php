@@ -1559,7 +1559,6 @@
 			if (count($this->setcolum) == 0 && $this->thisType != "item") {
 				
 			} elseif (count($this->setcolum) > 0 && $this->thisType != "item") {
-				
 				$_busca_->set_colum($this->colum);
 			} else {
 				
@@ -1571,15 +1570,15 @@
 				if (count($this->setCat) >= 1) {
 					$_busca_->set_colum('DISTINCT(tabela_modelo.id) as id');
 				}
-				
-				
-				$_busca_->set_colum('tabela_modelo.id');
 				if ($this->thisType == "item") {
 					foreach ($this->setcolum as $value) {
 						$_busca_->set_colum($value);
 					}
 				}
+				
+				$_busca_->set_colum('tabela_modelo.id');
 				$_busca_->set_colum('tabela_modelo.token');
+				$_busca_->set_colum('tabela_modelo.ws_author');
 				$_busca_->set_colum('tabela_modelo.ws_id_ferramenta');
 				$_busca_->set_colum('tabela_modelo.ws_timespam');
 				foreach ($s->fetch_array as $value) {

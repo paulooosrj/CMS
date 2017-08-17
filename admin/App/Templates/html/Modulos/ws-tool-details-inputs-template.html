@@ -1,9 +1,12 @@
 <!-- BEGIN 	BLOCK_INPUT_IFRAME -->
 	<iframe class="iframe_adicional" width="{WIDTH}" name="{NAME}" id="{NAME}"  src="{VALUE_OPT}" width="{WIDTH_ADD}" height="{HEIGHT}" style="position: relative;float: left; border: solid 1px #CCC;margin: 3px;"></iframe>
 <!-- END 	BLOCK_INPUT_IFRAME -->
+
 <!-- BEGIN BLOCK_KEYWORKS_ADD -->
+
 	<div class="c"></div>
 	<div class="label_separados w1" style="margin-bottom: -17px;">{LABEL}</div>
+	
 	<div class="c"></div>
 	<textarea class="keyworks_adicional" id="{ID}" name="{ID}" style="position: absolute;width:990px;"></textarea>
 	<div class="c" style="padding: 6px;"></div>
@@ -47,7 +50,10 @@
 <!-- END BLOCK_PLAYER_MP3 -->
 <!-- BEGIN BLOCK_PLAYER_VIDEO -->
 	<div class="groupForm" style="height:auto; width:{WIDTH}px; position: relative; float: left;margin-right: 6px;">
-		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px;">{LABELSUP}</div>
+
+		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+	
+
 		<div class="playerVideoThumb" data-token="{TOKEN}" data-mysql="{MYSQL}" style="width:{WIDTH}px; height:{HEIGHT}px;" data-width="{WIDTH}" data-height="{HEIGHT}">
 			<div class="combo_upload">
 				<div class="insertLink" legenda="Inserir/Alterar link"><img src="/admin/App/Templates/img/websheep/iconLink.png" />
@@ -59,7 +65,9 @@
 <!-- END BLOCK_PLAYER_VIDEO -->
 <!-- BEGIN BLOCK_UPLOAD_FILE -->
 	<div class="model_file bg02" {LEGENDA} style="width:{WIDTH}px;">
+	
 		<div class="w1 label">{LABEL}</div>
+		
 		<div class="combo_bar bg04">
 			<div class="bar bg05"></div>
 		</div>
@@ -86,7 +94,9 @@
 <!-- END BLOCK_SEPARADOR -->
 <!-- BEGIN BLOCK_COLORPICKER -->
 	<div class="groupForm" style="height:auto; width:{WIDTH}px; position: relative; float: left;margin-right: 6px;">
-		<div class="label_input w1" style="height:36px;width: calc(100% - 24px);padding: 12px 10px;">{LABELSUP}</div>
+	
+		<div class="label_input w1" style="height:36px;width: calc(100% - 24px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		
 		<div class="input_colorpicker bg01" style="width:calc(100% - 26px);height:{HEIGHT}px;" {LEGENDA}>
 			<div class="colorpicker_geral" data-color="{COR}">
 				<div class="label w1">{LABEL}</div>
@@ -101,7 +111,10 @@
 <!-- BEGIN BLOCK_INPUT_TEXT -->
 
 	<div class="groupForm" style="height:auto; width:{WIDTH}px; position: relative; float: left;">
-		<div class="label_input w1" style="height:36px;width: calc(100% - 24px);padding: 12px 10px;">{LABELSUP}</div>
+	
+		<div class="label_input w1" style="height:36px;width: calc(100% - 24px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		
+
 		<div class="c"></div>
 		<input {FILTRO} {TYPE} {FINANCEIRO} {DISABLED} id="{ID}" {LEGENDA} class="inputText input_adicional" name="{NAME}" placeholder="{PLACE}" maxlength="{CARACTERES}" style="height:44px;width:calc({WIDTH}px - 3px);" value="{VALUE}"></input>
 		<!-- BEGIN 	GOOGLE_API_PLACE -->
@@ -184,7 +197,9 @@
 <!-- END BLOCK_INPUT_TEXT -->
 <!-- BEGIN BLOCK_TEXTAREA -->
 	<div class="groupForm" style="height:auto; width:{WIDTH}px; position: relative; float: left;margin-right: 6px;">
-		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px;">{LABELSUP}</div>
+	
+		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		
 		<div class="textarea_adicional" style="margin: 3px;position: relative;float: left;">
 			<textarea class="textarea_adicional" id="{ID}" data-editor="{EDITOR}" class="inputText input_adicional" name="{NAME}" placeholder="{PLACE}" style="height:{INPUT_HEIGHT}px;width:{INPUT_WIDTH}px;margin-top:0;"></textarea>
 		</div>
@@ -422,7 +437,9 @@
 <!-- END BLOCK_BOT_FOTOS -->
 <!-- BEGIN BLOCK_CHECKBOX -->
 	<div class="groupForm" style="height:auto; width:{WIDTH}px; position: relative; float: left;margin-right: 6px;">
-		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px;">{LABELSUP}</div>
+	
+			<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		
 		<label {LEGENDA} class="w1 class_check bg01" style="width:{WIDTH}px;">
 			<input {DISABLED} {CHECKED} value="{VALUE}" type="checkbox" id="{ID}" name="{NAME}"> {LABEL}
 		</label>
@@ -430,14 +447,18 @@
 <!-- END BLOCK_CHECKBOX -->
 <!-- BEGIN BLOCK_RADIOBOX -->
 	<div class="groupForm" style="height:auto; width:{WIDTH}px; position: relative; float: left;margin-right: 6px;">
-		<!-- <div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px;">{LABELSUP}</div> -->
+	
+		 <div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div> 
+		
 		<label {LEGENDA} class="w1 class_radio bg01" style="width:{WIDTH}px;">
 			<input {DISABLED} type="radio" name="{NAME}" value="{LABEL}" {CHECK}>{LABEL}</label>
 	</div>
 <!-- END BLOCK_RADIOBOX -->
 <!-- BEGIN BLOCK_SELECTBOX -->
 	<div class="groupForm" style="height:auto; width:{WIDTH}px; position: relative; float: left;margin-right: 6px;">
-		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px;">{LABELSUP}</div>
+	
+		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		
 		<div class="combo_selectbox" style="width:{WIDTH};height: 36px;background:rgba(0, 0, 0, 0.07);margin: 3px;position: relative;float: left;padding: 4px 0;">
 			<select {DISABLED} id="{ID}" name="{NAME}" data-id_campo="{ID}" class="textoarea_adicional selectbox_adicional" {LEGENDA} placeholder="{PLACE}" style="margin:3px;padding: 6px 0px;-webkit-border-radius: 5px;  -moz-border-radius: 5px;  border-radius: 5px;">
 				<option value="" disabled selected style="color:#CCC">{PLACE}</option>
@@ -454,7 +475,9 @@
 
 <!-- BEGIN BLOCK_SELECTBOX_LINK_TOOL -->
 	<div class="groupForm" style="height:auto; width:{WIDTH}px; position: relative; float: left;margin-right: 6px;">
-		<div class="label_input w1" style="height:36px;width: calc(100% - 20px);padding: 12px 10px;">{LABELSUP}</div>
+	
+		<div class="label_input w1" style="height:36px;width: calc(100% - 20px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		
 		<div class="combo_selectbox" style="width:{WIDTH};height: 36px;background:rgba(0, 0, 0, 0.07);margin: 3px;position: relative;float: left;padding: 4px 0;">
 			<select {DISABLED} id="{ID}" name="{NAMEOPT}" data-id_campo="{ID}" class="textoarea_adicional selectbox_adicional" {LEGENDA} placeholder="{PLACE}" style="margin:3px;padding: 6px 0px;-webkit-border-radius: 5px;  -moz-border-radius: 5px;border-radius: 5px;width: calc(100% - 10px);">
 				<option value="" disabled selected style="color:#CCC">{PLACE}</option>
@@ -473,7 +496,9 @@
 <!-- END BLOCK_SELECTBOX_TOOL_LINK -->
 <!-- BEGIN BLOCK_MULTIPLE_SELECTBOX -->
 	<div class="groupForm" style="height:auto; width:{WIDTH}px; position: relative; float: left;margin-right: 6px;">
-		<div class="label_input w1" style="height:36px;width: calc(100% - 24px);padding: 12px 10px;">{LABELSUP}</div>
+	
+		<div class="label_input w1" style="height:36px;width: calc(100% - 24px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		
 		<div class="multipleselect_box" style="width:{WIDTH}">
 			<select {DISABLED} id="{ID}" name="{ID}" data-id_campo="{ID}" class="textoarea_adicional selectbox_adicional multipleselect" placeholder="{PLACE}" style="width:{WIDTH_SELECT};margin: 10px;padding: 10px;-webkit-border-radius: 5px;  -moz-border-radius: 5px;  border-radius: 5px;" multiple>
 				<!-- BEGIN BLOCK_MULTIMPLE_SELECTBOX_OP -->

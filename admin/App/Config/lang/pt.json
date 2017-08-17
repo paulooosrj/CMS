@@ -724,7 +724,8 @@
 			"SimpleLabel": "Label simples de texto, perfeito para descrever algo ou algum campo",
 			"ColorPicker": "Este é um campo de colorpicker, onde o usuario poderá definir uma cor hexadecimal",
 			"ColorPickerName": "Título que irá na listagem dos ítens",
-			"ColorPickerLabel": "Label interno do colorpicker"
+			"ColorPickerLabel": "Label interno do colorpicker",
+			"EnableTopCaption": "Habilitar Label Superior"
 		}
 	},
 	"Leads" : {

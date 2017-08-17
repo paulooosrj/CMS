@@ -631,6 +631,7 @@
 	add_if_not_exist($tab."_campos",	'autosize' 			,			'BOOLEAN 				NOT NULL DEFAULT FALSE'	);
 	add_if_not_exist($tab."_campos",	'upload'			,			'BOOLEAN 				NOT NULL DEFAULT FALSE'	);
 	add_if_not_exist($tab."_campos",	'calendario'		,			'BOOLEAN 				NOT NULL DEFAULT FALSE'	);
+	add_if_not_exist($tab."_campos",	'labelTop'			,			'BOOLEAN 				NOT NULL DEFAULT TRUE'	);
 	add_if_not_exist($tab."_campos",	'styles' 			,			'varchar 	(300) 			NULL default ""'	);
 	add_if_not_exist($tab."_campos",	'label' 			,			'varchar 	(300) 			NULL default ""'	);
 	add_if_not_exist($tab."_campos",	'token' 			,			'varchar 	(300) 			NULL default ""'	);

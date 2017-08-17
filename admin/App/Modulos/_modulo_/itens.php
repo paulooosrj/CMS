@@ -251,10 +251,20 @@
 			########################################################################
 			# CASO SEJA LIMITADO A VISUALIZAÇÃO AOS POSTS DO USUARIO 
 			########################################################################
-			if($_SESSION['user']['edit_only_own']==1 && $item['ws_author']!=$_SESSION['user']['id']){
-				$_SET_TEMPLATE_INPUT->block("COMBO_EDIT_BLOCK");
-			}else{
+			// if($_SESSION['user']['edit_only_own']==1 && $item['ws_author']!=$_SESSION['user']['id']){
+
+			if(		
+
+				$_SESSION['user']['admin']==1 			|| 	
+
+				$_SESSION['user']['edit_only_own']== 0 	||
+
+				($_SESSION['user']['edit_only_own']==1 && $item['ws_author']==$_SESSION['user']['id'] )
+
+			){
 				$_SET_TEMPLATE_INPUT->block("COMBO_EDIT");
+			}else{
+				$_SET_TEMPLATE_INPUT->block("COMBO_EDIT_BLOCK");
 			}
 			########################################################################
 			# RETORNA A LINHA <TR> 
