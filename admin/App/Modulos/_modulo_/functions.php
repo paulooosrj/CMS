@@ -1133,9 +1133,9 @@
 			$avatar = '';
 		}
 		echo '<form id="form-img" id-img="' . $iDimg . '" >
-			<input 		id="titulo" 		name="titulo" 			class="inputText" value="' . $titulo . '" placeholder="Titulo da imagem" style="width: 488px;left: 0;">
+			<input 		id="titulo" 		name="titulo" 			class="inputText" value="' . $titulo . '" placeholder="Titulo da imagem" style="width: 488px;left: 0;padding: 10px;margin-bottom: 20px;">
 			<textarea 	id="textarea" 		name="descricao" 		class="inputText">' . stripslashes(urldecode($descricao)) . '</textarea>
-			<input 		id="url" 			name="url" 				class="inputText" value="' . $url . '"	placeholder="Link de Direcionamento">
+			<input 		id="url" 			name="url" 				class="inputText" value="' . $url . '"	placeholder="Link de Direcionamento" style="width: 488px;left: 0;padding: 10px;margin-top: 20px;">
 			</form>
 			<script>
 					CKEDITOR.replace( "textarea", {forcePasteAsPlainText	:true,fillEmptyBlocks:false,basicEntities:false,entities_greek:false, entities_latin:false, entities_additional:"",toolbarGroups: [{ name: "basicstyles" },{ name: "links" }]});

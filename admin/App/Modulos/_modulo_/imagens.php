@@ -66,7 +66,13 @@
 	# IMPORTAMOS A CLASSE DE TEMPLATE
 	##########################################################################################################
 	$TEMPLATE 						= new Template(ROOT_ADMIN."/App/Templates/html/Modulos/ws-tool-imagens-template.html", true);
-	$TEMPLATE->BACK 				= @$_GET['back'];
+
+	if(isset($_GET['back'])){
+		$TEMPLATE->BACK = '&back='.@$_GET['back'];
+	}else{
+		$TEMPLATE->clear("BACK");
+	}
+
 	$TEMPLATE->WS_ID_FERRAMENTA 	= $_FERRAMENTA['id'];
 	$TEMPLATE->TOKEN_GROUP			= $_GET['token_group'];
 	$TEMPLATE->ID_ITEM 				= $_GET['id_item'];
@@ -76,9 +82,7 @@
 	$TEMPLATE->PATH 				= 'App/Modulos/_modulo_';
 	$TEMPLATE->HTTPVARS				= http_build_query($_GET);
 
-
-
-	if(isset($_GET['ws_nivel']) && $_GET['ws_nivel']>0 ){ 
+	if(isset($_GET['ws_nivel']) && $_GET['ws_nivel']>-1 ){ 
 		$TEMPLATE->block('BOT_BACK');
 	}else{
 		$TEMPLATE->block('BOT_PUBLICAR');

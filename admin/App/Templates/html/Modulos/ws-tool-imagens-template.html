@@ -220,15 +220,13 @@ function reloadFunctions(){
 						type:2
 					})
 			}else{
-				$("#palco ul").prepend(e.responseText);
-				ordena_fotos_imgs();
-				reloadFunctions();
 				TopAlert({ 
 						mensagem:'Upload feito com sucesso!', 
 						height:20,
 						timer:5000,
 						type:3
 					})
+					$("#conteudo").load("/admin/App/Modulos/_modulo_/imagens.php?token_group={TOKEN_GROUP}&ws_id_ferramenta={WS_ID_FERRAMENTA}{BACK}&id_item={ID_ITEM}&ws_nivel={WS_NIVEL}&id_cat={ID_CAT}");
 			};
 		},
 		error:function(e){
