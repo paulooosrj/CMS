@@ -94,6 +94,7 @@
 	$template->ToolsManager_ToolDetails_label_list				=	ws::getLang("ToolsManager>ToolDetails>label>list");
 	$template->ToolsManager_ToolDetails_label_category			=	ws::getLang("ToolsManager>ToolDetails>label>category");
 	$template->ToolsManager_ToolDetails_columnsWillBeDisplayed	=	ws::getLang("ToolsManager>ToolDetails>columnsWillBeDisplayed");
+	$template->ToolsManager_ToolDetails_toolIsPartOfAPlugin		=	ws::getLang("ToolsManager>ToolDetails>toolIsPartOfAPlugin");
 	$template->ToolsManager_ToolDetails_AddJs_title				=	ws::getLang("ToolsManager>ToolDetails>AddJs>title");
 	$template->ToolsManager_ToolDetails_AddJs_opt1				=	ws::getLang("ToolsManager>ToolDetails>AddJs>opt1");
 	$template->ToolsManager_ToolDetails_AddJs_opt2				=	ws::getLang("ToolsManager>ToolDetails>AddJs>opt2");
@@ -111,6 +112,8 @@
 	$template->ToolsManager_ToolDetails_TopAlert_setMySQL		=	ws::getLang("ToolsManager>ToolDetails>TopAlert>setMySQL");
 	$template->ToolsManager_ToolDetails_modal_saving			=	ws::getLang("ToolsManager>ToolDetails>modal>saving");
 	$template->ToolsManager_ToolDetails_modal_save_sucess		=	ws::getLang("ToolsManager>ToolDetails>modal>save>sucess");
+	$template->_js_ 											=	stripcslashes($FERRAMENTA['_js_']);
+
 	$template->SLUG 											=	$FERRAMENTA['slug'];
 	$template->_prefix_ 										=	$FERRAMENTA['_prefix_'];
 	$template->_tit_menu_ 										=	$FERRAMENTA['_tit_menu_'];
@@ -122,7 +125,7 @@
 	$template->_exec_js_2 										=	$FERRAMENTA['_exec_js_']=="abrir" 	? "checked" :"" ;
 	$template->_exec_js_3 										=	$FERRAMENTA['_exec_js_']=="salvar" 	? "checked" :"" ;
 	$template->_exec_js_4 										=	$FERRAMENTA['_exec_js_']=="nada" 	? "checked" :"" ;
-	$template->_js_ 											=	stripcslashes($FERRAMENTA['_js_']);
+	$template->_plugin_ 										=	$FERRAMENTA['_plugin_'] =="1" 		? "checked" :"" ;
 
 	#####################################################  
 	# VERIFICAMOS SE EXISTE UM LINK DE RETORNO SETADO 

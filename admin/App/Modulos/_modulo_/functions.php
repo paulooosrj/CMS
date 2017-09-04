@@ -1138,7 +1138,19 @@
 			<input 		id="url" 			name="url" 				class="inputText" value="' . $url . '"	placeholder="Link de Direcionamento" style="width: 488px;left: 0;padding: 10px;margin-top: 20px;">
 			</form>
 			<script>
-					CKEDITOR.replace( "textarea", {forcePasteAsPlainText	:true,fillEmptyBlocks:false,basicEntities:false,entities_greek:false, entities_latin:false, entities_additional:"",toolbarGroups: [{ name: "basicstyles" },{ name: "links" }]});
+					CKEDITOR.replace( "textarea", {
+						forcePasteAsPlainText	:true,
+						fillEmptyBlocks:false,
+						basicEntities:false,
+						entities_greek:false, 
+						entities_latin:false, 
+						entities_additional:"",
+						enterMode: 2,
+						toolbarStartupExpanded: 0,
+						entities: 0,
+						forceSimpleAmpersand: 1,
+						allowedContent: true,
+						toolbarGroups: [{ name: "basicstyles" },{ name: "links" }]});
 					setTimeout(function(){$(".cke_button[title=\"Add ShortCode\"] .cke_button_label").show();},500)
 					reloadFunctions();
 					$("#checkbox_avatar").LegendaOver();

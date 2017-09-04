@@ -598,6 +598,14 @@
 			"saveTool": "Salvar ferramenta",
 			"toolType": "Tipo da ferramenta",
 			"columnsWillBeDisplayed": "Quais colunas serão exibidas na listagem dos itens?",
+
+
+
+			"toolIsPartOfAPlugin": "Essa ferramenta faz parte de um plugin",
+
+
+
+
 			"editButtom": "Editar os campos do Ítem",
 			"TopAlert": {
 				"setSlug": "Escreva um SLUG para esta feramenta",
@@ -619,7 +627,7 @@
 				"maxSelect": "Desculpe, escolha apenas 8 opções.    =("
 			},
 			"AddJs": {
-				"title": "Quais colunas serão exibidas na listagem dos itens?",
+				"title": "Javascript auxiliar",
 				"opt1": "Executar código ao abrir e ao salvar o ítem da ferramenta",
 				"opt2": "Executar código ao abrir um ítem da ferramenta",
 				"opt3": "Executar javscript ao salvar o item da ferramenta",

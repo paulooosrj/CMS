@@ -111,8 +111,10 @@
 */	
 	error_reporting(E_ALL) ;
 	$TYPE_SEND = $_POST;
+	$TYPE_SEND = $_REQUEST;
 
 	include($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
+
 
 	if(isset($TYPE_SEND['typeSend']) && $TYPE_SEND['typeSend']=='captcha'){
 		@session_name('_WS_');@session_id($_COOKIE['_WS_']);@session_start(); 
@@ -158,8 +160,11 @@
 	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 	header("Cache-Control: post-check=0, pre-check=0", false);
 	header("Pragma: no-cache");
+
 	$LeadsToken = strtolower(ws::urlPath(2));
-	$type_send = "ajax";
+	$type_send 	= "ajax";
+	parse_str($TYPE_SEND['form'],$TYPE_SEND);
+
 	if(isset($TYPE_SEND['typeSend'])){
 		$type_send=$TYPE_SEND['typeSend'];
 		unset($TYPE_SEND['typeSend']);
@@ -167,9 +172,9 @@
 
 	$_FORM = $TYPE_SEND;
 
-	#########################################################################################################################
-	######################################################################################################################### VERIFICA SE TEM ALGUM LEAD COM ESSE TOKEN
-	######################################################################################################################### E GRAVA OS DADOS NA VARIÁVEL
+	############################################################################################
+	############################################################################################ VERIFICA SE TEM ALGUM LEAD COM ESSE TOKEN
+	############################################################################################ E GRAVA OS DADOS NA VARIÁVEL
 
 	$s = new MySQL();
 	$s->set_table(PREFIX_TABLES.'ws_list_leads');
@@ -221,6 +226,7 @@ if($_LEAD->finalidade=='Apenas enviar email'){				goto enviaEmail;};
 if($_LEAD->finalidade=='Apenas gravar na base'){			goto gravaNaBase;};
 
 gravaNaBase:
+
 	$getPOSTs=array();
 	$local = new MySQL();
 	$local->set_table(PREFIX_TABLES.'wslead_'.$LeadsToken);
@@ -230,7 +236,11 @@ gravaNaBase:
 	$I 					= new MySQL();
 	$I->set_table(PREFIX_TABLES.'wslead_'.$LeadsToken);
 
+
+
+
 	foreach($getPOSTs as $coluna){
+
 		if(isset($_FORM[$coluna])){
 			$I->set_insert($coluna,$_FORM[$coluna]);
 		} }

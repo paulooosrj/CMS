@@ -741,7 +741,7 @@
 		$t_page->set_where('AND type="path"');
 		$t_page->select();
 		$formulario = "
-		<form id='form_new_name' style='width:500px'>
+		<form id='form_new_name' style='width:500px' data-idPage='".$_REQUEST['id']."'>
 			<div class='w1' style='text-aling:left'>".ws::getlang("pages>modalDetailsPage>title")."</div>
 			<input name='titulo_page' style='padding: 10px 20px;margin: 10px;width: calc(100% - 20px);' class='inputText' 	value='" . $t_page->fetch_array[0]['title'] . "'></input>
 			<div class='w1' style='text-aling:left'>Nome do arquivo:</div>
@@ -2648,6 +2648,7 @@
 		} else {
 			$_getInput['_menu_popup_'] = '1';
 		}
+
 		if (empty($_getInput['_keywords_'])) {
 			$_getInput['_keywords_'] = '0';
 		} else {
@@ -2678,10 +2679,17 @@
 		} else {
 			$_getInput['_rel_prod_cat_'] = '1';
 		}
+		
 		if (empty($_getInput['_esconde_topo_'])) {
 			$_getInput['_esconde_topo_'] = '0';
 		} else {
 			$_getInput['_esconde_topo_'] = '1';
+		}
+		
+		if (empty($_getInput['_plugin_'])) {
+			$_getInput['_plugin_'] = '0';
+		} else {
+			$_getInput['_plugin_'] = '1';
 		}
 		
 		$Salva->set_update('_grupo_pai_', 0);
@@ -2696,6 +2704,7 @@
 		// $Salva->set_update('avatar', $_getInput['identificadoravatar']);
 		$Salva->set_update('det_listagem_item', $_getInput['det_listagem_item']);
 		$Salva->set_update('_esconde_topo_', $_getInput['_esconde_topo_']);
+		$Salva->set_update('_plugin_', $_getInput['_plugin_']);
 		$Salva->set_update('slug', $_getInput['_slug_']);
 		$Salva->set_update('_exec_js_', $_getInput['_exec_js_']);
 		$Salva->set_update('_desc_', $_getInput['_desc_']);

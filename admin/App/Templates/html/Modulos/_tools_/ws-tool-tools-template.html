@@ -241,7 +241,9 @@
 		e.preventDefault();
 		var selecteds = $("input[type='checkbox']:checked").length;
 		if(selecteds==1){
+
 			$("input[type='checkbox']:checked").parent().parent().parent().parent().find(".exportar").click();
+
 		}else{
 			var ferramentas = new Array();
 			$("input[type='checkbox']:checked").parent().parent().parent().parent().each(function(index){ ferramentas.push($(this).data("id"));})
@@ -251,6 +253,7 @@
 				width:500,
 				newFun:function(){
 					var filename = $("#nameFileTool").val()+'.ws';
+
 					$.ajax({
 					  type: "POST",
 					  url: "/admin/App/Modulos/_tools_/functions.php",
@@ -303,13 +306,14 @@
 	})
 
 	$(".exportar").unbind('click').click(function(){
-			var li			= $(this).parent().parent().parent().parent().parent();
+			var li			= $(this).parent().parent().parent().parent();
 			var id			= $(li).data('id');
 			var NamePlugin	= $(li).find('.titulo').text().split(" ").join("_");
+
 			$.ajax({
 			  type: "POST",
 			  url: "/admin/App/Modulos/_tools_/functions.php",
-			  data: { function:"exportToolFile",id_tool:id}
+			  data: { "function":"exportToolFile","id_tool":id}
 			}).done(function(data) {
 					var pom = document.createElement('a');
 						pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + base64_encode(data));
@@ -322,7 +326,6 @@
 						pom.click().remove();
 					}
 			})
-
 })
 
 

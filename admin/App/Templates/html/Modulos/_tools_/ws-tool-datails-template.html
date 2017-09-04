@@ -45,8 +45,21 @@
 					<label style="text-align: left;"><input class="inputText _menu_popup_"	name="_niveis_"	type="radio" value="0" 	 {checked2} style="position: relative; width: 15px; height: 15px; top: 2px; ">{ToolsManager_ToolDetails_label_list}</label>
 					<label style="text-align: left;"><input class="inputText _menu_popup_"	name="_niveis_"	type="radio" value="1" 	 {checked3} style="position: relative; width: 15px; height: 15px; top: 2px; ">{ToolsManager_ToolDetails_label_category}</label>
 				</div>
+
 				<div class="c"></div>
-				<div class="label w1 _menu_popup_" style="width: 570px;">{ToolsManager_ToolDetails_columnsWillBeDisplayed}</div>
+
+
+
+
+
+				<div class="w1">
+					<label style="text-align: left;width: 50%;position: relative;float: left;padding: 20px 10px;;"><input class="inputText _menu_popup_"	name="_plugin_"	type="checkbox" {_plugin_} style="position: relative; width: 15px; height: 15px; top: 2px; ">{ToolsManager_ToolDetails_toolIsPartOfAPlugin}</label>
+				</div>
+
+
+
+				<div class="c"></div>
+				<div class="label w1 _menu_popup_" style="width: 570px;font-size:26px">{ToolsManager_ToolDetails_columnsWillBeDisplayed}</div>
 				<div class="c"></div>
 				<div id="camposTable">
 					<select id="InfoItemSelect" style="width: 580px;margin-left: 10px;" multiple>
@@ -56,7 +69,7 @@
 					</select>
 				</div>
 			<div class="c"></div>
-				<label class="label w1 _menu_popup_" style="width: 579px;font-size: 29px;">{ToolsManager_ToolDetails_AddJs_title}</label>
+				<label class="label w1 _menu_popup_" style="width: 579px;font-size:27px;">{ToolsManager_ToolDetails_AddJs_title}</label>
 				<label class="label w1 	_menu_popup_"><input style="width: auto;" name="_exec_js_" 	type="radio" value="osdois" {_exec_js_1} >{ToolsManager_ToolDetails_AddJs_opt1}</label>
 				<label class="label w1 	_menu_popup_"><input style="width: auto;" name="_exec_js_" 	type="radio" value="abrir" 	{_exec_js_2} >{ToolsManager_ToolDetails_AddJs_opt2}</label>
 				<label class="label w1 	_menu_popup_"><input style="width: auto;" name="_exec_js_" 	type="radio" value="salvar" {_exec_js_3} >{ToolsManager_ToolDetails_AddJs_opt3}</label>
@@ -67,6 +80,9 @@
 				<div class="c"></div>
 					<div id="editar_campos_item" class="botao _menu_popup_" style="position: relative;	width:520px;	text-align: center;padding: 20px;margin: 20px;float: left;margin-left: 20px;">{ToolsManager_ToolDetails_editButtom}</div>
 				<div class="c"></div>
+
+
+
 		</div>
 		</form>
 	</div>
