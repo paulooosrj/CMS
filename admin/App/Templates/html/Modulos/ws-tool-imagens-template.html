@@ -146,7 +146,7 @@ function reloadFunctions(){
 					vars:"iDimg="+iDimg+"&ws_id_ferramenta={WS_ID_FERRAMENTA}&id_item={ID_ITEM}",
 					Sucess:function(e){
 						$(Div).remove();
-						$("#conteudo").load("/admin/App/Modulos/_modulo_/imagens.php?token_group={TOKEN_GROUP}&ws_id_ferramenta={WS_ID_FERRAMENTA}&back={BACK}&id_item={ID_ITEM}&ws_nivel={WS_NIVEL}&id_cat={ID_CAT}");
+						$("#conteudo").load("./{PATH}/imagens.php?{HTTPVARS}")
 					}
 				});
 			}
@@ -226,7 +226,8 @@ function reloadFunctions(){
 						timer:5000,
 						type:3
 					})
-					$("#conteudo").load("/admin/App/Modulos/_modulo_/imagens.php?token_group={TOKEN_GROUP}&ws_id_ferramenta={WS_ID_FERRAMENTA}{BACK}&id_item={ID_ITEM}&ws_nivel={WS_NIVEL}&id_cat={ID_CAT}");
+					$("#conteudo").load("./{PATH}/imagens.php?{HTTPVARS}")
+					//$("#conteudo").load("/admin/App/Modulos/_modulo_/imagens.php?token_group={TOKEN_GROUP}&ws_id_ferramenta={WS_ID_FERRAMENTA}{BACK}&id_item={ID_ITEM}&ws_nivel={ID_NIVEL}&id_cat={ID_CAT}");
 			};
 		},
 		error:function(e){

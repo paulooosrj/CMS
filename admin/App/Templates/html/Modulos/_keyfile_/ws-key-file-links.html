@@ -82,7 +82,7 @@ function reloadFunctions(){
 								if(e=="falha"){
 									TopAlert({mensagem: "{keyFile_links_failCreateLink}",type:2})
 								}else{
-									TopAlert({mensagem: "{keyFile_links_sucessCreateLink}",type:3})
+									TopAlert({mensagem: "{keyFile_links_topAlert_sucessCreateLink}",type:3})
 									$(".AlinkAccessKey").attr("href","http://{DOMINIO}/ws-download/"+tokenFile+"!"+e)
 									$(".inputlinkAccessKey").attr("value","http://{DOMINIO}/ws-download/"+tokenFile+"!"+e)
 									keyaccess = e;

@@ -34,8 +34,6 @@
 	 			
 
 
-
-
 	############################################### SEPARA AS TABELAS EXISTENTES ###############################
 	$GLOBALS["ConfigSQL"] = "";
 
@@ -170,15 +168,39 @@
 	add_if_not_exist('ws_template',				'obs' ,			'varchar(350) 	NULL default ""');
 	add_if_not_exist('ws_template',				'token',		'varchar(150) 	NULL default ""');
 	add_if_not_exist("ws_template",				'ws_timestamp',		'TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP');
-###############################################################################################################
-############################################# UPDATE NAS TABELAS DO SISTEMA ###################################
-###############################################################################################################
 
+
+###############################################################################################################
+###################################################### WS VÍDEOS ##############################################
+###############################################################################################################
 	CreateTableIfNotExist('ws_video');
 	add_if_not_exist('ws_video',				'ws_author',	'int(11) 		NOT NULL DEFAULT FALSE');
 	add_if_not_exist('ws_video',				'linkvideo',	'varchar(250) 	NULL default ""');
 	add_if_not_exist('ws_video',				'keyaccess',	'varchar(350)	NULL default ""');
 	add_if_not_exist('ws_video',				'creation',		'timestamp 	NOT NULL DEFAULT CURRENT_TIMESTAMP');
+
+##############################################################################################################
+######################################### ACESSO DIRETO A FERRAMENTA #########################################
+##############################################################################################################
+	CreateTableIfNotExist('ws_direct_access');
+	add_if_not_exist('ws_direct_access', 		'type_obj',		'varchar(250) 	NULL default "item"');
+	add_if_not_exist('ws_direct_access', 		'id_tool',		'int(11) 		NOT NULL DEFAULT FALSE');
+	add_if_not_exist('ws_direct_access', 		'id_item',		'int(11) 		NOT NULL DEFAULT FALSE');
+	add_if_not_exist('ws_direct_access', 		'id_gal',		'int(11) 		NOT NULL DEFAULT FALSE');
+	add_if_not_exist('ws_direct_access'	,		'ws_author',	'int(11) 		NOT NULL DEFAULT FALSE');
+	add_if_not_exist('ws_direct_access'	,		'createin',		'timestamp		NOT NULL DEFAULT CURRENT_TIMESTAMP');
+	add_if_not_exist('ws_direct_access'	,		'keyaccess',	'varchar(128) 	NULL default ""' );
+	add_if_not_exist('ws_direct_access'	,		'expire',		'DATE 			NULL');
+
+
+// item
+// detalhes
+// categorias
+// galerias
+// imagens
+// arquivos
+
+
 
 ###############################################################################################################
 ############################################# BKP WebSheep ###################################

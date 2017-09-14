@@ -92,9 +92,11 @@ if(!defined("php_version")) 	define('php_version',file_get_contents(ROOT_ADMIN.'
 ############################################
 #	DEFINE O IDIOMA DO ADMIN
 ############################################
-if( !defined( '__LANG__' ) )define( '__LANG__', str_replace(array(PHP_EOL,"\n","\r"),"",file_get_contents(ROOT_ADMIN.'/App/Templates/json/ws-lang.json')) );
-if( !defined( 'wslang' ) )	define( 'wslang', str_replace(array(PHP_EOL,"\n","\r"),"",file_get_contents(ROOT_ADMIN.'/App/Config/lang/'.LANG.'.json')) );
+// TRADUÇÃO ANTIGA
+if( !defined( '__LANG__' ) )define( '__LANG__', str_replace(array(PHP_EOL,"\n","\r"),"",file_get_contents(ROOT_ADMIN.'/App/Templates/json/ws-lang.json')));
 
+// TRADUÇÃO NOVA (em desenvolvimento ainda)
+if( !defined( 'wslang' ) )	define( 'wslang', str_replace(array(PHP_EOL,"\n","\r"),"",file_get_contents(ROOT_ADMIN.'/App/Config/lang/'.LANG.'.json')) );
 
 
 

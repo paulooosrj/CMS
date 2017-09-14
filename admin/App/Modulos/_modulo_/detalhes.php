@@ -9,6 +9,7 @@
 	clearstatcache();
 	#####################################################  FUNÇÕES DO MODULO
 	include($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
+	
 	#####################################################  
 	# CRIA SESSÃO
 	#####################################################  
@@ -31,10 +32,10 @@
 	$_SESSION['id_cat']   = empty($_GET['id_cat']) ? "1" : $_GET['id_cat'];
 	$_SESSION['ws_nivel'] = empty($_GET['ws_nivel']) ? "1" : $_GET['ws_nivel'];
 	define("ID_FERRAMENTA", $_GET['ws_id_ferramenta']);
-	
-	if(empty($_GET['LIMIT'])){$_GET['LIMIT']="50";}
-	if(empty($_GET['PAGE'])){$_GET['PAGE']="1";}
 
+	if(empty($_GET['LIMIT'])){			$_GET['LIMIT']="50";														}
+	if(empty($_GET['PAGE'])){			$_GET['PAGE']="1";															}
+	if(empty($_GET['token_group'])){	$_GET['token_group']=_token(PREFIX_TABLES."ws_biblioteca","token_group");	}
 
 
 	#####################################################  
@@ -645,7 +646,7 @@
 			$_IPUNT_CAMPOS .= $_SET_TEMPLATE_INPUT->parse();
 		}
 		//#####################################################################    BOTÃO ARQUIVOS INTERNOS
-		if($_FERRAMENTA_['_arquivos_'] == "1" && $k['type'] == 'bt_files') {
+		if($_FERRAMENTA_['_files_'] == "1" && $k['type'] == 'bt_files') {
 			$_SET_TEMPLATE_INPUT                = new Template(TEMPLATE_INPUT_LINK, true);
 			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
 

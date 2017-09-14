@@ -1027,8 +1027,19 @@ function rsearch($folder, $pattern) {
 
 
 function verifyUserLogin($return=false){
+
+		############################################################################################################################
+		#	CASO ESTEJA LOGADO DIRETAMENTE COM SERIALKEY
+		############################################################################################################################
+		if(ws::urlPath(3,false)){
+			$keyAccess = ws::getTokenRest(ws::urlPath(3,false),false);
+		}elseif(ws::urlPath(2,false)){
+			$keyAccess = ws::getTokenRest(ws::urlPath(2,false),false);
+		}
+
+
 		if(	
-			SECURE==TRUE 
+			(SECURE==TRUE && $keyAccess==false)
 			&&
 			((empty($_COOKIE['ws_session'])|| empty($_COOKIE['ws_log'])|| empty($_COOKIE['_WS_']) || empty($_SESSION['ws_log']) || empty($_SESSION['user']))
 			||

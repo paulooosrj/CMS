@@ -51,10 +51,20 @@
 	#	CRIAMOS A 1° SESSÃO
 	############################################################################################################################
 		_session();
+
+	############################################################################################################################
+	#	CASO ESTEJA LOGADO DIRETAMENTE COM ACCESSKEY
+	############################################################################################################################
+		if(ws::urlPath(3,false)){
+			$keyAccess = ws::getTokenRest(ws::urlPath(3,false),false);
+		}elseif(ws::urlPath(2,false)){
+			$keyAccess = ws::getTokenRest(ws::urlPath(2,false),false);
+		}
+
 	############################################################################################################################
 	#	CASO ESTEJA LOGADO IMPORTAMOS O DESKTOP
-	############################################################################################################################
-		if( SECURE==FALSE ||  (!empty($_COOKIE['ws_log']) && $_COOKIE['ws_log']=='true') && (!empty($_SESSION) && @$_SESSION['ws_log']==true)){	
+	############################################################################################################################	
+		if( SECURE==FALSE || (isset($keyAccess) && $keyAccess==true) || (!empty($_COOKIE['ws_log']) && $_COOKIE['ws_log']=='true') && (!empty($_SESSION) && @$_SESSION['ws_log']==true)){	
 			include(ROOT_ADMIN.'/App/Core/ws-dashboard.php');exit;
 		}
 

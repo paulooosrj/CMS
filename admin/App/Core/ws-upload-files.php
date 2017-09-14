@@ -87,7 +87,7 @@
 									##########################################################################################################  
 							 		# GUARDAMOS AS VARIÁVEIS DO ARQUIVO UPADO NA ARRAY
 									##########################################################################################################  
-										$_RETURN_FILES[] = array(
+									$_RETURN_FILES[] = array(
 										'status'=>'sucesso',
 										'response'=>'Upload efetuado com sucesso!',
 										'error'=>0,
@@ -198,7 +198,7 @@ foreach($_RETURN_FILES AS $FILE){
 	# CADA MÓDULO POSSÚI UM CAMPO HIDDEN COM O NAME="TYPE" QUE VAI NOS DIZER QUE MÓDULO ELE PERTENCE
 	#  VERIFICAMOS QUAL É O CAMPO E MANIPULAMOS A BASE DE DADOS CONFORME O ITEM INDICADO
 	#################################################################################################
-    	if($_POST['type']=='item_detail_file'){		
+    if($_POST['type']=='item_detail_file'){		
 
 		AddBiblioteca($FILE,$_POST);
 
@@ -426,6 +426,7 @@ foreach($_RETURN_FILES AS $FILE){
 				$up->salvar();
 				echo '/ws-img/281/0/100/'.$FILE['file']['newName'];
 	}elseif($_POST['type']=='lista_arquivos_item'){		
+		
 			AddBiblioteca($FILE,$_POST);
 			$up					= new MySQL();
 			$up->set_table(PREFIX_TABLES.'_model_files');
@@ -438,7 +439,8 @@ foreach($_RETURN_FILES AS $FILE){
 			$up->set_insert('token',$token);
 			$up->set_insert('size_file',$FILE['file']['size']);
 			$up->insert();
-			echo true;
+
+
 	}elseif($_POST['type']=='img_inner_item'){		
 			criaRascunho($_POST['ws_id_ferramenta'], $_POST['id_item'],true);	
 			AddBiblioteca($FILE,$_POST);
@@ -474,10 +476,6 @@ foreach($_RETURN_FILES AS $FILE){
             'thumb' => $FILE['file']['newName']
         ));
 	}elseif($_POST['type']==''){	
-
-
-
-
 	}elseif($_POST['type']==''){		
 	}elseif($_POST['type']==''){		
 	}elseif($_POST['type']==''){}

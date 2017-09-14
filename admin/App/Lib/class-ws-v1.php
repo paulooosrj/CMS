@@ -251,15 +251,12 @@
 			
 			$now     = date("Y-m-d H:i:s") . PHP_EOL;
 			$timeout = date("Y-m-d H:i:s", strtotime('+' . $timeout, strtotime(date("Y-m-d H:i:s"))));
-			
 			$setTokenRest = _token(PREFIX_TABLES . 'ws_auth_token', 'token');
 			$_temp_       = new MySQL();
 			$_temp_->set_table(PREFIX_TABLES . 'ws_auth_token');
 			$_temp_->set_insert('token', $setTokenRest);
 			$_temp_->set_insert('ws_timestamp', $now);
-			$_temp_->set_insert('expire', $timeout);
-			
-			
+			$_temp_->set_insert('expire', $timeout);		
 			if ($_temp_->insert()) {
 				return $setTokenRest;
 			} else {
@@ -271,7 +268,7 @@
 			$texto = array_slice($texto, 0, $limite);
 			return implode($texto, " ") . $end;
 		}
-		static function getTokenRest($setTokenRest) {
+		static function getTokenRest($setTokenRest,$die=true) {
 			##############################################################################
 			# BUSCAMOS NA BASE UM TOKEN DENTRO DO PRAZO ESTABELECIDO
 			##############################################################################
@@ -295,7 +292,11 @@
 			if ($_temp_->_num_rows >= 1) {
 				return true;
 			} else {
-				die("Not found token access or expired");
+				if($die==true){
+					die("Not found token access or expired");
+				}else{
+					return false;
+				}
 			}
 			
 		}
@@ -1432,11 +1433,11 @@
 					if (count($newKey) == 1) {
 						$b[] = "{{" . $this->aliasStr . $key . "}}";
 						$c[] = @$retorno[$COLUNA];
+
+						// se tiver 2 parâmetros
 					} elseif (count($newKey) >= 2) {
 						$verify = implode(array_slice($newKey, 1), ',');
-						// se tiver 2 parâmetros
 						if (count($newKey) == 2) {
-							
 							if (is_numeric(@$newKey[1]) || is_int(@$newKey[1])) {
 								$b[] = "{{" . $key . "}}";
 								$c[] = substr(strip_tags(str_replace("_ws_php_eol_", PHP_EOL, @$retorno[$COLUNA])), 0, $newKey[1]);
@@ -1446,7 +1447,7 @@
 								$b[]    = "{{" . $this->aliasStr . $key . "}}";
 								$c[]    = $result;
 							}
-							// se for o campo 1° e depois a função depois parametros
+						// se for o campo 1° e depois a função depois parametros
 						} elseif (count($newKey) > 2) {
 							$vars = str_replace("(this)", @$retorno[$COLUNA], implode(array_slice($newKey, 2), '","'));
 							$func = $newKey[1];

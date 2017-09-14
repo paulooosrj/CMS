@@ -1,4 +1,5 @@
 <?php
+ob_start();
 ###################################################################
 # IMPORTA A CLASSE PADRÃO DO SISTEMA
 ###################################################################
@@ -1014,10 +1015,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ws-config.php');
 	}
 
 ###################################################################
+# LIMPA BUFFER PARA SETAR O NOVO HEADER
+###################################################################
+ob_end_clean();
+
+###################################################################
 # VERIFICAMOS DE ONDE ELE DEVE PUXAR O CONTEUDO: ADMIN OU WEBSITE
 ###################################################################
-
-	header('Content-Type:'.get_content_type($BASE_FILE));
+	@header('Content-Type:'.get_content_type($BASE_FILE));
 
 	if (file_exists($BASE_FILE.'.gz') && @filemtime($BASE_FILE.'.gz') > @filemtime($BASE_FILE)) {
 		echo gzdecode(file_get_contents($BASE_FILE.'.gz'));

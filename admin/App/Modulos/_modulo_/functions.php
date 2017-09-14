@@ -1043,6 +1043,7 @@
 		$descricao = $Dados->fetch_array[0]['texto'];
 		$url       = $Dados->fetch_array[0]['url'];
 		$download  = $Dados->fetch_array[0]['download'];
+
 		echo '<form id="form-img" id-img="' . $idFile . '" style="padding: 0 20px;" >
 			<input 		id="titulo" 	name="titulo" 		class="inputText" value="' . $titulo . '" placeholder="Titulo da imagem">
 			<textarea 	id="textAreaInput" 	name="descricao" 	class="inputText">' . stripslashes(urldecode($descricao)) . '</textarea>
@@ -1064,15 +1065,16 @@
 	###############################################################################################################################
 	function SalvarDadosFiles() {
 		$Salva = new MySQL();
-		$Salva->set_table(PREFIX_TABLES . '_model_files');
+		$Salva->set_table(PREFIX_TABLES.'_model_files');
 		$Salva->set_where('id=' . $_POST['idFile']);
 		$Salva->set_update('titulo', $_POST['titulo']);
 		$Salva->set_update('texto', urlencode($_POST['texto']));
 		$Salva->set_update('url', urlencode($_POST['url']));
 		$Salva->set_update('download', $_POST['download']);
+
 		$SalvaBiblio = new MySQL();
-		$SalvaBiblio->set_table(PREFIX_TABLES . 'ws_biblioteca');
-		$SalvaBiblio->set_where('tokenFile="' . $_POST['token'] . '"');
+		$SalvaBiblio->set_table(PREFIX_TABLES.'ws_biblioteca');
+		$SalvaBiblio->set_where('token="'.$_POST['token'].'"');
 		$SalvaBiblio->set_update('download', $_POST['download']);
 		$SalvaBiblio->salvar();
 		if ($Salva->salvar()) {

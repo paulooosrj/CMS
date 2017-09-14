@@ -2621,10 +2621,7 @@
 				file_put_contents(ROOT_WEBSITE . "/includes/" . $file, '<?' . PHP_EOL . '# WebSheep;' . PHP_EOL . '# Novo arquivo;' . PHP_EOL . '?>');
 			}
 		}
-		
-		
-		
-		
+	
 		if ($_TOOL->insert()) {
 			$_TOOL = new MySQL();
 			$_TOOL->set_table(PREFIX_TABLES . 'ws_ferramentas');

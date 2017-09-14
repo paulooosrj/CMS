@@ -99,7 +99,7 @@
 	FTP_FILES_SIZE(ROOT_WEBSITE);
 
 	#####################################################  
-	# DAMOS UM SELECT TA BALEA DA BIBLIOTECA  
+	# DAMOS UM SELECT NA TABALEA DA BIBLIOTECA  
 	#####################################################
 	$BD_BIBLIOTECA= new MySQL(); 
 	$BD_BIBLIOTECA->set_table(PREFIX_TABLES.'ws_biblioteca'); 
@@ -142,7 +142,7 @@
 		 				'file'=>		str_replace(ROOT_WEBSITE,"",$dir.'/'.$diretorio),
 		 				'filename'=>	str_replace(ROOT_WEBSITE,"",$dir.'/'.$diretorio), 
 		 				'upload_size'=>	_filesize($peso),
-		 				'uploaded'=>	date ("d/m/Y H:i", filemtime($dir.'/'.$diretorio)),
+		 				'uploaded'=>	@date("d/m/Y H:i",@filemtime($dir.'/'.$diretorio)), 
 						'ext'=>			$ext
 		 			);
 				}

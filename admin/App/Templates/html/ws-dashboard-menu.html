@@ -50,7 +50,7 @@
 		<!-- END NEW_VERSION -->
 
 		<!-- BEGIN ADMIN -->
-				<li data-get="" class="ferramenta_especial"	data-ferramenta="0" data-path="./App/Modulos/_tools_/paginas.php">
+				<li data-get="" class="ferramenta_especial"	 data-title-loading="{label_paginas}" data-ferramenta="0" data-path="./App/Modulos/_tools_/paginas.php">
 					<span class="icon fa-file"></span>{label_paginas}
 				</li>
 				<div class="container"></div>
@@ -58,23 +58,23 @@
 					<span class="icon icon-link"></span>{label_links}
 				</li>
 				<div class="container">
-					<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_URL_includes/">
+					<li data-get="" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_url_includes}" data-ferramenta="0" data-path="./App/Modulos/_URL_includes/">
 						<span class="icon fa-link"></span>{label_url_includes}
 					</li>
-					<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_URL_amigavel/index.php">
+					<li data-get="" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_url_htaccess}" data-ferramenta="0" data-path="./App/Modulos/_URL_amigavel/index.php">
 						<span class="icon icon-anchor"></span>{label_url_htaccess}
 					</li>
-					<li data-get="type=css" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_include_JS_CSS_/index.php">
+					<li data-get="type=css" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_include_css}" data-ferramenta="0" data-path="./App/Modulos/_include_JS_CSS_/index.php">
 						<span class="icon fa fa-css3"></span>{label_include_css}
 					</li>
-					<li data-get="type=js" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_include_JS_CSS_/index.php">
+					<li data-get="type=js" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_include_js}" data-ferramenta="0" data-path="./App/Modulos/_include_JS_CSS_/index.php">
 						<span class="icon fa fa-jsfiddle"></span>{label_include_js}
 					</li>
 				</div>
-				<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/webmaster/">
+				<li data-get="" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_editor}" data-ferramenta="0" data-path="./App/Modulos/webmaster/">
 					<span class="icon fa-code"></span>{label_editor}
 				</li>
-				<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_dominio_/">
+				<li data-get="" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_Conf_Painel}" data-ferramenta="0" data-path="./App/Modulos/_dominio_/">
 					<span class="icon fa-dashboard"></span>{label_Conf_Painel}
 				</li>
 
@@ -84,44 +84,44 @@
 			<span class="icon icon-wrench"></span>{label_ferramentas}
 		</li>
 		<div class="container">
-			<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_tools_/tools.php">
+			<li data-get="" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_gerenciar_ferramentas}" data-ferramenta="0" data-path="./App/Modulos/_tools_/tools.php">
 				<span class="fa fa-cog" style="margin-right: 10px;"></span>{label_gerenciar_ferramentas}
 			</li>
 			<!-- BEGIN TOOL -->
-			<li class="ferramenta_especial " data-plugin="0" data-ferramenta="{ID}" data-path="./App/Modulos/_modulo_/index.php"><span class="icon fa-chevron-right"></span>{LABEL}</li>
+			<li class="ferramenta_especial " data-plugin="0"  data-title-loading="{LABEL}" data-ferramenta="{ID}" data-path="./App/Modulos/_modulo_/index.php"><span class="icon fa-chevron-right"></span>{LABEL}</li>
 			<!-- END TOOL -->
 		</div>
 		<li class="path">
 			<span class="icon fa-plug"></span>{label_plugin}
 		</li>
 		<div class="container">
-			<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_modulo_/plugins.php"> <span class="icon fa-cogs"></span>{label_gerenciar_plugin}</li>
-			<li class="path" data-ferramenta="0" data-path="./App/Modulos/_modulo_/plugins.php"> 
+			<li data-get="" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_gerenciar_plugin}" data-ferramenta="0" data-path="./App/Modulos/_modulo_/plugins.php"> <span class="icon fa-cogs"></span>{label_gerenciar_plugin}</li>
+			<li class="path"  data-title-loading="{label_plugin_instalado}" data-ferramenta="0" data-path="./App/Modulos/_modulo_/plugins.php"> 
 				<span class="icon fa-puzzle-piece"></span>{label_plugin_instalado}
 			</li>
 			<div class="container">
 				<!-- BEGIN PLUGIN -->
-				<li class="ferramenta_especial innerOpt tool" data-plugin="1" data-w="{W}" data-h="{H}" data-type="{TYPE}" data-ferramenta="0" data-path="{PATH}"><img src="{ICON}" />{LABEL}</li>
+				<li class="ferramenta_especial innerOpt tool" data-plugin="1" data-w="{W}" data-h="{H}" data-type="{TYPE}"  data-title-loading="{LABEL}" data-ferramenta="0" data-path="{PATH}"><img src="{ICON}" />{LABEL}</li>
 				<!-- END PLUGIN -->
 
 			</div>
 		</div>
-		<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_keyfile_">
+		<li data-get="" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_Download_Senha}" data-ferramenta="0" data-path="./App/Modulos/_keyfile_">
 			<span class="icon fa fa-key"></span>{label_Download_Senha}
 		</li>
-		<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_leads_/">
+		<li data-get="" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_Cadastros}" data-ferramenta="0" data-path="./App/Modulos/_leads_/">
 			<span class="icon fa-envelope"></span>{label_Cadastros}
 		</li>
-		<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_modulo_/ws-central-bkps.php"> 
+		<li data-get="" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_BKP}" data-ferramenta="0" data-path="./App/Modulos/_modulo_/ws-central-bkps.php"> 
 			<span class="icon fa fa-history"></span>{label_BKP}
 		</li>
-		<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/usuarios/">
+		<li data-get="" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_Usuarios}" data-ferramenta="0" data-path="./App/Modulos/usuarios/">
 			<span class="icon fa-users"></span>{label_Usuarios}
 		</li>
-		<li class="ferramenta_especial 	biblioteca" data-plugin="0" data-ferramenta="0" data-path="">
+		<li class="ferramenta_especial 	biblioteca" data-plugin="0"  data-title-loading="{label_Biblioteca}" data-ferramenta="0" data-path="">
 			<span class="icon fa-picture-o"></span>{label_Biblioteca}
 		</li>
-		<li data-get="" class="ferramenta_especial" data-plugin="0" data-ferramenta="0" data-path="./App/Modulos/_hd_/">
+		<li data-get="" class="ferramenta_especial" data-plugin="0"  data-title-loading="{label_hd}" data-ferramenta="0" data-path="./App/Modulos/_hd_/">
 			<span class="icon fa-pie-chart"></span>{label_hd}
 		</li>
 		<li id="clicklogout">

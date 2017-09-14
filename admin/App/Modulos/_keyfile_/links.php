@@ -56,8 +56,8 @@
 	$template->keyFile_links_backButton 								= ws::getLang("keyFile>links>backButton");
 	$template->keyFile_links_createLinkButton 							= ws::getLang("keyFile>links>createLinkButton");
 	$template->keyFile_links_failCreateLink 							= ws::getLang("keyFile>links>failCreateLink");
-	$template->keyFile_links_sucessCreateLink 							= ws::getLang("keyFile>links>sucessCreateLink");
 	$template->keyFile_links_modal_save_saving 							= ws::getLang("keyFile>links>modal>save>saving");
+	$template->keyFile_links_topAlert_sucessCreateLink 					= ws::getLang("keyFile>links>topAlert>sucessCreateLink");
 	$template->keyFile_links_topAlert_settingsIncorrectly 				= ws::getLang("keyFile>links>topAlert>settingsIncorrectly");
 	$template->keyFile_links_modal_delete_content 						= ws::getLang("keyFile>links>modal>delete>content");
 	$template->keyFile_links_modal_delete_bot1 							= ws::getLang("keyFile>links>modal>delete>bot1");
@@ -90,6 +90,7 @@
 	$s = new MySQL();
 	$s->set_table(PREFIX_TABLES.'ws_keyfile as keyFile ');
 	$s->set_colum('keyFile.id,keyFile.tokenFile,keyFile.active,keyFile.disableToDown,keyFile.refreshToDown,keyFile.keyaccess,keyFile.expire');
+	$s->set_where('keyFile.tokenFile="'.$_GET['tokenfile'].'"');
 	$s->select();
 	foreach($s->fetch_array as $img){ 
 		$template->LI_ID_LINK			=$img['id'];

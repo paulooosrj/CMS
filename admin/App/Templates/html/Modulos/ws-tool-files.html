@@ -54,9 +54,9 @@
 							<b>Nome Original:</b>{NOME}<br><b>Peso:</b>{PESO}<br><b>Filename:</b>{ARQUIVO}
 						</div>
 						<div id='detalhes_img'>
-						<span class='editar legenda mover' 	legenda ='Mover Posição'>		<img src='//cdn.websheep.com.br/img/websheep/arrow-move.png'></span>
-						<span class='editar legenda' 		legenda ='Editar Informações'>	<img src='//cdn.websheep.com.br/img/websheep/pencil.png'></span>
-						<span class='excluir legenda' 		legenda ='Excluir Arquivo'>		<img src='//cdn.websheep.com.br/img/websheep/cross-button.png'></span>
+						<span class='editar legenda mover' 	legenda ='Mover Posição'>		<img src='/admin/App/Templates/img/websheep/arrow-move.png'></span>
+						<span class='editar legenda' 		legenda ='Editar Informações'>	<img src='/admin/App/Templates/img/websheep/pencil.png'></span>
+						<span class='excluir legenda' 		legenda ='Excluir Arquivo'>		<img src='/admin/App/Templates/img/websheep/cross-button.png'></span>
 					</div>
 				</li>
 			<!-- END BLOCK_FILES_ITEM -->
@@ -127,11 +127,12 @@ function reloadFunctions(){
 		var iDimg = $(this).parent().parent().parent().attr('id');
 		var token = $(this).parent().parent().parent().data('token');
 
-		functions({
-			funcao:"dados_file",
-			vars:"idFile="+iDimg+"&token="+token,
-			patch:'App/Modulos/_modulo_',
-			Sucess:function(e){
+			$.ajax({
+			  type: "POST",
+			  url: "./{PATH}/functions.php",
+			  data: {"function":"dados_file","idFile":iDimg,"token":token},
+			  beforeSend:function(){confirma({width:"auto",conteudo:"<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+			}).done(function(e) {
 				var formImg = e;
 				confirma({
 					conteudo:formImg,
@@ -160,12 +161,12 @@ function reloadFunctions(){
 						var titulo 		= 	encodeURIComponent($('#form-img #titulo').val());
 						var texto 		= 	encodeURIComponent(element.val());
 						var url 		= 	encodeURIComponent($('#form-img #url').val());
-						functions({
-							patch:"App/Modulos/_modulo_",
-							funcao:"SalvarDadosFiles",
-							vars:"idFile="+idImg+"&titulo="+titulo+"&texto="+texto+"&url="+url+"&download="+download+"&token="+token,
-							metodo:"post",
-							Sucess:function(e){
+						$.ajax({
+						  type: "POST",
+						  url: "./{PATH}/functions.php",
+						  data: {"function":"SalvarDadosFiles","idFile":idImg,"titulo":titulo,"texto":texto,"url":url,"download":download,"token":token},
+						  beforeSend:function(){confirma({width:"auto",conteudo:"<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+						}).done(function(e) {
 								out(e)
 								if(e=='Ítem salvo com sucesso!'){var cor=3;}else{var cor=2;}
 								TopAlert({
@@ -175,12 +176,66 @@ function reloadFunctions(){
 									timer:3000,
 									type:cor,
 								})
-							}
 						})
 					}
 				})
-			}
-		})
+			})
+
+			/*		functions({
+						funcao:"dados_file",
+						vars:"idFile="+iDimg+"&token="+token,
+						patch:'App/Modulos/_modulo_',
+						Sucess:function(e){
+							var formImg = e;
+							confirma({
+								conteudo:formImg,
+								bot1:"Salvar",
+								bot2:"Cancelar",
+								drag:false,
+								botclose:false,
+								posFn:function(){
+									var element = $('#ws_confirm #body #ws_confirm_conteudo #form-img #textAreaInput');
+			 						$(element).ckeditor({
+			 								enterMode :2,
+											forcePasteAsPlainText	:true,
+											fillEmptyBlocks:false,
+											basicEntities:false,
+											entities_greek:false, 
+											entities_latin:false, 
+											entities_additional:"",
+											toolbarGroups: [{ name: "basicstyles" },{ name: "links" }]
+			 						})
+								},
+								newFun:function(){
+									var element 	= 	$('#textAreaInput');
+									var token 		= 	$('#token').val();
+									var idImg 		= 	$('#form-img').attr('id-img');
+									var download 	= 	$('#download:checked').length;
+									var titulo 		= 	encodeURIComponent($('#form-img #titulo').val());
+									var texto 		= 	encodeURIComponent(element.val());
+									var url 		= 	encodeURIComponent($('#form-img #url').val());
+									functions({
+										patch:"App/Modulos/_modulo_",
+										funcao:"SalvarDadosFiles",
+										vars:"idFile="+idImg+"&titulo="+titulo+"&texto="+texto+"&url="+url+"&download="+download+"&token="+token,
+										metodo:"post",
+										Sucess:function(e){
+											out(e)
+											if(e=='Ítem salvo com sucesso!'){var cor=3;}else{var cor=2;}
+											TopAlert({
+												mensagem:e,
+												clickclose:true,
+												height:20,
+												timer:3000,
+												type:cor,
+											})
+										}
+									})
+								}
+							})
+						}
+					})
+			*/	
 	})
 /*====================================================================================================*/
 }
@@ -194,10 +249,7 @@ $("#formUpload").ajaxForm({
 			$('.tapa_upload').find('.bar').animate({width:percentComplete+"%"},50);
 		},
 		complete: function(e){
-			out("---->")
-			out(e.responseText)
-			out("<----")
-			//$("#conteudo").load("/admin/App/Modulos/_modulo_/files.php?ws_id_ferramenta={WS_ID_FERRAMENTA}&token_group={TOKEN_GROUP}&id_item={ID_ITEM}&ws_nivel={WS_NIVEL}")
+			$("#conteudo").load("/admin/App/Modulos/_modulo_/files.php?ws_id_ferramenta={WS_ID_FERRAMENTA}&token_group={TOKEN_GROUP}&id_item={ID_ITEM}&ws_nivel={WS_NIVEL}")
 		}
 	})
 

@@ -39,11 +39,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
 		$KeyLink->select();
 
 
-		# SE APENAS TIVER O TOKEN SEM A CHAVE
-		if(count($_url_)==1){ goto getPass;exit;}
-
 		# SE APENAS TIVER O TOKEN + CHAVE + DIRECT
 		if(count($_url_)>=2  && $KeyLink->_num_rows==1  && $direto){	goto direct; 		exit;}
+
+		# SE APENAS TIVER O TOKEN SEM A CHAVE
+		if(count($_url_)==1){ goto getPass;exit;}
 
 		# SE APENAS TIVER O TOKEN COM A CHAVE
 		if(count($_url_)>=2  && $KeyLink->_num_rows==1){				goto botDownload; 	exit;}
@@ -56,32 +56,30 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
 	}
 exit;
 ######################################################
-
 direct:
-	 $file 			= './../../website/assets/upload-files/'.$biblioteca->obj[0]->file;
-	 if(!file_exists($file)){goto arquivoNull;exit;}
-	 $upload_size    	=  _filesize($biblioteca->obj[0]->upload_size);
-	 $fileName   		=  $biblioteca->obj[0]->filename;
-	 $mime_type   		=  $biblioteca->obj[0]->type;
-	header('Content-Type: ' .$mime_type);
-	header('Content-Disposition: attachment; filename="'.$fileName.'"');
-	header('Content-Transfer-Encoding: binary');
-	header('Content-Length: '.filesize($file));
-	header('Accept-Ranges: bytes');
-	header('Connection: Keep-Alive');
-	header('Expires: 0');
-	header('Pragma: public');
-	header('Cache-Control:');
-	readfile($file);
-	$update = new MySQL();
-	$update->set_table(PREFIX_TABLES.'ws_keyfile');
-	$update->set_where('keyaccess="'.$biblioteca->obj[0]->keyaccess.'"'); 
-	$update->set_where('AND tokenFile="'.$biblioteca->obj[0]->tokenFile.'"'); 
-	$update->set_update('accessed',($biblioteca->obj[0]->accessed + 1));
-	if($biblioteca->obj[0]->disableToDown=="1"){$update->set_update('active','0'); }
-	if(($biblioteca->obj[0]->accessed=="0" && $biblioteca->obj[0]->refreshToDown=="1") || $biblioteca->obj[0]->refreshToDown=="2"){$update->set_update('keyaccess',_codePass(_crypt())); }
-	$update->salvar();
-
+		$file 			= ROOT_WEBSITE.'/assets/upload-files/'.$biblioteca->obj[0]->file;
+		if(!file_exists($file)){goto arquivoNull;exit;}
+		$upload_size    	=  _filesize($biblioteca->obj[0]->upload_size);
+		$fileName   		=  $biblioteca->obj[0]->filename;
+		$mime_type   		=  $biblioteca->obj[0]->type;
+		header('Content-Type: ' .$mime_type);
+		header('Content-Disposition: attachment; filename="'.$fileName.'"');
+		header('Content-Transfer-Encoding: binary');
+		header('Content-Length: '.filesize($file));
+		header('Accept-Ranges: bytes');
+		header('Connection: Keep-Alive');
+		header('Expires: 0');
+		header('Pragma: public');
+		header('Cache-Control:');
+		readfile($file);
+		$update = new MySQL();
+		$update->set_table(PREFIX_TABLES.'ws_keyfile');
+		$update->set_where('keyaccess="'.$biblioteca->obj[0]->keyaccess.'"'); 
+		$update->set_where('AND tokenFile="'.$biblioteca->obj[0]->tokenFile.'"'); 
+		$update->set_update('accessed',($biblioteca->obj[0]->accessed + 1));
+		if($biblioteca->obj[0]->disableToDown=="1"){$update->set_update('active','0'); }
+		if(($biblioteca->obj[0]->accessed=="0" && $biblioteca->obj[0]->refreshToDown=="1") || $biblioteca->obj[0]->refreshToDown=="2"){$update->set_update('keyaccess',_codePass(_crypt())); }
+		$update->salvar();
 exit;
 botDownload:
 ?>
@@ -92,13 +90,13 @@ botDownload:
 	<link type="image/x-icon" href="img/favicon.ico" rel="shortcut icon" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="/admin/App/Templates/css/fontes/fonts.css" 									type="text/css" media="all" />
-	<link rel="stylesheet" href="/admin/App/Templates/css/login/reset.css" 								type="text/css" media="all" />
-	<link rel="stylesheet" href="/admin/App/Templates/css/login/desktop.css?<?=rand(0,999999)?>" 			type="text/css" media="all" />
-	<link rel="stylesheet" href="/admin/App/Templates/css/login/estrutura.css" 							type="text/css" media="all" />
+	<link rel="stylesheet" href="/admin/App/Templates/css/login/reset.css" 										type="text/css" media="all" />
+	<link rel="stylesheet" href="/admin/App/Templates/css/login/desktop.css?<?=rand(0,999999)?>" 				type="text/css" media="all" />
+	<link rel="stylesheet" href="/admin/App/Templates/css/login/estrutura.css" 									type="text/css" media="all" />
 	<link rel="stylesheet" href="/admin/App/Templates/css/websheep/theme_blue.min.css" 							type="text/css" media="all" />
-	<link rel="stylesheet" href="/admin/App/Templates/css/websheep/funcionalidades.css" 							type="text/css" media="all" />
-	<script type="text/javascript" src="/admin/App/Vendor/jquery/2.2.0/jquery.min.js"						id="jquery"></script>
-	<script type="text/javascript" src="/admin/App/Templates/js/websheep/websheep_full.js" 						id="funcionalidades"></script>
+	<link rel="stylesheet" href="/admin/App/Templates/css/websheep/funcionalidades.css" 						type="text/css" media="all" />
+	<script type="text/javascript" src="/admin/App/Vendor/jquery/2.2.0/jquery.min.js"							id="jquery"></script>
+	<script type="text/javascript" src="/admin/App/Templates/js/websheep/funcionalidades.min.js" 				id="funcionalidades"></script>
 	<script type="text/javascript" src="/admin/App/Templates/js/websheep/functionsws.min.js" 					id="functionsws"></script>
 	<style>
 		.formularioDownload{
@@ -145,7 +143,7 @@ botDownload:
 			<div class="pct w1" style="text-align: center; margin-top: 10px; "></div>
 		</div>
 		<div class="c"></div>
-		<button 	id="downloadFileBtn" 		type="submit" class="botao">Fazer download</button>
+		<button 	id="downloadFileBtn" 		type="submit" class="botao">Download</button>
 	</form>
 	<div class="c"></div>
 </div>
@@ -189,7 +187,9 @@ arquivoNull:
 	<link rel="stylesheet" href="/admin/App/Templates/css/websheep/theme_blue.min.css" 							type="text/css" media="all" />
 	<link rel="stylesheet" href="/admin/App/Templates/css/websheep/funcionalidades.css" 							type="text/css" media="all" />
 	<script type="text/javascript" src="/admin/App/Vendor/jquery/2.2.0/jquery.min.js"						id="jquery"></script>
-	<script type="text/javascript" src="/admin/App/Templates/js/websheep/websheep_full.js" 						id="funcionalidades"></script>
+	<script type="text/javascript" src="/admin/App/Templates/js/websheep/funcionalidades.min.js" 						id="funcionalidades"></script>
+	<script type="text/javascript" src="/admin/App/Templates/js/websheep/functionsws.min.js" 					id="functionsws"></script>
+
 		<style>
 			.formularioDownload{
 				margin-left:0!important;
@@ -241,7 +241,8 @@ getPass:
 <link rel="stylesheet" href="/admin/App/Templates/css/websheep/theme_blue.min.css" 							type="text/css" media="all" />
 <link rel="stylesheet" href="/admin/App/Templates/css/websheep/funcionalidades.css" 							type="text/css" media="all" />
 <script type="text/javascript" src="/admin/App/Vendor/jquery/2.2.0/jquery.min.js"						id="jquery"></script>
-<script type="text/javascript" src="/admin/App/Templates/js/websheep/websheep_full.js" 						id="funcionalidades"></script>
+<script type="text/javascript" src="/admin/App/Templates/js/websheep/funcionalidades.min.js" 						id="funcionalidades"></script>
+<script type="text/javascript" src="/admin/App/Templates/js/websheep/functionsws.min.js" 					id="functionsws"></script>
 <style>
 	.formularioDownload{
 		margin-left:0!important;
@@ -272,11 +273,7 @@ getPass:
 			<div class="pct w1" style="text-align: center; margin-top: 10px; "></div>
 		</div>
 		<div class="c"></div>
-
-
-
-
-		<button 	id="downloadFileBtn" type="submit" class="botao">Fazer download</button>
+		<button 	id="downloadFileBtn" type="submit" class="botao">Download</button>
 	</form>
 	<div class="c"></div>
 </div>

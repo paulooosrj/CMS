@@ -22,6 +22,7 @@
 	@define("ID_ITEM"			,$_GET['id_item']);
 	@define("BACK"				,$_GET['back']);
 	@define("TOKEN_GROUP"		,$_GET['token_group']);
+	@define("TITULO_FERRAMENTA"	,$_SESSION['_TITULO_FERRAMENTA_']);
 	@define("PATCH"				,'App/Modulos/_modulo_');
 
 ##################################################################################
@@ -43,12 +44,17 @@
 ##################################################################################
 	$_SET_TEMPLATE_INPUT->TOKEN_GROUP 			= TOKEN_GROUP;
 	$_SET_TEMPLATE_INPUT->WS_ID_FERRAMENTA 		= WS_ID_FERRAMENTA;
-	$_SET_TEMPLATE_INPUT->_TITULO_FERRAMENTA_ 	= $_SESSION['_TITULO_FERRAMENTA_'];
+	$_SET_TEMPLATE_INPUT->_TITULO_FERRAMENTA_ 	= TITULO_FERRAMENTA;
 	$_SET_TEMPLATE_INPUT->PATCH 				= PATCH;
 	$_SET_TEMPLATE_INPUT->ID_ITEM 				= ID_ITEM;
 	$_SET_TEMPLATE_INPUT->_ID_GALERIA_ 			= _ID_GALERIA_;
 	$_SET_TEMPLATE_INPUT->BACK 					= BACK;
 
+	if(BACK=="false"){
+		$_SET_TEMPLATE_INPUT->clear("BOTBACK");
+	}else{
+		$_SET_TEMPLATE_INPUT->block("BOTBACK");
+	}
 ##################################################################################
 # VARREMOS A BASE RETORNANDO O TEMPLATE DE CADA IMAGEM
 ##################################################################################
@@ -67,18 +73,3 @@
 
 
 ?>
-<script type="text/javascript">
-var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-copyTextareaBtn.addEventListener('click', function(event) {
-  var copyTextarea = document.querySelector('.js-copytextarea');
-  copyTextarea.select();
-
-  try {
-    var successful = document.execCommand('copy');
-    var msg = successful ? 'successful' : 'unsuccessful';
-
-  } catch (err) {
-    console.log('Oops, unable to copy');
-  }
-});

@@ -7,7 +7,10 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_modulo_/fotos.min.css',
 			<div id="progress_combo" class="bg03" >	
 			<div id="progress_bar" class="bg05"></div>
 		</div>
-			<div id="bt_Back_Gal" class="botao">Voltar as galerias</div>
+			<!-- BEGIN BOTBACK --> 
+				<div id="bt_Back_Gal" class="botao">Voltar as galerias</div>
+			<!-- END BOTBACK --> 
+
 
 			<form name="formUpload" id="formUpload" action="/admin/App/Core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
 				<input name="arquivo[]" id="myfile" type="file" 	multiple  style="display:none" accept='image/jpg,image/png,image/jpeg,image/gif'/>

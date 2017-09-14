@@ -61,15 +61,10 @@ function salvaLink(){
 	$Salva->set_update('disableToDown',$form['disableToDown']);
 	$Salva->set_update('refreshToDown',$refreshLink);
 	$Salva->salvar();
-
-
 	echo json_encode(array(
 		'resposta'=>'sucesso',
 		'inputlinkAccessKey'=>$form['inputlinkAccessKey']
 		));
-
-
-
 }
 
 function AtualizaKey(){

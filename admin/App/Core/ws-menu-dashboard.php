@@ -98,7 +98,8 @@
 	$_WS_TOOL_->set_order('posicao', 'ASC');
 	$_WS_TOOL_->set_where('_plugin_="0"');
 	$_WS_TOOL_->set_where('AND App_Type="1"');
-	if (SECURE!=FALSE && $_SESSION['user']['admin'] == '0') {
+
+	if (SECURE!=FALSE && @$_SESSION['user']['admin'] == '0') {
 		$_WS_TOOL_->join(' INNER ', PREFIX_TABLES . 'ws_user_link_ferramenta as link', 'link.id_ferramenta=tools.id AND link.id_user="' . $_SESSION['user']['id'] . '"');
 	}
 	$_WS_TOOL_->select();
@@ -112,8 +113,8 @@
 		$menu_dashboard->LABEL = $inner_menu['titulo'];
 		$menu_dashboard->block("TOOL");
 	}
-	
-	if ( SECURE==FALSE || $_SESSION['user']['admin'] == '1') {
+
+	if ( SECURE==FALSE || @$_SESSION['user']['admin'] == '1') {
 		$menu_dashboard->block("ADMIN");
 	}
 
