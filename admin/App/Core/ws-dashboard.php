@@ -110,8 +110,17 @@
 						$TEMPLATE->LI_W 	= @$dataW;
 						$TEMPLATE->LI_H 	= @$dataH;
 						$TEMPLATE->LI_TYPE 	= @$dataType;
-						$TEMPLATE->LI_PATH 	= $contents->realPath;
-						$TEMPLATE->LI_FILE 	= $contents->realPath.'/'.$contents->painel;
+
+						if(@$dataType!="iframe"){
+							$TEMPLATE->LI_PATH 	= str_replace('/'.$setupdata['url_plugin'].'/',"", $contents->realPath);
+							$TEMPLATE->LI_FILE 	= $contents->painel;
+						}else{
+							$TEMPLATE->LI_PATH 	= $contents->realPath;
+							$TEMPLATE->LI_FILE 	= $contents->realPath.'/'.$contents->painel;
+							
+						}
+
+
 						if(isset($contents->icon) &&$contents->icon!="" &&file_exists(ROOT_WEBSITE.$contents->realPath.'/'.$contents->icon)){
 							$TEMPLATE->LI_ICON 	= '<img src="'.$contents->realPath.'/'.$contents->icon.'" width="15px"/>';
 						}else{

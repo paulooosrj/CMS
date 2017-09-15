@@ -27,13 +27,18 @@
 		}
 	}
 	function returnFileInnerPlugin() {
+
+
+
 		$SETUP = new MySQL();
 		$SETUP->set_table(PREFIX_TABLES . 'setupdata');
 		$SETUP->set_where('id="1"');
 		$SETUP->select();
 		$SETUP = $SETUP->fetch_array[0];
+
 		define("PATH_PLUGINS", ROOT_WEBSITE . '/' . $SETUP['url_plugin']);
-		$_REQUEST['pathname'] = str_replace($SETUP['url_plugin'] . '/', "", dirname($_REQUEST['page']));
+
+
 		if (substr($_REQUEST['page'], 0, strlen($SETUP['url_plugin'])) == $SETUP['url_plugin']) {
 			$_REQUEST['page'] = substr($_REQUEST['page'], strlen($SETUP['url_plugin']));
 		}
@@ -51,13 +56,10 @@
 			$_REQUEST['pathname'] = substr($_REQUEST['pathname'], strlen($SETUP['url_plugin']));
 		}
 		
-		
-		$_ConfigPHP_ = PATH_PLUGINS . $_REQUEST['pathname'] . '/plugin.config.php';
+		$_ConfigPHP_ = PATH_PLUGINS . '/'.$_REQUEST['pathname'] . '/plugin.config.php';
 		$filename    = explode('?', basename($_REQUEST['page']));
-		$_FileLoad_  = PATH_PLUGINS . '/' . $_REQUEST['pathname'] . '/' . $filename[0];
-		
-		
-		
+		$_FileLoad_  = PATH_PLUGINS .'/'.  $_REQUEST['pathname'] . '/' . $filename[0];
+
 		if (!file_exists($_FileLoad_)) {
 			echo "Ops, parece que o arquivo <b>'/" . $SETUP['url_plugin'] . $_REQUEST['pathname'] . '/' . $filename[0] . "'</b> não existe...";
 			exit;

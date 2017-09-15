@@ -399,7 +399,6 @@
 				 	if(directAccess.type_obj=='detail' && directAccess.id_item>0){
 					 	var linkAccess = "/admin/App/Modulos/_modulo_/detalhes.php?back=false&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item;
 				 	}
-
 				 	if(directAccess.type_obj=='img' && directAccess.id_item>0){
 					 	var linkAccess = "/admin/App/Modulos/_modulo_/imagens.php?back=false&ws_nivel=-1&id_cat=0&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item;
 				 	}
@@ -412,9 +411,6 @@
 				 	if(directAccess.type_obj=='files' && directAccess.id_item>0){
 					 	var linkAccess = "/admin/App/Modulos/_modulo_/files.php?direct=true&ws_nivel=-1&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item;
 				 	}
-
-
-
 				 	if(linkAccess!=null){
 						confirma({
 							width:"auto",

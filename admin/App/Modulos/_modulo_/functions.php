@@ -83,6 +83,7 @@
 		$CAMPO_DATA->set_where('id_campo="' . $_POST['idCampo'] . '"');
 		$CAMPO_DATA->select();
 		$CAMPO_DATA = $CAMPO_DATA->fetch_array[0];
+		
 		$categorias = new MySQL();
 		$categorias->set_table(PREFIX_TABLES . 'ws_link_itens');
 		$categorias->set_where(' id_item="' . $_POST['id_item'] . '"');

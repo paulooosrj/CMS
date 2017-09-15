@@ -1266,10 +1266,14 @@
 			$this->setpag[] = $limit;
 			return $this;
 		}
+
+		// TRAZER ITENS QUE O ID X  É LINKADO
 		public function linker($type) {
 			$this->dataRelLinker[] = $type;
 			return $this;
 		}
+
+		//TRAZER ITENS LINKADO AO ID X
 		public function linked($type) {
 			$this->dataRelLinked[] = $type;
 			return $this;
@@ -1279,16 +1283,7 @@
 			return $this;
 		}
 		public static function videoData($url = null, $data = "player", $w = null, $h = null, $default = null, $autoplay = "0") {
-			$types = array(
-				'site',
-				'url',
-				'title',
-				'description',
-				'image',
-				'player',
-				'id'
-			);
-			
+			$types = array('site', 'url', 'title', 'description', 'image', 'player', 'id');
 			if ($url == null || (!strpos($url, "youtube") && !strpos($url, "vimeo"))) {
 				if ($default == null) {
 					return _erro("Erro ba função ws::videoData, permitido apenas link do youtube ou vímeo");
@@ -1642,7 +1637,7 @@
 						$_busca_->join(" INNER ", PREFIX_TABLES . 'ws_link_itens as linkRel', 'linkRel.id_item_link 	=tabela_modelo.id 	AND  linkRel.id_item="' . implode('" OR linkRel.id_item="', $this->dataRelLinker) . '"');
 					}
 					if (count($this->dataRelLinked) > 0) {
-						$_busca_->join(" INNER ", PREFIX_TABLES . 'ws_link_itens as linkRel', 'linkRel.id_item 			=tabela_modelo.id 		AND  linkRel.id_item_link="' . implode('" OR linkRel.id_item_link="', $this->dataRelLinked) . '"');
+						$_busca_->join(" INNER ", PREFIX_TABLES . 'ws_link_itens as linkRel', 'linkRel.id_item=tabela_modelo.id 		AND  linkRel.id_item_link="' . implode('" OR linkRel.id_item_link="', $this->dataRelLinked) . '"');
 					}
 				} elseif ($this->dataRelType == "cat") {
 					if (count($this->dataRelLinker) > 0) {
@@ -1839,6 +1834,7 @@
 			if (!is_numeric($id) && !is_int($id) && !is_array($id)) {
 				_erro(ws::GetDebugError(debug_backtrace(), "Ops, isso não é um ítem"));
 			} else {
+				$id = (int)$id;
 				if (is_int($id)) {
 					$this->setItem[] = 'tabela_modelo.id="' . $id . '"';
 				}
@@ -1848,6 +1844,8 @@
 					}
 				}
 			}
+
+			
 			return $this;
 		}
 		public function type($type) {
