@@ -140,35 +140,35 @@
 	##########################################################################################
 	$TEMPLATE->copyright 	= ws::getlang('dashboard>footerCopyright',array('[name]','[system_version]'),array($setupdata['client_name'],$localVersion->version));
 
-
-
- 	if(ws::urlPath(2,false)){
+	##########################################################################################
+	#  VERIFICA SE EXISTE 2° PATH NA URL
+	##########################################################################################
+	$serialKey = ws::urlPath(2,false);
+ 	if($serialKey){
 		##########################################################################################
-		#  CASO SEJA UM ACESSO DIRETO, PUXAMOS DA BASE A CHAVE
+		#  CASO O 2° PATH SEJA UM ACESSO DIRETO, PUXAMOS DA BASE A CHAVE
 		##########################################################################################
-		if(ws::getTokenRest(ws::urlPath(2,false),false)!==TRUE){
-			$ws_direct_access 					= new MySQL();
-			$ws_direct_access->set_table(PREFIX_TABLES.'ws_direct_access');
-			$ws_direct_access->set_where('keyaccess="'.ws::urlPath(2,false).'"');
-			$ws_direct_access->select();
-			$_num_rows 						= $ws_direct_access->_num_rows;
-			$ws_direct_access 				= $ws_direct_access->fetch_array;
-			$script 	='';
-			if($_num_rows>0){
-				$TEMPLATE->type_obj = $ws_direct_access[0]['type_obj'];
-				$TEMPLATE->id_tool 	= $ws_direct_access[0]['id_tool'];
-				$TEMPLATE->id_item 	= $ws_direct_access[0]['id_item'];
-				$TEMPLATE->id_gal 	= $ws_direct_access[0]['id_gal'];
-				$TEMPLATE->block('DIRECTACCESS');
-			}
+		$ws_direct_access 				= new MySQL();
+		$ws_direct_access->set_table(PREFIX_TABLES.'ws_direct_access');
+		$ws_direct_access->set_where('keyaccess="'.$serialKey.'"');
+		$ws_direct_access->select();
+		$_num_rows 						= $ws_direct_access->_num_rows;
+		$ws_direct_access 				= $ws_direct_access->fetch_array;
+		##########################################################################################
+		#  CASO EXISTA O SERIALKEY RETORNA 
+		##########################################################################################
+		if($_num_rows>0){
+			$TEMPLATE->type_obj 		= $ws_direct_access[0]['type_obj'];
+			$TEMPLATE->id_tool 			= $ws_direct_access[0]['id_tool'];
+			$TEMPLATE->id_item 			= $ws_direct_access[0]['id_item'];
+			$TEMPLATE->id_gal 			= $ws_direct_access[0]['id_gal'];
+			$TEMPLATE->block('DIRECTACCESS');
+		}else{
+			$TEMPLATE->clear('DIRECTACCESS');
 		}
- 	}
+ 	}		
 
-	$TEMPLATE->classHTMLtypeAcess 	= (isset($_num_rows) && ws::urlPath(2,false)) ? "IframeModel" : "";
-
-
-
-
+ 	$TEMPLATE->classHTMLtypeAcess 	= ( isset($_num_rows) && $_num_rows>0 ) ? "IframeModel" : "";
 	##########################################################################################
 	#  RETORNA O HTML MONTADO   
 	##########################################################################################
