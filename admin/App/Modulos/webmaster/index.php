@@ -8,7 +8,7 @@ include_once(((substr($r, -1) == '/') ? substr($r, 0, -1) : $r).'/admin/App/Lib/
 // _session(); 
 $session = new session();
 
-	$session->get('_PATCH_')='App/Modulos/webmaster'; 
+	$session->set('_PATCH_', 'App/Modulos/webmaster'); 
 	include("./autoComplete.php");
 
 ?>
