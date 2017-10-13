@@ -1787,6 +1787,7 @@
 	# 	PUBLICA UM RASCUNHO DE UM ÍTEM
 	##########################################################################################################
 	function PublicaRascunho() {
+		global $user;
 		$vars = $_POST;
 		if (SalvaDetalhes($_POST)) {
 			if (aplicaRascunho($vars['ws_id_ferramenta'], $vars['id_item'])) {
