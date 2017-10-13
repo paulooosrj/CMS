@@ -3,7 +3,11 @@ if( !defined( '__DIR__' ) )define( '__DIR__', dirname(__FILE__) );
 if (mysqli_connect_errno()) {printf("Connect failed: %s\n", mysqli_connect_error());exit();}
 set_time_limit(0);
 
-
+#####################################################################
+# 	INCLUIMOS A SESSÃO
+#####################################################################
+include_once (ROOT_ADMIN.'/App/Lib/class-session.php');
+	
 #####################################################################
 # 	RETORNA ARQUIVOS CONFORMA O PATERN SETADO
 #####################################################################
@@ -21,6 +25,7 @@ function rsearch($folder, $pattern) {
 	function get_content_type($file) {
 		$info = pathinfo($file);
 		$content_types = array(
+			"php"		=>"application/x-httpd-php",
 			"ez"		=>"application/andrew-inset",
 			"aw"		=>"application/applixware",
 			"atom"		=>"application/atom+xml",
@@ -1023,256 +1028,241 @@ function rsearch($folder, $pattern) {
 				unlink($value);
 		}
 	}
-
-
-
-function verifyUserLogin($return=false){
-
-		############################################################################################################################
-		#	CASO ESTEJA LOGADO DIRETAMENTE COM SERIALKEY
-		############################################################################################################################
-		if(ws::urlPath(3,false)){
-			$keyAccess = ws::getTokenRest(ws::urlPath(3,false),false);
-		}elseif(ws::urlPath(2,false)){
-			$keyAccess = ws::getTokenRest(ws::urlPath(2,false),false);
-		}
-
-
-		if(	
-			(SECURE==TRUE && $keyAccess==false)
-			&&
-			((empty($_COOKIE['ws_session'])|| empty($_COOKIE['ws_log'])|| empty($_COOKIE['_WS_']) || empty($_SESSION['ws_log']) || empty($_SESSION['user']))
-			||
-			($_COOKIE['ws_log']!=true || $_SESSION['ws_log'] !=1 || $_SESSION['user']['ativo']!=1 ))
-		){
-			session_regenerate_id(true);
-			session_start(); 
-			$_SESSION=array();
-			unset($_SESSION);
-			session_unset();
-			session_destroy();
-			session_write_close();
-			flush();
-			if($return==true){ 
-				return false;
-			}else{
-				echo '<script>
-						document.cookie.split(";").forEach(function(c) {document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");}); 
-						if(window.location.pathname=="/admin/"){
-							window.top.location.reload();
-						}else{
-							window.top.location = "/admin/";
-						}
-				</script>';
-			}
-		}else{
-			if($return==true){ 
-				return true;
-			}
-		}
-
-
-}
-function aplicaRascunho($ws_id_ferramenta,$id_item,$apenasAplica=false){
-		global $_conectMySQLi_;
-		if($apenasAplica==true){goto apenasAplica;}
-		##########################################################################################################
-		# SEPARA OS CAMPOS UTILIZADOS NA FERRAMENTA
-		##########################################################################################################
-			$campos							= new MySQL();
-			$campos->set_table(PREFIX_TABLES.'_model_campos');
-			$campos->set_order(	"posicao","ASC");
-			$campos->set_where(	'ws_id_ferramenta="'.$ws_id_ferramenta.'"');
-			$campos->select();
-
-		##########################################################################################################
-		# SELECIONA O RASCUNHO A SER APLICADO
-		##########################################################################################################
-			$get_draft				= new MySQL();
-			$get_draft->set_table(PREFIX_TABLES."_model_item");
-			$get_draft->set_where('ws_draft="1"');
-			$get_draft->set_where('AND ws_id_draft="'.$id_item.'"');
-			$get_draft->set_where('AND ws_id_ferramenta="'.$ws_id_ferramenta.'"');
-			$get_draft->select();
-			if($get_draft->_num_rows==0){
-				die('Não existe rascunho cadastrado deste ítem');
-			}
-			$rascunho = $get_draft->fetch_array[0];
-		##########################################################################################################
-		# ABRE OS DADOS DO ÍTEM A SER ALTERADO
-		##########################################################################################################
-			$Set_Item				= new MySQL();
-			$Set_Item->set_table(PREFIX_TABLES.'_model_item');
-			$Set_Item->set_where(PREFIX_TABLES.'_model_item.id="'.$id_item.'"');
-
-		##########################################################################################################
-		# ADICIONA OS REGISTROS NOS CAMPOS ADICIONADOS DA FERRAMENTA
-		##########################################################################################################
-			foreach ($campos->fetch_array as $value) {
-				if($value['coluna_mysql']!=""){
-					$rascunhoSave = mysqli_real_escape_string($_conectMySQLi_,urldecode($rascunho[$value['coluna_mysql']]));
-					$Set_Item->set_update($value['coluna_mysql'], $rascunhoSave);
+	############################################################################################################################
+	#	CASO ESTEJA LOGADO DIRETAMENTE COM SERIALKEY
+	############################################################################################################################
+		function verifyUserLogin($return=false){
+				if(ws::urlPath(3,false)){
+					$keyAccess = ws::getTokenRest(ws::urlPath(3,false),false);
+				}elseif(ws::urlPath(2,false)){
+					$keyAccess = ws::getTokenRest(ws::urlPath(2,false),false);
 				}
-			}
-			if($Set_Item->salvar()){
-				apenasAplica:
-				##########################################################################################################
-				# EXCLUI O RASCUNHO DO ÍTEM
-				##########################################################################################################
-					$get_draft				= new MySQL();
-					$get_draft->set_table(PREFIX_TABLES."_model_item");
-					$get_draft->set_where('ws_draft="1"');
-					$get_draft->set_where('AND ws_id_draft="'.$id_item.'"');
-					$get_draft->set_where('AND ws_id_ferramenta="'.$ws_id_ferramenta.'"');
-					$get_draft->exclui();
-
-				##########################################################################################################
-				# EXCLUI OS REGISTROS DAS IMAGENS DO ÍTEM ORIGINAL
-				##########################################################################################################
-					$ExclIMGs				= new MySQL();
-					$ExclIMGs->set_table(PREFIX_TABLES."_model_img");
-					$ExclIMGs->set_where('ws_draft="0"');
-					$ExclIMGs->set_where('AND ws_id_draft="0"');
-					$ExclIMGs->set_where('AND ws_id_ferramenta="'.$ws_id_ferramenta.'"');
-					$ExclIMGs->set_where('AND id_item="'.$id_item.'"');
-					if($apenasAplica==true){
-						$ApenasAplicaQuery = new MySQL();
-						$ApenasAplicaQuery->select("SELECT COUNT(*) as count FROM ".PREFIX_TABLES."_model_img where(ws_draft='1' AND ws_id_ferramenta='".$ws_id_ferramenta."' AND id_item='".$id_item."')");
-						$ExclIMGs->set_where('AND '.$ApenasAplicaQuery->obj[0]->count.'>0');
+				$log_session = new session();
+				if(	
+					(SECURE==TRUE && $keyAccess==false) &&
+					($log_session->verifyLogin()!=true)
+				){
+					$log_session->finish();
+					if($return==true){ 
+						return false;
+					}else{
+						echo '<script>
+									document.cookie.split(";").forEach(function(c) {document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");}); 
+									if(window.location.pathname=="/admin/"){
+										window.top.location.reload();
+									}else{
+										window.top.location = "/admin/";
+									}
+							</script>';
+						exit;
 					}
-					$ExclIMGs->exclui();
-				##########################################################################################################
-				# AGORA HABILITA COMO ORIGINAL OS REGISTROS DO RASCUNHO
-				##########################################################################################################
-					$Set_img				= new MySQL();
-					$Set_img->set_table(PREFIX_TABLES.'_model_img');
-					$Set_img->set_where('ws_draft="1" AND ws_id_draft="'.$id_item.'"');
-					$Set_img->set_update("ws_draft","0");
-					$Set_img->set_update("ws_id_draft","0");
-					$Set_img->salvar();
-
-				##########################################################################################################
-				# EXCLUI AS GALERIAS ORIGINAIS
-				##########################################################################################################
-					$ExclGal = new MySQL();
-					$ExclGal->set_table(PREFIX_TABLES.'_model_gal');
-					$ExclGal->set_where('ws_draft="0"');
-					$ExclGal->set_where('AND ws_id_draft="0"');
-					$ExclGal->set_where('AND ws_id_ferramenta="'.$ws_id_ferramenta.'"');
-					$ExclGal->set_where('AND id_item="'.$id_item.'"');
-					if($apenasAplica==true){
-						$ApenasAplicaQuery = new MySQL();
-						$ApenasAplicaQuery->select("SELECT COUNT(*) as contador FROM ".PREFIX_TABLES."_model_gal where(ws_draft='1' AND ws_id_ferramenta='".$ws_id_ferramenta."' AND id_item='".$id_item."' AND ws_id_draft='".$id_item."')");
-						$ExclGal->set_where('AND '.$ApenasAplicaQuery->obj[0]->contador.'>0');
-					}				
-					$ExclGal->exclui();
-
-				##########################################################################################################
-				# APLICANDO AS GALERIAS DE FOTOS
-				##########################################################################################################
-					$Set_img = new MySQL();
-					$Set_img->set_table(PREFIX_TABLES.'_model_gal');
-					$Set_img->set_where('ws_draft="1" AND ws_id_draft="'.$id_item.'"');
-					$Set_img->set_update("ws_draft","0");
-					$Set_img->set_update("ws_id_draft","0");
-					$Set_img->salvar();
-
-				##########################################################################################################
-				# EXCLUI AS IMAGENS DAS GALERIAS ORIGINAIS
-				##########################################################################################################
-					$ExclGal = new MySQL();
-					$ExclGal->set_table(PREFIX_TABLES.'_model_img_gal');
-					$ExclGal->set_where('ws_draft="0" AND ws_id_draft="0" AND ws_id_ferramenta="'.$ws_id_ferramenta.'" AND id_item="'.$id_item.'"');
-					if($apenasAplica==true){
-						$ApenasAplicaQuery = new MySQL();
-						$ApenasAplicaQuery->select("SELECT COUNT(*) as contador FROM ".PREFIX_TABLES."_model_img_gal where(ws_draft='1' AND ws_id_ferramenta='".$ws_id_ferramenta."' AND id_item='".$id_item."' AND ws_id_draft='".$id_item."')");
-						$ExclGal->set_where('AND '.$ApenasAplicaQuery->obj[0]->contador.'>0');
+				}else{
+					if($return==true){ 
+						return true;
 					}
-					$ExclGal->exclui();
+				}
+		}
+		
+	function aplicaRascunho($ws_id_ferramenta,$id_item,$apenasAplica=false){
+			global $_conectMySQLi_;
+			if($apenasAplica==true){goto apenasAplica;}
+			##########################################################################################################
+			# SEPARA OS CAMPOS UTILIZADOS NA FERRAMENTA
+			##########################################################################################################
+				$campos							= new MySQL();
+				$campos->set_table(PREFIX_TABLES.'_model_campos');
+				$campos->set_order(	"posicao","ASC");
+				$campos->set_where(	'ws_id_ferramenta="'.$ws_id_ferramenta.'"');
+				$campos->select();
 
-				##########################################################################################################
-				# APLICANDO AS IMAGENS NAS GALERIAS DE FOTOS
-				##########################################################################################################
-					$Set_img = new MySQL();
-					$Set_img->set_table(PREFIX_TABLES.'_model_img_gal');
-					$Set_img->set_where('ws_draft="1" AND ws_id_draft="'.$id_item.'"');
-					$Set_img->set_update("ws_draft","0");
-					$Set_img->set_update("ws_id_draft","0");
-					$Set_img->salvar();
+			##########################################################################################################
+			# SELECIONA O RASCUNHO A SER APLICADO
+			##########################################################################################################
+				$get_draft				= new MySQL();
+				$get_draft->set_table(PREFIX_TABLES."_model_item");
+				$get_draft->set_where('ws_draft="1"');
+				$get_draft->set_where('AND ws_id_draft="'.$id_item.'"');
+				$get_draft->set_where('AND ws_id_ferramenta="'.$ws_id_ferramenta.'"');
+				$get_draft->select();
+				if($get_draft->_num_rows==0){
+					die('Não existe rascunho cadastrado deste ítem');
+				}
+				$rascunho = $get_draft->fetch_array[0];
+			##########################################################################################################
+			# ABRE OS DADOS DO ÍTEM A SER ALTERADO
+			##########################################################################################################
+				$Set_Item				= new MySQL();
+				$Set_Item->set_table(PREFIX_TABLES.'_model_item');
+				$Set_Item->set_where(PREFIX_TABLES.'_model_item.id="'.$id_item.'"');
 
-				##########################################################################################################
-				# EXCLUI OS REGISTROS DOS ARQUIVOS DO ÍTEM ORIGINAL
-				##########################################################################################################
-					$ExclFiles				= new MySQL();
-					$ExclFiles->set_table(PREFIX_TABLES."_model_files");
-					$ExclFiles->set_where('ws_draft="0"');
-					$ExclFiles->set_where('AND ws_id_draft="0"');
-					$ExclFiles->set_where('AND ws_id_ferramenta="'.$ws_id_ferramenta.'"');
-					$ExclFiles->set_where('AND id_item="'.$id_item.'"');
-					if($apenasAplica==true){						
-						$ApenasAplicaQuery = new MySQL();
-						$ApenasAplicaQuery->select("SELECT COUNT(*) as contador FROM ".PREFIX_TABLES."_model_files where(ws_draft='1' AND ws_id_ferramenta='".$ws_id_ferramenta."' AND id_item='".$id_item."' AND ws_id_draft='".$id_item."')");
-						$ExclFiles->set_where('AND '.$ApenasAplicaQuery->obj[0]->contador.'>0');
+			##########################################################################################################
+			# ADICIONA OS REGISTROS NOS CAMPOS ADICIONADOS DA FERRAMENTA
+			##########################################################################################################
+				foreach ($campos->fetch_array as $value) {
+					if($value['coluna_mysql']!=""){
+						$rascunhoSave = mysqli_real_escape_string($_conectMySQLi_,urldecode($rascunho[$value['coluna_mysql']]));
+						$Set_Item->set_update($value['coluna_mysql'], $rascunhoSave);
 					}
-					$ExclFiles->exclui();
+				}
+				if($Set_Item->salvar()){
+					apenasAplica:
+					##########################################################################################################
+					# EXCLUI O RASCUNHO DO ÍTEM
+					##########################################################################################################
+						$get_draft				= new MySQL();
+						$get_draft->set_table(PREFIX_TABLES."_model_item");
+						$get_draft->set_where('ws_draft="1"');
+						$get_draft->set_where('AND ws_id_draft="'.$id_item.'"');
+						$get_draft->set_where('AND ws_id_ferramenta="'.$ws_id_ferramenta.'"');
+						$get_draft->exclui();
 
-				##########################################################################################################
-				# AGORA HABILITA COMO ORIGINAL OS REGISTROS DO RASCUNHO
-				##########################################################################################################
-					$Set_files				= new MySQL();
-					$Set_files->set_table(PREFIX_TABLES.'_model_files');
-					$Set_files->set_where('ws_draft="1" AND ws_id_draft="'.$id_item.'"');
-					$Set_files->set_update("ws_draft","0");
-					$Set_files->set_update("ws_id_draft","0");
-					$Set_files->salvar();
+					##########################################################################################################
+					# EXCLUI OS REGISTROS DAS IMAGENS DO ÍTEM ORIGINAL
+					##########################################################################################################
+						$ExclIMGs				= new MySQL();
+						$ExclIMGs->set_table(PREFIX_TABLES."_model_img");
+						$ExclIMGs->set_where('ws_draft="0"');
+						$ExclIMGs->set_where('AND ws_id_draft="0"');
+						$ExclIMGs->set_where('AND ws_id_ferramenta="'.$ws_id_ferramenta.'"');
+						$ExclIMGs->set_where('AND id_item="'.$id_item.'"');
+						if($apenasAplica==true){
+							$ApenasAplicaQuery = new MySQL();
+							$ApenasAplicaQuery->select("SELECT COUNT(*) as count FROM ".PREFIX_TABLES."_model_img where(ws_draft='1' AND ws_id_ferramenta='".$ws_id_ferramenta."' AND id_item='".$id_item."')");
+							$ExclIMGs->set_where('AND '.$ApenasAplicaQuery->obj[0]->count.'>0');
+						}
+						$ExclIMGs->exclui();
+					##########################################################################################################
+					# AGORA HABILITA COMO ORIGINAL OS REGISTROS DO RASCUNHO
+					##########################################################################################################
+						$Set_img				= new MySQL();
+						$Set_img->set_table(PREFIX_TABLES.'_model_img');
+						$Set_img->set_where('ws_draft="1" AND ws_id_draft="'.$id_item.'"');
+						$Set_img->set_update("ws_draft","0");
+						$Set_img->set_update("ws_id_draft","0");
+						$Set_img->salvar();
 
-				##########################################################################################################
-				# EXCLUI OS REGISTROS DOS RELACIONAMENTOS ORIGINAIS
-				##########################################################################################################
-					$ExclLink				= new MySQL();
-					$ExclLink->set_table(PREFIX_TABLES."_model_link_prod_cat");
-					$ExclLink->set_where(' ws_draft="0" ');
-					$ExclLink->set_where('AND ws_id_draft="0" ');
-					$ExclLink->set_where('AND ws_id_ferramenta="'.$ws_id_ferramenta.'"');
-					$ExclLink->set_where('AND id_item="'.$id_item.'"');
-					$ExclLink->exclui();
+					##########################################################################################################
+					# EXCLUI AS GALERIAS ORIGINAIS
+					##########################################################################################################
+						$ExclGal = new MySQL();
+						$ExclGal->set_table(PREFIX_TABLES.'_model_gal');
+						$ExclGal->set_where('ws_draft="0"');
+						$ExclGal->set_where('AND ws_id_draft="0"');
+						$ExclGal->set_where('AND ws_id_ferramenta="'.$ws_id_ferramenta.'"');
+						$ExclGal->set_where('AND id_item="'.$id_item.'"');
+						if($apenasAplica==true){
+							$ApenasAplicaQuery = new MySQL();
+							$ApenasAplicaQuery->select("SELECT COUNT(*) as contador FROM ".PREFIX_TABLES."_model_gal where(ws_draft='1' AND ws_id_ferramenta='".$ws_id_ferramenta."' AND id_item='".$id_item."' AND ws_id_draft='".$id_item."')");
+							$ExclGal->set_where('AND '.$ApenasAplicaQuery->obj[0]->contador.'>0');
+						}				
+						$ExclGal->exclui();
 
-				##########################################################################################################
-				# AGORA HABILITA COMO ORIGINAL OS RASCUNHOS
-				##########################################################################################################
-					$Set_Link				= new MySQL();
-					$Set_Link->set_table(PREFIX_TABLES.'_model_link_prod_cat');
-					$Set_Link->set_where('ws_draft="1" AND ws_id_draft="'.$id_item.'"');
-					$Set_Link->set_where('AND id_item="'.$id_item.'"');
-					$Set_Link->set_update("ws_draft","0");
-					$Set_Link->set_update("ws_id_draft","0");
-					$Set_Link->salvar();
-					
-				##########################################################################################################
-				# EXCLUI OS REGISTROS DOS RELACIONAMENTOS ORIGINAIS
-				##########################################################################################################
-					$ExclLink				= new MySQL();
-					$ExclLink->set_table(PREFIX_TABLES."ws_link_itens");
-					$ExclLink->set_where(' ws_draft="0"  AND ws_id_draft="0"  AND id_item="'.$id_item.'"');
-					$ExclLink->exclui();
+					##########################################################################################################
+					# APLICANDO AS GALERIAS DE FOTOS
+					##########################################################################################################
+						$Set_img = new MySQL();
+						$Set_img->set_table(PREFIX_TABLES.'_model_gal');
+						$Set_img->set_where('ws_draft="1" AND ws_id_draft="'.$id_item.'"');
+						$Set_img->set_update("ws_draft","0");
+						$Set_img->set_update("ws_id_draft","0");
+						$Set_img->salvar();
 
-				##########################################################################################################
-				# AGORA HABILITA COMO ORIGINAL OS RASCUNHOS
-				##########################################################################################################
-					$Set_Link				= new MySQL();
-					$Set_Link->set_table(PREFIX_TABLES.'ws_link_itens');
-					$Set_Link->set_where('ws_draft="1" AND ws_id_draft="'.$id_item.'" AND id_item="'.$id_item.'"');
-					$Set_Link->set_update("ws_draft","0");
-					$Set_Link->set_update("ws_id_draft","0");
-					$Set_Link->salvar();
+					##########################################################################################################
+					# EXCLUI AS IMAGENS DAS GALERIAS ORIGINAIS
+					##########################################################################################################
+						$ExclGal = new MySQL();
+						$ExclGal->set_table(PREFIX_TABLES.'_model_img_gal');
+						$ExclGal->set_where('ws_draft="0" AND ws_id_draft="0" AND ws_id_ferramenta="'.$ws_id_ferramenta.'" AND id_item="'.$id_item.'"');
+						if($apenasAplica==true){
+							$ApenasAplicaQuery = new MySQL();
+							$ApenasAplicaQuery->select("SELECT COUNT(*) as contador FROM ".PREFIX_TABLES."_model_img_gal where(ws_draft='1' AND ws_id_ferramenta='".$ws_id_ferramenta."' AND id_item='".$id_item."' AND ws_id_draft='".$id_item."')");
+							$ExclGal->set_where('AND '.$ApenasAplicaQuery->obj[0]->contador.'>0');
+						}
+						$ExclGal->exclui();
 
-				##########################################################################################################
-				# END
-				##########################################################################################################
-			};
+					##########################################################################################################
+					# APLICANDO AS IMAGENS NAS GALERIAS DE FOTOS
+					##########################################################################################################
+						$Set_img = new MySQL();
+						$Set_img->set_table(PREFIX_TABLES.'_model_img_gal');
+						$Set_img->set_where('ws_draft="1" AND ws_id_draft="'.$id_item.'"');
+						$Set_img->set_update("ws_draft","0");
+						$Set_img->set_update("ws_id_draft","0");
+						$Set_img->salvar();
 
-		return true;
-}
+					##########################################################################################################
+					# EXCLUI OS REGISTROS DOS ARQUIVOS DO ÍTEM ORIGINAL
+					##########################################################################################################
+						$ExclFiles				= new MySQL();
+						$ExclFiles->set_table(PREFIX_TABLES."_model_files");
+						$ExclFiles->set_where('ws_draft="0"');
+						$ExclFiles->set_where('AND ws_id_draft="0"');
+						$ExclFiles->set_where('AND ws_id_ferramenta="'.$ws_id_ferramenta.'"');
+						$ExclFiles->set_where('AND id_item="'.$id_item.'"');
+						if($apenasAplica==true){						
+							$ApenasAplicaQuery = new MySQL();
+							$ApenasAplicaQuery->select("SELECT COUNT(*) as contador FROM ".PREFIX_TABLES."_model_files where(ws_draft='1' AND ws_id_ferramenta='".$ws_id_ferramenta."' AND id_item='".$id_item."' AND ws_id_draft='".$id_item."')");
+							$ExclFiles->set_where('AND '.$ApenasAplicaQuery->obj[0]->contador.'>0');
+						}
+						$ExclFiles->exclui();
+
+					##########################################################################################################
+					# AGORA HABILITA COMO ORIGINAL OS REGISTROS DO RASCUNHO
+					##########################################################################################################
+						$Set_files				= new MySQL();
+						$Set_files->set_table(PREFIX_TABLES.'_model_files');
+						$Set_files->set_where('ws_draft="1" AND ws_id_draft="'.$id_item.'"');
+						$Set_files->set_update("ws_draft","0");
+						$Set_files->set_update("ws_id_draft","0");
+						$Set_files->salvar();
+
+					##########################################################################################################
+					# EXCLUI OS REGISTROS DOS RELACIONAMENTOS ORIGINAIS
+					##########################################################################################################
+						$ExclLink				= new MySQL();
+						$ExclLink->set_table(PREFIX_TABLES."_model_link_prod_cat");
+						$ExclLink->set_where(' ws_draft="0" ');
+						$ExclLink->set_where('AND ws_id_draft="0" ');
+						$ExclLink->set_where('AND ws_id_ferramenta="'.$ws_id_ferramenta.'"');
+						$ExclLink->set_where('AND id_item="'.$id_item.'"');
+						$ExclLink->exclui();
+
+					##########################################################################################################
+					# AGORA HABILITA COMO ORIGINAL OS RASCUNHOS
+					##########################################################################################################
+						$Set_Link				= new MySQL();
+						$Set_Link->set_table(PREFIX_TABLES.'_model_link_prod_cat');
+						$Set_Link->set_where('ws_draft="1" AND ws_id_draft="'.$id_item.'"');
+						$Set_Link->set_where('AND id_item="'.$id_item.'"');
+						$Set_Link->set_update("ws_draft","0");
+						$Set_Link->set_update("ws_id_draft","0");
+						$Set_Link->salvar();
+						
+					##########################################################################################################
+					# EXCLUI OS REGISTROS DOS RELACIONAMENTOS ORIGINAIS
+					##########################################################################################################
+						$ExclLink				= new MySQL();
+						$ExclLink->set_table(PREFIX_TABLES."ws_link_itens");
+						$ExclLink->set_where(' ws_draft="0"  AND ws_id_draft="0"  AND id_item="'.$id_item.'"');
+						$ExclLink->exclui();
+
+					##########################################################################################################
+					# AGORA HABILITA COMO ORIGINAL OS RASCUNHOS
+					##########################################################################################################
+						$Set_Link				= new MySQL();
+						$Set_Link->set_table(PREFIX_TABLES.'ws_link_itens');
+						$Set_Link->set_where('ws_draft="1" AND ws_id_draft="'.$id_item.'" AND id_item="'.$id_item.'"');
+						$Set_Link->set_update("ws_draft","0");
+						$Set_Link->set_update("ws_id_draft","0");
+						$Set_Link->salvar();
+
+					##########################################################################################################
+					# END
+					##########################################################################################################
+				};
+
+			return true;
+	}
 function criaRascunho($ws_id_ferramenta=0,$id_item=null, $imagens=false){
 		global $_conectMySQLi_;
 		##########################################################################################################
@@ -1920,8 +1910,32 @@ function encodeURIComponent($string) {$result = "";for ($i = 0; $i < strlen($str
 function encodeURIComponentbycharacter($char) {if ($char == "+") { return "%20"; }   if ($char == "%21") { return "!"; }   if ($char == "%27") { return '"'; }   if ($char == "%28") { return "("; }   if ($char == "%29") { return ")"; }   if ($char == "%2A") { return "*"; }   if ($char == "%7E") { return "~"; }   if ($char == "%80") { return "%E2%82%AC"; }   if ($char == "%81") { return "%C2%81"; }   if ($char == "%82") { return "%E2%80%9A"; }   if ($char == "%83") { return "%C6%92"; }   if ($char == "%84") { return "%E2%80%9E"; }   if ($char == "%85") { return "%E2%80%A6"; }   if ($char == "%86") { return "%E2%80%A0"; }   if ($char == "%87") { return "%E2%80%A1"; }   if ($char == "%88") { return "%CB%86"; }   if ($char == "%89") { return "%E2%80%B0"; }   if ($char == "%8A") { return "%C5%A0"; }   if ($char == "%8B") { return "%E2%80%B9"; }   if ($char == "%8C") { return "%C5%92"; }   if ($char == "%8D") { return "%C2%8D"; }   if ($char == "%8E") { return "%C5%BD"; }   if ($char == "%8F") { return "%C2%8F"; }   if ($char == "%90") { return "%C2%90"; }   if ($char == "%91") { return "%E2%80%98"; }   if ($char == "%92") { return "%E2%80%99"; }   if ($char == "%93") { return "%E2%80%9C"; }   if ($char == "%94") { return "%E2%80%9D"; }   if ($char == "%95") { return "%E2%80%A2"; }   if ($char == "%96") { return "%E2%80%93"; }   if ($char == "%97") { return "%E2%80%94"; }   if ($char == "%98") { return "%CB%9C"; }   if ($char == "%99") { return "%E2%84%A2"; }   if ($char == "%9A") { return "%C5%A1"; }   if ($char == "%9B") { return "%E2%80%BA"; }   if ($char == "%9C") { return "%C5%93"; }   if ($char == "%9D") { return "%C2%9D"; }   if ($char == "%9E") { return "%C5%BE"; }   if ($char == "%9F") { return "%C5%B8"; }   if ($char == "%A0") { return "%C2%A0"; }   if ($char == "%A1") { return "%C2%A1"; }   if ($char == "%A2") { return "%C2%A2"; }   if ($char == "%A3") { return "%C2%A3"; }   if ($char == "%A4") { return "%C2%A4"; }   if ($char == "%A5") { return "%C2%A5"; }   if ($char == "%A6") { return "%C2%A6"; }   if ($char == "%A7") { return "%C2%A7"; }   if ($char == "%A8") { return "%C2%A8"; }   if ($char == "%A9") { return "%C2%A9"; }   if ($char == "%AA") { return "%C2%AA"; }   if ($char == "%AB") { return "%C2%AB"; }   if ($char == "%AC") { return "%C2%AC"; }   if ($char == "%AD") { return "%C2%AD"; }   if ($char == "%AE") { return "%C2%AE"; }   if ($char == "%AF") { return "%C2%AF"; }   if ($char == "%B0") { return "%C2%B0"; }   if ($char == "%B1") { return "%C2%B1"; }   if ($char == "%B2") { return "%C2%B2"; }   if ($char == "%B3") { return "%C2%B3"; }   if ($char == "%B4") { return "%C2%B4"; }   if ($char == "%B5") { return "%C2%B5"; }   if ($char == "%B6") { return "%C2%B6"; }   if ($char == "%B7") { return "%C2%B7"; }   if ($char == "%B8") { return "%C2%B8"; }   if ($char == "%B9") { return "%C2%B9"; }   if ($char == "%BA") { return "%C2%BA"; }   if ($char == "%BB") { return "%C2%BB"; }   if ($char == "%BC") { return "%C2%BC"; }   if ($char == "%BD") { return "%C2%BD"; }   if ($char == "%BE") { return "%C2%BE"; }   if ($char == "%BF") { return "%C2%BF"; }   if ($char == "%C0") { return "%C3%80"; }   if ($char == "%C1") { return "%C3%81"; }   if ($char == "%C2") { return "%C3%82"; }   if ($char == "%C3") { return "%C3%83"; }   if ($char == "%C4") { return "%C3%84"; }   if ($char == "%C5") { return "%C3%85"; }   if ($char == "%C6") { return "%C3%86"; }   if ($char == "%C7") { return "%C3%87"; }   if ($char == "%C8") { return "%C3%88"; }   if ($char == "%C9") { return "%C3%89"; }   if ($char == "%CA") { return "%C3%8A"; }   if ($char == "%CB") { return "%C3%8B"; }   if ($char == "%CC") { return "%C3%8C"; }   if ($char == "%CD") { return "%C3%8D"; }   if ($char == "%CE") { return "%C3%8E"; }   if ($char == "%CF") { return "%C3%8F"; }   if ($char == "%D0") { return "%C3%90"; }   if ($char == "%D1") { return "%C3%91"; }   if ($char == "%D2") { return "%C3%92"; }   if ($char == "%D3") { return "%C3%93"; }   if ($char == "%D4") { return "%C3%94"; }   if ($char == "%D5") { return "%C3%95"; }   if ($char == "%D6") { return "%C3%96"; }   if ($char == "%D7") { return "%C3%97"; }   if ($char == "%D8") { return "%C3%98"; }   if ($char == "%D9") { return "%C3%99"; }   if ($char == "%DA") { return "%C3%9A"; }   if ($char == "%DB") { return "%C3%9B"; }   if ($char == "%DC") { return "%C3%9C"; }   if ($char == "%DD") { return "%C3%9D"; }   if ($char == "%DE") { return "%C3%9E"; }   if ($char == "%DF") { return "%C3%9F"; }   if ($char == "%E0") { return "%C3%A0"; }   if ($char == "%E1") { return "%C3%A1"; }   if ($char == "%E2") { return "%C3%A2"; }   if ($char == "%E3") { return "%C3%A3"; }   if ($char == "%E4") { return "%C3%A4"; }   if ($char == "%E5") { return "%C3%A5"; }   if ($char == "%E6") { return "%C3%A6"; }   if ($char == "%E7") { return "%C3%A7"; }   if ($char == "%E8") { return "%C3%A8"; }   if ($char == "%E9") { return "%C3%A9"; }   if ($char == "%EA") { return "%C3%AA"; }   if ($char == "%EB") { return "%C3%AB"; }   if ($char == "%EC") { return "%C3%AC"; }   if ($char == "%ED") { return "%C3%AD"; }   if ($char == "%EE") { return "%C3%AE"; }   if ($char == "%EF") { return "%C3%AF"; }   if ($char == "%F0") { return "%C3%B0"; }   if ($char == "%F1") { return "%C3%B1"; }   if ($char == "%F2") { return "%C3%B2"; }   if ($char == "%F3") { return "%C3%B3"; }   if ($char == "%F4") { return "%C3%B4"; }   if ($char == "%F5") { return "%C3%B5"; }   if ($char == "%F6") { return "%C3%B6"; }   if ($char == "%F7") { return "%C3%B7"; }   if ($char == "%F8") { return "%C3%B8"; }   if ($char == "%F9") { return "%C3%B9"; }   if ($char == "%FA") { return "%C3%BA"; }   if ($char == "%FB") { return "%C3%BB"; }   if ($char == "%FC") { return "%C3%BC"; }   if ($char == "%FD") { return "%C3%BD"; }   if ($char == "%FE") { return "%C3%BE"; }   if ($char == "%FF") { return "%C3%BF"; }   return $char;}
 function _verifica_tabela($tabela)				{global $_conectMySQLi_;while ($row = mysqli_fetch_row(mysqli_query($_conectMySQLi_,"SHOW TABLES"))) { if($tabela==$row[0]){return false ;exit;};}return true ;exit;}
 function _define_page_($var, $page)				{ob_start();require_once $page; define($var, ob_get_clean());ob_end_flush();}
-function _encripta( $t, $k)						{$e = mcrypt_encrypt(MCRYPT_BLOWFISH, $k, $t, MCRYPT_MODE_ECB);$b = base64_encode($e);return $b;}
-function _decripta( $t, $k)						{$b = base64_decode($t);$d = mcrypt_decrypt(MCRYPT_BLOWFISH, $k, $b, MCRYPT_MODE_ECB);return utf8_decode($d);}
+
+
+function _encripta( $plaintext, $key){	
+	$ivlen 			= openssl_cipher_iv_length($cipher="AES-128-CBC");
+	$iv 			= openssl_random_pseudo_bytes($ivlen);
+	$ciphertext_raw = openssl_encrypt($plaintext, $cipher, $key, $options=OPENSSL_RAW_DATA, $iv);
+	$hmac 			= hash_hmac('sha256', $ciphertext_raw, $key, $as_binary=true);
+	return base64_encode($iv.$hmac.$ciphertext_raw);
+}
+function _decripta( $ciphertext, $key) {	
+	$c 					= base64_decode($ciphertext);
+	$ivlen 				= openssl_cipher_iv_length($cipher="AES-128-CBC");
+	$iv 				= substr($c, 0, $ivlen);
+	$hmac 				= substr($c, $ivlen, $sha2len=32);
+	$ciphertext_raw		= substr($c, $ivlen+$sha2len);
+	$original_plaintext = openssl_decrypt($ciphertext_raw, $cipher, $key, $options=OPENSSL_RAW_DATA, $iv);
+	$calcmac 			= hash_hmac('sha256', $ciphertext_raw, $key, $as_binary=true);
+	if (hash_equals($hmac, $calcmac)){
+	    return $original_plaintext;
+	}else{
+	    return false;
+	}
+}
+
+
+
 function _return_code($codigo)					{return '<div id="editor" class="prettyprint linenums" style="width: 710px; margin-bottom: -40px;margin-left: 15px; text-align: left; padding: 10px 20px 10px 40px; background-color: rgb(0, 0, 0);text-shadow: none;">&lt;?'.str_replace(array('<','>'), array('&lt;','&gt;'),$codigo).'?&gt;</div><script type="text/javascript">prettyPrint();</script>';}
 function url_amigavel_filename($texto){
 	$array1 = array("{","}","[","]","´","&",",","/"," ","á","à", "â", "ã", "ä", "é", "è", "ê", "ë", "í", "ì", "î", "ï", "ó", "ò", "ô", "õ", "ö", "ú", "ù", "û", "ü", "ç");
@@ -2016,21 +2030,23 @@ function _wp_json_convert_string( $string ) {
 }
 function _set_session($id){
 		ob_start();
-		ini_set('session.cookie_secure',	1);
-		ini_set('session.cookie_httponly',	1);
-		ini_set('session.cookie_lifetime', 	"432000");
-		ini_set("session.gc_maxlifetime",	"432000");
-		ini_set("session.use_trans_sid", 	0);
-		ini_set('session.use_cookies', 		1);
-		ini_set('session.use_only_cookies', 1);
-		ini_set('session.name', 			'_WS_');
-		session_cache_expire("432000");
-		session_cache_limiter('private');
-		session_id($id);
-		session_start();
+		if(empty($_SESSION) && session_id()!=$id){
+			ini_set('session.cookie_secure',	1);
+			ini_set('session.cookie_httponly',	1);
+			ini_set('session.cookie_lifetime', "432000");
+			ini_set("session.gc_maxlifetime",	"432000");
+			ini_set("session.use_trans_sid", 	0);
+			ini_set('session.use_cookies', 	1);
+			ini_set('session.use_only_cookies', 1);
+			ini_set('session.name', 			'_WS_');
+			session_cache_expire("432000");
+			session_cache_limiter('private');
+			session_id($id);
+			session_name($id);
+			session_start();
+		}
 };
 function _session(){
-	
 	if(isset($_COOKIE['ws_session'])){
 		session_name('_WS_');
 		@session_id($_COOKIE['ws_session']);

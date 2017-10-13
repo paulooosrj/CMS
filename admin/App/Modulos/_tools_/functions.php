@@ -821,7 +821,9 @@
 		$s->set_where('visualizado="0"');
 		$s->set_where('AND excluido="0"');
 		$s->select();
-		$_SESSION['logs'] = $s->_num_rows;
+
+		$session = new session();
+		$session->set('logs',$s->_num_rows);
 	}
 	function listnerNotify() {
 		set_time_limit(0);
@@ -2012,37 +2014,6 @@
 	
 	*/
 	
-	function printLogNotifica() {
-		$mensagens = "";
-		$s         = new MySQL();
-		$s->set_table(PREFIX_TABLES . 'ws_log');
-		$s->select();
-		
-		if (empty($_SESSION['logs'])) {
-			$_SESSION['logs'] = $s->_num_rows;
-		} elseif (intval($_SESSION['logs']) < intval($s->_num_rows)) {
-			$_SESSION['oldLogs'] = $_SESSION['logs'];
-			$_SESSION['logs']    = $s->_num_rows;
-			$count               = intval($_SESSION['logs']) - intval($_SESSION['oldLogs']);
-			$s                   = new MySQL();
-			$s->set_table(PREFIX_TABLES . 'ws_log');
-			$s->set_limit($count);
-			$s->set_order("id", "DESC");
-			$s->select();
-			foreach ($s->fetch_array as $ws_log) {
-				$user_mysql = new MySQL();
-				$user_mysql->set_table(PREFIX_TABLES . 'ws_usuarios');
-				$user_mysql->set_where('id="' . $ws_log['id_user'] . '"');
-				$user_mysql->debug(0);
-				$user_mysql->select();
-				//if($ws_log['id_user'] != $_SESSION['user']['id']){
-				$mensagens .= 'notify("warning","<strong>' . $user_mysql->fetch_array[0]['nome'] . '</strong> ' . $ws_log['titulo'] . '","bottomRight");';
-				//}
-			}
-		}
-		echo $mensagens;
-	}
-	
 	function curl_info($url) {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
@@ -2055,7 +2026,8 @@
 		return $info;
 	}
 	function situationpanel() {
-		echo @$_SESSION["lisence"]["situacao"];
+		$session= new session();
+		echo @$session->get("lisence_situacao");
 		exit;
 	}
 	function returnrefer() {
@@ -2636,8 +2608,9 @@
 		}
 	}
 	function salvaFerramenta() {
-		global $_conectMySQLi_;
-		$Salva = new MySQL();
+		global 		$_conectMySQLi_;
+		$session 	= new session();
+		$Salva 		= new MySQL();
 		$Salva->set_table(PREFIX_TABLES . 'ws_ferramentas');
 		$Salva->set_where('id="' . $_REQUEST['ws_id_ferramenta'] . '"');
 		$_getInput = array();
@@ -2715,7 +2688,9 @@
 			$t_ferramentas->set_where('id="' . $_REQUEST['ws_id_ferramenta'] . '"');
 			$t_ferramentas->set_update('_alterado_', '1');
 			$t_ferramentas->salvar();
-			$_SESSION['ws_id_ferramenta'] = $_REQUEST['ws_id_ferramenta'];
+
+			$session->set('ws_id_ferramenta',$_REQUEST['ws_id_ferramenta']);
+
 			ws::updateTool($_REQUEST['ws_id_ferramenta']);
 			echo "sucesso";
 			exit;
@@ -2966,7 +2941,10 @@
 	//####################################################################################################################
 	//####################################################################################################################
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
-	_session();
+	//_session();
+	$session = new session();
+
+
 	if (isset($_REQUEST['function'])) {
 		_exec($_REQUEST['function']);
 	}

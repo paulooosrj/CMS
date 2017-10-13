@@ -7,32 +7,65 @@ class session{
 	private $stringone;
 	private $duratacookie;
 	private $secret;
-	public function __construct ($cook="cookie",$secury=1,$salt="classeSegura",$prefix="_WS_") {
-		$this->type 		= $cook;
-		$this->secury 		= $secury;
-		$this->preStr 		= $prefix;
-		$this->maxCookie	=20;
-		$this->cookieLenght	=3096;	
-		$this->duratacookie	=3600*24;	
-		$this->secred 		=$salt;		
-		if ($this->type=="cookie") {
-			if($secury==1){$this->stringone = $this->prelevaStringaTotale();}
-		} else {
-			if($secury==0){
-				ini_set("session.gc_maxlifetime","432000");
-				ini_set("url_rewriter.tags","");
-				ini_set("session.use_trans_sid", false);
-				session_start();
-			}else{
-				
-				ini_set("session.gc_maxlifetime","432000");
-				ini_set("url_rewriter.tags","");
-				ini_set("session.use_trans_sid", false);
-				session_id($this->crypta($this->preStr));
-				session_name($this->crypta($this->preStr));
-				session_start();
+	public function __construct ($name="ws-session2") {
+		$this->type 		= 	"session"; //cookie
+		$this->secury 		= 	1;
+		$this->preStr 		= 	$name; 
+		$this->prefix 		= 	"ws-"; 
+		$this->secret 		=	LOGGED_IN_SALT;		
+		$this->maxCookie	=	20;
+		$this->CoockieIdSess=	md5('ws-idsess');
+		$this->cookieLenght	=	3096;	
+		$this->duratacookie	=	(time() + ( 24 * 3600));	
+		$this->newName 		= 	strtolower($this->prefix.substr(str_replace(array("_","-","==","="),"",base64_encode(md5($this->preStr))),0,256));
+		$this->start();
+	}
+
+	public function start() {
+		if($this->verifyLogin()==false){
+			if ($this->type=="cookie") {
+				if($this->secury==1){
+					$this->stringone = $this->prelevaStringaTotale();
+				}
+			} else {
+				if($this->secury==0){
+					ini_set("session.gc_maxlifetime","432000");
+					ini_set("url_rewriter.tags","");
+					ini_set("session.use_trans_sid", false);
+					if(empty($_SESSION) && session_id()!=$this->preStr){
+						session_id($this->preStr);
+						session_name($this->preStr);
+						session_start();
+					}
+				}else{
+						ini_set("session.cookie_secure",true);
+						ini_set("session.cookie_httponly",true);
+						ini_set("session.use_trans_sid", false);
+
+					 if(
+						 	(empty($_COOKIE[$this->CoockieIdSess])) ||
+						 	(isset($_COOKIE[$this->CoockieIdSess]) && $_COOKIE[$this->CoockieIdSess]!=$this->newName) 
+					 ){
+						session_id($this->newName);
+						session_name($this->newName);
+						session_start();
+						setcookie($this->CoockieIdSess, $this->newName,$this->duratacookie,'/');	
+					}else{
+						session_id($_COOKIE[$this->CoockieIdSess]);
+						session_name($_COOKIE[$this->CoockieIdSess]);
+						session_start();
+					}
+				}
 			}
 		}
+	}
+
+	public function verifyLogin() {
+		 if ($this->get("ws_log")==1) {
+		 	return true;
+		 }else{
+		 	return false;
+		 }
 	}
  	private function build_str($ar) {
 		$qs = array();
@@ -41,12 +74,12 @@ class session{
 	}
 	private function prelevaStringaTotale() {
 		$cookiesSet = array_keys($_COOKIE);
-		$out = "";
+		$out 		= "";
 		for ($x=0;$x<count($cookiesSet);$x++) {
 			if (strpos(" ".$cookiesSet[$x],$this->preStr)==1)
 				$out.=$_COOKIE[$cookiesSet[$x]];
 		}
-		return $this->decrypta($out);
+		return $this->decrypta($out,$this->secret);
 	}
 	public function debug() {return $this->prelevaStringaTotale();}
  	private function calcolaCookieLiberi() {
@@ -82,7 +115,7 @@ class session{
 						$vars=array();
 					}
 					$vars[$var] = $value;
-					$str = $this->crypta($this->build_str($vars));
+					$str = $this->crypta($this->build_str($vars),$this->secret);
 					$arr = $this->my_str_split($str,$this->cookieLenght);
 					$cLiberi = $this->calcolaCookieLiberi();
 					if (count($arr) < $cLiberi) {
@@ -98,7 +131,7 @@ class session{
 				}
 		} else {
 			if($this->secury==1){
-				$_SESSION[$var]=$this->crypta($value);
+				$_SESSION[$var]=$this->crypta($value,$this->secret);
 			}else{
 				$_SESSION[$var]=$value;
 			}
@@ -112,9 +145,7 @@ class session{
 					} else {
 						return "";
 					}
-					if(!isset($vars[$var])) {
-						return "";
-					}
+					if(!isset($vars[$var])) {return "";}
 					return $vars[$var];
 
 				}else{
@@ -122,20 +153,20 @@ class session{
 				}
 		} else {
 			if($this->secury==1){
-				return $this->decrypta($_SESSION[$var]);
+				return $this->decrypta(@$_SESSION[$var],$this->secret);
 			}else{
-				return $_SESSION[$var];
+				return @$_SESSION[$var];
 			}
 		}
 	}
  	public function finish() {
-		if ($this->type=="cookie") {
 			if($this->secury==1){
 				$cookiesSet = array_keys($_COOKIE);
 				for ($x=0;$x<count($cookiesSet);$x++) {
-					if (strpos(" ".$cookiesSet[$x],$this->preStr)==1)
+					if (strpos(" ".$cookiesSet[$x],$this->preStr)==1){
 						setcookie($cookiesSet[$x],"",time()-3600*24,"/",$_SERVER['HTTP_HOST']);
 						$this->stringone="";
+					}
 				}
 			}else{
 				$cookiesSet = array_keys($_COOKIE);
@@ -143,31 +174,22 @@ class session{
 					setcookie($cookiesSet[$x],"",time()-3600*24,"/", $_SERVER['HTTP_HOST'] );
 				}
 			}
-		} else {
+			session_id($_COOKIE[$this->CoockieIdSess]);
+			session_name($_COOKIE[$this->CoockieIdSess]);
+			$_SESSION=array();
+			unset($_SESSION);
+			session_unset();
 			session_destroy();
-			$_SESSION = array();
-		}
+			session_write_close();
+			flush();
 	}
-	private function crypta($t){
+	private function crypta($t,$secret){
 		if ($t=="") return $t;
-		$r = md5(10); $c=0; $v="";
-		for ($i=0;$i<strlen($t);$i++){
-			if ($c==strlen($r)) $c=0;
-			$v.= substr($r,$c,1) . (substr($t,$i,1) ^ substr($r,$c,1));
-			$c++;
-		}
-		return (base64_encode($this->ed($v)));
+		return _encripta($t,$secret);
 	}
-	private function decrypta($t) {
+	private function decrypta($t,$secret) {
 		if ($t=="") return $t;
-		$t = $this->ed(base64_decode(($t)));
-		$v = "";
-		for ($i=0;$i<strlen($t);$i++){
-			$md5 = substr($t,$i,1);
-			$i++;
-			$v.= (substr($t,$i,1) ^ $md5);
-		}
-		return $v;
+		return _decripta($t,$secret);
 	}
 	private function ed($t) {
 		$r = md5($this->secret); $c=0; $v="";
@@ -178,5 +200,15 @@ class session{
 		}
 		return $v;
 	}
+	public function verify() {
+		
+		  if(isset($_SESSION) && session_id()==$this->newName){
+		 	 return true;
+		  }else{
+		 	 return false;
+		 }
+	}
+
+
 }
 ?>

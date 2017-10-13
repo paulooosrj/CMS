@@ -14,14 +14,13 @@
 ##################################################################################
 	clearstatcache();
 	criaRascunho($_GET['ws_id_ferramenta'],$_GET['id_item']);
+
 ##################################################################################
 # DEFINE VARIAVEIS GET 
 ##################################################################################
-
 	if(empty($_GET['id_cat'])){
 		$_GET['id_cat']=0;
 	}
-
 
 ##################################################################################
 # DEFINE AS VARIAVEIS 
@@ -30,13 +29,10 @@
 	@define("ID_ITEM"			,		$_GET['id_item']);
 	@define("TOKEN_GROUP"		,		$_GET['token_group']);
 
-
 ##################################################################################
 # INVOCA A CLASSE DO TEMPLATE
 ##################################################################################
 	$_SET_TEMPLATE_INPUT = new Template(ROOT_ADMIN."/App/Templates/html/Modulos/ws-tool-galerias-template.html", true);
-	
-
 	if(isset($_GET['back']) && $_GET['back']=='true'){ 
 		$_SET_TEMPLATE_INPUT->block('BOT_BACK');
 	}
@@ -57,10 +53,6 @@
 	$draft->set_where('ws_draft="1"');
 	$draft->set_where('AND ws_id_draft="'.$_GET['id_item'].'"');
 	$draft->select();
-
-
-
-
 
 	$s 					= new MySQL();
 	$s->set_table(PREFIX_TABLES.'_model_gal');

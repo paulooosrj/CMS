@@ -12,10 +12,8 @@
 	$tabelas[]= "ws_usuarios";
 	$tabelas[]= "ws_ferramentas";
 	$tabelas[]= "ws_user_link_ferramenta";
-	$tabelas[]= "ws_cargos";
 	$tabelas[]= "ws_biblioteca";
 	$tabelas[]= "ws_template";
-	$tabelas[]= "notificacoes";
 	$tabelas[]= "bkp_ws";
 
 ############################################### URL AMIGAVEIS PADRÃO ###############################
@@ -212,30 +210,7 @@
 	add_if_not_exist('bkp_ws',				'obs' ,			'varchar(350) 	NULL default ""');
 	add_if_not_exist('bkp_ws',				'token',		'varchar(150) 	NULL default ""');
 	add_if_not_exist('bkp_ws',				'criacao',		'timestamp 	NOT NULL DEFAULT CURRENT_TIMESTAMP');
-###############################################################################################################
-################################################	notificacoes	###########################################
-###############################################################################################################
-	CreateTableIfNotExist('notificacoes');
-	add_if_not_exist('notificacoes',		'ws_author',	'int(11) 		NOT NULL DEFAULT FALSE');
-	add_if_not_exist('notificacoes',		'token',		'varchar(100) 		NULL default ""');
-	add_if_not_exist('notificacoes',		'titulo',		'varchar(250) 		NULL default ""');
-	add_if_not_exist('notificacoes',		'texto',		'varchar(1000) 		NULL default ""');
-	add_if_not_exist('notificacoes',		'visualizado',	'tinyint(1) 	NOT NULL default "0"');
-	add_if_not_exist('notificacoes',		'excluido',		'tinyint(1) 	NOT NULL default "0"');
-	add_if_not_exist('notificacoes',		'thumb',		'varchar(300) 		NULL default ""');
-	add_if_not_exist("notificacoes",		'ws_timestamp',		'TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP');
-###############################################################################################################
-################################################	ws_cargos		###########################################
-###############################################################################################################
 
-	CreateTableIfNotExist('ws_cargos');
-	add_if_not_exist('ws_cargos',		'ws_author',	'int(11) 		NOT NULL DEFAULT FALSE');
-	add_if_not_exist('ws_cargos',		'id_master',	'int(11) NOT NULL default "0"');
-	add_if_not_exist('ws_cargos',		'id_criador',	'int(11) NOT NULL default "0"');
-	add_if_not_exist('ws_cargos',		'cargo',		'varchar(200) 	NULL default ""');
-	add_if_not_exist('ws_cargos',		'descricao',	'varchar(300) 	NULL default ""');
-	add_if_not_exist('ws_cargos',		'token',		'varchar(250) 	NULL default ""');
-	add_if_not_exist("ws_cargos",		'ws_timestamp',		'TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP');
 ###############################################################################################################
 ################################################	ws_user_link_ferramenta		###############################
 ###############################################################################################################
@@ -331,27 +306,30 @@
 	add_if_not_exist('ws_usuarios'			,'tokenRequestTime'		,'datetime');
 	add_if_not_exist('ws_usuarios'			,'ws_timestamp',		'TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP');
 
+
 ###############################################################################################################
 ################################################	ws_log	###################################################
 ###############################################################################################################
-
 	CreateTableIfNotExist('ws_log');
-	add_if_not_exist('ws_log'		,'ws_author',		'int(11) 		NOT NULL DEFAULT FALSE');
-	add_if_not_exist('ws_log'		,'id_user'			,'int(11) 		NOT NULL default "0"');
-	add_if_not_exist('ws_log'		,'id_ferramenta'	,'int(11) 		NOT NULL default "0"');
-	add_if_not_exist('ws_log'		,'id_item'			,'int(11) 		NOT NULL default "0"');
-	add_if_not_exist('ws_log'		,'dataregistro'		,'timestamp		NOT NULL DEFAULT CURRENT_TIMESTAMP');
+	add_if_not_exist('ws_log'		,'id_user'			,'int(11) 			NOT	 NULL default 0');
+	add_if_not_exist('ws_log'		,'id_ferramenta'	,'int(11) 			NOT	 NULL default 0');
+	add_if_not_exist('ws_log'		,'id_item'			,'int(11) 			NOT	 NULL default 0');
+	add_if_not_exist('ws_log'		,'linha'			,'int(11) 			NOT	 NULL default 0');
+	add_if_not_exist('ws_log'		,'coluna'			,'int(11) 			NOT	 NULL default 0');
+	add_if_not_exist('ws_log'		,'dataregistro'		,'timestamp			DEFAULT CURRENT_TIMESTAMP');
+	add_if_not_exist('ws_log'		,'type'				,'varchar(300) 		NULL default ""');
+	add_if_not_exist('ws_log'		,'url'				,'varchar(300) 		NULL default ""');
 	add_if_not_exist('ws_log'		,'titulo'			,'varchar(300) 		NULL default ""');
-	add_if_not_exist('ws_log'		,'descricao'		,'varchar(300) 		NULL default ""');
-	add_if_not_exist('ws_log'		,'detalhes'			,'varchar(300) 		NULL default ""');
-	add_if_not_exist('ws_log'		,'tabela'			,'varchar(300) 		NULL default ""');
+	add_if_not_exist('ws_log'		,'mensagem'			,'varchar(300) 		NULL default ""');
+	
+
 
 ###############################################################################################################
 ################################################	ws_webmaster		#######################################
 ###############################################################################################################
 
 	CreateTableIfNotExist('ws_webmaster');
-	add_if_not_exist('ws_webmaster'			,'ws_author',		'int(11) 		NOT NULL DEFAULT FALSE');
+	add_if_not_exist('ws_webmaster'			,'ws_author'			,'int(11) 		NOT NULL DEFAULT FALSE');
 	add_if_not_exist('ws_webmaster'			,'path' 				,'varchar(200) 	NULL	default ""');
 	add_if_not_exist('ws_webmaster'			,'original' 			,'varchar(200)	NULL 	default ""');
 	add_if_not_exist('ws_webmaster'			,'bkpfile' 				,'varchar(200)	NULL 	default ""');

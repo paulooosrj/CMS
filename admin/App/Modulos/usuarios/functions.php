@@ -1,7 +1,6 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
 
-
 function templateUser($_id_,$_nome_,$_sobrenome_,$_email_,$_thumb_){
 
 	$template="";
@@ -22,11 +21,11 @@ function templateUser($_id_,$_nome_,$_sobrenome_,$_email_,$_thumb_){
 			
 }
 function addUser(){
-
+			$user = new Session();
 			$token = _token (PREFIX_TABLES."ws_usuarios",'token');
 			$I 					= new MySQL();
 			$I->set_table(PREFIX_TABLES.'ws_usuarios');
-			$I->set_insert('id_criador',$_SESSION['user']['id']);
+			$I->set_insert('id_criador',$user->get('id'));
 			$I->set_insert('nome',$_REQUEST['nome']);
 			$I->set_insert('email','myemail@domain.com');
 			$I->set_insert('token',$token);
@@ -58,7 +57,7 @@ function exclui_user(){
 }
 function reloadUser()			{
 
-
+			$user = new Session();
 			$user_mysql 					= new MySQL();
 			$user_mysql->set_table(PREFIX_TABLES.'ws_usuarios');
 			$user_mysql->set_where('id="'.$_REQUEST['iD_user'].'"');
@@ -79,107 +78,105 @@ function reloadUser()			{
 	}
 
 function LoadDadosUser(){
+	$user = new Session();
+
 	if($_REQUEST['iD']=='undefined'){	echo "ID de usuario não encontrado.";	exit;	};
 
 			$s 					= new MySQL();
 			$s->set_table(PREFIX_TABLES.'ws_usuarios');
 			$s->set_where('id="'.$_REQUEST['iD'].'"');
 			$s->select();
+			echo '<div id="DadosUserBase" class="content_2">
+					<form action="./App/Modulos/usuarios/upload_files.php?iD='.$s->fetch_array[0]['id'].'" method="post" enctype="multipart/form-data" name="formUpload" id="formUpload">
+		          	<input type="file" id="botUpload" name="myfile" /><input type="submit" class="botao botupload" value="Fazer Upload" id="botaoUpload"></form>
+					<form id="dadosUserForm">
+					<div id="thumbUpload"></div>
+					<div id="progress" class="bg06">
+					<div id="bar" class="bg05"></div>
+					</div>
+					<div id="thumb">';
+					if($s->fetch_array[0]['avatar']!=""){echo '<img src="./App/Modulos/usuarios/upload/'.$s->fetch_array[0]['avatar'].'" width="200" height="200"/>';} 
+			echo '	</div>
+					<input name="nome" id="nome" value="'.$s->fetch_array[0]['nome'].'">
+					<input name="id_user"  value="'.$s->fetch_array[0]['id'].'" hidden="true">
+					<div id="cargo" >
+					<select id="cargoUser" name="Cargo">
+					<option>Selecione um cargo</option>';
 
-
-	echo '<div id="DadosUserBase" class="content_2">
-			<form action="./App/Modulos/usuarios/upload_files.php?iD='.$s->fetch_array[0]['id'].'" method="post" enctype="multipart/form-data" name="formUpload" id="formUpload">
-          	<input type="file" id="botUpload" name="myfile" /><input type="submit" class="botao botupload" value="Fazer Upload" id="botaoUpload"></form>
-			<form id="dadosUserForm">
-			<div id="thumbUpload"></div>
-			<div id="progress" class="bg06">
-			<div id="bar" class="bg05"></div>
-			</div>
-			<div id="thumb">';
-			if($s->fetch_array[0]['avatar']!=""){echo '<img src="./App/Modulos/usuarios/upload/'.$s->fetch_array[0]['avatar'].'" width="200" height="200"/>';} 
-	echo '	</div>
-			<input name="nome" id="nome" value="'.$s->fetch_array[0]['nome'].'">
-			<input name="id_user"  value="'.$s->fetch_array[0]['id'].'" hidden="true">
-			<div id="cargo" >
-			<select id="cargoUser" name="Cargo">
-			<option>Selecione um cargo</option>';
-
-			$cargo 					= new MySQL();
-			$cargo->set_table(PREFIX_TABLES.'ws_cargos');
-			$cargo->set_order('cargo ASC');
-			$cargo->set_template('<option value="{{id}}" {{selected}}>{{cargo}}</option>');
-			$cargo->select();
-			foreach($cargo->fetch_array as $row) {
-				if($s->fetch_array[0]['id_cargo']==$row['id']){$row["selected"]="selected";}else{$row["selected"]="";};
-				echo $cargo->set_template($row);;
-			};
-
-echo '</select>
-	</div>
-	<textarea id="descricao" name="Descricao" >'.$s->fetch_array[0]['descricao'].'</textarea>
-	<div class="tit">Dados de contato:</div>
-	<div class="box">';
-		if($s->fetch_array[0]['id']!=$_SESSION['user']['id'] && $_SESSION['user']['admin']=='1'){
-				echo '<div>';
-		}else{
-				echo '<div style="display:none">';
-		}
-				if($s->fetch_array[0]['ativo']=='1'){$checked="checked";}else{$checked="";}
-				echo '<input type="checkbox" id="ativo" name="ativo" '.$checked.'><label for="ativo">Usuário Ativo</label><br />';
-				if($s->fetch_array[0]['admin']=='1'){$checked="checked";}else{$checked="";}
-				echo '<input type="checkbox" id="admin" name="admin" '.$checked.'><label for="admin">Este usuário é administrador</label>';
-				echo '<br />';
-				echo '<select name="status" id="status_user" style="width:510px">';
-				if($s->fetch_array[0]['id_status']=='0'){$selected="selected";}else{$selected="";}
-				echo '<option value="0" '.$selected.'>Habilitado</option>';
-
-				if($s->fetch_array[0]['id_status']=='1'){$selected="selected";}else{$selected="";}
-				echo '<option value="1" '.$selected.'>Faze de avaliação</option>';
-				
-				if($s->fetch_array[0]['id_status']=='2'){$selected="selected";}else{$selected="";}
-				echo '<option value="2" '.$selected.'>Bloqueado</option>';
-				
-				if($s->fetch_array[0]['id_status']=='3'){$selected="selected";}else{$selected="";}
-				echo '<option value="3" '.$selected.'>Painel desativado</option>';
+					$cargo 					= new MySQL();
+					$cargo->set_table(PREFIX_TABLES.'ws_cargos');
+					$cargo->set_order('cargo ASC');
+					$cargo->set_template('<option value="{{id}}" {{selected}}>{{cargo}}</option>');
+					$cargo->select();
+					foreach($cargo->fetch_array as $row) {
+						if($s->fetch_array[0]['id_cargo']==$row['id']){$row["selected"]="selected";}else{$row["selected"]="";};
+						echo $cargo->set_template($row);;
+					};
 				echo '</select>
-				<br><br><hr>';
-				echo '</div>';
+					</div>
+					<textarea id="descricao" name="Descricao" >'.$s->fetch_array[0]['descricao'].'</textarea>
+					<div class="tit">Dados de contato:</div>
+					<div class="box">';
+						if($s->fetch_array[0]['id']!=$user->get('id') && $user->get('admin')=='1'){
+								echo '<div>';
+						}else{
+								echo '<div style="display:none">';
+						}
+								if($s->fetch_array[0]['ativo']=='1'){$checked="checked";}else{$checked="";}
+								echo '<input type="checkbox" id="ativo" name="ativo" '.$checked.'><label for="ativo">Usuário Ativo</label><br />';
+								if($s->fetch_array[0]['admin']=='1'){$checked="checked";}else{$checked="";}
+								echo '<input type="checkbox" id="admin" name="admin" '.$checked.'><label for="admin">Este usuário é administrador</label>';
+								echo '<br />';
+								echo '<select name="status" id="status_user" style="width:510px">';
+								if($s->fetch_array[0]['id_status']=='0'){$selected="selected";}else{$selected="";}
+								echo '<option value="0" '.$selected.'>Habilitado</option>';
+
+								if($s->fetch_array[0]['id_status']=='1'){$selected="selected";}else{$selected="";}
+								echo '<option value="1" '.$selected.'>Faze de avaliação</option>';
+								
+								if($s->fetch_array[0]['id_status']=='2'){$selected="selected";}else{$selected="";}
+								echo '<option value="2" '.$selected.'>Bloqueado</option>';
+								
+								if($s->fetch_array[0]['id_status']=='3'){$selected="selected";}else{$selected="";}
+								echo '<option value="3" '.$selected.'>Painel desativado</option>';
+								echo '</select>
+								<br><br><hr>';
+								echo '</div>';
 
 
-		echo '		Sobrenome: 					<input name="sobrenome" 		id="sobrenome" 	value="'.$s->fetch_array[0]['sobrenome'].'"><br />
-					E-mail: 					<input name="Email" 			id="Email" 		value="'.$s->fetch_array[0]['email'].'"><br />
-					Telefone:					<input name="Telefone" 			id="Telefone" 	value="'.$s->fetch_array[0]['telefone'].'"><br />
-					Reside em: 					<input name="Reside"			id="Reside" 	value="'.$s->fetch_array[0]['endereco'].'"><br />
-					Login de acesso: 			<input name="Login"				id="Login" 		value="'.$s->fetch_array[0]['login'].'"><br />
-					Senha: 						<input name="SenhaWS" 			id="SenhaWS" 		value="" type="password" placeholder="Defina uma nova senha:"><br />
-					CPF: 						<input name="CPF" 				id="CPF" 		value="'.$s->fetch_array[0]['CPF'].'"><br />
-					RG: 						<input name="RG" 				id="RG" 		value="'.$s->fetch_array[0]['RG'].'"><br />
-	</div>';
+						echo '		Sobrenome: 					<input name="sobrenome" 		id="sobrenome" 	value="'.$s->fetch_array[0]['sobrenome'].'"><br />
+									E-mail: 					<input name="Email" 			id="Email" 		value="'.$s->fetch_array[0]['email'].'"><br />
+									Telefone:					<input name="Telefone" 			id="Telefone" 	value="'.$s->fetch_array[0]['telefone'].'"><br />
+									Reside em: 					<input name="Reside"			id="Reside" 	value="'.$s->fetch_array[0]['endereco'].'"><br />
+									Login de acesso: 			<input name="Login"				id="Login" 		value="'.$s->fetch_array[0]['login'].'"><br />
+									Senha: 						<input name="SenhaWS" 			id="SenhaWS" 		value="" type="password" placeholder="Defina uma nova senha:"><br />
+									CPF: 						<input name="CPF" 				id="CPF" 		value="'.$s->fetch_array[0]['CPF'].'"><br />
+									RG: 						<input name="RG" 				id="RG" 		value="'.$s->fetch_array[0]['RG'].'"><br />
+					</div>';
+					if($s->fetch_array[0]['id']!=$user->get('id') && $user->get('admin')=='1'){
+						echo '<div class="tit">Ele terá acesso a:</div>
+							<div class="box">';
+								$s 					= new MySQL();
+								$s->set_table(PREFIX_TABLES.'ws_ferramentas');
+								$s->select();
+								foreach($s->fetch_array as $ferra){
+									$perm_ferr 					= new MySQL();
+									$perm_ferr->set_table(PREFIX_TABLES.'ws_user_link_ferramenta');
+									$perm_ferr->set_where('id_user="'.$_REQUEST['iD'].'"');
+									$perm_ferr->set_where('AND id_ferramenta="'.$ferra['id'].'"');
+									$perm_ferr->select();
+									if($perm_ferr->_num_rows!=0){$checked="checked";}else{$checked="";}
 
-if($s->fetch_array[0]['id']!=$_SESSION['user']['id'] && $_SESSION['user']['admin']=='1'){
-	echo '<div class="tit">Ele terá acesso a:</div>
-		<div class="box">';
-			$s 					= new MySQL();
-			$s->set_table(PREFIX_TABLES.'ws_ferramentas');
-			$s->select();
-			foreach($s->fetch_array as $ferra){
-				$perm_ferr 					= new MySQL();
-				$perm_ferr->set_table(PREFIX_TABLES.'ws_user_link_ferramenta');
-				$perm_ferr->set_where('id_user="'.$_REQUEST['iD'].'"');
-				$perm_ferr->set_where('AND id_ferramenta="'.$ferra['id'].'"');
-				$perm_ferr->select();
-				if($perm_ferr->_num_rows!=0){$checked="checked";}else{$checked="";}
 
-
-				
-				echo '<input type="checkbox" id="'.$ferra['_tb_'].'" name="'.$ferra['_tb_'].'" '.$checked.'><label for="'.$ferra['_tb_'].'">'.$ferra['_tit_menu_'].'</label><br />';
-				}
-	echo '</div>';
-	}
-echo '</form>';
+									
+									echo '<input type="checkbox" id="'.$ferra['_tb_'].'" name="'.$ferra['_tb_'].'" '.$checked.'><label for="'.$ferra['_tb_'].'">'.$ferra['_tit_menu_'].'</label><br />';
+									}
+						echo '</div>';
+						}
+					echo '</form>';
 }
 function SalvadadosUser(){
-
+	$user = new Session();
 	if(isset($_REQUEST['PermTools']) && $_REQUEST['PermTools']!=""){$permissoes = explode(',',$_REQUEST['PermTools']);}else{$permissoes = array();}
 	$D					= new MySQL();
 	$D->set_table(PREFIX_TABLES.'ws_user_link_ferramenta');
@@ -232,49 +229,8 @@ function SalvadadosUser(){
 	if($U->salvar()){
 		echo "Usuário salvo com sucesso!";exit;
 	};
-
 }
 
-function returnCargos(){
-				$cargo = mysql_query("SELECT DISTINCT * FROM  ws_cargos order by cargo ASC");
-				while($row =@mysql_fetch_array($cargo)) {
-					echo '<div id="unicargo">
-							<form>
-								<input  		id="id_cargo" value="'.$row['id'].'" hidden="true"/>
-								<input  		name="cargo" id="cargoInput" value="'.$row['cargo'].'"/>
-								<textarea  name="descricao" id="cargodescricao">'.$row['descricao'].'</textarea>
-								<div id="salvar" class="w1">>Salvar</div>
-								<div id="excluir" class="w1">>Excluir</div>
-							</form>
-						</div>';
-						};
-	}
-function LoadCargos(){
-				echo '<div id="DadosUserBase" class="content_2">
-						<form id="formAdd">
-						<input  name="cargo" class="inputtext" id="cargoInput"/>		
-						<div id="botaoCadastraCargoBox" class="botao">Adicionar Cargo</div>
-						<textarea  name="descricao" class="inputtext" id="cargodescricao"/>		
-						</form>
-						<div id="base">';
-						returnCargos();
-					echo '</div></div>';
-	}
-
-function SalvaCargo(){if(mysql_query("UPDATE ".PREFIX_TABLES."ws_cargos SET cargo='".$_REQUEST['cargo']."', descricao='".$_REQUEST['descricao']."' WHERE(id='".$_REQUEST['id']."')" )){echo true;};}
-
-function AddCargo(){
-		$token = _token(PREFIX_TABLES."ws_cargos",'token');
-		if(mysql_query("INSERT INTO ".PREFIX_TABLES."ws_cargos (id_criador, cargo,descricao,token)VALUES ('".$_SESSION['user']['id']."','".$_REQUEST['cargo']."','".$_REQUEST['descricao']."', '".$token."')") or die("Erro: " . mysql_error())){
-				returnCargos();
-		}
-}
-function ExcluiCargo(){ 
-		mysql_query("UPDATE ".PREFIX_TABLES."ws_usuarios SET  id_cargo='' WHERE(id_cargo='".$_REQUEST['id']."')" );
-		mysql_query("DELETE FROM ws_cargos WHERE (id='".$_REQUEST['id']."')");
-		returnCargos();
-		echo "<div class='c'></div>";
-}
 //####################################################################################################################
 //####################################################################################################################
 //####################################################################################################################

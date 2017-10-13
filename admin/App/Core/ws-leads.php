@@ -114,8 +114,6 @@
 	$TYPE_SEND = $_REQUEST;
 
 	include($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
-
-
 	if(isset($TYPE_SEND['typeSend']) && $TYPE_SEND['typeSend']=='captcha'){
 		@session_name('_WS_');@session_id($_COOKIE['_WS_']);@session_start(); 
 		$codeCaptcha = trim(_decripta(@$_SESSION['ws-captcha'] ,'ws-captcha-keycode'));

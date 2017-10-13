@@ -156,6 +156,7 @@
 }
 #container #login button.botao {
     font-size: 20px;
+    border: 0;
     text-align: center;
     position: relative;
     left: 50%;

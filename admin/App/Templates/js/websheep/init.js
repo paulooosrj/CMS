@@ -42,7 +42,7 @@
 									//######################################################################################################################
 									//#  AJAVASCRIPT  
 									//######################################################################################################################
-									{src:"/admin/App/Vendor/jquery/1.11.3/jquery.min.js", 									id:"javascript", 	include:true},
+									{src:"/admin/App/Vendor/jquery/2.2.0/jquery.min.js", 									id:"javascript", 	include:true},
 									{src:"/admin/App/Vendor/intro.js-2.5.0/intro.min.js",									id:"javascript",	include:true},
 									{src:"/admin/App/Vendor/jquery-ui/1.10.3/jquery.min.js", 								id:"javascript", 	include:true},
 									{src:"/admin/App/Vendor/BrowserDetect/BrowserDetect.min.js",							id:"javascript",	include:true},
@@ -75,8 +75,8 @@
 									{src:"/admin/App/Vendor/CKeditor/ckeditor.js",											id:"javascript",	include:true},
 									// {src:"/admin/App/Vendor/artyom/artyom.min.js",										id:"javascript",	include:true},
 									// {src:"/admin/App/Templates/js/websheep/ws-dolly.js", 								id:"javascript", 	include:true},
-									{src:"/admin/App/Templates/js/websheep/funcionalidades.min.js", 						id:"javascript", 	include:true},
-									{src:"/admin/App/Templates/js/websheep/functionsws.min.js", 							id:"javascript", 	include:true},
+									{src:"/admin/App/Templates/js/websheep/funcionalidades.js", 							id:"javascript", 	include:true},
+									{src:"/admin/App/Templates/js/websheep/functionsws.js", 								id:"javascript", 	include:true},
 									{src:"/admin/App/Vendor/require/require.js", 											id:"javascript", 	include:true},
 								];
 					preload = new createjs.LoadQueue (false ,null, true);

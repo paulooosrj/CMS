@@ -1,4 +1,5 @@
 <?php 
+
 	/*
 		Este arquivo é parte do Websheep CMS
 		Websheep é um software livre; você pode redistribuí-lo e/ou 
@@ -46,30 +47,38 @@
 	if(file_exists(ROOT_ADMIN.'/App/Config/firstacess') && file_get_contents(ROOT_ADMIN.'/App/Config/firstacess')=='true'){
 		include(ROOT_ADMIN.'/App/Core/ws-install.php');exit;
 	}
-
-	############################################################################################################################
-	#	CRIAMOS A 1° SESSÃO
-	############################################################################################################################
-		_session();
-
 	############################################################################################################################
 	#	CASO ESTEJA LOGADO DIRETAMENTE COM ACCESSKEY
 	############################################################################################################################
 		if(ws::urlPath(2,false)){
-			$keyAccess = ws::getTokenRest(ws::urlPath(2,false),false);
+			$keyAccess 			= ws::getTokenRest(ws::urlPath(2,false),false);
+
+			############################################################################################################################
+			#	CASO O ACCESSKEY ESTEJA LIGADA DIRETAMENTE A UM ELEMENTO
+			#	Por segurança, só libera o acesso se tiver o keyAccess nas duas tabelas
+			############################################################################################################################
+			$ws_direct_access 				= new MySQL();
+			$ws_direct_access->set_table(PREFIX_TABLES.'ws_direct_access');
+			$ws_direct_access->set_where('keyaccess="'.ws::urlPath(2,false).'"');
+			$ws_direct_access->select();
+			$_num_rows = $ws_direct_access->_num_rows;
+			$authKey  = ( isset($_num_rows) && $_num_rows>0 && $keyAccess ) ? true : false;
 		}else{
-			$keyAccess = false;
+			$authKey = false;
 		}
 
 	############################################################################################################################
 	#	CASO ESTEJA LOGADO IMPORTAMOS O DESKTOP
 	############################################################################################################################	
-		if( SECURE==FALSE || (isset($keyAccess) && $keyAccess==true) || (!empty($_COOKIE['ws_log']) && $_COOKIE['ws_log']=='true') && (!empty($_SESSION) && @$_SESSION['ws_log']==true)){	
+		$log_session = new session();
+		if( 
+			SECURE==FALSE || 
+			(isset($authKey) && $authKey == true) || 
+			$log_session->verifyLogin() == true
+		){	
 			include(ROOT_ADMIN.'/App/Core/ws-dashboard.php');exit;
 		}
-
 	############################################################################################################################
 	#	CASO ESTEJA OFFLINE JÁ DIRECIONA PRO LOGIN
 	############################################################################################################################
 	include(ROOT_ADMIN.'/App/Modulos/login/index.php');
-	exit;

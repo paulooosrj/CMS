@@ -48,6 +48,11 @@ ol {
     left: 50%;
     transform: translateX(-50%);
 }
+.description{
+	position: relative;
+	line-height: normal;
+	margin-top: 20px;
+}
 .avisophp {
 		padding: 14px;
 		text-align: center;
@@ -70,6 +75,7 @@ ol {
 .avisophp .response label {
 	cursor: pointer;
 	font-weight: 600;
+	line-height: 20px;
 }
 .avisophp .response {
 	osition: relative;

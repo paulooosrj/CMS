@@ -1,8 +1,13 @@
 <?
 
+ob_start();
 include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
-_session();
+$session = new session();
+ob_end_clean();
+
+
 function InsertPagination(){
+	global $session;
 	echo '
 	<style>
 	@media screen and (max-width: 1030px) {
@@ -37,13 +42,13 @@ function InsertPagination(){
 			<div class="c"></div>
 			<div style="padding: 20px;margin-bottom: -24px;">
 				<div style="position: relative;font-size: 20px;margin-top: 20px;font-weight: 700;float: left;text-align: center;width: 100%;" class="w1">Selecione uma ferramenta</div>
-				<select id="shortcodes" name="id_tool" style="width:560px;padding: 10px;border: none;color: #3A639A;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;"><option value="">Selecione uma popção</option>';
+				<select id="shortcodes" name="id_toll" style="width:560px;padding: 10px;border: none;color: #3A639A;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;"><option value="">Selecione uma popção</option>';
 						$ws_ferramentas 				= new MySQL();
 						$ws_ferramentas->set_table(PREFIX_TABLES.'ws_ferramentas');
 						$ws_ferramentas->set_where('App_Type="1"');
 						$ws_ferramentas->select();
-						foreach ($ws_ferramentas->fetch_array as $tool) {
-							echo '<option value="'.$tool['id'].'">'.$tool['_tit_menu_'].'</option>';
+						foreach ($ws_ferramentas->fetch_array as $toll) {
+							echo '<option value="'.$toll['id'].'">'.$toll['_tit_menu_'].'</option>';
 						}
 
 				echo '</select>
@@ -130,43 +135,45 @@ function InsertPagination(){
 }
 
 function InsertPaginationCampos(){
+	global $session;
 	$ws_ferramentas 				= new MySQL();
 	$ws_ferramentas->set_table(PREFIX_TABLES.'ws_ferramentas');
-	$ws_ferramentas->set_where('id="'.$_REQUEST['id_tool'].'"');
+	$ws_ferramentas->set_where('id="'.$_REQUEST['id_toll'].'"');
 	$ws_ferramentas->select();
 	$isso = array('"',"	",PHP_EOL,"\r","\n");
 	$porisso = array("'","","","","");
 	$output  =  '	<!--'."\n\n";
 	$output .=  '		-------------------------------LEGENDA:--------------------------------------'."\n\n";
-	$output .=  '		max: Quantos ítens listará por página	'."\n";
-	$output .=  '		atual: Qual é a página atual, pode-se usar url:1,url:2,url:3 etc para setar uma variavel do topo ou utilizar a classe ws::urlPath(0)'."\n";
-	$output .=  '		html: Código html da paginação'."\n";
-	$output .=  '		number: <li> onde ficará o n° de cada pág'."\n";
-	$output .=  '		active: Página atual'."\n\n";
+	$output .=  '		data-max: Quantos ítens listará por página	'."\n";
+	$output .=  '		data-atual: Qual é a página atual, pode-se usar url:1,url:2,url:3 etc para setar uma variavel do topo ou utilizar a classe ws::urlPath(0)'."\n";
+	$output .=  '		data-html: Código html da paginação'."\n";
+	$output .=  '		data-number: <li> onde ficará o n° de cada pág'."\n";
+	$output .=  '		data-active: Página atual'."\n\n";
 	$output .=  '		------------------- OUTRAS TAGS DISPONÍIVEIS PARA SELECT:----------------------------'."\n\n";
-	$output .=  '		distinct=""	'."\n";
-	$output .=  '		category=""	'."\n";
-	$output .=  '		galery=""	'."\n";
-	$output .=  '		item="" 	'."\n";
-	$output .=  '		where=""	'."\n";
-	$output .=  '		innerItem="" '."\n\n";
-	$output .=  '	-->'."\n";
-	$output .=  '<ws-paginate slug="'.$ws_ferramentas->fetch_array[0]['slug'].'" type="'.$_REQUEST['type'].'" max="5" atual="url:2" ';
-	$output .=  'html="'.(str_replace($isso,$porisso,$_REQUEST['editorHTML'])).'" '; 
-	$output .=  'number="'.(str_replace($isso,$porisso,$_REQUEST['editorCOUNT'])).'" ';
-	$output .=  'active="'.(str_replace($isso,$porisso,$_REQUEST['editorCOUNTactive'])).'">';
-	$output .=  '</ws-paginate>'."\n";
+	$output .=  '		data-distinct=""	'."\n";
+	$output .=  '		data-category=""	'."\n";
+	$output .=  '		data-galery=""	'."\n";
+	$output .=  '		data-item="" 	'."\n";
+	$output .=  '		data-where=""	'."\n";
+	$output .=  '		data-innerItem="" '."\n\n";
+	$output .= '	-->'."\n";
+	$output .=   '<paginate data-slug="'.$ws_ferramentas->fetch_array[0]['slug'].'" data-type="'.$_REQUEST['type'].'" data-max="5" data-atual="url:2" ';
+	$output .=   'data-html="'.(str_replace($isso,$porisso,$_REQUEST['editorHTML'])).'" '; 
+	$output .=   'data-number="'.(str_replace($isso,$porisso,$_REQUEST['editorCOUNT'])).'" ';
+	$output .=   'data-active="'.(str_replace($isso,$porisso,$_REQUEST['editorCOUNTactive'])).'">';
+	$output .=   '</paginate>'."\n";
 	echo ($output);
 	exit;
 }
 function InsertCodeForm(){
+	global $session;
 	echo '<div class="comboShortCode">
 		<form id="formTags" style="height: 200px;">
 			<div style="font-size: 20px;font-weight: bold;padding-bottom: 12px;">Adicionar um formulário de cadastro</div>
 			<div class="descricao">Selecione qual cadastro será esse formulário:</div>
 			<div class="c"></div>
 			<div style="padding: 20px;margin-top: 7px;">
-				<select id="shortcodes" name="id_tool" style="width:450px;padding: 10px;border: none;color: #3A639A;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;"><option value="">Selecione uma popção</option>';
+				<select id="shortcodes" name="id_toll" style="width:450px;padding: 10px;border: none;color: #3A639A;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;"><option value="">Selecione uma popção</option>';
 					$fullPages 				= new MySQL();
 					$fullPages->set_table(PREFIX_TABLES.'ws_list_leads');
 					$fullPages->select();
@@ -191,11 +198,12 @@ function InsertCodeForm(){
 	exit;
 }
 function InsertCodeFormCampos(){
+	global $session;
 
 	if($_REQUEST['typeCode']=='html'){
-			echo '<form action="/ws-leads/'.strtolower($_REQUEST['id_tool']).'" method="post">'.PHP_EOL;
+			echo '<form action="/ws-leads/'.strtolower($_REQUEST['id_toll']).'" method="post">'.PHP_EOL;
 					$local = new MySQL();
-					$local->set_table(PREFIX_TABLES.'wslead_'.strtolower($_REQUEST['id_tool']));
+					$local->set_table(PREFIX_TABLES.'wslead_'.strtolower($_REQUEST['id_toll']));
 					$local->show_columns();
 			echo '		<input type="hidden" name="typeSend" value="html">'.PHP_EOL;
 					foreach($local->fetch_array as $coluna){
@@ -209,7 +217,7 @@ function InsertCodeFormCampos(){
 	}elseif($_REQUEST['typeCode']=='ajax'){
 			echo '<form id="ws_send">'.PHP_EOL;
 					$local = new MySQL();
-					$local->set_table(PREFIX_TABLES.'wslead_'.strtolower($_REQUEST['id_tool']));
+					$local->set_table(PREFIX_TABLES.'wslead_'.strtolower($_REQUEST['id_toll']));
 					$local->show_columns();
 					echo '		<input type="hidden" name="typeSend" value="ajax">'.PHP_EOL;
 					foreach($local->fetch_array as $coluna){
@@ -225,7 +233,7 @@ function InsertCodeFormCampos(){
 					e.preventDefault();
 					$.ajax({
 						type: "POST",
-						url:"/ws-leads/'.strtolower($_REQUEST['id_tool']).'",
+						url:"/ws-leads/'.strtolower($_REQUEST['id_toll']).'",
 						data: {form:$("#ws_send").serialize()},
 						async: true,
 						beforeSend: function(data) {	console.log("beforeSend");	},
@@ -245,8 +253,9 @@ function InsertCodeFormCampos(){
 	}
 }
 function InsertCode(){
+	global $session;
 	echo '<div class="comboShortCode">
-		<form id="formTags" style="height: 313px;">
+		<form id="formTags">
 			<div style="font-size: 20px;font-weight: bold;padding-bottom: 12px;">Adicionar conteúdo</div>
 			<div class="descricao">Selecione o que você quer, e uma ferramenta:</div>
 			<div class="c"></div>
@@ -288,13 +297,13 @@ function InsertCode(){
 			</label>
 			<div class="c"></div>
 			<div style="padding: 20px;margin-top: 7px;margin-bottom: -10px;">
-				<select id="shortcodes" name="id_tool" style="width:450px;padding: 10px;border: none;color: #3A639A;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;"><option value="">Selecione uma popção</option>';
+				<select id="shortcodes" name="id_toll" style="width:450px;padding: 10px;border: none;color: #3A639A;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;"><option value="">Selecione uma popção</option>';
 					$ws_ferramentas 				= new MySQL();
 					$ws_ferramentas->set_table(PREFIX_TABLES.'ws_ferramentas');
 					$ws_ferramentas->set_where('App_Type="1"');
 					$ws_ferramentas->select();
-					foreach ($ws_ferramentas->fetch_array as $tool) {
-						echo '<option value="'.$tool['id'].'">'.$tool['_tit_menu_'].'</option>'; 
+					foreach ($ws_ferramentas->fetch_array as $toll) {
+						echo '<option value="'.$toll['id'].'">'.$toll['_tit_menu_'].'</option>'; 
 					}
 					$fullPages 				= new MySQL();
 					$fullPages->set_table(PREFIX_TABLES.'ws_ferramentas');
@@ -307,26 +316,18 @@ function InsertCode(){
 				</div>
 			<div class="descricao">Você quer a classe em PHP ou uma TAG HTML5?</div>
 			<label>
-				<div style="width: 290px;margin: 10px;cursor:pointer;position: relative;float: left;padding: 10px 0;background: rgba(255, 255, 255, 0.58);top: 16px;left: 0px;">
+				<div style="width: 200px;margin: 10px;cursor:pointer;position: relative;float: left;padding: 10px 41px;background: rgba(255, 255, 255, 0.58);top: 16px;left: 0px;">
 					Classe PHP: 
 					<input name="typeCode" value="classe" type="radio"/>
 				</div>
 			</label>
 			<label>
-				<div style="width: 290px;margin: 10px;cursor:pointer;position: relative;float: left;padding: 10px 0;background: rgba(255, 255, 255, 0.58);top: 16px;left: 0px;">
+				<div style="width: 170px;margin: 10px;cursor:pointer;position: relative;float: left;padding: 10px 52px;background: rgba(255, 255, 255, 0.58);top: 16px;left: 0px;">
 					Tag HTML5: 
 					<input name="typeCode" value="tag" type="radio"/>
 				</div>
 			</label>
-			<!-- EM BREVE -->
-			<!--
-				<label>
-					<div style="width: 200px;margin: 10px;cursor:pointer;position: relative;float: left;padding: 10px 0;background: rgba(255, 255, 255, 0.58);top: 16px;left: 0px;">
-						API RESTful: 
-						<input name="typeCode" value="rest" type="radio"/>
-					</div>
-				</label>
-			-->
+
 
 			</form>
 		</div>';
@@ -334,9 +335,10 @@ function InsertCode(){
 }
 
 function InsertCodeCampos(){
+	global $session;
 	$ws_ferramentas 				= new MySQL();
 	$ws_ferramentas->set_table(PREFIX_TABLES.'ws_ferramentas');
-	$ws_ferramentas->set_where('id="'.$_REQUEST['id_tool'].'"');
+	$ws_ferramentas->set_where('id="'.$_REQUEST['id_toll'].'"');
 	$ws_ferramentas->select();
 	$Ferramenta = $ws_ferramentas->fetch_array[0];
 	$prefix 	= $Ferramenta['_prefix_'];
@@ -384,44 +386,44 @@ function InsertCodeCampos(){
 		$output.= '	foreach($pesquisa->obj as $data){'."\n";
 		$fullPages 				= new MySQL();
 		$fullPages->set_table(PREFIX_TABLES.'_model_campos');
-		$fullPages->set_where('ws_id_ferramenta="'.$_REQUEST['id_tool'].'"');
+		$fullPages->set_where('ws_id_ferramenta="'.$_REQUEST['id_toll'].'"');
 		$fullPages->set_where('AND coluna_mysql<>""');
 		$fullPages->select();
 
 
 		if(isset($_REQUEST['type']) && $_REQUEST['type']=='item'){
 			if($fullPages->_num_rows==0){$output .= '	//Nenhum campos específico adicionado'."\n";}
-			foreach ($fullPages->fetch_array as $tool) {
+			foreach ($fullPages->fetch_array as $toll) {
 
-				if($prefix!="" && substr($tool['coluna_mysql'],0,strlen($prefix))==$prefix) {$tool['coluna_mysql'] = substr($tool['coluna_mysql'],strlen($prefix));}
+				if($prefix!="" && substr($toll['coluna_mysql'],0,strlen($prefix))==$prefix) {$toll['coluna_mysql'] = substr($toll['coluna_mysql'],strlen($prefix));}
 
-				if( $tool['type']=="playerVideo"){
+				if( $toll['type']=="playerVideo"){
 					$output .=	"		//Function:  url=null,type=player,w=null,h=null\n";
 					$output .= '		//Retorno: site,url,title,description,image ou player'."\n";
 					$output .= '		//Default: div ou mensagem que retornará caso não tenha URL especificada'."\n";
 					$output .= '		//AutoPlay: Habilita o AutoPlay no vídeo. Valores 1 - 0 '."\n";
-					$output .= '		echo "<div>".ws::videoData($data->'.$tool['coluna_mysql'].',"Retorno","200","200","Default","AutoPlay")."</div>";'."\n\n\n";
+					$output .= '		echo "<div>".ws::videoData($data->'.$toll['coluna_mysql'].',"Retorno","200","200","Default","AutoPlay")."</div>";'."\n\n\n";
 				
 					$output .= '		//Caso queira a URL do MP4 diretamente'."\n";
 					$output .= '		//Secury=true retorna um link seguro, impossível de salvar '."\n";
 					$output .= '		//Secury=false retorna o link do arquivo do MP4 diretamente do youtube ou Vimeo '."\n";
-					$output .= '		echo \'<video width="200" height="200" preload="auto" type="video/mp4" src="\'.ws::getVimeoYoutubeDirectLink($data->'.$tool['coluna_mysql'].',Secury).\'" controls="true" poster=""></video>\';'."\n\n";
+					$output .= '		echo \'<video width="200" height="200" preload="auto" type="video/mp4" src="\'.ws::getVimeoYoutubeDirectLink($data->'.$toll['coluna_mysql'].',Secury).\'" controls="true" poster=""></video>\';'."\n\n";
 
 
-				}elseif( $tool['type']=="playerMP3"){
+				}elseif( $toll['type']=="playerMP3"){
 					$output .=	"		// Function:  url=null,type=player,w=null,h=null,size,theme \n";
 					$output .=	"		// Retorno: 	player, site, title, description, height, width, image \n";
 					$output .=	"		// Size: 		widget,classic,minimo,list \n";
 					$output .=	"		// Theme: 	light, dark \n";
 					$output .=	"		// Auto_play: 	true, false \n";
 					$output .=	"		// Default: 	div ou mensagem que retornará caso não tenha URL especificada \n";
-					$output .= '		echo "<div>".ws::audioData('.$tool['coluna_mysql'].',"Retorno","w","h","Size","Theme","Auto_play","Default")."</div>";'."\n";
+					$output .= '		echo "<div>".ws::audioData('.$toll['coluna_mysql'].',"Retorno","w","h","Size","Theme","Auto_play","Default")."</div>";'."\n";
 
-				}elseif( $tool['type']=="thumbmail"){
+				}elseif( $toll['type']=="thumbmail"){
 					$output.= '		//retorno da imagem:  ( path/largura/altura/imagem ) '."\n";
-					$output .= "		echo '<img src=\"/ws-img/0/0/'.\$data->".$tool['coluna_mysql'].".'\"/>';\n";
+					$output .= "		echo '<img src=\"/ws-img/0/0/'.\$data->".$toll['coluna_mysql'].".'\"/>';\n";
 				}else{
-					$output .= '		echo \'<div>\'.$data->'.$tool['coluna_mysql'].'.\'</div>\';'."\n";
+					$output .= '		echo \'<div>\'.$data->'.$toll['coluna_mysql'].'.\'</div>\';'."\n";
 				}
 			}
 		}
@@ -490,44 +492,44 @@ function InsertCodeCampos(){
 		$output .=  '		innerItem="" '."\n";
 		$output .=  '		filter=""'."\n";
 		$output .=  '		Paginação:'."\n";
-		$output .=  '		|	paginate="1,2"'."\n";
+		$output .=  '		|	data-paginate="1,2"'."\n";
 		$output .=  '		|	1:max por página, 2:página atual'."\n";
-		$output .=  '		|	pode ser usado parâmetros da URL ex:  paginate="url:1,url:2"'."\n\n";
-		// $output.= '################################### LIVE EDITOR ###################################'."\n";
-		// $output.= '		Agora você pode editar o seu site, dentro do próprio site, '."\n";
-		// $output.= '		basta inserir da DIV a tag "live-editor"'."\n";
-		// $output.= '		Por exemplo, o campo que você quer trazer é "titulo_blog",'."\n";
-		// $output.= '		Você deverá inserir em sua div isso: live-editor="{{titulo_blog_editor}}".'."\n";
-		// $output.= '		ATENÇÃO, COLOQUE APENAS NA DIV QUE TIVER O CONTEÚDO COMPLETO, POIS O QUE TIVER NA DIV SERÁ SALVO NA BASE DE DADOS.".'."\n";
-		// $output.= '		Por exemplo, se uma div tiver apenas uma prévia do texto, e você salvar, todo conteudo será trocado pela prévia.'."\n";
-		// $output.= '#################################################################################'."\n";
+		$output .=  '		|	pode ser usado parâmetros da URL ex:  data-paginate="url:1,url:2"'."\n\n";
+		$output.= '################################### LIVE EDITOR ###################################'."\n";
+		$output.= '		Agora você pode editar o seu site, dentro do próprio site, '."\n";
+		$output.= '		basta inserir da DIV a tag "data-live-editor"'."\n";
+		$output.= '		Por exemplo, o campo que você quer trazer é "titulo_blog",'."\n";
+		$output.= '		Você deverá inserir em sua div isso: data-live-editor="{{titulo_blog_editor}}".'."\n";
+		$output.= '		ATENÇÃO, COLOQUE APENAS NA DIV QUE TIVER O CONTEÚDO COMPLETO, POIS O QUE TIVER NA DIV SERÁ SALVO NA BASE DE DADOS.".'."\n";
+		$output.= '		Por exemplo, se uma div tiver apenas uma prévia do texto, e você salvar, todo conteudo será trocado pela prévia.'."\n";
+		$output.= '#################################################################################'."\n";
 
 		$output .=  '	-->'."\n";
 
 		$fullPages 				= new MySQL();
 		$fullPages->set_table(PREFIX_TABLES.'_model_campos');
-		$fullPages->set_where('ws_id_ferramenta="'.$_REQUEST['id_tool'].'"');
+		$fullPages->set_where('ws_id_ferramenta="'.$_REQUEST['id_toll'].'"');
 		$fullPages->set_where('AND coluna_mysql<>""');
 		$fullPages->select();
 
 		if(isset($_REQUEST['type']) && $_REQUEST['type']=='item'){
 			if($fullPages->_num_rows==0){$output .= '	<!-- Nenhum campos específico adicionado -->'."\n";}
-			foreach ($fullPages->fetch_array as $tool) {
-				if($prefix!="" && substr($tool['coluna_mysql'],0,strlen($prefix))==$prefix) {$tool['coluna_mysql'] = substr($tool['coluna_mysql'],strlen($prefix));}
-				if( $tool['type']=="playerVideo"){
+			foreach ($fullPages->fetch_array as $toll) {
+				if($prefix!="" && substr($toll['coluna_mysql'],0,strlen($prefix))==$prefix) {$toll['coluna_mysql'] = substr($toll['coluna_mysql'],strlen($prefix));}
+				if( $toll['type']=="playerVideo"){
 					$output .=	"	<!-- Function:  url=null,type=player,w=null,h=null -->\n";
 					$output .= '	<!-- Retorno: site,url,title,description,image ou player -->'."\n";
-					$output .= '	{{'.$tool['coluna_mysql'].",ws::videoData,(this),Retorno,200,200}}"."\n";
-				}elseif( $tool['type']=="playerMP3"){
+					$output .= '	{{'.$toll['coluna_mysql'].",ws::videoData,(this),Retorno,200,200}}"."\n";
+				}elseif( $toll['type']=="playerMP3"){
 					$output .=	"	<!-- Function:  url=null,type=player,w=null,h=null,size,theme -->\n";
 					$output .=	"	<!-- Retorno: 	player, site, title, description, height, width, image -->\n";
 					$output .=	"	<!-- Size: 		widget,classic,minimo,list -->\n";
 					$output .=	"	<!-- Theme: 	light, dark -->\n";
-					$output .= '	{{'.$tool['coluna_mysql'].',ws::audioData,(this),Retorno,w,h,Size,Theme}}'."\n";
-				}elseif( $tool['type']=="thumbmail"){
-					$output .= '	<img src="/ws-img/0/0/{{'.$tool['coluna_mysql'].'}}"/>'."\n";
+					$output .= '	{{'.$toll['coluna_mysql'].',ws::audioData,(this),Retorno,w,h,Size,Theme}}'."\n";
+				}elseif( $toll['type']=="thumbmail"){
+					$output .= '	<img src="/ws-img/0/0/{{'.$toll['coluna_mysql'].'}}"/>'."\n";
 				}else{
-					$output .= '	{{'.$tool['coluna_mysql'].'}}'."\n";
+					$output .= '	{{'.$toll['coluna_mysql'].'}}'."\n";
 				}
 			}
 		}
@@ -581,6 +583,7 @@ function InsertCodeCampos(){
 }
 
 function getShortCodesPlugin (){
+	global $session;
 	$jsonConfig = $_REQUEST['path'].'/plugin.config.json';
 	$phpConfig 	= $_REQUEST['path'].'/plugin.config.php';
 	$path 		= $_REQUEST['path'];
@@ -718,6 +721,7 @@ function getShortCodesPlugin (){
 
 }
 function loadShortCodes (){
+	global $session;
 	$setupdata 	= new MySQL();
 	$setupdata->set_table(PREFIX_TABLES.'setupdata');
 	$setupdata->set_order('id','DESC');
@@ -725,7 +729,7 @@ function loadShortCodes (){
 	$setupdata->debug(0);
 	$setupdata->select();
 	$setupdata = $setupdata->fetch_array[0];
-	$path = ROOT_WEBSITE.'/'.$setupdata['url_plugin'];
+	$path = 'website/'.$setupdata['url_plugin'];
 
 	echo '<div style="comboShortCode">
 		<div style="font-size: 20px;font-weight: bold;padding-bottom: 12px;">Adicionar um plugin</div>
@@ -735,19 +739,19 @@ function loadShortCodes (){
 			<select id="shortcodes" style="width:450px;padding: 10px;border: none;color: #3A639A;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">
 				<option value="">Selecione uma popção</option>
 			';
-			$dh = opendir($path);
+			$dh = opendir('./../../../'.$path);
 			while($diretorio = readdir($dh)){
 				if($diretorio != '..' && $diretorio != '.' && $diretorio != '.htaccess'){
-					if(file_exists($path.'/'.$diretorio.'/active')){
-						$jsonConfig = $path.'/'.$diretorio.'/plugin.config.json';
-						$phpConfig 	= $path.'/'.$diretorio.'/plugin.config.php';
+					if(file_exists('./../../../'.$path.'/'.$diretorio.'/active')){
+						$jsonConfig = './../../../'.$path.'/'.$diretorio.'/plugin.config.json';
+						$phpConfig 	= './../../../'.$path.'/'.$diretorio.'/plugin.config.php';
 						if(file_exists($phpConfig)){
 								ob_start(); @include($phpConfig); $jsonRanderizado=ob_get_clean();
 								$contents 		=	$plugin;
 						}elseif(file_exists($jsonConfig)){
 								$contents 		=	json_decode(file_get_contents($jsonConfig));
 						}
-						echo "<option value='".$path.'/'.$diretorio."'>".$contents->pluginName.'</option>';
+						echo "<option value='./../../../".$path.'/'.$diretorio."'>".$contents->pluginName.'</option>';
 					}
 				}
 			}
@@ -759,6 +763,7 @@ function loadShortCodes (){
 
 
 function returnBKP (){
+	global $session;
 		$file_exists_dir 				= new MySQL();
 		$file_exists_dir->set_table(PREFIX_TABLES.'ws_webmaster');
 		$file_exists_dir->set_where('path="'.str_replace('./../../..', '',$_REQUEST['pathFile']).'"');
@@ -777,8 +782,10 @@ function returnBKP (){
 		foreach($file_exists_dir->fetch_array as $opt){echo '<option value="'.$opt['token'].'">'.$opt['created'].'</option>'.PHP_EOL;};
 }
 function _excl_dir_(){
+	global $session;
 		$Dir = $_REQUEST['exclFolder'];
 		function ExcluiDir($Dir){
+			global $session;
 			if ($dd = opendir($Dir)) {
 				while (false !== ($Arq = readdir($dd))) {
 					if($Arq != "." && $Arq != ".."){
@@ -804,6 +811,7 @@ function _excl_dir_(){
 }
 
 function createFolder($NewPath=null){
+	global $session;
 
 	if($NewPath==null && isset($_REQUEST['newFile'])){$newFile = $_REQUEST['newFile'];}else{$newFile = $NewPath;}
 
@@ -823,6 +831,7 @@ function createFolder($NewPath=null){
 }
 
 function CriaPastas($dir,$oq=0){
+	global $session;
 	if (is_dir($dir)) {
 		$dh = opendir($dir);
 		while($diretorio = readdir($dh)){
@@ -839,6 +848,7 @@ function CriaPastas($dir,$oq=0){
 
 
 function createFile (){
+	global $session;
 		$dirname 	= dirname($_REQUEST['newFile']);
 		$filename 	= basename($_REQUEST['newFile']);
 		$fileCreate = "";
@@ -858,6 +868,7 @@ function createFile (){
 	exit;
 }
 function ListFolderNewFile (){
+	global $session;
 	echo 'Criar um arquivo novo
 	<div class="nave_folders">';
 	CriaPastas(ROOT_WEBSITE);
@@ -877,6 +888,7 @@ function ListFolderNewFile (){
 	</script>';
 }
 function ListFolderExclFolder (){
+	global $session;
 	echo 'Selecione um diretório e complemente com o nome do novo folder <br>ou apenas escreva o nome do novo folder no campo a baixo:
 	<div class="c"></div>
 	<div class="bg08" style="padding: 10px 60px; margin: 10px; color: #D80000;">Atenção, ao apagar serão excluidos também os arquivos de BKP em seu sistema.<br>E isso não terá mais volta!</div>
@@ -895,6 +907,7 @@ function ListFolderExclFolder (){
 		sanfona(\'.folder_alert\');
 	</script>';}
 function ListFolderNewFolder (){
+	global $session;
 	echo 'Selecione um diretório e complemente com o nome do novo folder <br>ou apenas escreva o nome do novo folder no campo a baixo:
 	<div class="c"></div>
 
@@ -914,6 +927,7 @@ function ListFolderNewFolder (){
 	</script>';}
 	
 function MostraFiles($dir){
+	global $session;
 	$dh = opendir($dir);
 	while($arquivo = readdir($dh)){
 		if($arquivo != '..' && $arquivo != '.' && !is_dir($dir.$arquivo)){
@@ -927,12 +941,14 @@ function MostraFiles($dir){
 };
 
 function 	refreshFolders (){
+	global $session;
 	CriaPastas(ROOT_WEBSITE,true);
 	MostraFiles(ROOT_WEBSITE);
 	echo '<script>sanfona(\'.folder\');</script>';
 }
 
 function loadFile($pathFile=null){
+	global $session;
 	global $_conectMySQLi_;
 		if(isset($_REQUEST['pathFile']) && $pathFile==null){
 			$pathFile 	= $_REQUEST['pathFile'];
@@ -979,15 +995,13 @@ function loadFile($pathFile=null){
 				//APLICA AS SESSÕES AO EDITOR
 				echo 'window.htmEditor.setSession(window.listFilesWebmaster.'.$newTokenFile.'.session);';
 				echo 'window.addTab("'.$newTokenFile.'",window.pathFile,window.loadFile,"saved");';
-				echo 'window.htmEditor.getSession().on("changeScrollTop", function(scroll) {setDestque()});';
-				echo 'setDestque();';
-
 	echo '}else{
 				$(\'.fileTabContainer .fileTab[data-pathFile="'.$pathFile.'"][data-loadFile="'.$file.'"]\').click();
 		 };';
 
 	}
 	function loadFileBKP(){
+		global $session;
 		if($_REQUEST['token']=="original"){
 			$_REQUEST['pathFile'] = $_REQUEST['pathFile'].'/'.$_REQUEST['filename'];
 			loadFile();
@@ -1014,28 +1028,30 @@ function loadFile($pathFile=null){
 		echo 'setTimeout(function(){$(".ace_scrollbar").perfectScrollbar("update");},200);';}
 
 function geraBKPeAplica(){
+	global $session;
 		parse_str($_POST['GET'], $POST);
-		$pathFile 	= str_replace(array(ROOT_WEBSITE.'/','./../../../../website/'),'', $POST['pathFile']);
-		$_FILE_NAME 		= $POST['filename'];
-		$_NAME_FILE_BKP 	= 'bkp_'.date('d-m-y_H-i-s').'_'.$_FILE_NAME;
-
-		$folderFTP 	= ROOT_WEBSITE.'/'.$pathFile.'/';
-		if($_POST['bkp']=='true'){
-			file_put_contents($folderFTP.$_NAME_FILE_BKP, file_get_contents($folderFTP.$_FILE_NAME));
-			$file_exists_dir 				= new MySQL();
-			$file_exists_dir->set_table(PREFIX_TABLES.'ws_webmaster');
-			$file_exists_dir->set_insert('path',$folderFTP);
-			$file_exists_dir->set_insert('original',$_FILE_NAME);
-			$file_exists_dir->set_insert('bkpfile',$_NAME_FILE_BKP);
-			$file_exists_dir->set_insert('responsavel',$_SESSION['user']['id']);
-			$file_exists_dir->set_insert('token',_token(PREFIX_TABLES.'ws_webmaster','token'));
-			$file_exists_dir->insert();
-		}
-		if(file_put_contents($folderFTP.$_FILE_NAME, $POST['ConteudoDoc'])){ echo "sucesso";};
+		$pathFile 	= str_replace(ROOT_WEBSITE.'/','', $POST['pathFile']);
+		$file 		= $POST['filename'];
+		$fileBKP 	= 'bkp_'.date('d-m-y_H-i-s').'_'.$file;
+		$folderFTP 	= ROOT_WEBSITE."/".$pathFile.'/'.$file;
+		$folderBKP 	= ROOT_ADMIN."/App/Modulos/webmaster/versoes/".$pathFile.'/'.$fileBKP;
+			if($_POST['bkp']=='true'){
+				file_put_contents($folderBKP, file_get_contents($folderFTP));
+				$file_exists_dir 				= new MySQL();
+				$file_exists_dir->set_table(PREFIX_TABLES.'ws_webmaster');
+				$file_exists_dir->set_insert('path',$pathFile);
+				$file_exists_dir->set_insert('original',$file);
+				$file_exists_dir->set_insert('bkpfile',$fileBKP);
+				$file_exists_dir->set_insert('responsavel',$session->get('id'));
+				$file_exists_dir->set_insert('token',_token(PREFIX_TABLES.'ws_webmaster','token'));
+				$file_exists_dir->insert();
+			}
+		if(file_put_contents($folderFTP, $POST['ConteudoDoc'])){ echo "sucesso";};
 		exit;
 	}
 function getVersionsFile(){
-	if(empty($_SESSION['user']['id']) || $_SESSION['user']['id']==""){echo "window.location.reload()";exit;}
+	global $session;
+	if(empty($session->get('id')) || $session->get('id')==""){echo "window.location.reload()";exit;}
 	$pathFile 	= $_REQUEST['pathFile'];
 	$pathFile 	= explode("/",$pathFile);
 	$file 		= end($pathFile);
@@ -1059,7 +1075,7 @@ function getVersionsFile(){
 			if($file['checkin']=='1'){
 					$resposta .=  '<div class=" bg06" style="padding: 10px;margin:0 9px;height: 28px;">';
 					$resposta .=  '<div style="position: relative;float: left;margin-top: 5px;font-size: 12px;font-weight: 800;"><span style="color:#19AB00;font-size: 15px;">[ Chek-In ]</span> Salvo em: '.$file['updated'].'</div>';
-					if($file['id_checkout']==$_SESSION['user']['id']){
+					if($file['id_checkout']==$session->get('id')){
 						$resposta .=  '<div data-id="'.$file['id'].'" class="botao botao_load_file" style="position: relative;float:right;padding: 6px 30px;">Abrir versão</div>';
 					}else{
 						if($file['id_checkout']!="0"){
@@ -1088,7 +1104,7 @@ function getVersionsFile(){
 							functions({
 								funcao:"loadFileVersion",
 								vars:"id_file="+id_file,
-								patch:"'.$_SESSION["_PATCH_"].'",
+								patch:"'.$session->get("_PATCH_").'",
 								Sucess:function(a){eval(a);}
 							});
 						$("#close").click();
@@ -1107,7 +1123,7 @@ function getVersionsFile(){
 			};
 		
 		//  se foi vc que fez o checkin ele libera o checkout
-		if($arrayMysql['checkin']=='1' && $arrayMysql['id_checkout']==$_SESSION['user']['id']){
+		if($arrayMysql['checkin']=='1' && $arrayMysql['id_checkout']==$session->get('id')){
 			checkinchekcout($arrayMysql['id'], $arrayMysql['checkin'],$codigo);
 			echo "out('1');";
 		}else{
@@ -1124,7 +1140,8 @@ function getVersionsFile(){
 		}
 	}}
 function loadFileVersion(){
-	if($_SESSION['user']['id']==""){echo "window.location.reload()";exit;}
+	global $session;
+	if($session->get('id')==""){echo "window.location.reload()";exit;}
 	$id_file = $_REQUEST['id_file'];
 	$load_version_file 				= new MySQL();
 	$load_version_file->set_table(PREFIX_TABLES.'ws_webmaster');
@@ -1140,7 +1157,8 @@ function loadFileVersion(){
 	echo 'window.doc_version="'.urlencode($codigo).'";';
 	checkinchekcout($load_version_file->fetch_array[0]['id'], $load_version_file->fetch_array[0]['checkin'],$codigo);}
 function load_path(){
-	if($_SESSION['user']['id']==""){echo "window.location.reload()";exit;}
+	global $session;
+	if($session->get('id')==""){echo "window.location.reload()";exit;}
 	$load_path_file 				= new MySQL();
 	$load_path_file->set_table(PREFIX_TABLES.'ws_webmaster');
 	$load_path_file->set_where('path="'.$_REQUEST['pathFile'].'"');
@@ -1157,6 +1175,7 @@ function load_path(){
 	echo 'window.doc_version="'.urlencode($codigo).'";';
 	checkinchekcout($load_path_file->fetch_array[0]['id'], $load_path_file->fetch_array[0]['checkin'],$codigo);}
 function exclui_file(){
+	global $session;
 		$U= new MySQL();
 		$U->set_table(PREFIX_TABLES.'ws_webmaster');
 		$U->set_where('path="'.str_replace('./../../..', '',$_REQUEST['pathFile']).'"');
@@ -1186,21 +1205,23 @@ function exclui_file(){
 		echo '$("#bkpsFile").html("").trigger("chosen:updated");';
 	}
 function saveFileBKP(){
+	global $session;
 
-			if($_SESSION['user']['id']==""){echo "window.location.reload()";exit;}
+			if($session->get('id')==""){echo "window.location.reload()";exit;}
 
 			$U					= new MySQL();
 			$U->set_where('id="'.$_REQUEST['id'].'"');
 			$U->set_table(PREFIX_TABLES.'ws_webmaster');
 			$U->set_update('rascunho',urlencode(stripslashes($_REQUEST['file_content'])));
-			$U->set_update('responsavel_altera',$_SESSION['user']['id']);
+			$U->set_update('responsavel_altera',$session->get('id'));
 			if($U->salvar()){
 				echo 'TopAlert({mensagem: "Salvo com sucesso!",type: 3});';
 			}else{
 				echo 'TopAlert({mensagem: "Ops, houve uma falha ao salvar",type: 2});';
 			}}
 function aplica_file(){
-	if($_SESSION['user']['id']==""){echo "window.location.reload()";exit;}
+	global $session;
+	if($session->get('id')==""){echo "window.location.reload()";exit;}
 	$path 			=		$_REQUEST['path']; 
 	$doc_version 	=		$_REQUEST['doc_version']; 
 	if(file_put_contents($path, stripslashes($doc_version))){

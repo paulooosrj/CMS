@@ -148,8 +148,14 @@ class controller{
 
 
 			if(count($this->urlsIncludes)==0){
-				ws::wsInclude($this->Root.'/'.$this->erro404);
-				$this->createCache 	= 0;
+				$extension = basename(ws::urlPath());
+				if(strpos($extension, ".")>-1){
+					header('HTTP/1.0 404 Not Found');
+					exit;
+				}else{
+					ws::wsInclude($this->Root.'/'.$this->erro404);
+					$this->createCache 	= 0;
+				}
 			}else{
 				$filePath = end($this->urlsIncludes);
 				ws::wsInclude($this->Root.'/'.$filePath);
@@ -194,7 +200,9 @@ class controller{
 		if($this->erro404==null){
 			self::_erro(self::GetDebugError(debug_backtrace(),'Por favor, coloque uma URL válida de como erro404'));
 		}else{
-			ws::wsInclude($this->Root.'/'.$this->erro404);
+
+
+
 			$this->createCache 	= 0;
 
 		}

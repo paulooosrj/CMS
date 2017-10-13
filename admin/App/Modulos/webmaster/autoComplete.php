@@ -14,13 +14,13 @@ function mostraDirJson($dir, $oq = ""){
 	}
 }
 function getSnap($str){return str_replace(array(PHP_EOL,'"',"	"),array('\n','\"',"   "),$str);}
-	$colunasTool = array();
+	$colunasToll = array();
 	$campos= new MySQL();
 	$campos->set_table(PREFIX_TABLES.'_model_campos');
 	$campos->set_where('coluna_mysql<>""');
 	$campos->select();
 
-	foreach ($campos->fetch_array as $value) {$colunasTool[$value['ws_id_ferramenta']][]=$value['coluna_mysql']; }
+	foreach ($campos->fetch_array as $value) {$colunasToll[$value['ws_id_ferramenta']][]=$value['coluna_mysql']; }
 	$slugs= new MySQL();
 	$slugs->set_table(PREFIX_TABLES.'ws_ferramentas');
 	$slugs->set_where('slug<>""');
@@ -144,9 +144,9 @@ $output = ''
 		foreach ($slugs->fetch_array as $value) {
 			$out='';
 			$out .= "# Colunas: ".$value['slug'].'																	'.PHP_EOL;
-			if(isset($colunasTool[$value['id']])){foreach ($colunasTool[$value['id']] as $colum) {$out .= '$data->'.$colum.PHP_EOL; } }
+			if(isset($colunasToll[$value['id']])){foreach ($colunasToll[$value['id']] as $colum) {$out .= '$data->'.$colum.PHP_EOL; } }
 			$out .= PHP_EOL."<!-- Colunas: ".$value['slug'].' -->'.PHP_EOL;
-			if(isset($colunasTool[$value['id']])){foreach ($colunasTool[$value['id']] as $colum) {$out .= "{{".$colum.'}}'.PHP_EOL; } }
+			if(isset($colunasToll[$value['id']])){foreach ($colunasToll[$value['id']] as $colum) {$out .= "{{".$colum.'}}'.PHP_EOL; } }
 			$output .=  ',{"value":"'.str_replace(array(PHP_EOL,'"',"	"),array('\n','\"',"   "),$out).'","meta":"HTML5"}';
 		}
 		foreach ($slugs->fetch_array as $value) {$output .=  ',{"value":"Slug: '.$value['slug'].'","meta":"Slug"}'; }

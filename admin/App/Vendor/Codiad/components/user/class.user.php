@@ -9,10 +9,10 @@
 // ############################################################################
 // # IMPORTAMOS A CLASSE DO SISTEMA
 // ############################################################################
-// $r= $_SERVER["DOCUMENT_ROOT"];
-// $_SERVER["DOCUMENT_ROOT"]   = (substr($r, -1) == '/') ? substr($r, 0, -1) : $r;
-// include_once($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');
-
+$r= $_SERVER["DOCUMENT_ROOT"];
+$_SERVER["DOCUMENT_ROOT"]   = (substr($r, -1) == '/') ? substr($r, 0, -1) : $r;
+include_once($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');
+$user = new session();
 class User
 {
 
@@ -49,8 +49,7 @@ class User
     // Authenticate
     //////////////////////////////////////////////////////////////////
 
-    public function Authenticate()
-    {
+    public function Authenticate(){
 
         $pass = false;
         $this->EncryptPassword();
@@ -58,7 +57,7 @@ class User
         foreach ($users as $user) {
             if ($user['username']==$this->username && $user['password']==$this->password) {
                 $pass = true;
-                $_SESSION['user']['usuario'] = $this->username;
+                $user->set('usuario',$this->username);
                 $_SESSION['lang'] = $this->lang;
                 $_SESSION['theme'] = $this->theme;
                 if ($user['project']!='') {

@@ -8,7 +8,6 @@
     $r      = $_SERVER["DOCUMENT_ROOT"];
     $root   =  ((substr($r, -1) == '/') ? substr($r, 0, -1) : $r);
     include_once($root.'/admin/App/Lib/class-ws-v1.php');
-
     Common::startSession();
 
     //////////////////////////////////////////////////////////////////
@@ -157,9 +156,12 @@
             // Check API Key or Session Authentication
             $key = "";
             if(isset($_GET['key'])){ $key = $_GET['key']; }
-            if(!isset($_SESSION['user']['usuario']) && !in_array($key,$api_keys)){
-              //  exit('{"status":"error","message":"Authentication Error"}');
-            }
+
+            // $user = new session();
+            // if(null !== $user->get('usuario') && !in_array($key,$api_keys)){
+            //   //  exit('{"status":"error","message":"Authentication Error"}');
+            // }
+
         }
 
         //////////////////////////////////////////////////////////////////
@@ -234,7 +236,8 @@
         //////////////////////////////////////////////////////////////////
 
         public static function checkAccess() {
-            return !file_exists(DATA . "/" . $_SESSION['user']['usuario'] . '_acl.php');
+            $user = new session();
+            return !file_exists(DATA . "/" . $user->get('usuario') . '_acl.php');
         }
 
         //////////////////////////////////////////////////////////////////
@@ -242,8 +245,8 @@
         //////////////////////////////////////////////////////////////////
 
         public static function checkPath($path) {
-            if(file_exists(DATA . "/" . $_SESSION['user']['usuario'] . '_acl.php')){
-                foreach (getJSON($_SESSION['user']['usuario'] . '_acl.php') as $projects=>$data) {
+            if(file_exists(DATA . "/" . $user->get('usuario') . '_acl.php')){
+                foreach (getJSON($user->get('usuario') . '_acl.php') as $projects=>$data) {
                     if (strpos($path, $data) === 0) {
                         return true;
                     }

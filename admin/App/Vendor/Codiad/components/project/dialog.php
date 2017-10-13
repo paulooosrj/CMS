@@ -11,6 +11,7 @@
 
     require_once('../../common.php');
     include_once($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');
+    $user = new session();    
 
     //////////////////////////////////////////////////////////////////
     // Verify Session or Key
@@ -27,8 +28,8 @@
             
             // Get access control data
             $projects_assigned = false;
-            if(file_exists(BASE_PATH . "/data/" . $_SESSION['user']['usuario'] . '_acl.php')){
-                $projects_assigned = getJSON($_SESSION['user']['usuario'] . '_acl.php');
+            if(file_exists(BASE_PATH . "/data/" . $user->get('usuario') . '_acl.php')){
+                $projects_assigned = getJSON($user->get('usuario') . '_acl.php');
             }
             
             ?>  
@@ -73,8 +74,8 @@
         
             // Get access control data
             $projects_assigned = false;
-            if(file_exists(BASE_PATH . "/data/" . $_SESSION['user']['usuario'] . '_acl.php')){
-                $projects_assigned = getJSON($_SESSION['user']['usuario'] . '_acl.php');
+            if(file_exists(BASE_PATH . "/data/" . $user->get('usuario') . '_acl.php')){
+                $projects_assigned = getJSON($user->get('usuario') . '_acl.php');
             }
             
             ?>

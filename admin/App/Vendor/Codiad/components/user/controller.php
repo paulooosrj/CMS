@@ -1,5 +1,7 @@
 <?php
 
+    $r = $_SERVER["DOCUMENT_ROOT"];
+    $_SERVER["DOCUMENT_ROOT"] = (substr($r, -1) == '/') ? substr($r, 0, -1) : $r;
     /*
     *  Copyright (c) Codiad & Kent Safranski (codiad.com), distributed
     *  as-is and without warranty under the MIT License. See
@@ -8,6 +10,8 @@
 
     require_once('../../common.php');
     require_once('class.user.php');
+    include_once ($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');
+    $user = new session();
 
 if (!isset($_GET['action'])) {
     die(formatJSEND("error", "Missing parameter"));
@@ -120,7 +124,7 @@ if ($_GET['action']=='password') {
         die(formatJSEND("error", "Missing username or password"));
     }
         
-    if (checkAccess() || $_POST['username'] == $_SESSION['user']['usuario']) {
+    if (checkAccess() || $_POST['username'] == $user->get('usuario')) {
         $User->username = $_POST['username'];
         $User->password = $_POST['password'];
         $User->Password();
@@ -136,7 +140,7 @@ if ($_GET['action']=='project') {
         die(formatJSEND("error", "Missing project"));
     }
         
-    $User->username = $_SESSION['user']['usuario'];
+    $User->username = $user->get('usuario');
     $User->project  = $_GET['project'];
     $User->Project();
 }
@@ -146,6 +150,6 @@ if ($_GET['action']=='project') {
     //////////////////////////////////////////////////////////////////
 
 if ($_GET['action']=='verify') {
-    $User->username = $_SESSION['user']['usuario'];
+    $User->username = $user->get('usuario');
     $User->Verify();
 }

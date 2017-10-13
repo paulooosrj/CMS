@@ -15,16 +15,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/global.css" />
+<!-- <link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/global.css" /> -->
 <link	type="text/css" media="all"		rel="stylesheet" 						href="/admin/App/Templates/css/websheep/estrutura.min.css" />
 <link	type="text/css" media="all"		rel="stylesheet" 						href="/admin/App/Templates/css/websheep/desktop.min.css" />
 <link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/install.css" />
 <link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/funcionalidades.css" />
 <link	type="text/css" media="all"		rel="stylesheet" 						href="/admin/App/Templates/css/fontes/fonts.css" />
-<link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/theme_blue.min.css" />
+<link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/theme_blue.min.css?v=1" />
 <script type = 'text/javascript' 												src="/admin/App/Vendor/jquery/2.2.0/jquery.min.js"></script>
-<script type = 'text/javascript' 												src="/admin/App/Templates/js/websheep/websheep_full.js"></script>
-<script type = 'text/javascript' 												src="/admin/App/Templates/js/websheep/funcionalidades.min.js"></script>
+<script type = 'text/javascript' 												src="/admin/App/Templates/js/websheep/funcionalidades.js"></script>
 
 
 <script type = 'text/javascript'>
@@ -76,11 +75,13 @@ $(document).ready(function(){
 					<div id="resposta"></div>
 					<img src="/admin/App/Templates/img/websheep/logo_ws_install.jpg" style="">
 					<div class="c"></div>
-					<strong style="font-family: 'Titillium Web', sans-serif;font-size: 30px;line-height">Bemvindo ao WebSheep <?=$ws_version->version?></strong>
+					<strong style="font-family: 'Titillium Web', sans-serif;font-size: 30px;line-height;font-weight: 700;margin: 20px 0px;position: relative;float: left;width: 100%;">Bemvindo ao WebSheep <?=$ws_version->version?></strong>
 					<br>
-					Antes de começar, gostariamos de agradecer por escolher e utilizar nossa plataforma, 
-					pois ela é fruto de muito esforço e noites sem dormir.
-					Ela foi projetada especialmente para profissionais na área de WEB que nao querem perder tempo nem dinheiro com desenvolvimentos complexos sob medida para seus clientes.
+					<div class="description">
+						Antes de começar, gostariamos de agradecer por escolher e utilizar nossa plataforma, 
+						pois ela é fruto de muito esforço e noites sem dormir.
+						Ela foi projetada especialmente para profissionais na área de WEB que nao querem perder tempo nem dinheiro com desenvolvimentos complexos sob medida para seus clientes.
+					</div>
 					<?
 							echo 	'<div class="avisophp">
 										<div class="response"> 

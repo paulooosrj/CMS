@@ -1,5 +1,5 @@
 <?
-	header("Content-Type: text/html; charset=utf-8",true);
+	include_once($_SERVER["DOCUMENT_ROOT"] . '/admin/App/Lib/class-ws-v1.php');
 	error_reporting(E_ALL); 
 ?>
 
@@ -14,9 +14,8 @@
 <link rel="stylesheet" href="/admin/App/Templates/css/chosen/chosen.css" 											type="text/css" media="all" />
 <link rel="stylesheet" href="/admin/App/Templates/css/websheep/theme_blue.min.css" 									type="text/css" media="all" />
 <link rel="stylesheet" href="/admin/App/Templates/css/websheep/funcionalidades.css" 								type="text/css" media="all" />
-<script type = 'text/javascript' src="/admin/App/Vendor/jquery/2.2.0/jquery.min.js"							id="jquery"></script>
-<script type = 'text/javascript' src="/admin/App/Templates/js/websheep/websheep_full.js" 							id="websheep_full"></script>
-<script type = 'text/javascript' src="/admin/App/Templates/js/websheep/funcionalidades.min.js" 						id="funcionalidades"></script>
+<script type = 'text/javascript' src="/admin/App/Vendor/jquery/2.2.0/jquery.min.js"									id="jquery"></script>
+<script type = 'text/javascript' src="/admin/App/Templates/js/websheep/funcionalidades.js" 							id="funcionalidades"></script>
 <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700" rel="stylesheet">
 <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
@@ -207,11 +206,6 @@ iframe{
 							})
 						}
 					});
-
-
-
-
-
 		<?endif;?>
 
 

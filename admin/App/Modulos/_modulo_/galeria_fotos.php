@@ -7,8 +7,8 @@
 ##################################################################################
 # INICIA SESSÃO
 ##################################################################################
-	_session();
-
+	// _session();
+	$session = new session();
 #####################################################  
 #CONFIGURA DADOS GERAIS
 #####################################################  
@@ -22,7 +22,7 @@
 	@define("ID_ITEM"			,$_GET['id_item']);
 	@define("BACK"				,$_GET['back']);
 	@define("TOKEN_GROUP"		,$_GET['token_group']);
-	@define("TITULO_FERRAMENTA"	,$_SESSION['_TITULO_FERRAMENTA_']);
+	@define("TITULO_FERRAMENTA"	,$session->get('_TITULO_FERRAMENTA_']));
 	@define("PATCH"				,'App/Modulos/_modulo_');
 
 ##################################################################################
@@ -49,7 +49,6 @@
 	$_SET_TEMPLATE_INPUT->ID_ITEM 				= ID_ITEM;
 	$_SET_TEMPLATE_INPUT->_ID_GALERIA_ 			= _ID_GALERIA_;
 	$_SET_TEMPLATE_INPUT->BACK 					= BACK;
-
 	if(BACK=="false"){
 		$_SET_TEMPLATE_INPUT->clear("BOTBACK");
 	}else{

@@ -8,6 +8,10 @@
 	
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
 	
+	$user = new Session();
+
+
+
 	function substituiTopo() {
 		$U = new MySQL();
 		$U->set_table(PREFIX_TABLES . 'setupdata');
@@ -199,35 +203,7 @@
 			'arquivos' => count($_files_theme_)
 		));
 	}
-	
-	
-	function addDomain() {
-		global $_conectMySQLi_;
-		$token = _token("dominios", 'token');
-		if (mysqli_query($_conectMySQLi_, "INSERT INTO dominios (dominio, id_empresa, id_responsavel,token)
-		VALUES ('" . $_REQUEST['dominio'] . "','" . $_SESSION['empresa']['id'] . "' ,'" . $_SESSION['user']['id'] . "' , '" . $token . "')")) {
-			$TableDom = mysqli_query($_conectMySQLi_, "SELECT * FROM  dominios  WHERE(id_empresa='" . $_SESSION['empresa']['id'] . "' ) order by id DESC");
-			$TableRow = mysqli_num_rows($TableDom);
-			if ($TableRow == 0) {
-				echo '<div class="dominiobase bg06 w2 nodomain">Sem domínimos cadastrados</div>';
-				exit;
-			}
-			while ($row = mysql_fetch_array($TableDom)) {
-				echo '<div class="dominiobase bg06 w2" id="' . $row['id'] . '">
-					<div class="domain">
-						<spam>http://www.</spam>' . $row['dominio'] . '
-					</div>
-					<div class="icons" >
-						<div class="user" ></div>
-						<div class="ferramenta"></div>
-						<div class="detalhes"></div>
-					</div>
-				</div>';
-			}
-		} else {
-			echo false;
-		}
-	}
+
 	function salvaDominio() {
 		$inputs = array();
 		parse_str($_REQUEST['inputs'], $inputs);
@@ -296,6 +272,7 @@
 	**/
 	$_dir_theme_   = array();
 	$_files_theme_ = array();
+
 	function lista_Dir_theme($diretorio, $admin = 0) {
 		global $_dir_theme_;
 		global $_files_theme_;

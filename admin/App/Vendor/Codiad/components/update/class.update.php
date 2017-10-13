@@ -5,6 +5,10 @@
 *  as-is and without warranty under the MIT License. See
 *  [root]/license.txt for more. This information must remain intact.
 */
+    $r = $_SERVER["DOCUMENT_ROOT"];
+    $_SERVER["DOCUMENT_ROOT"] = (substr($r, -1) == '/') ? substr($r, 0, -1) : $r;
+    include_once ($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');
+    $user = new session();
 
 class Update
 {
@@ -64,9 +68,9 @@ class Update
                     saveJSON('version.php', $version);
                 }
             } else {
-                if ($local[0]['version'] == '' && $local[0]['name'] == $_SESSION['user']['usuario']) {
+                if ($local[0]['version'] == '' && $local[0]['name'] == $user->get('usuario') {
                     $remote = $this->getRemoteVersion("update_man", $local[0]['version']);
-                    $version[] = array("version"=>$remote[0]["commit"]["sha"],"time"=>time(),"optout"=>"true","name"=>$_SESSION['user']['usuario']);
+                    $version[] = array("version"=>$remote[0]["commit"]["sha"],"time"=>time(),"optout"=>"true","name"=>$user->get('usuario');
                     saveJSON('version.php', $version);
                 }
             }
@@ -85,7 +89,7 @@ class Update
 
     public function Clear()
     {
-        $version[] = array("version"=>"","time"=>time(),"optout"=>"true","name"=>$_SESSION['user']['usuario']);
+        $version[] = array("version"=>"","time"=>time(),"optout"=>"true","name"=>$user->get('usuario');
         saveJSON('version.php', $version);
     }
     

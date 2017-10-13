@@ -8,7 +8,11 @@
 # INCLUI AS CLASSES  DO SISTEMA
 #################################################################################
 	include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
-	_session();
+
+#################################################################################  
+# INICIANDO A SESSÃO
+#################################################################################
+	$session = new session();
 
 #################################################################################  
 # VERIFICA SE O USUÁRIO ESTÁ LOGADO OU AS SESSÕES E COOKIES ESTÃO EM ORDEM
@@ -33,7 +37,7 @@
 	$_GET['token_group'] = (
 		(empty($_GET['token_group'])) ? (
 										 (
-										 	empty($_SESSION['token_group'])) ? _token(PREFIX_TABLES."ws_biblioteca","token_group") : $_SESSION['token_group']
+										 	empty($session->get('token_group'))) ? _token(PREFIX_TABLES."ws_biblioteca","token_group") : $session->get('token_group')
 										 ) :$_GET['token_group']
 										);
 #################################################################################  

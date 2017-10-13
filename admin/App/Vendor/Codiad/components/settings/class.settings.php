@@ -57,6 +57,6 @@ class Settings
             saveJSON('settings.php', array($this->username => array('codiad.username' => $this->username)));
         }
         $settings = getJSON('settings.php');
-        echo formatJSEND("success", $settings[$this->username]);
+        echo formatJSEND("success", @$settings[$this->username]);
     }
 }

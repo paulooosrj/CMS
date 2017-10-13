@@ -220,6 +220,7 @@
 			"Users": "Usuários",
 			"ImageLibrary": "Biblioteca de imagens",
 			"HDManagement": "Gerenciamento de HD",
+			"logRecords": "Logs",
 			"Logout": "Fazer Logout"
 		}
 	},
@@ -598,14 +599,7 @@
 			"saveTool": "Salvar ferramenta",
 			"toolType": "Tipo da ferramenta",
 			"columnsWillBeDisplayed": "Quais colunas serão exibidas na listagem dos itens?",
-
-
-
 			"toolIsPartOfAPlugin": "Essa ferramenta faz parte de um plugin",
-
-
-
-
 			"editButtom": "Editar os campos do Ítem",
 			"TopAlert": {
 				"setSlug": "Escreva um SLUG para esta feramenta",

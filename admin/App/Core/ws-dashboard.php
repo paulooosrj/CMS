@@ -4,6 +4,10 @@
 	############################################
 	 header("Content-Type: text/html; charset=utf-8",true);
 
+	############################################
+	#	CARREGA SESSION
+	############################################
+	$user = new session();
 
 
 	##########################################################################################
@@ -31,8 +35,8 @@
 	##########################################################################################
 	#  CASO O PAINEL SEJA INICIADO NO MODO 'INSECURE'  IGNORA AS PERMISSÕES E LIBERA TUDO
 	##########################################################################################
-	if (SECURE!=FALSE && isset($_SESSION)){
-		$_permissao_user_->set_where('id_user="'.$_SESSION['user']['id'].'"');
+	if (SECURE!=FALSE && $user->verify()){
+		$_permissao_user_->set_where('id_user="'.$user->get('id').'"');
 	}
 	$_permissao_user_->select();
 
@@ -67,8 +71,9 @@
 	##########################################################################################
 	#  AQUI VERIFICAMOS APENAS PARA AVISAR QUE ESTÁ NO MODO 'INSECURE'   
 	##########################################################################################
-		if (SECURE!=FALSE && isset($_SESSION)){
-			$name = $_SESSION['user']['nome'];
+
+		if (SECURE!=FALSE && @$log_session->get('ws_log')==1){
+			$name = $user->get('nome');
 		}else{
 			$name = "<span style='color:#f00;font-weight:bold;'>INSECURE</span>";
 		}
@@ -143,14 +148,14 @@
 	##########################################################################################
 	#  VERIFICA SE EXISTE 2° PATH NA URL
 	##########################################################################################
-	$serialKey = ws::urlPath(2,false);
- 	if($serialKey){
+	$keyAccess = ws::urlPath(2,false);
+ 	if($keyAccess){
 		##########################################################################################
 		#  CASO O 2° PATH SEJA UM ACESSO DIRETO, PUXAMOS DA BASE A CHAVE
 		##########################################################################################
 		$ws_direct_access 				= new MySQL();
 		$ws_direct_access->set_table(PREFIX_TABLES.'ws_direct_access');
-		$ws_direct_access->set_where('keyaccess="'.$serialKey.'"');
+		$ws_direct_access->set_where('keyaccess="'.$keyAccess.'"');
 		$ws_direct_access->select();
 		$_num_rows 						= $ws_direct_access->_num_rows;
 		$ws_direct_access 				= $ws_direct_access->fetch_array;
@@ -167,10 +172,25 @@
 			$TEMPLATE->clear('DIRECTACCESS');
 		}
  	}		
-
  	$TEMPLATE->classHTMLtypeAcess 	= ( isset($_num_rows) && $_num_rows>0 ) ? "IframeModel" : "";
 	##########################################################################################
 	#  RETORNA O HTML MONTADO   
 	##########################################################################################
 	$TEMPLATE->block("DASHBOARD");
+
+	##########################################################################################
+	#  COMPILA O JAVASCRIPT CASO NAO TENHA SIDO COMPILADO   
+	##########################################################################################
+		if(
+			(!file_exists(ROO_ADMIN.'/App/Templates/js/websheep/funcionalidades.min.js') || !file_exists(ROO_ADMIN.'/App/Templates/js/websheep/functionsws.min.js')) 	||
+			(filemtime(ROO_ADMIN.'/App/Templates/js/websheep/funcionalidades.js') 	> filemtime(ROO_ADMIN.'/App/Templates/js/websheep/funcionalidades.min.js')) 		||
+			(filemtime(ROO_ADMIN.'/App/Templates/js/websheep/functionsws.js') 		> filemtime(ROO_ADMIN.'/App/Templates/js/websheep/functionsws.min.js')) 
+		){
+			ws::compileJS();
+		}
+
+	##########################################################################################
+	#  PRINTA RESULTADO   
+	##########################################################################################
 	$TEMPLATE->show();
+

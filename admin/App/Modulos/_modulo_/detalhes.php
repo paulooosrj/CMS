@@ -14,7 +14,7 @@
 	# CRIA SESSÃO
 	#####################################################  
 	_session();
-
+	$session = new session();
 	#####################################################  
 	#DEFINE O LINK DO TEMPLATE DESTE MÓDULO 
 	#####################################################  
@@ -29,8 +29,9 @@
 	######################################################
 	######################################################
 	######################################################
-	$_SESSION['id_cat']   = empty($_GET['id_cat']) ? "1" : $_GET['id_cat'];
-	$_SESSION['ws_nivel'] = empty($_GET['ws_nivel']) ? "1" : $_GET['ws_nivel'];
+	$session->set('id_cat', empty($_GET['id_cat']) ? "1" : $_GET['id_cat']);
+	$session->set('ws_nivel', empty($_GET['ws_nivel']) ? "1" : $_GET['ws_nivel']);
+
 	define("ID_FERRAMENTA", $_GET['ws_id_ferramenta']);
 
 	if(empty($_GET['LIMIT'])){			$_GET['LIMIT']="50";														}
@@ -79,13 +80,13 @@
 		$get_produto->set_where('token="' . $token . '"');
 		$get_produto->select();
 		# grava na sessão GET o ID simulando o produto já inserido
-		$_SESSION['id_item'] = $get_produto->fetch_array[0]['id'];
+		$session->set('id_item',$get_produto->fetch_array[0]['id']);
 		# CASO JÁ TENHA UM PRODUTO, GRAVA NA SESSÃO O ID
 	} elseif($verify_produto->_num_rows == 1) {
-		$_SESSION['id_item'] = $verify_produto->fetch_array[0]['id'];
+		$session->set('id_item',$verify_produto->fetch_array[0]['id']);
 	} else {
 		#CASO CONTRARIO GRAVA O ID NA SESSÃO QUE FOI ENVIADO VIA GET
-		$_SESSION['id_item'] = $_GET['id_item'];
+		$session->set('id_item',$_GET['id_item']);
 	}
 	##########################################################################################################
 	# SEPARAMOS OS CAMPOS DESTE ÍTEM
@@ -101,7 +102,7 @@
 	$draft = new MySQL();
 	$draft->set_table(PREFIX_TABLES . "_model_item");
 	$draft->set_where('ws_draft="1"');
-	$draft->set_where('AND ws_id_draft="' . $_SESSION['id_item'] . '"');
+	$draft->set_where('AND ws_id_draft="' . $session->get('id_item') . '"');
 	$draft->select();
 	##########################################################################################################
 	#     SELECIONA O ÍTEM
@@ -110,10 +111,10 @@
 	$produto->set_table(PREFIX_TABLES . "_model_item");
 	// caso nao exista rascunho ou seja pedido a visualização do arquivo original    
 	if((isset($_GET['original']) && $_GET['original'] == 'true') || $draft->_num_rows == 0) {
-		$produto->set_where('id="' . $_SESSION['id_item'] . '"');
+		$produto->set_where('id="' . $session->get('id_item') . '"');
 	} else {
 		$produto->set_where('ws_draft="1"');
-		$produto->set_where('AND ws_id_draft="' . $_SESSION['id_item'] . '"');
+		$produto->set_where('AND ws_id_draft="' . $session->get('id_item') . '"');
 	}
 	// separamos os campos necessários desta ferramenta
 	foreach($campos->fetch_array as $value) {
@@ -124,11 +125,13 @@
 	##########################################################################################################
 	# caso nao tenha nenhum ítem setado, pega o ID 1    
 	##########################################################################################################
-	if($_SESSION['id_cat'] == 'null') {
-		$_SESSION['id_cat'] = '1';
-	} elseif($_SESSION['id_cat'] == 'nullback') {
-		$_SESSION['id_cat'] = $produto['id_cat'];
+	if($session->get('id_cat') == 'null') {
+		$session->set('id_cat','1');
+
+	} elseif($session->get('id_cat') == 'nullback') {
+		$session->set('id_cat',$produto['id_cat']);
 	}
+
 	if($_FERRAMENTA_['_niveis_'] >= 0) {
 		$link_back = './' . PATH . '/itens.php?LIMIT='.$_GET['LIMIT'].'&PAGE='.$_GET['PAGE'].'&token_group='.$_GET['token_group'].'&ws_id_ferramenta='.ID_FERRAMENTA;
 	}
@@ -201,9 +204,9 @@
 	##########################################################################################################
 	# DEFINIMOS AS CONSTANTES UTILIZADAS NO PAINEL
 	##########################################################################################################
-	define("ID_ITEM", $_SESSION['id_item']);
+	define("ID_ITEM", $session->get('id_item'));
 	define("ID_CAT", '');
-	define("WS_NIVEL", $_SESSION['ws_nivel']);
+	define("WS_NIVEL", $session->get('ws_nivel'));
 
 	/*##############################################################################################################################*/
 	/*##############################################################################################################################*/
@@ -235,7 +238,7 @@
 			$_SET_TEMPLATE_INPUT->WIDTH         = $k['largura'] - 22;
 			$_SET_TEMPLATE_INPUT->LABEL         = $k['label'];
 			$_SET_TEMPLATE_INPUT->ID            = $k['id_campo'];
-			$_SET_TEMPLATE_INPUT->WS_NIVEL      = $_SESSION['ws_nivel'];
+			$_SET_TEMPLATE_INPUT->WS_NIVEL      = $session->get('ws_nivel');
 			$_SET_TEMPLATE_INPUT->VALUE         = $k['values_opt'];
 			$_SET_TEMPLATE_INPUT->block("BLOCK_BOT_TOOLS");
 			$_IPUNT_CAMPOS .= $_SET_TEMPLATE_INPUT->parse();
@@ -656,7 +659,7 @@
 			$_SET_TEMPLATE_INPUT->WS_NIVEL      = WS_NIVEL;
 			$_SET_TEMPLATE_INPUT->WIDTH         = $k['largura'] - 22;
 			$_SET_TEMPLATE_INPUT->LABEL         = $k['label'];
-			$_SET_TEMPLATE_INPUT->WS_NIVEL      = $_SESSION['ws_nivel'];
+			$_SET_TEMPLATE_INPUT->WS_NIVEL      = $session->get('ws_nivel');
 			$_SET_TEMPLATE_INPUT->block("BLOCK_BOT_FILE");
 			$_IPUNT_CAMPOS .= $_SET_TEMPLATE_INPUT->parse();
 		}

@@ -18,15 +18,21 @@
 		} elseif (file_exists($jsonConfig)) {
 			$contents = json_decode(file_get_contents($jsonConfig));
 		}
+
+
 		if (file_exists($key)) {
 			unlink($key);
+			ws::insertLog($user->get('id'),0 ,0,"Plugin","Desabilitou plugin",$_REQUEST['pathPlugin'] ,"","system");
 			echo "off";
 			exit;
 		} else {
+			ws::insertLog($user->get('id'),0 ,0,"Plugin","Abilitou plugin",$_REQUEST['pathPlugin'] ,"","system");
 			file_put_contents($key, "true");
 			echo "on";
 			exit;
 		}
+
+
 	}
 	
 	###############################################################################################################################
@@ -55,6 +61,9 @@
 			}
 		}
 		ExcluiDir(ROOT_WEBSITE . '/' . $_REQUEST['path']);
+		//id_user,id_ferramenta ,id_item, titulo,descricao,detalhes,tabela,$type
+		ws::insertLog($user->get('id'),0 ,0,"Plugin","Excluiu plugin",$_REQUEST['path'] ,"","system");
+
 	}
 	
 	###############################################################################################################################
@@ -68,6 +77,8 @@
 		$getPath->select();
 		$getPath = $getPath->fetch_array[0]['url_plugin'];
 		CopiaDir(ROOT_ADMIN . '/App/Modulos/plugins/padrao', ROOT_WEBSITE . '/' . $getPath . '/padrao_' . date('d-m-Y_H-i'));
+		//id_user,id_ferramenta ,id_item, titulo,descricao,detalhes,tabela,$type
+		ws::insertLog($user->get('id'),0 ,0,"Plugin","Criou um novo plugin",$_REQUEST['path'] ,"","system");
 		exit;
 	}
 	
@@ -83,7 +94,6 @@
 		$CAMPO_DATA->set_where('id_campo="' . $_POST['idCampo'] . '"');
 		$CAMPO_DATA->select();
 		$CAMPO_DATA = $CAMPO_DATA->fetch_array[0];
-		
 		$categorias = new MySQL();
 		$categorias->set_table(PREFIX_TABLES . 'ws_link_itens');
 		$categorias->set_where(' id_item="' . $_POST['id_item'] . '"');
@@ -475,6 +485,10 @@
 			$Salva_Titulo->set_where('id="1"');
 			$Salva_Titulo->set_update('title_root', $titulo);
 			if ($Salva_Titulo->Salvar()) {
+
+				//id_user,id_ferramenta ,id_item, titulo,descricao,detalhes,tabela,$type
+				ws::insertLog($user->get('id'),0,0,"Alterou título padrão do website","Alterou o título padrão do website", "Alterou para:".$_POST['titulo'] ,PREFIX_TABLES."setupdata","update");
+
 				echo "sucesso";
 			}
 		} else {
@@ -483,6 +497,7 @@
 			$Salva_Titulo->set_where('id="' . $id_page . '"');
 			$Salva_Titulo->set_update('title_page', $titulo);
 			if ($Salva_Titulo->Salvar()) {
+				ws::insertLog($user->get('id'),0,$id_page,"Alterou título de uma página","Alterou título de uma página", "Alterou para:".$_POST['titulo'] ,PREFIX_TABLES."ws_pages","update");
 				echo "sucesso";
 			}
 		}
@@ -496,6 +511,7 @@
 		$FERRA->set_table(PREFIX_TABLES . 'meta_tags');
 		$FERRA->set_where('id="' . $_POST['idMeta'] . '"');
 		if ($FERRA->exclui()) {
+			ws::insertLog($user->get('id'),0,$id_page,"Alterou título de uma página","Alterou título de uma página", "Alterou para:".$_POST['titulo'] ,PREFIX_TABLES."meta_tags","delete");
 			echo "sucesso";
 			exit;
 		}
@@ -510,7 +526,10 @@
 		$FERRA->set_where('id<>"" AND (id="' . implode($_POST['metas'], '" OR id="') . '")');
 		if ($FERRA->exclui()) {
 			echo "sucesso";
+			ws::insertLog($user->get('id'),0,0,"Excluiu MetaTags","Excluiu MetaTags", "Excluiu MetaTags" ,PREFIX_TABLES."meta_tags","delete");
 			exit;
+		}else{
+			ws::insertLog($user->get('id'),0,0,"Falha em excluir MetaTags","Falha em excluir MetaTags", "Falha em excluir MetaTags" ,PREFIX_TABLES."meta_tags","error");
 		}
 	}
 	
@@ -526,6 +545,7 @@
 		$FERRA->set_update('content', $_POST['content']);
 		if ($FERRA->Salvar()) {
 			echo "sucesso";
+			ws::insertLog($user->get('id'),0,$_POST['idMeta'],"Salvou/Alterou MetaTags","Salvou/Alterou MetaTags", "Salvou/Alterou MetaTags" ,PREFIX_TABLES."meta_tags","update");
 			exit;
 		}
 	}
@@ -570,6 +590,8 @@
 				exit;
 			}
 			echo "sucesso";
+			ws::insertLog($user->get('id'),0,0,"Adicionou MetaTags","Adicionou MetaTags", "Adicionou MetaTags" ,PREFIX_TABLES."meta_tags","insert");
+
 			exit;
 		} elseif ($_POST['TypeMedia'] == "basic") {
 			foreach ($basic as $basic) {
@@ -580,10 +602,12 @@
 				$insert_categorias->set_insert('type', 'name');
 				$insert_categorias->set_insert('type_content', $basic);
 				if (!$insert_categorias->insert()) {
+					ws::insertLog($user->get('id'),0,0,"Falha ao add metaTags","Falha ao add metaTags", "Falha ao add metaTags" ,PREFIX_TABLES."meta_tags","error");
 					echo "falha";
 					exit;
 				}
 			}
+			ws::insertLog($user->get('id'),0,0,"Adicionou MetaTags","Adicionou MetaTags", "Adicionou MetaTags" ,PREFIX_TABLES."meta_tags","insert");
 			echo "sucesso";
 			exit;
 		} elseif ($_POST['TypeMedia'] == "og") {
@@ -595,10 +619,12 @@
 				$insert_categorias->set_insert('type', 'property');
 				$insert_categorias->set_insert('type_content', $og);
 				if (!$insert_categorias->insert()) {
+					ws::insertLog($user->get('id'),0,0,"Falha ao add metaTags","Falha ao add metaTags", "Falha ao add metaTags" ,PREFIX_TABLES."meta_tags","error");
 					echo "falha";
 					exit;
 				}
 			}
+			ws::insertLog($user->get('id'),0,0,"Adicionou MetaTags","Adicionou MetaTags", "Adicionou MetaTags" ,PREFIX_TABLES."meta_tags","insert");
 			echo "sucesso";
 			exit;
 		} elseif ($_POST['TypeMedia'] == "twitter") {
@@ -610,10 +636,12 @@
 				$insert_categorias->set_insert('type', 'name');
 				$insert_categorias->set_insert('type_content', $twitter);
 				if (!$insert_categorias->insert()) {
+					ws::insertLog($user->get('id'),0,0,"Falha ao add metaTags","Falha ao add metaTags", "Falha ao add metaTags" ,PREFIX_TABLES."meta_tags","error");
 					echo "falha";
 					exit;
 				}
 			}
+			ws::insertLog($user->get('id'),0,0,"Adicionou MetaTags","Adicionou MetaTags", "Adicionou MetaTags" ,PREFIX_TABLES."meta_tags","insert");
 			echo "sucesso";
 			exit;
 		}
@@ -1370,6 +1398,7 @@
 		}
 	}
 	function excl_prod($id) {
+		$session = new session();
 		@ob_start();
 		$produto = new MySQL();
 		$produto->set_table(PREFIX_TABLES . '_model_item');
@@ -1381,7 +1410,7 @@
 			excl_img($prod['id']);
 			excl_gal($prod['id']);
 			excl_arquivos($prod['id']);
-			if ($_SESSION['_NIVEIS_'] >= 1) {
+			if ($session->get('_NIVEIS_') >= 1) {
 				$exclui = new MySQL();
 				$exclui->set_table(PREFIX_TABLES . '_model_link_prod_cat');
 				$exclui->set_where('id_item="' . $id . '"');
@@ -1414,11 +1443,12 @@
 		$categorias->exclui();
 	}
 	function excl_produto() {
+		$session = new session();
 		excl_img($_REQUEST['id_item']);
 		excl_gal($_REQUEST['id_item']);
 		excl_arquivos($_REQUEST['id_item']);
 		//excl_links($_REQUEST['id_item']);
-		if ($_SESSION['_NIVEIS_'] >= 1) {
+		if ($session->get('_NIVEIS_') >= 1) {
 			$excluiNIVEIS = new MySQL();
 			$excluiNIVEIS->set_table(PREFIX_TABLES . '_model_link_prod_cat');
 			$excluiNIVEIS->set_where('id_item="' . $_REQUEST['id_item'] . '"');
@@ -1489,9 +1519,7 @@
 		$I->set_insert('ws_id_ferramenta', 	$_POST['ws_id_ferramenta']);
 		$I->set_insert('id_cat', 			$_POST['id_cat']);
 		$I->set_insert('ws_nivel', 			$_POST['ws_nivel']);
-		$I->set_insert('ws_author', 		$_SESSION['user']['id']);
-
-
+		$I->set_insert('ws_author', 		$user->get('id'));
 		if ($I->insert()) {
 			$I = new MySQL();
 			$I->set_table(PREFIX_TABLES . '_model_item');
@@ -1763,11 +1791,18 @@
 		if (SalvaDetalhes($_POST)) {
 			if (aplicaRascunho($vars['ws_id_ferramenta'], $vars['id_item'])) {
 				echo "Ítem salvo com sucesso!";
+				//id_user,id_ferramenta ,id_item, titulo,descricao,detalhes,tabela,$type
+				ws::insertLog($user->get('id'),$vars['ws_id_ferramenta'],$vars['id_item'],"Salvou/Alterou um ítem","Salvou/Alterou um ítem", "Salvou/Alterou um ítem" ,PREFIX_TABLES."_model_item","update");
 			} else {
 				echo "Falha em publicar rascunho!";
+				//id_user,id_ferramenta ,id_item, titulo,descricao,detalhes,tabela,$type
+				ws::insertLog($user->get('id'),$vars['ws_id_ferramenta'],$vars['id_item'],"Falha ao publicar rascunho","Falha ao publicar rascunho", "Falha ao publicar rascunho" ,PREFIX_TABLES."_model_item","error");
 			}
 		} else {
 			echo "Falha em salvar rascunho!";
+			//id_user,id_ferramenta ,id_item, titulo,descricao,detalhes,tabela,$type
+			ws::insertLog($user->get('id'),$vars['ws_id_ferramenta'],$vars['id_item'],"Falha ao salvar rascuinho","Falha ao salvar rascuinho", "Falha ao salvar rascuinho" ,PREFIX_TABLES."_model_item","error");
+
 		}
 	}
 	
@@ -2220,8 +2255,9 @@
 	##########################################################################################################
 	# INICIA A SESSÃO
 	##########################################################################################################
-	_session();
-	
+	// _session();
+	$user = new Session();
+
 	##########################################################################################################
 	# EXECUTA A FUNÇÃO REQUERIDA VIA AJAX
 	##########################################################################################################

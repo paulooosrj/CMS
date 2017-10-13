@@ -8,6 +8,11 @@
 
 require_once('../../common.php');
 
+############################################################################################################################
+# IMPORTAMOS A CLASSE PADRÃO DO SISTEMA
+############################################################################################################################
+include_once ($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');
+
 class Project extends Common
 {
 
@@ -36,9 +41,10 @@ class Project extends Common
 
     public function __construct()
     {
+        $user = new session();
         $this->projects = getJSON('projects.php');
-        if (file_exists(BASE_PATH . "/data/" . $_SESSION['user']['usuario'] . '_acl.php')) {
-            $this->assigned = getJSON($_SESSION['user']['usuario'] . '_acl.php');
+        if (file_exists(BASE_PATH . "/data/" . $user->get('usuario') . '_acl.php')) {
+            $this->assigned = getJSON($user->get('usuario') . '_acl.php');
         }
     }
     

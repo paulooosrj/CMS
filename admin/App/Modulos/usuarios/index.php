@@ -38,8 +38,8 @@
 	#####################################################  
 	# CRIA SESSÃO
 	#####################################################  
-	_session();
-
+	$user = new session();
+	
 	#####################################################  
 	# VERIFICA SE O USUÁRIO ESTÁ LOGADO OU AS SESSÕES E COOKIES ESTÃO EM ORDEM
 	#####################################################
@@ -73,7 +73,7 @@
 	#####################################################
 	$iUser = new MySQL();
 	$iUser->set_table(PREFIX_TABLES.'ws_usuarios');
-	$iUser->set_where('id="'.$_SESSION['user']['id'].'"');
+	$iUser->set_where('id="'.$user->get('id').'"');
 	$iUser->set_where('AND ativo="1"');
 	$iUser->select();
  	$iUser= $iUser->fetch_array[0];

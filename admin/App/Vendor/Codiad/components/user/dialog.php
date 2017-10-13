@@ -5,8 +5,13 @@
     *  as-is and without warranty under the MIT License. See
     *  [root]/license.txt for more. This information must remain intact.
     */
-
+    $r = $_SERVER["DOCUMENT_ROOT"];
+    $_SERVER["DOCUMENT_ROOT"] = (substr($r, -1) == '/') ? substr($r, 0, -1) : $r;
     require_once('../../common.php');
+
+    include_once ($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');
+    $user = new session();
+
 
     //////////////////////////////////////////////////////////////////
     // Verify Session or Key
@@ -52,7 +57,7 @@
                 <td width="85"><a onclick="codiad.user.password('<?php echo($data['username']); ?>');" class="icon-flashlight bigger-icon"></a></td>
                 <td width="75"><a onclick="codiad.user.projects('<?php echo($data['username']); ?>');" class="icon-archive bigger-icon"></a></td>
                 <?php
-                    if($_SESSION['user']['usuario'] == $data['username']){
+                    if($user->get('usuario') == $data['username']){
                     ?>
                     <td width="75"><a onclick="codiad.message.error('You Cannot Delete Your Own Account');" class="icon-block bigger-icon"></a></td>
                     <?php
@@ -158,7 +163,7 @@
         case 'password':
 
             if($_GET['username']=='undefined'){
-                $username = $_SESSION['user']['usuario'];
+                $username = $user->get('usuario');
             }else{
                 $username = $_GET['username'];
             }

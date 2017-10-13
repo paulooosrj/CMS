@@ -212,7 +212,6 @@
 		default:
 			break;
 	}
-300
 	/*
 		############################################################################################################
 		# GET
@@ -299,3 +298,4 @@
 			    $CONTENT = stream_context_create($HEADER);
 			    echo file_get_contents('http://' . DOMINIO . '/ws-rest/', false, $CONTENT);
 	*/
+

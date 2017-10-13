@@ -85,9 +85,9 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="/admin/App/Vendor/ajax/libs/prettify/r298/prettify.min.js"></script>
+    <script type="text/javascript" src="/admin/App/Vendor/prettify/r298/prettify.min.js"></script>
     <script type="text/javascript" src="/admin/App/Vendor/beautify-html/beautify-html.js"></script>
-    <script type="text/javascript" src="/admin/App/Templates/js/websheep/websheep_full.js"></script>
+    <!-- <script type="text/javascript" src="/admin/App/Templates/js/websheep/websheep_full.js"></script> -->
     <script type="text/javascript" src="./js/cljs.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){

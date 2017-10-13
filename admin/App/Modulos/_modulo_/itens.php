@@ -1,7 +1,8 @@
 <?php
 	ob_start();
 	include($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
-	_session();
+	// _session();
+	$user = new session();
 	clearstatcache();
 	if (empty($_GET['id_cat'])) {
 			$_GET['id_cat'] = '0';
@@ -251,15 +252,15 @@
 			########################################################################
 			# CASO SEJA LIMITADO A VISUALIZAÇÃO AOS POSTS DO USUARIO 
 			########################################################################
-			// if($_SESSION['user']['edit_only_own']==1 && $item['ws_author']!=$_SESSION['user']['id']){
+			// if($user->get('edit_only_own')==1 && $item['ws_author']!=$user->get('id')){
 
 			if(		
 
-				$_SESSION['user']['admin']==1 			|| 	
+				$user->get('admin')==1 			|| 	
 
-				$_SESSION['user']['edit_only_own']== 0 	||
+				$user->get('edit_only_own')== 0 	||
 
-				($_SESSION['user']['edit_only_own']==1 && $item['ws_author']==$_SESSION['user']['id'] )
+				($user->get('edit_only_own')==1 && $item['ws_author']==$user->get('id'))
 
 			){
 				$_SET_TEMPLATE_INPUT->block("COMBO_EDIT");

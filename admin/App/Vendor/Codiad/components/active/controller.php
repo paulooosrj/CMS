@@ -5,6 +5,14 @@
     *  as-is and without warranty under the MIT License. See
     *  [root]/license.txt for more. This information must remain intact.
     */
+    $r = $_SERVER["DOCUMENT_ROOT"];
+    $_SERVER["DOCUMENT_ROOT"] = (substr($r, -1) == '/') ? substr($r, 0, -1) : $r;
+
+    ############################################################################################################################
+    # IMPORTAMOS A CLASSE PADRÃO DO SISTEMA
+    ############################################################################################################################
+    include_once ($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');
+    
 
     require_once('../../common.php');
     require_once('class.active.php');
@@ -16,13 +24,14 @@
     //////////////////////////////////////////////////////////////////
 
     checkSession();
+    $user = new session();
 
     //////////////////////////////////////////////////////////////////
     // Get user's active files
     //////////////////////////////////////////////////////////////////
 
 if ($_GET['action']=='list') {
-    $Active->username = $_SESSION['user']['usuario'];
+    $Active->username =  $user->get('usuario');
     $Active->ListActive();
 }
 
@@ -31,7 +40,7 @@ if ($_GET['action']=='list') {
     //////////////////////////////////////////////////////////////////
 
 if ($_GET['action']=='add') {
-    $Active->username = $_SESSION['user']['usuario'];
+    $Active->username = $user->get('usuario');
     $Active->path = $_GET['path'];
     $Active->Add();
 }
@@ -41,7 +50,7 @@ if ($_GET['action']=='add') {
     //////////////////////////////////////////////////////////////////
 
 if ($_GET['action']=='rename') {
-    $Active->username = $_SESSION['user']['usuario'];
+    $Active->username = $user->get('usuario');
     $Active->path = $_GET['old_path'];
     $Active->new_path = $_GET['new_path'];
     $Active->Rename();
@@ -52,7 +61,7 @@ if ($_GET['action']=='rename') {
     //////////////////////////////////////////////////////////////////
 
 if ($_GET['action']=='check') {
-    $Active->username = $_SESSION['user']['usuario'];
+    $Active->username = $user->get('usuario');
     $Active->path = $_GET['path'];
     $Active->Check();
 }
@@ -62,7 +71,7 @@ if ($_GET['action']=='check') {
     //////////////////////////////////////////////////////////////////
 
 if ($_GET['action']=='remove') {
-    $Active->username = $_SESSION['user']['usuario'];
+    $Active->username = $user->get('usuario');
     $Active->path = $_GET['path'];
     $Active->Remove();
 }
@@ -72,7 +81,7 @@ if ($_GET['action']=='remove') {
     //////////////////////////////////////////////////////////////////
 
 if ($_GET['action']=='removeall') {
-    $Active->username = $_SESSION['user']['usuario'];
+    $Active->username = $user->get('usuario');
     $Active->RemoveAll();
 }
     
@@ -81,7 +90,7 @@ if ($_GET['action']=='removeall') {
     //////////////////////////////////////////////////////////////////
 
 if ($_GET['action']=='focused') {
-    $Active->username = $_SESSION['user']['usuario'];
+    $Active->username = $user->get('usuario');
     $Active->path = $_GET['path'];
     $Active->MarkFileAsFocused();
 }

@@ -31,11 +31,6 @@
 	include($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
 	
 	#####################################################  
-	# CRIA SESSÃO
-	#####################################################  
-	_session();
-
-	#####################################################  
 	# VERIFICA SE O USUÁRIO ESTÁ LOGADO OU AS SESSÕES E COOKIES ESTÃO EM ORDEM
 	#####################################################
 	verifyUserLogin();
@@ -46,10 +41,11 @@
 	define("TEMPLATE_LINK", ROOT_ADMIN . "/App/Templates/html/Modulos/_leads_/ws-tool-leads-campos.html");
 
 	#####################################################  
-	# DEFINE O LINK DO TEMPLATE DESTE MÓDULO 
+	# GRAVAMOS NA SESSÃO O LINK DO TEMPLATE DESTE MÓDULO 
 	#####################################################
-	$_SESSION['token_group']	= _token(PREFIX_TABLES."ws_biblioteca","token_group");
-	$_SESSION['_PATCH_']		= "App/Modulos/_leads_";
+	$session = new session();
+	$session->set('token_group', _token(PREFIX_TABLES."ws_biblioteca","token_group"));
+	$session->set('_PATCH_', "App/Modulos/_leads_");
 
 	#####################################################
 	# MONTAMOS A CLASSE DOS TEMPLATES 

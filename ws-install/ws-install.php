@@ -1,4 +1,4 @@
-<?
+<?php
 	ini_set('max_execution_time',0);
 	function ws_copy_dir($src,$dst) { 
 		$dir = opendir($src); 
@@ -70,7 +70,7 @@
 ?>
 
 <head>
-<title><?
+<title><?php
 	if(file_exists("./../admin")){
 		echo "WebSheep - Update de sistema";
 	}else{
@@ -267,7 +267,7 @@
 </style>
 </head>
 <div class="comboCentral">
-	<div class="logo"><b><?if(file_exists("./../admin")){echo "Update"; }else{echo "Setup";}?> WebSheep</b><br>
+	<div class="logo"><b><?php if(file_exists("./../admin")){echo "Update"; }else{echo "Setup";}?> WebSheep</b><br>
 	</div>
 	<div class="txt" id="txt">
 		<select id="branches">
@@ -300,7 +300,7 @@ $(document).ready(function(){
 		$("#loader").css("background-image","url(https://raw.githubusercontent.com/websheep/cms/"+path[path.length-1].slice(0,-4)+"/admin/App/Templates/img/websheep/loading322.gif)").show();
 		$("#txt,#botao").hide();
 		$.ajax({
-			url:"./<?=basename(__FILE__)?>",
+			url:"./<?php echo basename(__FILE__)?>",
 			data:{download:1,branche:$("#branches").val()},
 			beforeSend:function( xhr ) {}
 		}).done(function( data ) {

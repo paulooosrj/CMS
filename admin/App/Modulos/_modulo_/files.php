@@ -78,13 +78,10 @@ $draft->select();
 			$template->block("BLOCK_FILES_ITEM");
 	}
 
-
 	$s 					= new MySQL();
 	$s->set_table(PREFIX_TABLES."ws_ferramentas");
 	$s->set_where('id="'.$_GET['ws_id_ferramenta'].'"');
 	$s->select();
-
 	$template->EXTENCOES =	"'".str_replace(',',"','",$s->fetch_array[0]['_extencao_'])."'";
-
 	$template->block("FILES");
 	$template->show();

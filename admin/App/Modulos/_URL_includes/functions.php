@@ -1,27 +1,25 @@
 <?
-ob_start();
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
-ob_end_clean();
-
-			function template ($id,$slug,$obs, $_token_){
-				$retorno= "<li data-id='".$id."' data-token='".$_token_."'>
-								<div>
-									<div class='w1 titulo'>".$slug."</div>
-									<div class='w1 obs'>".$obs."</div>
-									<div id='combo'>
-										<div id='detalhes_img'>
-											<span><img class='editar legenda' 		legenda='Editar' 		 				src='/admin/App/Templates/img/websheep/layer--pencil.png'></span>
-											<span><img class='excluir legenda' 		legenda='<img class=\"editar\" 			src=\"/admin/App/Templates/img/websheep/exclamation.png\" style=\"position: absolute;margin-top: -2px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excluir'		src='".$_SESSION['PATCH']."/img/cross-button.png'></span>
-										</div>
-									</div>
-								</div>
-							</li>";
-				return $retorno;
-			}
+function template ($id,$slug,$obs, $_token_){
+	global $session;
+	$retorno= "<li data-id='".$id."' data-token='".$_token_."'>
+					<div>
+						<div class='w1 titulo'>".$slug."</div>
+						<div class='w1 obs'>".$obs."</div>
+						<div id='combo'>
+							<div id='detalhes_img'>
+								<span><img class='editar legenda' 		legenda='Editar' 		 				src='/admin/App/Templates/img/websheep/layer--pencil.png'></span>
+								<span><img class='excluir legenda' 		legenda='<img class=\"editar\" 			src=\"/admin/App/Templates/img/websheep/exclamation.png\" style=\"position: absolute;margin-top: -2px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excluir'		src='".$session->get('PATCH')."/img/cross-button.png'></span>
+							</div>
+						</div>
+					</div>
+				</li>";
+	return $retorno;
+}
 
 
 function SalvaPaths(){
+	global $session;
 	$inputs= array();
 	parse_str($_REQUEST['Formulario'], $inputs);
 	$setupdata 					= new MySQL();
@@ -48,7 +46,7 @@ function SalvaPaths(){
 
 }
 function salvaInclude(){
-
+	global $session;
 	$id_include 	=	$_REQUEST['id_include'];
 	$file 			=	$_REQUEST['file'];
 	$info 			=	$_REQUEST['info'];
@@ -104,6 +102,7 @@ function salvaInclude(){
 }
 
 function OrdenaItem(){
+	global $session;
 	$array_id 		= $_REQUEST['ids'];
 	$array_posicoes = $_REQUEST['posicoes'];
 	$i=0;
@@ -126,6 +125,7 @@ function OrdenaItem(){
 }
 
 function addFile(){
+			global $session;
 			$token = _token(PREFIX_TABLES.'ws_pages','token');
 			$I 					= new MySQL();
 			$I->set_table(PREFIX_TABLES.'ws_pages');
@@ -135,6 +135,7 @@ function addFile(){
 }
 
 function salvaTemplate(){
+			global $session;
 			global $_conectMySQLi_;
 			$I 					= new MySQL();
 			$I->set_table(PREFIX_TABLES.'ws_template');
@@ -149,6 +150,7 @@ function salvaTemplate(){
 		}
 
 function excluiRegistro(){
+			global $session;
 			$I 					= new MySQL();
 			$I->set_table(PREFIX_TABLES.'ws_pages');
 			$I->set_where('id="'.$_REQUEST['id_include'].'"');
@@ -158,6 +160,7 @@ function excluiRegistro(){
 			}
 		}
 function excluiRegistroFile(){
+	global $session;
 	if($_REQUEST['registro']=='false'){
 		excluiFile:
 		$I 					= new MySQL();
@@ -194,7 +197,10 @@ function excluiRegistroFile(){
 //####################################################################################################################
 //####################################################################################################################
 //####################################################################################################################
-_session();
+ob_start();
+include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
+$session = new session();
+ob_end_clean();
 _exec($_REQUEST['function']);
 ?>
 

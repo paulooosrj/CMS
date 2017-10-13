@@ -1,19 +1,19 @@
 <?php
 
 ############################################################################
+
+require_once('common.php');
+
+############################################################################
 # IMPORTAMOS A CLASSE DO SISTEMA
 ############################################################################
 $r 		=	$_SERVER["DOCUMENT_ROOT"];
 include_once(((substr($r, -1) == '/') ? substr($r, 0, -1) : $r).'/admin/App/Lib/class-ws-v1.php');
 
 ############################################################################
-
-require_once('common.php');
-
-############################################################################
 # VERIFICA SE O USUÁRIO ESTÁ LOGADO OU AS SESSÕES E COOKIES ESTÃO EM ORDEM
 ############################################################################
-verifyUserLogin();
+// verifyUserLogin();
 
 
 $_SESSION['lang']				= 'en';
@@ -124,14 +124,13 @@ if(isset($_SESSION['theme'])) {
 	//////////////////////////////////////////////////////////////////
 	// NOT LOGGED IN
 	//////////////////////////////////////////////////////////////////
+	$user = new session();
+	if(null !== $user->verify() && false !== $user->verify()){
 
-	if(!isset($_SESSION['user']['usuario'])){
-
-		$path = rtrim(str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']),"/");
-
-		$users = file_exists($path . "/data/users.php");
-		$projects = file_exists($path . "/data/projects.php");
-		$active = file_exists($path . "/data/active.php");
+		$path 		= rtrim(str_replace("index.php", "", $_SERVER['SCRIPT_FILENAME']),"/");
+		$users 		= file_exists($path . "/data/users.php");
+		$projects 	= file_exists($path . "/data/projects.php");
+		$active 	= file_exists($path . "/data/active.php");
 
 		if(!$users && !$projects && !$active){
 			// Installer

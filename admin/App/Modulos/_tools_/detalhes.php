@@ -31,15 +31,13 @@
 	include($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
 	
 	#####################################################  
-	# 
-	#####################################################
-	define("ws_id_ferramenta", $_GET['ws_id_ferramenta']);
-	$_SESSION['ws_id_ferramenta']	= ws_id_ferramenta;
-
-	#####################################################  
 	# CRIA SESSÃO
 	#####################################################  
-	_session();
+	// _session();
+	$session = new session();
+	define("ws_id_ferramenta", $_GET['ws_id_ferramenta']);
+	
+	$session->get('ws_id_ferramenta',ws_id_ferramenta);
 
 	#####################################################  
 	# VERIFICA SE O USUÁRIO ESTÁ LOGADO OU AS SESSÕES E COOKIES ESTÃO EM ORDEM

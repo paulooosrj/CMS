@@ -220,8 +220,7 @@
 <link	type="text/css" media="all"		rel="stylesheet" 						href="/admin/App/Templates/css/fontes/fonts.css" />
 <link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/theme_blue.min.css" />
 <script type = 'text/javascript' 												src="/admin/App/Vendor/jquery/2.2.0/jquery.min.js"></script>
-<script type = 'text/javascript' 												src="/admin/App/Templates/js/websheep/websheep_full.js"></script>
-<script type = 'text/javascript' 												src="/admin/App/Templates/js/websheep/funcionalidades.min.js"></script>
+<script type = 'text/javascript' 												src="/admin/App/Templates/js/websheep/funcionalidades.js"></script>
 
 
 

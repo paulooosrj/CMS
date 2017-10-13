@@ -38,8 +38,7 @@
 	#####################################################  
 	# CRIA SESSÃO
 	#####################################################  
-	_session();
-
+	$user = new session();
 	#####################################################  
 	# VERIFICA SE O USUÁRIO ESTÁ LOGADO OU AS SESSÕES E COOKIES ESTÃO EM ORDEM
 	#####################################################
@@ -54,11 +53,6 @@
 	$USUARIO->select();
 	$USUARIO = $USUARIO->fetch_array[0];
 
-	$iUser = new MySQL();
-	$iUser->set_table(PREFIX_TABLES.'ws_usuarios');
-	$iUser->set_where('id="'.$_SESSION['user']['id'].'"');
-	$iUser->select();
-	$iUser =  $iUser->fetch_array[0]; 
 
 	################################################################################
 	# MONTAMOS A CLASSE DOS TEMPLATES 
@@ -100,18 +94,14 @@
 	$template->userManager_details_labels_evaluation 			= ws::getLang("userManager>details>labels>evaluation");
 	$template->userManager_details_labels_blocked 				= ws::getLang("userManager>details>labels>blocked");
 	$template->userManager_details_labels_levelsOfAccess 		= ws::getLang("userManager>details>labels>levelsOfAccess");
+	$template->ADMIN_CHECK 										= ($USUARIO['admin']=='1') 			?	'checked="true"' : "";
+	$template->CHECK_ADD_USER									= ($USUARIO['add_user']=='1') 		?	'checked="true"' : "";
+	$template->CHECK_EDIT_ONLY_OWN								= ($USUARIO['edit_only_own']=='1')	?	'checked="true"' : "";
+	$template->CHECK_READING									= ($USUARIO['leitura']=='1') 		?	'checked="true"' : "";
+	$template->block('ADMIN_USER');
 
 
-
-
-		$template->ADMIN_CHECK 			= 	($USUARIO['admin']=='1') 			?	'checked="true"' : "";
-		$template->CHECK_ADD_USER		= 	($USUARIO['add_user']=='1') 		?	'checked="true"' : "";
-		$template->CHECK_EDIT_ONLY_OWN	= 	($USUARIO['edit_only_own']=='1')	?	'checked="true"' : "";
-		$template->CHECK_READING		= 	($USUARIO['leitura']=='1') 			?	'checked="true"' : "";
-		$template->block('ADMIN_USER');
-
-
-	if($_GET['id_user']!=$_SESSION['user']['id']){
+	if($_GET['id_user']!=$user->get('id')){
 		$innerTool = new MySQL();
 		$innerTool->set_table(PREFIX_TABLES.'ws_ferramentas');
 		$innerTool->set_where('App_Type="1"');

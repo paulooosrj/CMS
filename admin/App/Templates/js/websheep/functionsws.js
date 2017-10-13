@@ -39,7 +39,38 @@ ws = {
 	set: {
 		obj: function(newVal, valor) {
 			ws.get.obj[newVal] = valor;
+		},
+		log:function(opcoes){
+			var options = $.extend({
+				url: '/admin/App/Modulos/ws_log/functions.php',
+				function: 'addLog',
+				ws_author: 0,
+				id_user: 2,
+				id_ferramenta: 3,
+				id_item: 4,
+				dataregistro: 5,
+				titulo: 6,
+				descricao: 7,
+				detalhes: 8,
+				tabela: 9,
+				type: 'system',
+			}, opcoes);
+
+			$.ajax({
+				url: options.url,
+				type:'POST',
+				data: options,
+				success: function(e) {
+					console.log("sucess!")
+					console.log(e)
+				},
+				error: function(e) {
+					console.log("Error!")
+					console.log(e)
+				}
+			});
 		}
+
 	},
 	verify: {
 		jquery: function() {
@@ -369,7 +400,6 @@ ws = {
 				reload = false;
 			}
 			if(!document.querySelectorAll('script#' + id).length) {
-				ws.log.info("Adicionando arquivo .JS: \n  #" + id + " : " + documento)
 				var script = document.createElement('script');
 				script.id = id;
 				script.type = 'text/javascript';

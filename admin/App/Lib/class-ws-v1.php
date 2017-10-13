@@ -15,6 +15,7 @@
 	include_once(ROOT_ADMIN . '/App/Lib/class-ws-htmlprocess.php');
 	include_once(ROOT_ADMIN . '/App/Lib/class-lipsum.php');
 	include_once(ROOT_ADMIN . '/App/Lib/class-mobile-detect.php');
+
 	class WS {
 		public function __construct() {
 			$this->dataRelType          = "item";
@@ -228,6 +229,47 @@
 				}
 			}
 		}
+			static function compileJS(){
+					function compile($code, $level = 'SIMPLE_OPTIMIZATIONS'){
+						try {
+							$ch = curl_init('http://closure-compiler.appspot.com/compile'); 
+							curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+							curl_setopt($ch, CURLOPT_POST, 1);
+							curl_setopt($ch, CURLOPT_POSTFIELDS, 'output_info=compiled_code&output_format=text&compilation_level=' . $level . '&js_code=' . urlencode($code));
+							$minified = curl_exec($ch);
+							curl_close($ch);
+						} catch (Exception $e) {
+							$minified = $code;
+						}
+						return $minified;
+					}
+					$path 				= ROOT_ADMIN."/App/Templates/js/websheep";
+
+					$funcionalidades 	= file_get_contents($path."/funcionalidades.js");
+					$functionws			= str_replace("{dataMinifiq}",date("Y-m-d H:i:s"),file_get_contents($path."/functionsws.js"));
+
+					file_put_contents($path."/funcionalidades.min.js",	compile($funcionalidades));
+					file_put_contents($path."/functionsws.min.js",		compile($functionws));
+			}
+
+			static function insertLog($id_user="",$id_ferramenta="" ,$id_item="",$linha="",$coluna="",$type="",$url="",$titulo="",$mensagem=""){
+				global $_conectMySQLi_;
+				##############################################################################
+				# INSERIMOS UM REGISTRO DE LOG
+				##############################################################################
+				$_temp_ = new MySQL();
+				$_temp_->set_table(PREFIX_TABLES.'ws_log');
+				$_temp_->set_insert('id_user',		$id_user);
+				$_temp_->set_insert('id_ferramenta',$id_ferramenta);
+				$_temp_->set_insert('id_item',		$id_item);
+				$_temp_->set_insert('linha',		$linha);
+				$_temp_->set_insert('coluna',		$coluna);
+				$_temp_->set_insert('type',			$type);
+				$_temp_->set_insert('url',			$url);
+				$_temp_->set_insert('titulo',		$titulo);
+				$_temp_->set_insert('mensagem',		mysqli_real_escape_string($_conectMySQLi_,$mensagem));
+				$_temp_->insert();
+			}	
 		static function setTokenRest($timeout = "5 seconds") {
 			$Formats = array("seconds", "minutes", "hours", "days", "months", "years");
 			if (is_string($timeout)) {
@@ -301,11 +343,16 @@
 			
 		}
 		
-		
+		###################################################################################
+		# RETORNA O PROTOCOLO DA URL
+		###################################################################################		
 		public static function protocolURL() {
 			$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 			return $protocol;
 		}
+		###################################################################################
+		# RETORNA O NÚMERO EM FORMATADO FINANCEIRO 
+		###################################################################################
 		public static function formatMoney($number, $fractional = false) {
 			if ($fractional) {
 				$number = sprintf('%.2f', $number);
@@ -320,6 +367,10 @@
 			}
 			return $number;
 		}
+
+		###################################################################################
+		# RETORNA A URL DO ARQUIVO MP4 DO VÍDEO DO VIMEO OU YOUTUBE  
+		###################################################################################
 		public static function getVimeoYoutubeDirectLink($url = "", $secure = true) {
 			if (!is_string($url)) {
 				_erro(ws::GetDebugError(debug_backtrace(), "Erro: Isso não é uma string ->	ws::getVimeoYoutubeDirectLink('" . $url . "',true)"));
@@ -386,7 +437,7 @@
 			# INCLUIMOS O SCRIPT DE UPDATE DI MYSQL...
 			##################################################################################
 			include(ROOT_ADMIN . '/App/Modulos/update/ws_update.php');
-			
+
 			##################################################################################
 			# EXECUTAMOS O MYSQLI
 			##################################################################################
@@ -456,17 +507,18 @@
 			}
 		}
 		static function updateTool($id_tool = null) {
+			$session = new session();
 			##################################################################################
 			# grava na sessão o ID da ferramenta
 			##################################################################################
 			if ($id_tool != null) {
-				$_SESSION['ws_id_ferramenta'] = $id_tool;
+				$session->set('ws_id_ferramenta',$id_tool);
 			}
 			
 			##################################################################################
 			# grava na sessão o PATH da ferramenta
 			##################################################################################
-			$_SESSION['PATCH'] = 'App/Modulos/_modulo_';
+			$session->set('PATCH','App/Modulos/_modulo_');
 			
 			##################################################################################
 			# SELECT NA TABELA DAS FERRAMENTAS
@@ -481,15 +533,15 @@
 			# grava na sessão os nomes das tabelas títulos etc (temporário)
 			##################################################################################
 			$TABELA                          = @$_tool_->fetch_array[0];
-			$_SESSION['_TITULO_FERRAMENTA_'] = $TABELA['_tit_menu_'];
-			$_SESSION['_TABELA_']            = '_model';
-			$_SESSION['PATCH']               = $TABELA['_patch_'];
-			$_SESSION['_TITULO_MENU_']       = $TABELA['_tit_menu_'];
-			$_SESSION['_TITULO_FERRAMENTA_'] = $TABELA['_tit_topo_'];
-			$_SESSION['_NIVEIS_']            = $TABELA['_niveis_'];
-			$_SESSION['_FOTOS_']             = $TABELA['_fotos_'];
-			$_SESSION['_GALERIAS_']          = $TABELA['_galerias_'];
-			$_SESSION['_ARQUIVOS_']          = $TABELA['_files_'];
+			$session->set('_TITULO_FERRAMENTA_', $TABELA['_tit_menu_']);
+			$session->set('_TABELA_','_model');
+			$session->set('PATCH',$TABELA['_patch_']);
+			$session->set('_TITULO_MENU_',$TABELA['_tit_menu_']);
+			$session->set('_TITULO_FERRAMENTA_',$TABELA['_tit_topo_']);
+			$session->set('_NIVEIS_',$TABELA['_niveis_']);
+			$session->set('_FOTOS_',$TABELA['_fotos_']);
+			$session->set('_GALERIAS_',$TABELA['_galerias_']);
+			$session->set('_ARQUIVOS_',$TABELA['_files_']);
 			
 			##################################################################################
 			# CASO A FERRAMENTA TENHA SIDO ALTERADA E NÃO SALVA...
@@ -507,12 +559,13 @@
 				$s = new MySQL();
 				$s->debug(0);
 				$s->set_table(PREFIX_TABLES . 'ws_ferramentas');
-				$s->set_where('id="' . $_SESSION['ws_id_ferramenta'] . '"');
+				$s->set_where('id="' . $session->get('ws_id_ferramenta').'"');
 				$s->set_update('_alterado_', '0');
 				$s->salvar();
 			}
 			
 		}
+
 		static function normalizePath($path) {
 			$parts    = array();
 			$path     = str_replace('\\', '/', $path);
@@ -538,8 +591,8 @@
 			}
 			return implode('/', $parts);
 		}
+		
 		static function urlPath($node = null, $debug = true,$type="string") {
-
 			if (substr($_SERVER['REQUEST_URI'], 0, 1) == '/'){$_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], 1, strlen($_SERVER['REQUEST_URI']));}
 			if (is_string($node)) {
 				_erro(ws::GetDebugError(debug_backtrace(), "Erro: Isso não é um número ->	ws::urlPath('" . $node . "')"));
@@ -611,6 +664,9 @@
 			// VERIFICA NO SISTEMA SE O CACHE ESTÁ HABILITADO  E QUE CACHE EXISTA O ARQUIVO E INSERE
 			if ($setupdata['ws_cache'] == '1' && file_exists(ROOT_DOCUMENT.'/ws-cache/'.$urlCache)) {
 				ob_end_clean();
+
+
+				echo PHP_EOL.PHP_EOL.'<script type="text/javascript" src="/admin/App/Templates/js/websheep/ws-client-side-record.js"></script>'.PHP_EOL.PHP_EOL;
 				include(ROOT_DOCUMENT.'/ws-cache/'.$urlCache);
 				exit;
 			}
@@ -628,7 +684,6 @@
 							$jsonRanderizado = ob_get_clean();
 							$contents        = $plugin;
 						}
-						
 						if (isset($contents->globalphp) && $contents->globalphp != "") {
 							if (is_string($contents->globalphp)) {
 								if (file_exists(ROOT_WEBSITE . '/' . $setupdata['url_plugin'] . '/' . $diretorio . '/' . $contents->globalphp)) {
@@ -637,9 +692,7 @@
 									_erro('Um plugin chamado "' . $contents->pluginName . '" está tentando inserir um arquivo inexistente:<br><i>/' . $setupdata['url_plugin'] . '/' . $diretorio . '/' . $contents->globalphp . '</i>');
 								}
 							} elseif (is_array($contents->globalphp)) {
-								
 								if (count($contents->globalphp) == 1) {
-									
 									if (file_exists(ROOT_WEBSITE . '/' . $setupdata['url_plugin'] . '/' . $diretorio . '/' . $contents->globalphp[0])) {
 										include(ROOT_WEBSITE . '/' . $setupdata['url_plugin'] . '/' . $diretorio . '/' . $contents->globalphp[0]);
 									} else {
@@ -672,9 +725,8 @@
 					}
 				}
 			}
-			/*########################################*/
+		/*########################################*/
 			$controller = new controller();
-			_session();
 			$_temp_ = new MySQL();
 			$_temp_->set_table(PREFIX_TABLES . 'ws_pages');
 			$_temp_->set_where('type="path"');
@@ -882,14 +934,12 @@
 				// GRAVA O ARQUIVO COM O NOME CORRETO
 				file_put_contents(ROOT_DOCUMENT.'/ws-cache/'.$urlCache, $_outPutCacheHTML);
 			}
-			echo $_outPutCache;
+				echo PHP_EOL.PHP_EOL.'<script type="text/javascript" src="/admin/App/Templates/js/websheep/ws-client-side-record.js"></script>'.PHP_EOL.PHP_EOL;
+				echo $_outPutCache;
+
 			ob_end_flush();
 		}
-		
-		
-		
-		
-		
+	
 		public static function getPublicLinkDownload($referencia = "") {
 			$SerialKeyFiles = new MySQL();
 			$SerialKeyFiles->set_table(PREFIX_TABLES . ' ws_keyfile as keyFile ');
@@ -922,7 +972,6 @@
 			$get_contents = ob_get_clean();
 			echo htmlProcess::processHTML($get_contents);
 		}
-		
 		static function GetDebugError($dados, $plus = "") {
 			return ("<br>" . $plus . "<br><br><hr style='border-bottom: dashed 1px;'><br><b>Arquivo:</b>" . $dados[0]['file'] . '<br><b>Linha</b>: ' . $dados[0]['line'] . ' <br><b>Função:</b>' . $dados[0]['class'] . $dados[0]['type'] . $dados[0]['function'] . '("' . implode($dados[0]['args'], ',') . '")<br><br><hr style="border-bottom: dashed 1px;"><br><hr>');
 		}
@@ -1632,12 +1681,22 @@
 			
 			
 			if ((count($this->dataRelLinker) > 0 && count($this->dataRelLinked) == 0) || (count($this->dataRelLinker) == 0 && count($this->dataRelLinked) > 0)) {
+
 				if ($this->dataRelType == "item") {
+
 					if (count($this->dataRelLinker) > 0) {
-						$_busca_->join(" INNER ", PREFIX_TABLES . 'ws_link_itens as linkRel', 'linkRel.id_item_link 	=tabela_modelo.id 	AND  linkRel.id_item="' . implode('" OR linkRel.id_item="', $this->dataRelLinker) . '"');
+						if ($this->draft == false) {
+							$_busca_->join(" INNER ", PREFIX_TABLES . 'ws_link_itens as linkRel', 'tabela_modelo.ws_draft="0" AND tabela_modelo.ws_id_draft="0" AND linkRel.id_item_link =tabela_modelo.id 	AND  linkRel.id_item="' . implode('" OR linkRel.id_item="', $this->dataRelLinker) . '"');
+						} else {
+							$_busca_->join(" INNER ", PREFIX_TABLES . 'ws_link_itens as linkRel', 'tabela_modelo.ws_draft="1" AND linkRel.id_item_link =tabela_modelo.id 	AND  linkRel.id_item="' . implode('" OR linkRel.id_item="', $this->dataRelLinker) . '"');
+						}
 					}
 					if (count($this->dataRelLinked) > 0) {
-						$_busca_->join(" INNER ", PREFIX_TABLES . 'ws_link_itens as linkRel', 'linkRel.id_item=tabela_modelo.id 		AND  linkRel.id_item_link="' . implode('" OR linkRel.id_item_link="', $this->dataRelLinked) . '"');
+						if ($this->draft == false) {
+							$_busca_->join(" INNER ", PREFIX_TABLES . 'ws_link_itens as linkRel', 'tabela_modelo.ws_draft="0" AND tabela_modelo.ws_id_draft="0" AND 	linkRel.id_item=tabela_modelo.id 		AND  linkRel.id_item_link="' . implode('" OR linkRel.id_item_link="', $this->dataRelLinked) . '"');
+						} else {
+							$_busca_->join(" INNER ", PREFIX_TABLES . 'ws_link_itens as linkRel', 'tabela_modelo.ws_draft="1" AND linkRel.id_item=tabela_modelo.id 		AND  linkRel.id_item_link="' . implode('" OR linkRel.id_item_link="', $this->dataRelLinked) . '"');
+						}
 					}
 				} elseif ($this->dataRelType == "cat") {
 					if (count($this->dataRelLinker) > 0) {
@@ -1649,7 +1708,7 @@
 				}
 			}
 			$_busca_->set_where($set_where);
-			
+
 			###########################################################################
 			# FILTRA OS RASCUNHOS
 			###########################################################################
