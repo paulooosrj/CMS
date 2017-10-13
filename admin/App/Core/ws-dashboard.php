@@ -182,9 +182,9 @@
 	#  COMPILA O JAVASCRIPT CASO NAO TENHA SIDO COMPILADO   
 	##########################################################################################
 		if(
-			(!file_exists(ROO_ADMIN.'/App/Templates/js/websheep/funcionalidades.min.js') || !file_exists(ROO_ADMIN.'/App/Templates/js/websheep/functionsws.min.js')) 	||
-			(filemtime(ROO_ADMIN.'/App/Templates/js/websheep/funcionalidades.js') 	> filemtime(ROO_ADMIN.'/App/Templates/js/websheep/funcionalidades.min.js')) 		||
-			(filemtime(ROO_ADMIN.'/App/Templates/js/websheep/functionsws.js') 		> filemtime(ROO_ADMIN.'/App/Templates/js/websheep/functionsws.min.js')) 
+			(!file_exists(ROOT_ADMIN.'/App/Templates/js/websheep/funcionalidades.min.js') || !file_exists(ROOT_ADMIN.'/App/Templates/js/websheep/functionsws.min.js')) 	||
+			(filemtime(ROOT_ADMIN.'/App/Templates/js/websheep/funcionalidades.js') 	> filemtime(ROOT_ADMIN.'/App/Templates/js/websheep/funcionalidades.min.js')) 		||
+			(filemtime(ROOT_ADMIN.'/App/Templates/js/websheep/functionsws.js') 		> filemtime(ROOT_ADMIN.'/App/Templates/js/websheep/functionsws.min.js')) 
 		){
 			ws::compileJS();
 		}
