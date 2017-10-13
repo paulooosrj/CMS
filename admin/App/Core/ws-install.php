@@ -75,7 +75,7 @@ $(document).ready(function(){
 					<div id="resposta"></div>
 					<img src="/admin/App/Templates/img/websheep/logo_ws_install.jpg" style="">
 					<div class="c"></div>
-					<strong style="font-family: 'Titillium Web', sans-serif;font-size: 30px;line-height;font-weight: 700;margin: 20px 0px;position: relative;float: left;width: 100%;">Bemvindo ao WebSheep <?=$ws_version->version?></strong>
+					<strong style="font-family: 'Titillium Web', sans-serif;font-size: 30px;line-height;font-weight: 700;margin: 20px 0px;position: relative;float: left;width: 100%;">Bem vindo ao WebSheep <?=$ws_version->version?></strong>
 					<br>
 					<div class="description">
 						Antes de começar, gostariamos de agradecer por escolher e utilizar nossa plataforma, 
