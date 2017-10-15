@@ -49,7 +49,7 @@
 									{src:"/admin/App/Vendor/perfect-scrollbar/perfect-scrollbar.min.js", 					id:"javascript", 	include:true},
 									{src:"/admin/App/Vendor/chosen/chosen.jquery.js", 										id:"javascript", 	include:true},
 									{src:"/admin/App/Vendor/dataTableJquery/data-table.jquery.min.js",						id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/rightClick/rightClick.min.js",									id:"javascript",	include:true},
+									{src:"/admin/App/Vendor/RightClick/rightClick.min.js",									id:"javascript",	include:true},
 									{src:"/admin/App/Vendor/jquery-animate/jquery.animate-colors.min.js",					id:"javascript",	include:true},
 									{src:"/admin/App/Vendor/AjaxForm/AjaxForm.min.js",										id:"javascript",	include:true},
 									{src:"/admin/App/Vendor/jquery-form/jquery.form.js",									id:"javascript",	include:true},
