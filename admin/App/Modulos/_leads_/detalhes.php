@@ -44,7 +44,7 @@
 	# GERA O TOKEN GROUP PARA UPLOAD
 	#####################################################
 	if(empty($session->get('token_group'))){
-		$session->set('token_group') = _crypt();
+		$session->set('token_group',_crypt());
 	}
 	$s = new MySQL();
 	$s->set_table(PREFIX_TABLES.'ws_list_leads');
@@ -91,7 +91,7 @@
 	$template->lead_msng_resp		 	= $lead->msng_resp;
 	$template->lead_port		 		= $lead->port;
 	$template->lead_id			 		= $lead->id;
-	$template->token_group 				= (isset($session->get('token_group'))) ? $session->get('token_group'):_crypt();
+	$template->token_group 				= ($session->get('token_group') != null && $session->get('token_group')!="" ) ? $session->get('token_group'):_crypt();
 	
 	#####################################################  
 	# BLOCO DE TRADUÇÃO
