@@ -13820,13 +13820,17 @@ dommy.attrs.class_match_QMARK_ = function(a, b, c) {
 };
 dommy.attrs.class_index = function(a, b) {
   for(var c = 0;;) {
-    if(c = a.indexOf(b, c), 0 <= c) {
-      if(dommy.attrs.class_match_QMARK_.call(null, a, b, c)) {
-        return c
-      }
-      c += b.length
+    if(!a){
+        return null
     }else {
-      return null
+      if(c = a.indexOf(b, c), 0 <= c) {
+        if(dommy.attrs.class_match_QMARK_.call(null, a, b, c)) {
+          return c
+        }
+        c += b.length
+      }else {
+        return null
+      }
     }
   }
 };

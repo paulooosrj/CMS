@@ -689,7 +689,7 @@
                                 delimiter = '}}';
                                 matched = true;
                             }
-                        } else if (comment.indexOf('<?') === 0) { // {{! handlebars comment
+                        } else if (comment.indexOf('<'+'?') === 0) { // {{! handlebars comment
                             delimiter = '?>';
                             matched = true;
                         } else if (comment.indexOf('<%') === 0) { // {{! handlebars comment
