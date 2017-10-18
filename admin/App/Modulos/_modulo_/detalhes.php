@@ -1,3 +1,4 @@
+
 <?php
 	#####################################################  controla o CACHE
 	header("Expires: Mon, 26 Jul 1990 05:00:00 GMT");
@@ -8,7 +9,7 @@
 	define("PATH", 'App/Modulos/_modulo_');
 	clearstatcache();
 	#####################################################  FUNÇÕES DO MODULO
-	include($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
+	include(__DIR__.'/../../Lib/class-ws-v1.php');
 	
 	#####################################################  
 	# CRIA SESSÃO

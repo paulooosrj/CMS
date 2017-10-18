@@ -3,7 +3,7 @@
 	window.id_item_selected='';
 	var barra_progresso = '';
 	var canvas_barra_progresso = '';
-	include_css('/admin/App/Templates/css/websheep/modulos/_leads_/style.min.css','css_mod','All');
+	include_css('./App/Templates/css/websheep/modulos/_leads_/style.min.css','css_mod','All');
 </script>
 <div id="topoModulo" class="TitTop bg05 w1b">{Leads_Index_FormRegister}</div>
 	<div id="topo_upload" class="bg01" >
@@ -36,7 +36,7 @@ function reloadFunctions(){
 
 	$('.cadastros').unbind('click').bind("click",function(){
 		var token = $(this).data('token');
-		confirma({width:"auto",conteudo:"Carregando cadastro...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+		confirma({width:"auto",conteudo:"Carregando cadastro...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 		$("#conteudo").load("{PATH}/cadastros.php?lead="+token,function(){
 			$("#ws_confirm").remove();
 			$("#body").removeClass("scrollhidden");
@@ -45,7 +45,7 @@ function reloadFunctions(){
 	})
 	$('.editar').unbind('click').bind("click",function(){
 		var token = $(this).data('token');
-		confirma({width:"auto",conteudo:"{Leads_Index_Modal_LoadRegister}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+		confirma({width:"auto",conteudo:"{Leads_Index_Modal_LoadRegister}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 		$("#conteudo").load("{PATH}/detalhes.php?lead="+token,function(){
 			$("#ws_confirm").remove();
 			$("#body").removeClass("scrollhidden");
@@ -64,7 +64,7 @@ function reloadFunctions(){
 				posFn:function(){},
 				newFun:function(){
 					$.ajax({
-						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Index_Modal_DeleteLink}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Index_Modal_DeleteLink}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
 						cache: false, type: "POST", url: "App/Modulos/_leads_/functions.php",
 						data: {
 							function: "exclTabela",
@@ -84,7 +84,7 @@ function reloadFunctions(){
 
 	$("#bt_Add_Galeria").unbind('click').click(function(){
 		$.ajax({
-			beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Index_Modal_CreateLead}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+			beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Index_Modal_CreateLead}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
 			cache: false, type: "POST", url: "App/Modulos/_leads_/functions.php",
 			data: {function: "AddLead"}
 		}).done(function(e) {

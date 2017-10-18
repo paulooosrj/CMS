@@ -17,21 +17,22 @@
 	*/
 
 	ob_start();	
-	$r = $_SERVER["DOCUMENT_ROOT"];
-	$_SERVER["DOCUMENT_ROOT"] = (substr($r, -1) == '/') ? substr($r, 0, -1) : $r;
-
+	############################################################################################################################################
+	# DEFINIMOS O ROOT DO SISTEMA
+	############################################################################################################################################
+	define('ROOT_DOCUMENT', dirname(str_replace(array('\\', '//'), "/", dirname(__FILE__))));
 
 	############################################################################################################################
 	# CASO NÃO TENHA SIDO VERIFICADO OU SEJA UMA NOVA INSTALAÇÃO/UPDATE IMPORTA VERIFICAÇÃO DO SERVIDOR
 	############################################################################################################################
-	if(!file_exists($_SERVER["DOCUMENT_ROOT"].'/admin/App/Config/ws-server-ok') || file_exists($_SERVER["DOCUMENT_ROOT"].'/admin/App/Config/firstacess')){
-		include($_SERVER["DOCUMENT_ROOT"].'/admin/App/Config/ws-verify-server.php');
+	if(!file_exists(ROOT_DOCUMENT.'/admin/App/Config/ws-server-ok') || file_exists(ROOT_DOCUMENT.'/admin/App/Config/firstacess')){
+		include(ROOT_DOCUMENT.'/admin/App/Config/ws-verify-server.php');
 	}
 
 	############################################################################################################################
 	# CASO NÃO EXISTA O 'ws-config.php' IMPORTA A TELA DE SETUP
 	############################################################################################################################
-	if(!file_exists($_SERVER["DOCUMENT_ROOT"].'/ws-config.php')) {
+	if(!file_exists(ROOT_DOCUMENT.'/ws-config.php')) {
 		include('./App/Core/ws-setup.php');
 		exit;
 	}
@@ -39,7 +40,7 @@
 	############################################################################################################################
 	# IMPORTAMOS A CLASSE PADRÃO DO SISTEMA
 	############################################################################################################################
-	include_once ($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');
+	include_once (ROOT_DOCUMENT.'/admin/App/Lib/class-ws-v1.php');
 
 	############################################################################################################################
 	#	CASO SEJA O 1° ACESSO, IMPORTA A TELA DE INSTALAÇÃO

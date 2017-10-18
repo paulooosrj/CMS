@@ -4,12 +4,8 @@
 	# IMPORTAMOS A CLASSE THUMB CANVAS
 	################################################################################
 	ob_start();
-	if (substr($_SERVER["DOCUMENT_ROOT"], -1) == '/') {
-		$_SERVER["DOCUMENT_ROOT"] = substr($_SERVER["DOCUMENT_ROOT"], 0, -1);
-	}
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-canvas.class.php');
+	include_once(__DIR__.'/../Lib/class-canvas.class.php');
 	ob_clean();
-	
 	################################################################################
 	# FUNÇÃO PARA MANIPULAR A URL
 	################################################################################

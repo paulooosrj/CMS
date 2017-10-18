@@ -3,7 +3,7 @@
 	window.id_item_selected='';
 	var barra_progresso = '';
 	var canvas_barra_progresso = '';
-	include_css ('/admin/App/Templates/css/websheep/modulos/_URL_amigavel/style.min.css','css_mod','All');
+	include_css ('./App/Templates/css/websheep/modulos/_URL_amigavel/style.min.css','css_mod','All');
 </script>
 <div id="topoModulo" class="TitTop bg05 w1b">{urlFriendly_title}</div>
 	<div id="topo_upload" class="bg01" >
@@ -38,7 +38,7 @@ function reloadFunctions(){
 			funcao:"addRules",
 			vars:"",
 			patch:"{PATH}",
-			beforeSend:function(){confirma({width:"auto",conteudo:"  {urlFriendly_modal_Adding}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+			beforeSend:function(){confirma({width:"auto",conteudo:"  {urlFriendly_modal_Adding}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 			Sucess:function(e){
 				console.log(e)
 				$( "#conteudo" ).load("./{PATH}/index.php", function( response, status, xhr ) {
@@ -74,7 +74,7 @@ function reloadFunctions(){
 				$.ajax({
 					type: "POST",
 					url: "./{PATH}/functions.php",
-		 			beforeSend:function(){confirma({width:"auto",conteudo:"  {urlFriendly_modal_rearrangingItems}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+		 			beforeSend:function(){confirma({width:"auto",conteudo:"  {urlFriendly_modal_rearrangingItems}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 					data: { function:"salvaRules",idPath:idPath,urlPath:urlPath,nameFile:nameFile,type:type}
 				}).done(function(data) {
 					console.log(data)

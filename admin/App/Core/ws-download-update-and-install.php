@@ -1,5 +1,5 @@
 <?php 
-include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
+include_once(__DIR__.'/../Lib/class-ws-v1.php');
 
 $link = file_get_contents(ROOT_ADMIN.'/App/Templates/install/link.txt');
 set_time_limit(-1);

@@ -3,7 +3,7 @@
 	var barra_progresso = '';
 	var canvas_barra_progresso = '';
 	window.id_item_selected='';
-	include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/detalhes.min.css','css_mod','All');
+	include_css ('./App/Templates/css/websheep/modulos/_tools_/detalhes.min.css','css_mod','All');
 </script>
 <div id="topoModulo" class="TitTop bg05 w1b">{ToolsManager_ToolDetails_mainTitle}</div>
 	<div id="topo_basico" class="bg01 editor_basico" style="display:block">
@@ -99,14 +99,14 @@ _root.reloadFunctions = function(){
 		out("reload functions");
 		$("#voltar").unbind('click').click(function(){
 			var url = $(this).data("goback");
-			confirma({width:"auto",conteudo:"  {ToolsManager_ToolDetails_modal_back}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+			confirma({width:"auto",conteudo:"  {ToolsManager_ToolDetails_modal_back}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 
 			$("#conteudo").load(url,function(){
 				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
 			});
 		})
 		$("#editar_campos_item").unbind('click').click(function(){
-			confirma({width:"auto",conteudo:"  {ToolsManager_ToolDetails_modal_loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+			confirma({width:"auto",conteudo:"  {ToolsManager_ToolDetails_modal_loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 			if(_root.form_preenchido!= $("#form_basico").serialize()){
 
 				confirma({
@@ -173,8 +173,8 @@ _root.reloadFunctions = function(){
 				$.ajax({
 				  type: "POST",
 				  cache: false,
-				  url: "/admin/App/Modulos/_tools_/functions.php",
-				  beforeSend:function(){confirma({width:"auto",conteudo:"  {ToolsManager_ToolDetails_modal_saving}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				  url: "./App/Modulos/_tools_/functions.php",
+				  beforeSend:function(){confirma({width:"auto",conteudo:"  {ToolsManager_ToolDetails_modal_saving}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 				  data: {_js_:window.htmEditor.getSession().getValue(), function:"salvaFerramenta", ws_id_ferramenta: "{WS_ID_FERRAMENTA}",inputs:inputs+chos}
 				}).done(function(e) {
 					if(e=="sucesso"){
@@ -209,8 +209,8 @@ _root.reloadFunctions = function(){
 	if($('#Balao_ToolType').length){$('#Balao_ToolType').remove();}
 	_root.reloadFunctions();
 
-	$.getScript("/admin/App/Vendor/ace/src-min-noconflict/ace.js", function(wordList) {
-		ace.config.set('basePath', '/admin/App/Vendor/ace/src-min-noconflict');// SETA LOCAL DOS ARQUIVOS DO EDITOR
+	$.getScript("./App/Vendor/ace/src-min-noconflict/ace.js", function(wordList) {
+		ace.config.set('basePath', './App/Vendor/ace/src-min-noconflict');// SETA LOCAL DOS ARQUIVOS DO EDITOR
 		window.htmEditor = ace.edit("ace_editor");
 		window.htmEditor.setTheme("ace/theme/websheep.0.3");
 		window.htmEditor.getSession().setMode("ace/mode/javascript");
@@ -221,7 +221,7 @@ _root.reloadFunctions = function(){
 	    window.htmEditor.setDisplayIndentGuides(true);
 	    window.htmEditor.getSession().setUseWrapMode(true);  
 	    
-		$.getScript("/admin/App/Vendor/ace/src-min-noconflict/ext-language_tools.js", function(wordList) {
+		$.getScript("./App/Vendor/ace/src-min-noconflict/ext-language_tools.js", function(wordList) {
 			setTimeout(function(){
 				var wsCompleter = {
 				    getCompletions: function(editor, session, pos, prefix, callback) {

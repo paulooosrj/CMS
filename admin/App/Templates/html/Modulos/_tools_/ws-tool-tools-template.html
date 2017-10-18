@@ -12,7 +12,7 @@
 	window.id_item_selected='';
 	var barra_progresso = '';
 	var canvas_barra_progresso = '';
-	include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','css_mod','All');
+	include_css ('./App/Templates/css/websheep/modulos/_tools_/style.min.css','css_mod','All');
 </script>
 <style type="text/css">
 	.comboToolls{
@@ -79,7 +79,7 @@
 		<!-- BEGIN GOBACKJS  -->
 			<script type="text/javascript">
 				$("#voltar").bind("click tap press",function(){
-					confirma({width:"auto",conteudo:"  {ToolsManager_Modal_Backing}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+					confirma({width:"auto",conteudo:"  {ToolsManager_Modal_Backing}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 					$("#conteudo").load("{GOBACK}",function(){
 						$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
 					});
@@ -98,12 +98,12 @@
 							<div style='padding:0;		position:relative; float:left; width:25px; height:25px; top:2px;'>
                             <input type='checkbox' style='cursor:pointer; position:relative; top:6px;' class='legenda' legenda='{ToolsManager_Select}'></div>
 							<div style='padding:0 9px; 	position:relative; float:left; width:25px; height:25px; top:2px;'>
-                            <img style='cursor:pointer; position:relative; float:left; top:2px; ' class='limpar legenda' legenda='{ToolsManager_Clear}' src='/admin/App/Templates/img/websheep/vassoura.png'></div>
+                            <img style='cursor:pointer; position:relative; float:left; top:2px; ' class='limpar legenda' legenda='{ToolsManager_Clear}' src='./App/Templates/img/websheep/vassoura.png'></div>
 							<div style='display:none; padding:0 9px; position:relative; float:left; width:25px; height:25px; top:2px;'>
-                            <img style='cursor:pointer; position:relative; float:left; top:4px; left:5px;' class='exportar legenda' legenda='{ToolsManager_Export}' src='/admin/App/Templates/img/websheep/export_toll.png'></div>
-							<div style='padding:0 9px;	position:relative; float:left; width:25px; height:25px; top:2px;'><img style='cursor:pointer; position:relative; float:left; top:4px; left:5px;' 	class='mover_item legenda' legenda='{ToolsManager_Move}' src='/admin/App/Templates/img/websheep/arrow-move.png'></div>
-							<div style='padding:0 9px; 	position:relative; float:left; width:25px; height:25px; top:2px;'><img style='cursor:pointer; position:relative; float:left; top:4px; left:5px;' 	class='editar legenda' legenda='{ToolsManager_Access}' src='/admin/App/Templates/img/websheep/magnifier.png'></div> 
-                            <div style='display:none;	padding:0 9px; position:relative; float:left; width:25px; height:25px; top:2px;'><img style='cursor:pointer; position:relative; float:left; top:4px; left:5px' 	class='excluir legenda' legenda='<img class=\"editar\" src=\"/admin/App/Templates/img/websheep/exclamation.png\" style=\"position: absolute;margin-top: -2px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excluir' src='/admin/App/Templates/img/websheep/cross-button.png'></div>
+                            <img style='cursor:pointer; position:relative; float:left; top:4px; left:5px;' class='exportar legenda' legenda='{ToolsManager_Export}' src='./App/Templates/img/websheep/export_toll.png'></div>
+							<div style='padding:0 9px;	position:relative; float:left; width:25px; height:25px; top:2px;'><img style='cursor:pointer; position:relative; float:left; top:4px; left:5px;' 	class='mover_item legenda' legenda='{ToolsManager_Move}' src='./App/Templates/img/websheep/arrow-move.png'></div>
+							<div style='padding:0 9px; 	position:relative; float:left; width:25px; height:25px; top:2px;'><img style='cursor:pointer; position:relative; float:left; top:4px; left:5px;' 	class='editar legenda' legenda='{ToolsManager_Access}' src='./App/Templates/img/websheep/magnifier.png'></div> 
+                            <div style='display:none;	padding:0 9px; position:relative; float:left; width:25px; height:25px; top:2px;'><img style='cursor:pointer; position:relative; float:left; top:4px; left:5px' 	class='excluir legenda' legenda='<img class=\"editar\" src=\"./App/Templates/img/websheep/exclamation.png\" style=\"position: absolute;margin-top: -2px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excluir' src='./App/Templates/img/websheep/cross-button.png'></div>
 						</div>
 					</div>
 				</li>
@@ -126,7 +126,7 @@
 			})
 			$.ajax({
 			  type: "POST",
-			  url: "/admin/App/Modulos/_tools_/functions.php",
+			  url: "./App/Modulos/_tools_/functions.php",
 			  data: { 
 				function:"ordenaFerramenta",
 				posicoes:posicoes
@@ -199,9 +199,9 @@
 					ferramentas.push(id);
 				})
 				$.ajax({
-					beforeSend:function(){confirma({width:600, conteudo:"{ToolsManager_Modal_WaitDel}<br>{ToolsManager_Modal_AllRegister}<br> <div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag:false, bot1:0, bot2:0 }) },
+					beforeSend:function(){confirma({width:600, conteudo:"{ToolsManager_Modal_WaitDel}<br>{ToolsManager_Modal_AllRegister}<br> <div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag:false, bot1:0, bot2:0 }) },
 					type: "POST",
-					url: "/admin/App/Modulos/_tools_/functions.php",
+					url: "./App/Modulos/_tools_/functions.php",
 					data: { 'function':"exclude_All_Tool_File","tools":ferramentas}
 				}).done(function(data) {
 					if(data=="sucesso"){
@@ -257,7 +257,7 @@
 
 					$.ajax({
 					  type: "POST",
-					  url: "/admin/App/Modulos/_tools_/functions.php",
+					  url: "./App/Modulos/_tools_/functions.php",
 					  data: { 'function':"export_All_Tool_File", tools:ferramentas}
 					}).done(function(data) {
 							var pom = document.createElement('a');
@@ -290,7 +290,7 @@
 		var page 				= $(this).parent().parent().parent().parent().parent().data('file');
 		confirma({
 			width:"auto",
-			conteudo:"<strong>{ToolsManager_Modal_LoadEditor}</strong><div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+			conteudo:"<strong>{ToolsManager_Modal_LoadEditor}</strong><div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 			drag:false,
 			posFn:function(){
 					$("#ws_confirm").css("line-height","20px");
@@ -313,7 +313,7 @@
 
 			$.ajax({
 			  type: "POST",
-			  url: "/admin/App/Modulos/_tools_/functions.php",
+			  url: "./App/Modulos/_tools_/functions.php",
 			  data: { "function":"exportToolFile","id_tool":id}
 			}).done(function(data) {
 					var pom = document.createElement('a');
@@ -333,7 +333,7 @@
 	$(".editar ").unbind('click').click(function(){
 		var li	= $(this).parent().parent().parent().parent();
 		var id	= $(this).parent().parent().parent().parent().data("id");
-		confirma({width:"auto",conteudo:"  {ToolsManager_Modal_Loading}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+		confirma({width:"auto",conteudo:"  {ToolsManager_Modal_Loading}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 		 $("#conteudo").load("{LINK_DETALHES}",function(){
 		 	$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
 		});
@@ -347,7 +347,7 @@
 				funcao:"returnPaths",
 				vars:"id="+id,
 				patch:"{PATH}",
-				beforeSend:function(){confirma({width:"auto",conteudo:"  {ToolsManager_Modal_Verifying}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				beforeSend:function(){confirma({width:"auto",conteudo:"  {ToolsManager_Modal_Verifying}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 				Sucess:function(e){
 					confirma({				
 						width:"auto",
@@ -433,7 +433,7 @@
 							var newName 	= $("#form_new_name input[name='titulo_page']").val();
 							$.ajax({
 							  type: "POST",
-							  url: "/admin/App/Modulos/_tools_/functions.php",
+							  url: "./App/Modulos/_tools_/functions.php",
 							  data: { function:"salvaNomeFolder",id:id,formulario:formulario}
 							}).done(function(data) {
 								out(data)
@@ -502,7 +502,7 @@
 					var AppData = $("#detailsApp").serialize();
 					$.ajax({
 					  type: "POST",
-					  url: "/admin/App/Modulos/_tools_/functions.php",
+					  url: "./App/Modulos/_tools_/functions.php",
 					  data: { function:"addApp",id:id,AppData:AppData,plugin:"{GET_PLUGIN}"}
 					}).done(function(data) {
 						TopAlert({mensagem: "{ToolsManager_Modal_CreateOk}",type: 3})
@@ -532,14 +532,14 @@
 						setTimeout(function(){
 							confirma({
 								width:600,
-								conteudo:"{ToolsManager_Modal_WaitClean}<br> <div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+								conteudo:"{ToolsManager_Modal_WaitClean}<br> <div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 								drag:false,
 								bot1:0,
 								bot2:0,
 								posFn:function(){
 									$.ajax({
 									  type: "POST",
-									  url: "/admin/App/Modulos/_tools_/functions.php",
+									  url: "./App/Modulos/_tools_/functions.php",
 									  data: { function:"limparFerramenta",ws_id_ferramenta:patch}
 									}).done(function(data) {
 										$("#ws_confirm").css("line-height","20px");
@@ -571,14 +571,14 @@
 						setTimeout(function(){
 							confirma({
 								width:600,
-								conteudo:"{ToolsManager_Modal_WaitDel}<br>{ToolsManager_Modal_AndAllReg}<br> <div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+								conteudo:"{ToolsManager_Modal_WaitDel}<br>{ToolsManager_Modal_AndAllReg}<br> <div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 								drag:false,
 								bot1:0,
 								bot2:0,
 								posFn:function(){
 									$.ajax({
 									  type: "POST",
-									  url: "/admin/App/Modulos/_tools_/functions.php",
+									  url: "./App/Modulos/_tools_/functions.php",
 									  data: { function:"excluiFerramenta",ws_id_ferramenta:patch}
 									}).done(function(data) {
 										out(data)
@@ -680,7 +680,7 @@ function SetupTool(Base64Var){
 				}else{
 					$.ajax({
 					  type: "POST",
-					  url: "/admin/App/Modulos/_tools_/functions.php",
+					  url: "./App/Modulos/_tools_/functions.php",
 					  data: { 
 						function:"installToolPanel",
 						ToolInstall:ToolInstall

@@ -6,21 +6,9 @@
 	#
 	#
 	############################################################################################################################################
-	# DEFINIMOS O ROOT DO SISTEMA, E RETIRAMOS A ULTIMA  BARA CASO EXISTA (existem servidores que tem outros q nao)
-	############################################################################################################################################
-		$_server = $_SERVER['DOCUMENT_ROOT'];
-		if (substr($_server, -1) == '/') {
-			@define('ROOT_DOCUMENT', substr($_server, 0, -1));
-		} else {
-			@define('ROOT_DOCUMENT', $_server);
-		}
-
-	############################################################################################################################################
 	# CAPTAMOS A BASE DO SISTEMA
 	############################################################################################################################################
 		$path = basename(realpath(__DIR__ . '/../')) . PHP_EOL;
-
-
 	############################################################################################################################################
 	# GERA UMA SENHA PARA OS CAMPOS DO ARQUIVO DE CONFIGURAÇÃO
 	############################################################################################################################################
@@ -89,10 +77,10 @@
 				str_replace(PHP_EOL, "", $data['USUARIO_BD']),
 				str_replace(PHP_EOL, "", $data['SENHA_BD']),
 				str_replace(PHP_EOL, "", $data['SERVIDOR_BD']),
-				ROOT_DOCUMENT . '/website',
-				ROOT_DOCUMENT . '/admin',
+				$data['ROOT_DOCUMENT'] . '/website',
+				$data['ROOT_DOCUMENT'] . '/admin',
 				str_replace(PHP_EOL, "", $data['RECAPTCHA']),
-				ROOT_DOCUMENT
+				$data['ROOT_DOCUMENT']
 			);
 			$isso_Password = array(
 				'{ID_SESS}',
@@ -121,7 +109,7 @@
 			##########################################################################################################################################
 			# PEGAMOS A STRING O ARQUIVO CONFIG BASE
 			##########################################################################################################################################
-			$wsConfigDefault         = file_get_contents(ROOT_DOCUMENT . '/admin/App/Config/ws-config-default.php');
+			$wsConfigDefault         = file_get_contents($data['ROOT_DOCUMENT'].'/admin/App/Config/ws-config-default.php');
 
 			##########################################################################################################################################
 			# FORMATAMOS O CONTEUDO DELE
@@ -132,7 +120,7 @@
 			#######################################################################################################################################
 			# GRAVAMOS O NOVO ARQUIVO ws-config.php E RETORNAMOS O RESULTADO
 			#######################################################################################################################################
-			if (!file_put_contents(ROOT_DOCUMENT . '/ws-config.php', $wsConfigDefaultFormated)) {
+			if (!file_put_contents($data['ROOT_DOCUMENT'] . '/ws-config.php', $wsConfigDefaultFormated)) {
 				echo json_encode(array(
 					'status' => 'falha',
 					'resposta' => 'Não foi possível gravar o ws-config.php'
@@ -162,7 +150,7 @@
 	############################################################################################################################################
 	# COPIAMOS O HTACCES PADRÃO DO SISTEMA PARA O CAMINHO ROOT
 	############################################################################################################################################
-		copy(ROOT_DOCUMENT . '/admin/App/Templates/txt/ws-first-htaccess.txt', ROOT_DOCUMENT . '/.htaccess');
+		copy(ROOT_DOCUMENT.'/admin/App/Templates/txt/ws-first-htaccess.txt', ROOT_DOCUMENT . '/.htaccess');
 
 	############################################################################################################################################
 	# CRIAMOS TODOS OS DIRETORIOS DO WEBSITE A SER MONTADO
@@ -212,15 +200,15 @@
 <link type="image/x-icon" href="./img/favicon.png" rel="shortcut icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/global.css" />
-<link	type="text/css" media="all"		rel="stylesheet" 						href="/admin/App/Templates/css/websheep/estrutura.min.css" />
-<link	type="text/css" media="all"		rel="stylesheet" 						href="/admin/App/Templates/css/websheep/desktop.min.css" />
-<link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/install.css" />
-<link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/funcionalidades.css" />
-<link	type="text/css" media="all"		rel="stylesheet" 						href="/admin/App/Templates/css/fontes/fonts.css" />
-<link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/theme_blue.min.css" />
-<script type = 'text/javascript' 												src="/admin/App/Vendor/jquery/2.2.0/jquery.min.js"></script>
-<script type = 'text/javascript' 												src="/admin/App/Templates/js/websheep/funcionalidades.js"></script>
+<link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/global.css" />
+<link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/websheep/estrutura.min.css" />
+<link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/websheep/desktop.min.css" />
+<link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/install.css" />
+<link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/funcionalidades.css" />
+<link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/fontes/fonts.css" />
+<link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/theme_blue.min.css" />
+<script type = 'text/javascript' 												src="./App/Vendor/jquery/2.2.0/jquery.min.js"></script>
+<script type = 'text/javascript' 												src="./App/Templates/js/websheep/funcionalidades.js"></script>
 
 
 
@@ -233,15 +221,15 @@ $(document).ready(function(){
 		var SENHA_BD 		=	$("input[name='SENHA_BD']").val();
 		var SERVIDOR_BD 	=	$("input[name='SERVIDOR_BD']").val();
 		$.ajax({
-			type: "POST",cache: false,url: "/admin/App/Core/ws-setup.php",
+			type: "POST",cache: false,url: "./App/Core/ws-setup.php",
 			data: {function:"testMySQL",NOME_BD:NOME_BD,USUARIO_BD:USUARIO_BD,SENHA_BD:SENHA_BD,SERVIDOR_BD:SERVIDOR_BD,},
 			error: function (xhr, ajaxOptions, thrownError) {alert(xhr.status);alert(thrownError);}
 		}).done(function(data) { 
 			
 			if(data=='1'){
-				$("input[name='NOME_BD'],input[name='USUARIO_BD'],input[name='SENHA_BD'],input[name='SERVIDOR_BD']").css({borderColor:"#b0d000",paddingLeft:33,'background-image':"url('/admin/App/Templates/img/websheep/tick-circle.png')",'background-position':10,'background-repeat':"no-repeat"})
+				$("input[name='NOME_BD'],input[name='USUARIO_BD'],input[name='SENHA_BD'],input[name='SERVIDOR_BD']").css({borderColor:"#b0d000",paddingLeft:33,'background-image':"url('./App/Templates/img/websheep/tick-circle.png')",'background-position':10,'background-repeat':"no-repeat"})
 			}else{
-				$("input[name='NOME_BD'],input[name='USUARIO_BD'],input[name='SENHA_BD'],input[name='SERVIDOR_BD']").css({borderColor:"#d03b00",paddingLeft:33,'background-image':"url('/admin/App/Templates/img/websheep/cross.png')",'background-position':10,'background-repeat':"no-repeat"})
+				$("input[name='NOME_BD'],input[name='USUARIO_BD'],input[name='SENHA_BD'],input[name='SERVIDOR_BD']").css({borderColor:"#d03b00",paddingLeft:33,'background-image':"url('./App/Templates/img/websheep/cross.png')",'background-position':10,'background-repeat':"no-repeat"})
 			}
 		});
 	})
@@ -250,17 +238,18 @@ $(document).ready(function(){
 		$.ajax({
 			type: "POST",
 			cache: false,
-			url: "/admin/App/Core/ws-setup.php",
-		    beforeSend:function(){confirma({width:"auto",conteudo:"  Criando ws-config...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+			url: "./App/Core/ws-setup.php",
+		    beforeSend:function(){confirma({width:"auto",conteudo:"  Criando ws-config...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 			data: {function:"createWsConfig", form:formulario},
 		}).done(function(data) {
 					objJSON = JSON.parse(data)
+					console.log(data);
 					if(objJSON.status=="sucesso"){
 						$.ajax({
 								type: "POST",
 								cache: false,
-								beforeSend:function(){confirma({width:"auto",conteudo:"  Configurando MySQL...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
-								url: "/admin/App/Modulos/_tools_/functions.php",
+								beforeSend:function(){confirma({width:"auto",conteudo:"  Configurando MySQL...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+								url: "./App/Modulos/_tools_/functions.php",
 								data: {function:"installSQLInit",formulario:formulario},
 								error: function (xhr, ajaxOptions, thrownError) {alert(xhr.status);alert(thrownError);}
 							}).done(function(data) {
@@ -339,6 +328,7 @@ $(document).ready(function(){
 						<input	type="hidden" name="_PATCH_ADMIN_" 			value="<?= $path ?>" 		readonly>
 						<input	type="hidden" name="ID_SESS" 				value="<?= substr(_crypt(), 0, 6) ?>" readonly>
 						<input	type="hidden" name="NAME_SESS" 				value="<?= substr(_crypt(), 0, 6) ?>" readonly>
+						<input	type="hidden" name="ROOT_DOCUMENT" 			value="<?= ROOT_DOCUMENT?>" readonly>
 					</form>
 					<div class="c"></div>
 					<div class="step botao vamosla" id="vamosla" style="width: 100%;">Criar ws-config.php e continuar a instalação</div>

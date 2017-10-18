@@ -1,7 +1,7 @@
 <!-- BEGIN CAMPOS_LEADS -->
 <script>
 var barra_progresso = '';
-include_css ('/admin/App/Templates/css/websheep/modulos/_leads_/style.min.css','css_mod','All');
+include_css ('./App/Templates/css/websheep/modulos/_leads_/style.min.css','css_mod','All');
 </script>
 <div id="topoModulo" class="TitTop bg05 w1b">Lead Captures</div>
 	<div id="topo_upload" class="bg01" >
@@ -49,7 +49,7 @@ function reloadFunctions(){
 				posFn:function(){},
 				newFun:function(){
 					$.ajax({
-						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Fields_Modal_AddingField}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Fields_Modal_AddingField}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
 						cache: false, type: "POST", url: "{PATH}/functions.php",
 						data: {
 							function: "exclCampo",
@@ -70,7 +70,7 @@ function reloadFunctions(){
 	})
 
 	$("#voltar").unbind("click").click(function() {
-		confirma({width: "auto",conteudo: "{Leads_Fields_Modal_Backing}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0});
+		confirma({width: "auto",conteudo: "{Leads_Fields_Modal_Backing}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0});
 		$("#conteudo").load("{PATH}/detalhes.php?lead={TOKEN_TABLE}", function() {
 			$("#ws_confirm").remove();
 			$("#body").removeClass("scrollhidden");
@@ -87,9 +87,9 @@ function reloadFunctions(){
 			ErrorCheck: function() {TopAlert({mensagem: "{Leads_Fields_Modal_TypeName}", clickclose: true, height: 20, timer: 3000, type: 2, }) },
 			newFun:function(){
 				var coluna = $('.colunaNameConfirm').val();
-				confirma({width: "auto", conteudo: "  {Leads_Fields_Modal_AddingField}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0});
+				confirma({width: "auto", conteudo: "  {Leads_Fields_Modal_AddingField}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0});
 				$.ajax({
-					beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Fields_Modal_AddingField}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+					beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Fields_Modal_AddingField}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
 					cache: false, type: "POST", url: "{PATH}/functions.php",
 					data: {
 						function: "AddCampo",

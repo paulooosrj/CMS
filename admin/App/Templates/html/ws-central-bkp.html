@@ -1,6 +1,6 @@
 <!-- BEGIN BLOCK_CENTRAL_BKP -->
 <script type="text/javascript">
-include_css("/admin/App/Templates/css/websheep/modulos/_modulo_/templates.min.css","css_mod","All");
+include_css("./App/Templates/css/websheep/modulos/_modulo_/templates.min.css","css_mod","All");
 </script>
 	<div id="topo_upload" class="bg01">
 		<div class="tapa_upload" style="display:none">
@@ -67,7 +67,7 @@ $(function(){
 			var dataFile = $(this).data('href');
 			confirma({
 			width:"auto",
-			conteudo:"  {central_Bkp_loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+			conteudo:"  {central_Bkp_loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 			drag:false,
 			posFn:function(){
 				$("#ws_confirm").css("line-height","20px");
@@ -94,9 +94,9 @@ $(function(){
 			<div class='c'></div>\
 			<div class='thumbmail' style='border: solid 5px #3f6daa;background-color: #FFF;width: 200px;height:200px;position: relative;float: left;'>\
 				<div class='combo_upload' style='display: none; opacity: 1;'>\
-					<div class='pc' legenda='{central_Bkp_mycomputer}'>	<img src='/admin/App/Templates/img/websheep/up_m.png'></div>\
-					<div class='bb' legenda='{central_Bkp_library}'>	<img src='/admin/App/Templates/img/websheep/folder_m.png'></div>\
-					<div class='excl' legenda='{central_Bkp_delete}'>		<img src='/admin/App/Templates/img/websheep/delete.png' style='width:25px;margin-top:-1px;'></div>\
+					<div class='pc' legenda='{central_Bkp_mycomputer}'>	<img src='./App/Templates/img/websheep/up_m.png'></div>\
+					<div class='bb' legenda='{central_Bkp_library}'>	<img src='./App/Templates/img/websheep/folder_m.png'></div>\
+					<div class='excl' legenda='{central_Bkp_delete}'>		<img src='./App/Templates/img/websheep/delete.png' style='width:25px;margin-top:-1px;'></div>\
 				</div>\
 			<img class='avatarBKP' src='/ws-img/200/200/null'></div>\
 			<input type='hidden' class='avatar' >\
@@ -166,7 +166,7 @@ $(function(){
 						  url: "App/Modulos/_tools_/functions.php",
 						  beforeSend:function(){
 						  	setTimeout(function(){
-						  		confirma({width:"auto",conteudo:"{central_Bkp_creating}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
+						  		confirma({width:"auto",conteudo:"{central_Bkp_creating}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
 						  	},1000)
 						  },
 						  cache: false,
@@ -217,7 +217,7 @@ $(function(){
 				  url: "App/Modulos/_tools_/functions.php",
 				  beforeSend:function(){
 				  	setTimeout(function(){
-				  		confirma({width:"auto",conteudo:"{central_Bkp_restoration}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
+				  		confirma({width:"auto",conteudo:"{central_Bkp_restoration}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
 				  	},1000)
 				  },
 				  cache: false,

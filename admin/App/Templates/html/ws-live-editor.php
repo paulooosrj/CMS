@@ -6,13 +6,13 @@
         var j = document.createElement("script"),
         head = document.getElementsByTagName('head')[0]
         j.setAttribute('type', "text/javascript")
-        j.setAttribute('src', '/admin/js/jquery-2.2.0.min.js')
+        j.setAttribute('src', './js/jquery-2.2.0.min.js')
         head.insertBefore(j,head.firstChild)
     }
     var j = document.createElement("script"),
     head = document.getElementsByTagName('head')[0]
     j.setAttribute('type', "text/javascript")
-    j.setAttribute('src', '/admin/includes/plugins/CKeditor/ckeditor.js')
+    j.setAttribute('src', './includes/plugins/CKeditor/ckeditor.js')
     head.insertBefore(j,head.firstChild)
     setTimeout(function() {
         var element = document.querySelector("body");
@@ -34,7 +34,7 @@
                         console.log("Live Editor:")
                         jQuery.ajax({
                             type: "POST",
-                            url: "/admin/App/Modulos/_modulo_/functions.php",
+                            url: "./App/Modulos/_modulo_/functions.php",
                             data: {
                                 "function": "SaveLiveEditor",
                                 "colum": LiveEditorColum,
@@ -112,7 +112,7 @@
         jQuery("#closeLiveEditor").bind("click tap press", function() {
             $.ajax({
                 type: "POST",
-                url: "/admin/App/Modulos/_tools_/functions.php",
+                url: "./App/Modulos/_tools_/functions.php",
                 data: {"function": "detroyEditorActive"},
                 async: true,
                 success: function(data) {location.reload();}

@@ -27,11 +27,11 @@
 <!-- BEGIN BLOCK_THUMBMAIL -->
 	<div class="thumbmail" data-token="{TOKEN}" data-mysql="{MYSQL}" style="width:{WIDTH}px; height:{HEIGHT}px;" data-width="{WIDTH}" data-height="{HEIGHT}">
 		<div class="combo_upload">
-			<div class="pc" legenda="Meu computador"> <img src="/admin/App/Templates/img/websheep/up_m.png" />
+			<div class="pc" legenda="Meu computador"> <img src="./App/Templates/img/websheep/up_m.png" />
 			</div>
-			<div class="bb" legenda="Na biblioteca"> <img src="/admin/App/Templates/img/websheep/folder_m.png" />
+			<div class="bb" legenda="Na biblioteca"> <img src="./App/Templates/img/websheep/folder_m.png" />
 			</div>
-			<div class="excl" legenda="Excluir"> <img src="/admin/App/Templates/img/websheep/delete.png" style="width:25px;margin-top:-1px;" />
+			<div class="excl" legenda="Excluir"> <img src="./App/Templates/img/websheep/delete.png" style="width:25px;margin-top:-1px;" />
 			</div>
 		</div>
 		<img class="thumb_img" src="{SRC}" />
@@ -41,7 +41,7 @@
 <!-- BEGIN BLOCK_PLAYER_MP3 -->
 	<div class="playerMP3" data-token="{TOKEN}" data-mysql="{MYSQL}" style="width:{WIDTH}px; height:{HEIGHT}px;" data-width="{WIDTH}" data-height="{HEIGHT}">
 		<div class="hidePlayer combo_upload">
-			<div class="insertLink" legenda="Inserir/Alterar link"><img src="/admin/App/Templates/img/websheep/iconLink.png" />
+			<div class="insertLink" legenda="Inserir/Alterar link"><img src="./App/Templates/img/websheep/iconLink.png" />
 			</div>
 
 		</div>
@@ -56,7 +56,7 @@
 
 		<div class="playerVideoThumb" data-token="{TOKEN}" data-mysql="{MYSQL}" style="width:{WIDTH}px; height:{HEIGHT}px;" data-width="{WIDTH}" data-height="{HEIGHT}">
 			<div class="combo_upload">
-				<div class="insertLink" legenda="Inserir/Alterar link"><img src="/admin/App/Templates/img/websheep/iconLink.png" />
+				<div class="insertLink" legenda="Inserir/Alterar link"><img src="./App/Templates/img/websheep/iconLink.png" />
 				</div>
 			</div>
 			<img class="thumb_img" src="{SRC}" style="{styleThumb}" />
@@ -176,7 +176,7 @@
 					});
 				}
 			}
-			include_js('/admin/App/Vendor/google/jquery.geocomplete.min.js', 'maps_googleapis_geocomplete');
+			include_js('./App/Vendor/google/jquery.geocomplete.min.js', 'maps_googleapis_geocomplete');
 			include_js('//maps.googleapis.com/maps/api/js?sensor=false&libraries=places', 'maps_googleapis');
 			window.ActiveGoogle = function(inputText) {
 				if(window.google) {
@@ -216,7 +216,7 @@
 
 			var config_{ID} = {
 				stylesSet: 'estilos_{ID}',
-				doksoft_uploader_url: '/admin/App/Modulos/_modulo_/upload_ckEditor.php?type=ckEditor&group={GROUP}',
+				doksoft_uploader_url: './App/Modulos/_modulo_/upload_ckEditor.php?type=ckEditor&group={GROUP}',
 				height: {HEIGHT},
 				width: {WIDTH},
 				autoGrow_minHeight: {HEIGHT},
@@ -323,25 +323,25 @@
 			{ID}_editor.ui.addButton('Biblioteca', {
 				label: "Biblioteca",
 				command: 'loadBiblioteca',
-				icon: '/admin/App/Templates/img/websheep/photo-album--plus.png',
+				icon: './App/Templates/img/websheep/photo-album--plus.png',
 				toolbar: 'websheep'
 			}); 
 			{ID}_editor.ui.addButton('Upload', {
 				label: "Upload",
 				command: 'uploadIMGEditor',
-				icon: '/admin/App/Templates/img/websheep/image--plus.png',
+				icon: './App/Templates/img/websheep/image--plus.png',
 				toolbar: 'websheep'
 			}); 
 			{ID}_editor.ui.addButton('AjustCss', {
 				label: "Ajustar CSS",
 				command: 'AjustarCSS',
-				icon: '/admin/App/Templates/img/websheep/ui-toolbar--pencil.png',
+				icon: './App/Templates/img/websheep/ui-toolbar--pencil.png',
 				toolbar: 'websheep'
 			}); 
 			{ID}_editor.ui.addButton('AjustarEstilos', {
 				label: "Ajustar Estilos",
 				command: 'AjustarEstilos',
-				icon: '/admin/App/Templates/img/websheep/application-wave.png',
+				icon: './App/Templates/img/websheep/application-wave.png',
 				toolbar: 'websheep'
 			});
 			setTimeout(function() {
@@ -360,8 +360,8 @@
 	<textarea id="{ID}" name="{NAME}" style="display:none;"></textarea>
 	<div id="ace_{ID}" class="inputText" style="height:{INPUT_HEIGHT}px;width:{INPUT_WIDTH}px;margin-top:0;font-size: 15px;overflow-X:hidden"></div>
 	<script>
-		$.getScript('/admin/App/Vendor/ace/src-min-noconflict/ace.js', function() {
-			$.getScript('/admin/App/Vendor/ace/src-min-noconflict/ext-language_tools.js', function() {
+		$.getScript('./App/Vendor/ace/src-min-noconflict/ace.js', function() {
+			$.getScript('./App/Vendor/ace/src-min-noconflict/ext-language_tools.js', function() {
 				window.AceEditor_{ID} = ace.edit("ace_{ID}");
 				var conteudo = decodeURIComponent("{CONTEUDO}")
 				window.AceEditor_{ID}.setTheme("ace/theme/monokai");

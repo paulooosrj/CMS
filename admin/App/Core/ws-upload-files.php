@@ -11,7 +11,7 @@
 	##########################################################################################################  
 	# IMPORTAMOS A CLASSE PADRÃO DO SISTEMA
 	##########################################################################################################
-		include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
+		include_once(__DIR__.'/../Lib/class-ws-v1.php');
 
 	##########################################################################################################  
 	# CRIA SESSÃO
@@ -373,8 +373,8 @@ foreach($_RETURN_FILES AS $FILE){
 		echo "<li id='".$get_ID->fetch_array[0]['id']."'>	
 				<div id='combo'>
 					<div id='detalhes_img' class='bg02'>
-					<spam ><img class='editar' 	legenda='Editar Informações'	src='/admin/App/Templates/img/websheep/layer--pencil.png'></spam>   
-					<spam ><img class='excluir'	legenda='Excluir Imagem'		src='/admin/App/Templates/img/websheep/cross-button.png'></spam>   
+					<spam ><img class='editar' 	legenda='Editar Informações'	src='./App/Templates/img/websheep/layer--pencil.png'></spam>   
+					<spam ><img class='excluir'	legenda='Excluir Imagem'		src='./App/Templates/img/websheep/cross-button.png'></spam>   
 				</div>
 					<img class='thumb_exibicao' src='/ws-img/155/155/100/".$FILE['file']['newName']."'>
 				</div>

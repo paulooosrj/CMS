@@ -8,7 +8,7 @@ function template ($id,$slug,$obs, $_token_){
 						<div class='w1 obs'>".$obs."</div>
 						<div id='combo'>
 							<div id='detalhes_img'>
-								<span><img class='editar legenda' 		legenda='Editar' 		 				src='/admin/App/Templates/img/websheep/layer--pencil.png'></span>
+								<span><img class='editar legenda' 		legenda='Editar' 		 				src='./App/Templates/img/websheep/layer--pencil.png'></span>
 								<span><img class='excluir legenda' 		legenda='<img class=\"editar\" 			src=\"/admin/App/Templates/img/websheep/exclamation.png\" style=\"position: absolute;margin-top: -2px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excluir'		src='".$session->get('PATCH')."/img/cross-button.png'></span>
 							</div>
 						</div>
@@ -198,7 +198,7 @@ function excluiRegistroFile(){
 //####################################################################################################################
 //####################################################################################################################
 ob_start();
-include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
+include_once(__DIR__.'/../../Lib/class-ws-v1.php');
 $session = new session();
 ob_end_clean();
 _exec($_REQUEST['function']);

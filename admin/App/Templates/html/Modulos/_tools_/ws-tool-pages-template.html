@@ -3,7 +3,7 @@
 window.id_item_selected		='';
 var barra_progresso 		= '';
 var canvas_barra_progresso 	= '';
-include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','css_mod','All');
+include_css ('./App/Templates/css/websheep/modulos/_tools_/style.min.css','css_mod','All');
 </script>
 	<div id="topoModulo" class="TitTop bg05 w1b">{topTitle}</div>
 	<div id="topo_upload" class="bg01" >
@@ -20,11 +20,11 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 						<div>
 							<div class="combo_folder">
 								<div class="detalhes_img">
-									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class='metaTags legenda' 		legenda='{pages_iconsPage_ManageMetaTags}' 	data-pageID="{LI_ID_FILE}"	src='/admin/App/Templates/img/websheep/metaTags.png' style="margin:2px;"></div>
-									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="mover_item 	legenda" 	legenda="{pages_iconsPage_MoveItem}" 									src="/admin/App/Templates/img/websheep/arrow-move.png"></div>
-									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="editar 		legenda"	legenda="{pages_iconsPage_Edit}" 		 								src="/admin/App/Templates/img/websheep/layer--pencil.png"></div>
-									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="programar 	legenda" 	legenda="{pages_iconsPage_EditCode}" 		 							src="/admin/App/Templates/img/websheep/Terminal-Logo.png"></div>
-									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="excluir 	legenda" 	legenda="{pages_iconsPage_delete}"										src="/admin/App/Templates/img/websheep/cross-button.png"></div>	
+									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class='metaTags legenda' 		legenda='{pages_iconsPage_ManageMetaTags}' 	data-pageID="{LI_ID_FILE}"	src='./App/Templates/img/websheep/metaTags.png' style="margin:2px;"></div>
+									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="mover_item 	legenda" 	legenda="{pages_iconsPage_MoveItem}" 									src="./App/Templates/img/websheep/arrow-move.png"></div>
+									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="editar 		legenda"	legenda="{pages_iconsPage_Edit}" 		 								src="./App/Templates/img/websheep/layer--pencil.png"></div>
+									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="programar 	legenda" 	legenda="{pages_iconsPage_EditCode}" 		 							src="./App/Templates/img/websheep/Terminal-Logo.png"></div>
+									<div><img style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);" class="excluir 	legenda" 	legenda="{pages_iconsPage_delete}"										src="./App/Templates/img/websheep/cross-button.png"></div>	
 								</div>
 							</div>
 						</div>
@@ -51,7 +51,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 			})
 			$.ajax({
 			  type: "POST",
-			  url: "/admin/App/Modulos/_tools_/functions.php",
+			  url: "./App/Modulos/_tools_/functions.php",
 			  data: { 
 			  	function:"ordenaFerramenta",
 			  	posicoes:posicoes
@@ -106,7 +106,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 					var newName = $("#form_new_name input").serialize();
 					$.ajax({
 					  type: "POST",
-					  url: "/admin/App/Modulos/_tools_/functions.php",
+					  url: "./App/Modulos/_tools_/functions.php",
 					  data: { function:"addPage",formulario:newName}
 					}).done(function(data) {
 						out(data)
@@ -127,7 +127,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 			var page 				= $(this).parent().parent().parent().parent().parent().data('file');
 			confirma({
 				width:"auto",
-				conteudo:"<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+				conteudo:"<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 				drag:false,
 				posFn:function(){
 						$("#ws_confirm").css("line-height","20px");
@@ -150,7 +150,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 					funcao:"returnPaths",
 					vars:"id="+id,
 					patch:"{PATH}",
-					beforeSend:function(){confirma({width:"auto",conteudo:"  Verificando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+					beforeSend:function(){confirma({width:"auto",conteudo:"  Verificando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 					Sucess:function(e){
 						confirma({				
 							width:"auto",
@@ -231,7 +231,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 								var newName 	= $("#form_new_name input[name='titulo_page']").val();
 								$.ajax({
 								  type: "POST",
-								  url: "/admin/App/Modulos/_tools_/functions.php",
+								  url: "./App/Modulos/_tools_/functions.php",
 								  data: { function:"salvaNomeFolder",id:id,formulario:formulario}
 								}).done(function(data) {
 									if(data=="sucesso"){
@@ -248,7 +248,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 		})
 		$(".combo_folder .metaTags").unbind('click').click(function(e){
 			var id_page	= $(this).attr("data-pageID");
-			confirma({width:"auto",conteudo:"  Carregando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+			confirma({width:"auto",conteudo:"  Carregando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 			$("#conteudo").load("./App/Modulos/_modulo_/metaTags.php?id_page="+id_page,function(){$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");});
 		})
 		$(".combo_folder .excluir").unbind('click').click(function(e){
@@ -264,7 +264,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 				newFun:function(){
 					$.ajax({
 					  type: "POST",
-					  url: "/admin/App/Modulos/_tools_/functions.php",
+					  url: "./App/Modulos/_tools_/functions.php",
 					  data: { function:"excluiFolder",id_folder:id_folder,token:token,preservar:true}
 					}).done(function(data) {
 						console.log(data)
@@ -274,7 +274,7 @@ include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.min.css','
 				onCancel:function(){
 					$.ajax({
 					  type: "POST",
-					  url: "/admin/App/Modulos/_tools_/functions.php",
+					  url: "./App/Modulos/_tools_/functions.php",
 					  data: { function:"excluiFolder",id_folder:id_folder,token:token,preservar:false}
 					}).done(function(data) {
 						console.log(data)

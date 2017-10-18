@@ -1,7 +1,7 @@
 <!-- BEGIN LEAD_CAPTURE -->
 <script>
-	include_css ('/admin/App/Templates/css/websheep/modulos/_leads_/itens.css','css_mod','All');
-	include_css ('/admin/App/Templates/css/websheep/modulos/_leads_/newItens.min.css','css_mod','All');
+	include_css ('./App/Templates/css/websheep/modulos/_leads_/itens.css','css_mod','All');
+	include_css ('./App/Templates/css/websheep/modulos/_leads_/newItens.min.css','css_mod','All');
 </script>
 <div id="topoModulo" class="TitTop bg05 w1b">
 			<span style='color:#FFF'>{TITULO}<span>
@@ -11,7 +11,7 @@
 		<div id="bt_voltar_cat_cad" class="botao">{Leads_Register_Back}</div>
 		<script>
 			$("#bt_voltar_cat_cad").unbind("click").click(function(){
-					confirma({width:"auto",conteudo:"  {Leads_Register_Backing}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+					confirma({width:"auto",conteudo:"  {Leads_Register_Backing}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 					$("#conteudo").load("./{PATH}/index.php",function(){
 						$("#ws_confirm").remove();
 						$("#body").removeClass("scrollhidden");
@@ -40,7 +40,7 @@
 							<td>{TD_FIELD}</td>
 						<!-- END TD -->
 						<td>
-							<img class="btExclui" src="/admin/App/Templates/img/websheep/cross.png" data-id="{TD_ID}" style="cursor: pointer;"/>
+							<img class="btExclui" src="./App/Templates/img/websheep/cross.png" data-id="{TD_ID}" style="cursor: pointer;"/>
 						</td>
 					</tr>
 				<!-- END TR_TABLE -->
@@ -86,7 +86,7 @@ $(document).ready(function(){
 				posFn:function(){},
 				newFun:function(){
 					$.ajax({
-						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Register_Modal_DeleteLink}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Register_Modal_DeleteLink}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
 						cache: false, type: "POST", url: "{PATH}/functions.php",
 						data: {
 							function: "exclRegistro",

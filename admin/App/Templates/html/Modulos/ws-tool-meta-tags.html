@@ -56,7 +56,7 @@
 					$.ajax({
 						type: "POST",
 						url: "./{PATH}/functions.php",
-						beforeSend:function(){setTimeout(function(){confirma({width:"auto",conteudo:"  Excluindo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},500);},
+						beforeSend:function(){setTimeout(function(){confirma({width:"auto",conteudo:"  Excluindo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},500);},
 						data: {function:"exclMultiMetaTag",metas:lista}
 					}).done(function(e) {
 						setTimeout(function(){
@@ -94,7 +94,7 @@
 						$.ajax({
 							type: "POST",
 							url: "./{PATH}/functions.php",
-							beforeSend:function(){confirma({width:"auto",conteudo:"  Excluindo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+							beforeSend:function(){confirma({width:"auto",conteudo:"  Excluindo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 							data: {function:"exclMetaTag",idMeta}
 						}).done(function(e) {
 							out(e)
@@ -121,7 +121,7 @@
 			$.ajax({
 				type: "POST",
 				url: "./{PATH}/functions.php",
-				beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 				data: {function:"salvaMetaTag",idMeta:idMeta,type:type,type_content:type_content,content:content }
 			}).done(function(e) {
 				out(e)
@@ -139,7 +139,7 @@
 		$.ajax({
 			type: "POST",
 			url: "./{PATH}/functions.php",
-			beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+			beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 			data: {function:"salvaTitlePage",titulo:titulo, id_page:"{ID_PAGE}"}
 			}).done(function(e) {
 			out(e)
@@ -156,7 +156,7 @@
 		$.ajax({
 			type: "POST",
 			url: "./{PATH}/functions.php",
-			beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+			beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 			data: {function:"addMetaTag",TypeMedia:TypeMedia,id_page:"{ID_PAGE}"}
 			}).done(function(e) {
 			out(e)
@@ -169,7 +169,7 @@
 			}
 		})
 	})
-	include_css('/admin/App/Templates/css/websheep/modulos/_modulo_/metaTags.min.css','metaTagsCSS','All');
+	include_css('./App/Templates/css/websheep/modulos/_modulo_/metaTags.min.css','metaTagsCSS','All');
 	function AceEditorInit() {
 		setTimeout(function(){
 			$('.comboMetas li').each(function( index ) {

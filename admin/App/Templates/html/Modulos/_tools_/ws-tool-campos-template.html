@@ -3,12 +3,12 @@
 	window.id_item_selected='';
 	var barra_progresso = '';
 	var canvas_barra_progresso = '';
-	include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/style.css','css_mod','All');
-	include_css ('/admin/App/Templates/css/websheep/modulos/_tools_/detalhes.min.css','css_mod','All');
+	include_css ('./App/Templates/css/websheep/modulos/_tools_/style.css','css_mod','All');
+	include_css ('./App/Templates/css/websheep/modulos/_tools_/detalhes.min.css','css_mod','All');
 </script>
 <style type="text/css">
 	.ui-icon, .ui-widget-content .ui-icon{
-		background-image: url(/admin/App/Templates/img/jquery-ui/1.12.1/ui-icons_444444_256x240.png)!important;
+		background-image: url(./App/Templates/img/jquery-ui/1.12.1/ui-icons_444444_256x240.png)!important;
 	}
 </style><div id="_prefix_" data-prefix="{PREFIX}"></div>
 <iframe id="getThumb" style="display:none;width:1300px;"></iframe>
@@ -231,14 +231,14 @@ _root.reloadFunctions = function(){
 	window.resize_and_move();
 	$('*[legenda]').LegendaOver();
 	$("#voltar").unbind('click').click(function(){
-		confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+		confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 		$("#conteudo").load("./{PATH}/index.php",function(){
 			$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
 		});
 	})
 
 	$("#voltar_basico").unbind('click').click(function(){
-		confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+		confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 		// aqui verificamos se ele vem dos plugins ou não...
 			$("#conteudo").load("./{PATH}/detalhes.php?goback={ENCODE_GOBACK}&ws_id_ferramenta={WS_ID_FERRAMENTA}",function(){
 			$("#ws_confirm").remove();
@@ -252,7 +252,7 @@ _root.reloadFunctions = function(){
 	$.ajax({
 		type: "POST",
 		cache: false,
-		beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+		beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 		url: "./{PATH}/functions.php",
 		data: {function:"salvaFerramenta", ws_id_ferramenta:"{WS_ID_FERRAMENTA}",inputs:inputs }
 		}).done(function(e) {
@@ -267,13 +267,13 @@ _root.reloadFunctions = function(){
 			$.ajax({
 			  type: "POST",
 			  cache: false,
-			  beforeSend:function(){confirma({width:"auto",conteudo:"  Excluíndo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+			  beforeSend:function(){confirma({width:"auto",conteudo:"  Excluíndo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 			  url: "./{PATH}/functions.php",
 			  data: {function:"excluicampo", ws_id_ferramenta: "{WS_ID_FERRAMENTA}",token:token }
 			}).done(function(e) {
 				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
 				if(e=="sucesso"){
-					$("#getThumb").attr("src","/admin/{PATH}/print_campos.php?ws_id_ferramenta={WS_ID_FERRAMENTA}")
+					$("#getThumb").attr("src","./{PATH}/print_campos.php?ws_id_ferramenta={WS_ID_FERRAMENTA}")
 					$(div).remove();
 				}else{
 					out(e)
@@ -286,7 +286,7 @@ _root.reloadFunctions = function(){
 		$.ajax({
 			  type: "POST",
 			  url: "./{PATH}/detalhes_campo.php",
-				beforeSend:function(){confirma({width:"auto",conteudo:" Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
+				beforeSend:function(){confirma({width:"auto",conteudo:" Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
 			},
 			  data: { ws_id_ferramenta: "{WS_ID_FERRAMENTA}",token:token,prefix:_prefix_ }
 			}).done(function(e) {
@@ -309,7 +309,7 @@ _root.reloadFunctions = function(){
 						$.ajax({
 							type: "POST",
 							url: "./{PATH}/functions.php",
-							beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+							beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 							data: {function:"salvaCampo",inputs:Conteudo,ws_id_ferramenta:"{WS_ID_FERRAMENTA}" }
 						}).done(function(e) {
 							$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
@@ -337,7 +337,7 @@ _root.reloadFunctions = function(){
 			$.ajax({
 				type: "POST",
 				url: "./{PATH}/functions.php",
-				beforeSend:function(){confirma({width:"auto",conteudo:"  Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				beforeSend:function(){confirma({width:"auto",conteudo:"  Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 				data: {function:"habilita_img_interna",ws_id_ferramenta:"{WS_ID_FERRAMENTA}"}
 			}).done(function(data) {
 				out(data)
@@ -358,7 +358,7 @@ _root.reloadFunctions = function(){
 			$.ajax({
 				type: "POST",
 				url: "./{PATH}/functions.php",
-				beforeSend:function(){confirma({width:"auto",conteudo:"  Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				beforeSend:function(){confirma({width:"auto",conteudo:"  Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 				data: {function:"habilita_gal_interna",ws_id_ferramenta:"{WS_ID_FERRAMENTA}"}
 			}).done(function(data) {
 				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
@@ -379,7 +379,7 @@ _root.reloadFunctions = function(){
 				$.ajax({
 					type: "POST",
 					url: "./{PATH}/functions.php",
-					beforeSend:function(){confirma({width:"auto",conteudo:"  Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+					beforeSend:function(){confirma({width:"auto",conteudo:"  Aguarde...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 					data: {function:"habilita_files_interna",ws_id_ferramenta:"{WS_ID_FERRAMENTA}"}
 				}).done(function(data) {
 					$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
@@ -399,10 +399,10 @@ _root.reloadFunctions = function(){
 			$.ajax({
 				type: "POST",
 				url: "./{PATH}/functions.php",
-				beforeSend:function(){confirma({width:"auto",conteudo:"  Adicionando elemento...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				beforeSend:function(){confirma({width:"auto",conteudo:"  Adicionando elemento...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 				data: {function:"addCampo",type:dataType,ws_id_ferramenta:"{WS_ID_FERRAMENTA}"}
 			}).done(function(data) {
-				$("#getThumb").attr("src","/admin/{PATH}/print_campos.php?ws_id_ferramenta={WS_ID_FERRAMENTA}")
+				$("#getThumb").attr("src","./{PATH}/print_campos.php?ws_id_ferramenta={WS_ID_FERRAMENTA}")
 
 				$("#ws_confirm").remove();$("#body").removeClass("scrollhidden");$("*").removeClass("blur");
 				var json = jQuery.parseJSON(data);
@@ -436,7 +436,7 @@ _root.resize = function(_token_,_largura_,_altura_,dataid){
 			  	ws_id_ferramenta:"{WS_ID_FERRAMENTA}"
 			  }
 			}).done(function(data) {
-				$("#getThumb").attr("src","/admin/{PATH}/print_campos.php?ws_id_ferramenta={WS_ID_FERRAMENTA}")
+				$("#getThumb").attr("src","./{PATH}/print_campos.php?ws_id_ferramenta={WS_ID_FERRAMENTA}")
 				if(data=="sucesso"){
 					TopAlert({mensagem: "Campo redimencionado com sucesso!",type: 3})
 				}else{
@@ -474,7 +474,7 @@ _root.resize = function(_token_,_largura_,_altura_,dataid){
 			if(retorno==true){
 				if(data=="sucesso"){
 					TopAlert({mensagem: "Campo reposicionado com sucesso!",type: 3})
-					$("#getThumb").attr("src","/admin/{PATH}/print_campos.php?ws_id_ferramenta={WS_ID_FERRAMENTA}")
+					$("#getThumb").attr("src","./{PATH}/print_campos.php?ws_id_ferramenta={WS_ID_FERRAMENTA}")
 				}else{
 					TopAlert({mensagem: "Ops, houve uma falha ao reposicionar um campo!",type: 2})
 				}

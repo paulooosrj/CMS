@@ -1,11 +1,5 @@
 <?php
 	#####################################################  
-	# FORMATA O CAMINHO ROOT
-	#####################################################
-	$r                        = $_SERVER["DOCUMENT_ROOT"];
-	$_SERVER["DOCUMENT_ROOT"] = (substr($r, -1) == '/') ? substr($r, 0, -1) : $r;
-
-	#####################################################  
 	# DEFINE O PATH DO MÓDULO 
 	#####################################################
 	define("PATH", 'App/Modulos/_hd_');
@@ -28,7 +22,7 @@
 	# IMPORTA A CLASSE PADRÃO DO SISTEMA
 	#####################################################
 	ob_start();
-	include($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
+	include(__DIR__.'/../../Lib/class-ws-v1.php');
 	
 	#####################################################  
 	# CRIA SESSÃO

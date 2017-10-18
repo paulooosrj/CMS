@@ -1,7 +1,8 @@
 <?
 	error_reporting( E_ALL ); 
-	if(substr($_SERVER["DOCUMENT_ROOT"],-1)=='/'){$_SERVER["DOCUMENT_ROOT"]=substr($_SERVER["DOCUMENT_ROOT"],0,-1);}
-	include_once($_SERVER["DOCUMENT_ROOT"].'/admin/App/Lib/class-ws-v1.php');	
+
+
+	include_once(__DIR__.'/../../Lib/class-ws-v1.php');	
 
 ######################################### tabelas basicas necessárias #################################
 

@@ -2,7 +2,7 @@
 				/*############################################################################################################################################*/
 				//	DEFINIMOS O PATH PADRÃO DOS ARQUIVOS DE EDITOR DE TEXTO CKEDITOR
 				/*############################################################################################################################################*/
-				var CKEDITOR_BASEPATH = window.CKEDITOR_BASEPATH ='/admin/App/Vendor/CKeditor/';
+				var CKEDITOR_BASEPATH = window.CKEDITOR_BASEPATH ='./App/Vendor/CKeditor/';
 
 				//############################################################################################################################################
 				//#  PRELOADER  
@@ -11,73 +11,74 @@
 					manifest = [
 									//######################################################################################################################
 									//#  IMAGENS  
-									//######################################################################################################################									{src:"/admin/App/Templates/img/websheep/Splash.jpg",									id:"image", 		include:false},
-									{src:"/admin/App/Templates/img/websheep/SplashScreen.png",								id:"image", 		include:false},
-									{src:"/admin/App/Templates/img/websheep/icones_editor.png",								id:"image", 		include:false},
-									{src:"/admin/App/Templates/img/websheep/icons_topo_tools.png",							id:"image", 		include:false},
-									{src:"/admin/App/Templates/img/websheep/sem_img_G.jpg",									id:"image", 		include:false},
+									//######################################################################################################################									
+									{src:"./App/Templates/img/websheep/Splash.jpg",										id:"image", 		include:false},
+									{src:"./App/Templates/img/websheep/SplashScreen.png",								id:"image", 		include:false},
+									{src:"./App/Templates/img/websheep/icones_editor.png",								id:"image", 		include:false},
+									{src:"./App/Templates/img/websheep/icons_topo_tools.png",							id:"image", 		include:false},
+									{src:"./App/Templates/img/websheep/sem_img_G.jpg",									id:"image", 		include:false},
 									//######################################################################################################################
 									//#  CSS  
 									//######################################################################################################################
-									{src:"/admin/App/Templates/css/websheep/reset.css",										id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/websheep/funcionalidades.css",							id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/fontes/fonts.css",										id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/websheep/estrutura.min.css",								id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/websheep/desktop.min.css?v=0.1",							id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/websheep/theme_blue.min.css",							id:"CSS",			include:true},
-									{src:"/admin/App/Templates/css/jquery-ui/1.12.1/jquery-ui.min.css",						id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/chosen/chosen.css",										id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/cleditor/jquery.cleditor.css",							id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/perfect-scrollbar/perfect-scrollbar.min.css",			id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/textext/textext.plugin.tags.css",						id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/textext/textext.core.css",								id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/textext/textext.plugin.arrow.css",						id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/textext/textext.plugin.autocomplete.css",				id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/textext/textext.plugin.clear.css",						id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/textext/textext.plugin.focus.css",						id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/textext/textext.plugin.prompt.css",						id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/colorpicker/colorpicker.css",							id:"CSS", 			include:true},
-									{src:"/admin/App/Templates/css/colorpicker/layout.css?v=0.1",							id:"CSS", 			include:true},
-									{src:"/admin/App/Vendor/intro.js-2.5.0/introjs.min.css",								id:"CSS",			include:true},
+									{src:"./App/Templates/css/websheep/reset.css",										id:"CSS", 			include:true},
+									{src:"./App/Templates/css/websheep/funcionalidades.css",							id:"CSS", 			include:true},
+									{src:"./App/Templates/css/fontes/fonts.css",										id:"CSS", 			include:true},
+									{src:"./App/Templates/css/websheep/estrutura.min.css",								id:"CSS", 			include:true},
+									{src:"./App/Templates/css/websheep/desktop.min.css?v=0.1",							id:"CSS", 			include:true},
+									{src:"./App/Templates/css/websheep/theme_blue.min.css",							id:"CSS",			include:true},
+									{src:"./App/Templates/css/jquery-ui/1.12.1/jquery-ui.min.css",						id:"CSS", 			include:true},
+									{src:"./App/Templates/css/chosen/chosen.css",										id:"CSS", 			include:true},
+									{src:"./App/Templates/css/cleditor/jquery.cleditor.css",							id:"CSS", 			include:true},
+									{src:"./App/Templates/css/perfect-scrollbar/perfect-scrollbar.min.css",			id:"CSS", 			include:true},
+									{src:"./App/Templates/css/textext/textext.plugin.tags.css",						id:"CSS", 			include:true},
+									{src:"./App/Templates/css/textext/textext.core.css",								id:"CSS", 			include:true},
+									{src:"./App/Templates/css/textext/textext.plugin.arrow.css",						id:"CSS", 			include:true},
+									{src:"./App/Templates/css/textext/textext.plugin.autocomplete.css",				id:"CSS", 			include:true},
+									{src:"./App/Templates/css/textext/textext.plugin.clear.css",						id:"CSS", 			include:true},
+									{src:"./App/Templates/css/textext/textext.plugin.focus.css",						id:"CSS", 			include:true},
+									{src:"./App/Templates/css/textext/textext.plugin.prompt.css",						id:"CSS", 			include:true},
+									{src:"./App/Templates/css/colorpicker/colorpicker.css",							id:"CSS", 			include:true},
+									{src:"./App/Templates/css/colorpicker/layout.css?v=0.1",							id:"CSS", 			include:true},
+									{src:"./App/Vendor/intro.js-2.5.0/introjs.min.css",								id:"CSS",			include:true},
 									//######################################################################################################################
 									//#  AJAVASCRIPT  
 									//######################################################################################################################
-									{src:"/admin/App/Vendor/jquery/2.2.0/jquery.min.js", 									id:"javascript", 	include:true},
-									{src:"/admin/App/Vendor/intro.js-2.5.0/intro.min.js",									id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/jquery-ui/1.10.3/jquery.min.js", 								id:"javascript", 	include:true},
-									{src:"/admin/App/Vendor/BrowserDetect/BrowserDetect.min.js",							id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/perfect-scrollbar/perfect-scrollbar.min.js", 					id:"javascript", 	include:true},
-									{src:"/admin/App/Vendor/chosen/chosen.jquery.js", 										id:"javascript", 	include:true},
-									{src:"/admin/App/Vendor/dataTableJquery/data-table.jquery.min.js",						id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/RightClick/rightClick.min.js",									id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/jquery-animate/jquery.animate-colors.min.js",					id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/AjaxForm/AjaxForm.min.js",										id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/jquery-form/jquery.form.js",									id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/highcharts/stock/highstock.js",									id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/highcharts/stock/modules/exporting.js",							id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/highcharts/highcharts.js",										id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/highcharts/modules/exporting.js",								id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/highcharts/highcharts-more.js",									id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/colorpicker/colorpicker.min.js",								id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/colorpicker/eye.min.js",										id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/colorpicker/utils.min.js",										id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/colorpicker/layout.min.js",										id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/textext/textext.core.min.js",									id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/textext/textext.plugin.tags.min.js",							id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/textext/textext.plugin.suggestions.min.js",						id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/textext/textext.plugin.prompt.min.js",							id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/textext/textext.plugin.focus.min.js",							id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/textext/textext.plugin.filter.min.js",							id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/textext/textext.plugin.clear.min.js",							id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/textext/textext.plugin.autocomplete.min.js",					id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/textext/textext.plugin.arrow.min.js",							id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/textext/textext.plugin.ajax.min.js",							id:"javascript",	include:true},
-									{src:"/admin/App/Vendor/CKeditor/ckeditor.js",											id:"javascript",	include:true},
-									// {src:"/admin/App/Vendor/artyom/artyom.min.js",										id:"javascript",	include:true},
-									// {src:"/admin/App/Templates/js/websheep/ws-dolly.js", 								id:"javascript", 	include:true},
-									{src:"/admin/App/Templates/js/websheep/funcionalidades.js", 							id:"javascript", 	include:true},
-									{src:"/admin/App/Templates/js/websheep/functionsws.js", 								id:"javascript", 	include:true},
-									{src:"/admin/App/Vendor/require/require.js", 											id:"javascript", 	include:true},
+									{src:"./App/Vendor/jquery/2.2.0/jquery.min.js", 									id:"javascript", 	include:true},
+									{src:"./App/Vendor/intro.js-2.5.0/intro.min.js",									id:"javascript",	include:true},
+									{src:"./App/Vendor/jquery-ui/1.10.3/jquery.min.js", 								id:"javascript", 	include:true},
+									{src:"./App/Vendor/BrowserDetect/BrowserDetect.min.js",							id:"javascript",	include:true},
+									{src:"./App/Vendor/perfect-scrollbar/perfect-scrollbar.min.js", 					id:"javascript", 	include:true},
+									{src:"./App/Vendor/chosen/chosen.jquery.js", 										id:"javascript", 	include:true},
+									{src:"./App/Vendor/dataTableJquery/data-table.jquery.min.js",						id:"javascript",	include:true},
+									{src:"./App/Vendor/RightClick/rightClick.min.js",									id:"javascript",	include:true},
+									{src:"./App/Vendor/jquery-animate/jquery.animate-colors.min.js",					id:"javascript",	include:true},
+									{src:"./App/Vendor/AjaxForm/AjaxForm.min.js",										id:"javascript",	include:true},
+									{src:"./App/Vendor/jquery-form/jquery.form.js",									id:"javascript",	include:true},
+									{src:"./App/Vendor/highcharts/stock/highstock.js",									id:"javascript",	include:true},
+									{src:"./App/Vendor/highcharts/stock/modules/exporting.js",							id:"javascript",	include:true},
+									{src:"./App/Vendor/highcharts/highcharts.js",										id:"javascript",	include:true},
+									{src:"./App/Vendor/highcharts/modules/exporting.js",								id:"javascript",	include:true},
+									{src:"./App/Vendor/highcharts/highcharts-more.js",									id:"javascript",	include:true},
+									{src:"./App/Vendor/colorpicker/colorpicker.min.js",								id:"javascript",	include:true},
+									{src:"./App/Vendor/colorpicker/eye.min.js",										id:"javascript",	include:true},
+									{src:"./App/Vendor/colorpicker/utils.min.js",										id:"javascript",	include:true},
+									{src:"./App/Vendor/colorpicker/layout.min.js",										id:"javascript",	include:true},
+									{src:"./App/Vendor/textext/textext.core.min.js",									id:"javascript",	include:true},
+									{src:"./App/Vendor/textext/textext.plugin.tags.min.js",							id:"javascript",	include:true},
+									{src:"./App/Vendor/textext/textext.plugin.suggestions.min.js",						id:"javascript",	include:true},
+									{src:"./App/Vendor/textext/textext.plugin.prompt.min.js",							id:"javascript",	include:true},
+									{src:"./App/Vendor/textext/textext.plugin.focus.min.js",							id:"javascript",	include:true},
+									{src:"./App/Vendor/textext/textext.plugin.filter.min.js",							id:"javascript",	include:true},
+									{src:"./App/Vendor/textext/textext.plugin.clear.min.js",							id:"javascript",	include:true},
+									{src:"./App/Vendor/textext/textext.plugin.autocomplete.min.js",					id:"javascript",	include:true},
+									{src:"./App/Vendor/textext/textext.plugin.arrow.min.js",							id:"javascript",	include:true},
+									{src:"./App/Vendor/textext/textext.plugin.ajax.min.js",							id:"javascript",	include:true},
+									{src:"./App/Vendor/CKeditor/ckeditor.js",											id:"javascript",	include:true},
+									// {src:"./App/Vendor/artyom/artyom.min.js",										id:"javascript",	include:true},
+									// {src:"./App/Templates/js/websheep/ws-dolly.js", 								id:"javascript", 	include:true},
+									{src:"./App/Templates/js/websheep/funcionalidades.js", 							id:"javascript", 	include:true},
+									{src:"./App/Templates/js/websheep/functionsws.js", 								id:"javascript", 	include:true},
+									{src:"./App/Vendor/require/require.js", 											id:"javascript", 	include:true},
 								];
 					preload = new createjs.LoadQueue (false ,null, true);
 					preload.on("fileload",	onLoad);
@@ -92,8 +93,8 @@
 		        		window.loader_obj = event.item.src;
 		        		window.loader_ext = event.item.id;
 		        		window.loader_tag = event.result;
-		        		if(event.item.src=="/admin/App/Templates/img/websheep/SplashScreen.png"){	
-		        			$("#preloadWS #splashWS").css("background-image","url(/admin/App/Templates/img/websheep/SplashScreen.png)");
+		        		if(event.item.src=="./App/Templates/img/websheep/SplashScreen.png"){	
+		        			$("#preloadWS #splashWS").css("background-image","url(./App/Templates/img/websheep/SplashScreen.png)");
 		        		}
 						if((event.item.id=='javascript' || event.item.id=='CSS') && event.item.include== true){$('html head').prepend(event.result);}
 						if(event.item.id=='image'){}
@@ -140,7 +141,7 @@
 						$.ajax({
 							beforeSend:function(){$("#menu_tools").html("");},
 							type: "POST",
-							url: "/admin/App/Modulos/_tools_/functions.php",
+							url: "./App/Modulos/_tools_/functions.php",
 							data:{"function":"refreshMenuDesktop"}
 						}).done(function(data) {
 							$("#menu_tools").html(data);
@@ -172,7 +173,7 @@
 												return false;
 											}
 											confirma({
-												conteudo:title+"</b><div class=\'preloaderupdate\' style=\'position: absolute;width: 30px;height: 30px;left: 230px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+												conteudo:title+"</b><div class=\'preloaderupdate\' style=\'position: absolute;width: 30px;height: 30px;left: 230px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 												drag:false,
 												bot1:0,bot2:0,
 												posFn:function(){
@@ -331,13 +332,13 @@
 											$.ajax({
 												type: "POST",
 												async: true,
-												url: "/admin/App/Modulos/login/functions.php",
+												url: "./App/Modulos/login/functions.php",
 												data:{'function':'logout'},
 												beforeSend: function() {
 													$("#iniciarsessao").hide('fast')
 													$("#iniciarsessao_disabled").show('fast')
 													setTimeout(function(){
-														confirma({width: "auto", conteudo: "  {dashboard_wait}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 })
+														confirma({width: "auto", conteudo: "  {dashboard_wait}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 })
 													},1000)
 												}
 											}).done(function(e){
@@ -394,22 +395,22 @@
 				 if(typeof(directAccess) !== 'undefined' && directAccess != null && typeof directAccess.id_tool == 'number'){
 				 	var linkAccess  = null;
 				 	if(directAccess.type_obj=='item' && directAccess.id_item==0){
-					 	var linkAccess = "/admin/App/Modulos/_modulo_/index.php?back=false&ws_id_ferramenta="+directAccess.id_tool;
+					 	var linkAccess = "./App/Modulos/_modulo_/index.php?back=false&ws_id_ferramenta="+directAccess.id_tool;
 				 	}
 				 	if(directAccess.type_obj=='detail' && directAccess.id_item>0){
-					 	var linkAccess = "/admin/App/Modulos/_modulo_/detalhes.php?back=false&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item;
+					 	var linkAccess = "./App/Modulos/_modulo_/detalhes.php?back=false&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item;
 				 	}
 				 	if(directAccess.type_obj=='img' && directAccess.id_item>0){
-					 	var linkAccess = "/admin/App/Modulos/_modulo_/imagens.php?back=false&ws_nivel=-1&id_cat=0&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item;
+					 	var linkAccess = "./App/Modulos/_modulo_/imagens.php?back=false&ws_nivel=-1&id_cat=0&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item;
 				 	}
 				 	if(directAccess.type_obj=='gal' && directAccess.id_item>0){
-					 	var linkAccess = "/admin/App/Modulos/_modulo_/galerias.php?back=false&ws_nivel=-1&id_cat=0&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item;
+					 	var linkAccess = "./App/Modulos/_modulo_/galerias.php?back=false&ws_nivel=-1&id_cat=0&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item;
 				 	}
 				 	if(directAccess.type_obj=='img_gal' && directAccess.id_item>0 && directAccess.id_gal>0){
-					 	var linkAccess = "/admin/App/Modulos/_modulo_/galeria_fotos.php?back=false&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item+"&id_galeria="+directAccess.id_gal;
+					 	var linkAccess = "./App/Modulos/_modulo_/galeria_fotos.php?back=false&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item+"&id_galeria="+directAccess.id_gal;
 				 	}
 				 	if(directAccess.type_obj=='files' && directAccess.id_item>0){
-					 	var linkAccess = "/admin/App/Modulos/_modulo_/files.php?direct=true&ws_nivel=-1&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item;
+					 	var linkAccess = "./App/Modulos/_modulo_/files.php?direct=true&ws_nivel=-1&ws_id_ferramenta="+directAccess.id_tool+"&id_item="+directAccess.id_item;
 				 	}
 				 	if(linkAccess!=null){
 						confirma({

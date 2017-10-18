@@ -1,12 +1,12 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
+include_once(__DIR__.'/../../Lib/class-ws-v1.php');
 
 function templateUser($_id_,$_nome_,$_sobrenome_,$_email_,$_thumb_){
 
 	$template="";
 	$template .= '<li class="parceirobase bg06 w2" id="'.$_id_.'">';
 	if($_thumb_==""){
-		$template .= '<div class="thumbuser bg02"><img src="/admin/App/Templates/img/websheep/Sem_avatar.png" /></div>';
+		$template .= '<div class="thumbuser bg02"><img src="./App/Templates/img/websheep/Sem_avatar.png" /></div>';
 	}else{
 		$template .= '<div class="thumbuser bg02"><img src="./App/Modulos/usuarios/upload/'.$_thumb_.'" width="65" height="39" /></div>';
 	}

@@ -1,6 +1,6 @@
 <!-- BEGIN CAT_DETAILS -->
 <script type="text/javascript">
-	include_css("/admin/App/Templates/css/websheep/modulos/_modulo_/detalhes.min.css","css_mod","All");
+	include_css("./App/Templates/css/websheep/modulos/_modulo_/detalhes.min.css","css_mod","All");
 </script>
 <style type="text/css">.iframe #topoModulo {display: none;}</style>
 <div id="topoModulo" class="TitTop bg05 w1b">Categoria</div>
@@ -13,14 +13,14 @@
 		</div>
 		<form name="formUpload" id="formUpload">
 			<div id="bt_SalvarItem" class="bg02 w1">
-				<img src="/admin/App/Templates/img/websheep/disk-black.png"/> Salvar categoria
+				<img src="./App/Templates/img/websheep/disk-black.png"/> Salvar categoria
 			</div>
 			<div id="bt_voltar_cat" class="bg02 w1">
-				<img src="/admin/App/Templates/img/websheep/arrow-180.png" style="position: relative;float: left;top: 0px;margin-right: 10px;"/> Voltar
+				<img src="./App/Templates/img/websheep/arrow-180.png" style="position: relative;float: left;top: 0px;margin-right: 10px;"/> Voltar
 			</div>
 			<script>
 				$("#bt_voltar_cat").unbind("click").click(function(){
-					confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+					confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 					$("#conteudo").load("./App/Modulos/_modulo_/categorias.php?LIMIT={LIMIT}&PAGE={PAGE}&token_group={TOKEN_GROUP}&ws_id_ferramenta={WS_ID_FERRAMENTA}",function(){
 						$("#ws_confirm").remove();
 						$("#body").removeClass("scrollhidden");
@@ -46,9 +46,9 @@
 	<form id="form_dados_geral">
 		<div class="thumbmail" data-mysql="teste_thumb" style="width:281px;">
 			<div class="combo_upload" style="display: none; opacity: 1;">
-				<div class="pc" legenda="Meu computador">	<img src="/admin/App/Templates/img/websheep/up_m.png"></div>
-				<div class="bb" legenda="Na biblioteca">	<img src="/admin/App/Templates/img/websheep/folder_m.png"></div>
-				<div class="excl" legenda="Excluir">		<img src="/admin/App/Templates/img/websheep/delete.png" style="width:25px;margin-top:-1px;"></div>
+				<div class="pc" legenda="Meu computador">	<img src="./App/Templates/img/websheep/up_m.png"></div>
+				<div class="bb" legenda="Na biblioteca">	<img src="./App/Templates/img/websheep/folder_m.png"></div>
+				<div class="excl" legenda="Excluir">		<img src="./App/Templates/img/websheep/delete.png" style="width:25px;margin-top:-1px;"></div>
 			</div>
 			<img class="thumb_img" src="/ws-img/281/0/100/{CAT_AVATAR}">
 		</div>
@@ -146,7 +146,7 @@
 								  type: "POST",
 								  data: {function:"reloadThumbCategoria",idCat:"{ID_CAT}",avatar:"null"},
 								  url: "./{PATH}/functions.php",
-								  beforeSend:function(){confirma({width:"auto",conteudo:"Excluindo categoria...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+								  beforeSend:function(){confirma({width:"auto",conteudo:"Excluindo categoria...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
 								}).done(function(e) {
 										$("#ws_confirm").css("line-height","20px");
 										$("#ws_confirm").remove();
@@ -178,7 +178,7 @@
 					posFn:function(){},
 					onSelect:function(e){
 						$.ajax({
-						  beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+						  beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 						  cache: false,
 						  type: "POST",
 						  url: "{PATH}/functions.php",
@@ -220,7 +220,7 @@
 								  type: "POST",
 								  data: {function:"ExcluiCategoria",id_cat:"{ID_CAT}"},
 								  url: "./{PATH}/functions.php",
-								  beforeSend:function(){confirma({width:"auto",conteudo:"  Excluindo categoria...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+								  beforeSend:function(){confirma({width:"auto",conteudo:"  Excluindo categoria...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
 								}).done(function(e) {
 										$("#ws_confirm").css("line-height","20px");
 										$("#ws_confirm").remove();
@@ -262,7 +262,7 @@
 				CKEDITOR.replace("textarea",$config);			
 					$("#bt_SalvarItem").unbind("click tap press").bind("click tap press",function(){
 						$.ajax({
-						  beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+						  beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 						  cache: false,
 						  type: "POST",
 						  url: "{PATH}/functions.php",

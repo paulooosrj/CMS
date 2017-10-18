@@ -1,7 +1,7 @@
 <?
 
 ob_start();
-include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
+include_once(__DIR__.'/../../Lib/class-ws-v1.php');
 $session = new session();
 ob_end_clean();
 

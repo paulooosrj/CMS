@@ -1,6 +1,5 @@
 <? 
-	$_SERVER["DOCUMENT_ROOT"] = (substr($_SERVER["DOCUMENT_ROOT"], -1) == '/') ? substr($_SERVER["DOCUMENT_ROOT"], 0, -1) : $_SERVER["DOCUMENT_ROOT"];
-	include_once($_SERVER["DOCUMENT_ROOT"].'/ws-config.php');
+	include_once(ROOT_DOCUMENT.'/ws-config.php');
 	$php_version = file_get_contents(ROOT_ADMIN.'/App/Templates/txt/ws-php-version.txt');
 	##########################################################################################
 	#  VERSÃO DO SISTEMA   
@@ -15,15 +14,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<!-- <link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/global.css" /> -->
-<link	type="text/css" media="all"		rel="stylesheet" 						href="/admin/App/Templates/css/websheep/estrutura.min.css" />
-<link	type="text/css" media="all"		rel="stylesheet" 						href="/admin/App/Templates/css/websheep/desktop.min.css" />
-<link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/install.css" />
-<link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/funcionalidades.css" />
-<link	type="text/css" media="all"		rel="stylesheet" 						href="/admin/App/Templates/css/fontes/fonts.css" />
-<link	type="text/css" media="all"		rel="stylesheet"						href="/admin/App/Templates/css/websheep/theme_blue.min.css?v=1" />
-<script type = 'text/javascript' 												src="/admin/App/Vendor/jquery/2.2.0/jquery.min.js"></script>
-<script type = 'text/javascript' 												src="/admin/App/Templates/js/websheep/funcionalidades.js"></script>
+<!-- <link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/global.css" /> -->
+<link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/websheep/estrutura.min.css" />
+<link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/websheep/desktop.min.css" />
+<link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/install.css" />
+<link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/funcionalidades.css" />
+<link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/fontes/fonts.css" />
+<link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/theme_blue.min.css?v=1" />
+<script type = 'text/javascript' 												src="./App/Vendor/jquery/2.2.0/jquery.min.js"></script>
+<script type = 'text/javascript' 												src="./App/Templates/js/websheep/funcionalidades.js"></script>
 
 
 <script type = 'text/javascript'>
@@ -34,7 +33,7 @@ $(document).ready(function(){
 		if($("#eu_aceito").val()=='1'){
 			confirma({
 				width:"auto",
-				conteudo:"  Atualizando o sistema...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+				conteudo:"  Atualizando o sistema...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 				drag:false,
 				bot1:0,
 				bot2:0,
@@ -44,7 +43,7 @@ $(document).ready(function(){
 					$.ajax({
 						type: "POST",
 						cache: false,
-						url: "/admin/App/Modulos/_tools_/functions.php",
+						url: "./App/Modulos/_tools_/functions.php",
 						data: {function:"installSQLInit"},
 						error: function (xhr, ajaxOptions, thrownError) {
 							alert(xhr.status);
@@ -73,7 +72,7 @@ $(document).ready(function(){
 			<div id="palco" class="w1" >
 				<div id='step0' style="position: relative;float: left;text-align: center;">
 					<div id="resposta"></div>
-					<img src="/admin/App/Templates/img/websheep/logo_ws_install.jpg" style="">
+					<img src="./App/Templates/img/websheep/logo_ws_install.jpg" style="">
 					<div class="c"></div>
 					<strong style="font-family: 'Titillium Web', sans-serif;font-size: 30px;line-height;font-weight: 700;margin: 20px 0px;position: relative;float: left;width: 100%;">Bem vindo ao WebSheep <?=$ws_version->version?></strong>
 					<br>

@@ -188,7 +188,7 @@ function enviaemail(){
 	}
 }
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
+include_once(__DIR__.'/../../Lib/class-ws-v1.php');
 _exec($_REQUEST['function']);
 ob_end_flush();
 ?>

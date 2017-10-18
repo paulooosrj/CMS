@@ -6,7 +6,7 @@
 	ini_set('memory_limit', $memory_limit);
 	ini_set('memory_limit', '-1');
 	
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
+	include_once(__DIR__.'/../../Lib/class-ws-v1.php');
 	
 	$user = new Session();
 

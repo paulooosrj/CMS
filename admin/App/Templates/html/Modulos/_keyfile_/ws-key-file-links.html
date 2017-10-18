@@ -3,7 +3,7 @@
 window.id_item_selected		='';
 var barra_progresso 		= '';
 var canvas_barra_progresso 	= '';
-include_css ('/admin/App/Templates/css/websheep/modulos/_keyfile_/style.min.css','css_mod','All');
+include_css ('./App/Templates/css/websheep/modulos/_keyfile_/style.min.css','css_mod','All');
 </script>
 <div id="topoModulo" class="TitTop bg05 w1b">{keyFile_links_mainTitle}<span style="color:#FFF;">{FILENAME}</span></div>
 	<div id="topo_upload" class="bg01" >
@@ -60,7 +60,7 @@ function reloadFunctions(){
 
 		$.ajax({
 			beforeSend: function() {}
-			,cache: false, type: "POST", url: "/admin/App/Modulos/_keyfile_/functions.php",
+			,cache: false, type: "POST", url: "./App/Modulos/_keyfile_/functions.php",
 			data: {'function': "getInfoLink", idLink: idLink, }
 		}).done(function(e) {
 			confirma({
@@ -76,7 +76,7 @@ function reloadFunctions(){
 					$(".icon-refresh")						.unbind("click tap press").bind('click tap press',function(){
 							$.ajax({
 								beforeSend: function() {}
-								,cache: false, type: "POST", url: "/admin/App/Modulos/_keyfile_/functions.php",
+								,cache: false, type: "POST", url: "./App/Modulos/_keyfile_/functions.php",
 								data: {'function': "AtualizaKey", idLink: idLink, }
 							}).done(function(e) {
 								if(e=="falha"){
@@ -97,10 +97,10 @@ function reloadFunctions(){
 					$.ajax({
 						beforeSend: function() {
 							setTimeout(function(){
-								confirma({width: "auto", conteudo: "  {keyFile_links_modal_save_saving}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) 
+								confirma({width: "auto", conteudo: "  {keyFile_links_modal_save_saving}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) 
 							},500)
 						},
-						cache: false, type: "POST", url: "/admin/App/Modulos/_keyfile_/functions.php",
+						cache: false, type: "POST", url: "./App/Modulos/_keyfile_/functions.php",
 						data: {
 							function: "salvaLink",
 							form: $("#formLink").serialize(),
@@ -138,7 +138,7 @@ function reloadFunctions(){
 				posFn:function(){},
 				newFun:function(){
 					$.ajax({
-						beforeSend: function() {confirma({width: "auto", conteudo: "  {keyFile_links_modal_delete_before}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+						beforeSend: function() {confirma({width: "auto", conteudo: "  {keyFile_links_modal_delete_before}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
 						cache: false, type: "POST", url: "App/Modulos/_keyfile_/functions.php",
 						data: {
 							function: "exclLink",
@@ -157,7 +157,7 @@ function reloadFunctions(){
 
 	$("#bt_Add_Galeria").unbind('click').click(function(){
 		$.ajax({
-			beforeSend: function() {confirma({width: "auto", conteudo: "  {keyFile_links_modal_addLink_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+			beforeSend: function() {confirma({width: "auto", conteudo: "  {keyFile_links_modal_addLink_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
 			cache: false, type: "POST", url: "App/Modulos/_keyfile_/functions.php",
 			data: {
 				function: "AddLink",
@@ -175,7 +175,7 @@ function reloadFunctions(){
 
 
 	$("#bt_Voltar_Galeria").unbind('click').click(function(){
-		confirma({width: "auto", conteudo: "  {keyFile_links_backButtonBefore}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0})
+		confirma({width: "auto", conteudo: "  {keyFile_links_backButtonBefore}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0})
 		$("#conteudo").load("{PATH}/index.php",function(){$("#ws_confirm").remove(); $("#body").removeClass("scrollhidden"); $("*").removeClass("blur"); });
 	});
 	setTimeout(function(){

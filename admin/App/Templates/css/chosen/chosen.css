@@ -89,7 +89,7 @@
   display: block;
   width: 12px;
   height: 12px;
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') -42px 1px no-repeat;
+  background: url('./../../img/websheep/chosen-sprite.png') -42px 1px no-repeat;
   font-size: 1px;
 }
 .chosen-container-single .chosen-single abbr:hover {
@@ -123,12 +123,12 @@
   height: auto;
   outline: 0;
   border: 1px solid #aaaaaa;
-  background: white url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat 100% -20px;
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat 100% -20px, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(1%, #eeeeee), color-stop(15%, white));
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat 100% -20px, -webkit-linear-gradient(#eeeeee 1%, white 15%);
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat 100% -20px, -moz-linear-gradient(#eeeeee 1%, white 15%);
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat 100% -20px, -o-linear-gradient(#eeeeee 1%, white 15%);
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat 100% -20px, linear-gradient(#eeeeee 1%, white 15%);
+  background: white url('./../../img/websheep/chosen-sprite.png') no-repeat 100% -20px;
+  background: url('./../../img/websheep/chosen-sprite.png') no-repeat 100% -20px, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(1%, #eeeeee), color-stop(15%, white));
+  background: url('./../../img/websheep/chosen-sprite.png') no-repeat 100% -20px, -webkit-linear-gradient(#eeeeee 1%, white 15%);
+  background: url('./../../img/websheep/chosen-sprite.png') no-repeat 100% -20px, -moz-linear-gradient(#eeeeee 1%, white 15%);
+  background: url('./../../img/websheep/chosen-sprite.png') no-repeat 100% -20px, -o-linear-gradient(#eeeeee 1%, white 15%);
+  background: url('./../../img/websheep/chosen-sprite.png') no-repeat 100% -20px, linear-gradient(#eeeeee 1%, white 15%);
   font-size: 1em;
   font-family: sans-serif;
   line-height: normal;
@@ -282,7 +282,7 @@
   display: block;
   width: 12px;
   height: 12px;
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') -42px 1px no-repeat;
+  background: url('./../../img/websheep/chosen-sprite.png') -42px 1px no-repeat;
   font-size: 1px;
 }
 
@@ -420,12 +420,12 @@
 }
 .chosen-rtl .chosen-search input[type="text"] {
   padding: 4px 5px 4px 20px;
-  background: white url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat -30px -20px;
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat -30px -20px, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(1%, #eeeeee), color-stop(15%, white));
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat -30px -20px, -webkit-linear-gradient(#eeeeee 1%, white 15%);
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat -30px -20px, -moz-linear-gradient(#eeeeee 1%, white 15%);
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat -30px -20px, -o-linear-gradient(#eeeeee 1%, white 15%);
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat -30px -20px, linear-gradient(#eeeeee 1%, white 15%);
+  background: white url('./../../img/websheep/chosen-sprite.png') no-repeat -30px -20px;
+  background: url('./../../img/websheep/chosen-sprite.png') no-repeat -30px -20px, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(1%, #eeeeee), color-stop(15%, white));
+  background: url('./../../img/websheep/chosen-sprite.png') no-repeat -30px -20px, -webkit-linear-gradient(#eeeeee 1%, white 15%);
+  background: url('./../../img/websheep/chosen-sprite.png') no-repeat -30px -20px, -moz-linear-gradient(#eeeeee 1%, white 15%);
+  background: url('./../../img/websheep/chosen-sprite.png') no-repeat -30px -20px, -o-linear-gradient(#eeeeee 1%, white 15%);
+  background: url('./../../img/websheep/chosen-sprite.png') no-repeat -30px -20px, linear-gradient(#eeeeee 1%, white 15%);
   direction: rtl;
 }
 .chosen-rtl.chosen-container-single .chosen-single div b {
@@ -438,7 +438,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  background: url('/admin/App/Templates/img/websheep/chosen-sprite.png') no-repeat 0px 2px;
+  background: url('./../../img/websheep/chosen-sprite.png') no-repeat 0px 2px;
 }
 #chosen_select_chosen.chosen-container-active.chosen-with-drop .chosen-single div b {
   background-position: -18px 2px !important;

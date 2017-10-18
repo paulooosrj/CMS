@@ -1,4 +1,0 @@
-<IfModule mod_rewrite.c>
-AddType application/x-httpd-php .conf
-RewriteEngine off
-</IfModule>

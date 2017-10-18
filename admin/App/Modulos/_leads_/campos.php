@@ -28,7 +28,7 @@
 	# IMPORTA A CLASSE PADRÃO DO SISTEMA
 	#####################################################
 	ob_start();
-	include($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
+	include(__DIR__.'/../../Lib/class-ws-v1.php');
 	
 	#####################################################  
 	# VERIFICA SE O USUÁRIO ESTÁ LOGADO OU AS SESSÕES E COOKIES ESTÃO EM ORDEM

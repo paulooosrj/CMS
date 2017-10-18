@@ -3,7 +3,7 @@
 	window.id_item_selected='';
 	var barra_progresso = '';
 	var canvas_barra_progresso = '';
-	include_css ('/admin/App/Templates/css/websheep/modulos/_include_JS_CSS_/style.min.css','css_mod','All');
+	include_css ('./App/Templates/css/websheep/modulos/_include_JS_CSS_/style.min.css','css_mod','All');
 </script>
 <div id="topoModulo" class="TitTop bg05 w1b">{includeJsCss_index_title}</div>
 	<div id="palco" class="palco_01" >
@@ -28,7 +28,7 @@ function reloadFunctions(){
 	$(".editar").unbind('click tap press').bind("click tap press",function(e){
 		var Path 		= $(this).parent().find('.urlPath').text();
 		var idPath 		= $(this).parent().parent().data('id');
-		confirma({width:"auto",conteudo:"  {includeJsCss_index_modal_edit_access}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
+		confirma({width:"auto",conteudo:"  {includeJsCss_index_modal_edit_access}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
 		$( "#conteudo" ).load("./App/Modulos/_include_JS_CSS_/urlsCadastradas.php?type={TYPE}&Path="+Path+"&idPath="+idPath, function( response, status, xhr ) {
 			$("#ws_confirm").remove();
 			$("#body").removeClass("scrollhidden");
@@ -50,7 +50,7 @@ function reloadFunctions(){
 			newFun:function(){
 				$.ajax({
 				  type: "POST",
-				  url: "/admin/App/Modulos/_URL_amigavel/functions.php",
+				  url: "./App/Modulos/_URL_amigavel/functions.php",
 				  data: { function:"excluiRegistro",idPath:idPath}
 				}).done(function(data) {
 					out(data);
@@ -64,7 +64,7 @@ function reloadFunctions(){
 			onCancel:function(){
 				$.ajax({
 				  type: "POST",
-				  url: "/admin/App/Modulos/_URL_amigavel/functions.php",
+				  url: "./App/Modulos/_URL_amigavel/functions.php",
 				  data: { function:"excluiRegistroFile",id_include:id_include}
 				}).done(function(data) {
 					out(data);

@@ -2,7 +2,7 @@
 	############################################################################
 	# IMPORTA A CLASSE PADRÃO DO WEBSHEEP
 	############################################################################
-	include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
+	include_once(__DIR__.'/../../Lib/class-ws-v1.php');
 
 	############################################################################
 	# INICIAMOS A SESSÃO
@@ -117,21 +117,21 @@
 	############################################################################
 	if($_FERRAMENTA_['_niveis_']== -1 && $_CAMPOS_->_num_rows==1 && $_CAMPOS_->fetch_array[0]['type']=='bt_fotos'){
 		echo '<script type="text/javascript">
-				include_css ("/admin/App/Templates/css/websheep/modulos/_modulo_/imagens.min.css?v='.md5(uniqid(rand(), true)).'","css_mod","All");
+				include_css ("./App/Templates/css/websheep/modulos/_modulo_/imagens.min.css?v='.md5(uniqid(rand(), true)).'","css_mod","All");
 				$("#conteudo").load("./'._PATH_.'/imagens.php?token_group='.$session->get('token_group').'&ws_id_ferramenta='.$_GET['ws_id_ferramenta'].'&back=false&id_item=1&ws_nivel=-1&id_cat=1");
 			</script>';exit;
 		exit;
 
 	}elseif($_FERRAMENTA_['_niveis_']== -1 && $_CAMPOS_->_num_rows==1 && $_CAMPOS_->fetch_array[0]['type']=='bt_galerias'){
 		echo '<script type="text/javascript">
-				include_css ("/admin/App/Templates/css/websheep/modulos/_modulo_/galerias.css?v='.md5(uniqid(rand(), true)).'","css_mod","All");
+				include_css ("./App/Templates/css/websheep/modulos/_modulo_/galerias.css?v='.md5(uniqid(rand(), true)).'","css_mod","All");
 				$("#conteudo").load("./'._PATH_.'/galerias.php?token_group='.$session->get('token_group').'&ws_id_ferramenta='.$_GET['ws_id_ferramenta'].'&back=false&id_item=1&ws_nivel=-1");
 			</script>';exit;
 		exit;
 
 	}elseif($_FERRAMENTA_['_niveis_']== -1 && $_CAMPOS_->_num_rows==1 && $_CAMPOS_->fetch_array[0]['type']=='bt_files'){
 		echo '<script type="text/javascript">
-				include_css ("/admin/App/Templates/css/websheep/modulos/_modulo_/style_files.min.css?v='.md5(uniqid(rand(), true)).'","css_mod","All");
+				include_css ("./App/Templates/css/websheep/modulos/_modulo_/style_files.min.css?v='.md5(uniqid(rand(), true)).'","css_mod","All");
 				$("#conteudo").load("./'._PATH_.'/files.php?token_group='.$session->get('token_group').'&ws_id_ferramenta='.$_GET['ws_id_ferramenta'].'&back=false&id_item=1&ws_nivel=-1");
 			</script>';exit;
 		exit;
@@ -144,7 +144,7 @@
 
 	}elseif(isset($_GET['edita']) && $_GET['edita']=='cat'){
 		echo '<script type="text/javascript">
-				include_css ("/admin/App/Templates/css/websheep/modulos/_modulo_/style.css?v='.md5(uniqid(rand(), true)).'","css_mod","All");
+				include_css ("./App/Templates/css/websheep/modulos/_modulo_/style.css?v='.md5(uniqid(rand(), true)).'","css_mod","All");
 				$("#conteudo").load("./'._PATH_.'/categorias.php?token_group='.$session->get('token_group').'&ws_id_ferramenta='.$_GET['ws_id_ferramenta'].'&id_cat=0&ws_nivel=0");
 			</script>';exit;
 		exit;

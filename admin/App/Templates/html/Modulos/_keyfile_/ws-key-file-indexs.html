@@ -3,7 +3,7 @@
 	window.id_item_selected		='';
 	var barra_progresso 		= '';
 	var canvas_barra_progresso 	= '';
-	include_css('/admin/App/Templates/css/websheep/modulos/_keyfile_/newItens.min.css','css_mod','All');
+	include_css('./App/Templates/css/websheep/modulos/_keyfile_/newItens.min.css','css_mod','All');
 </script>
 <div id="topoModulo" class="TitTop bg05 w1b">{keyFile_index_mainTitle}</div>
 	<div id="palco" class="palco_01"  style="padding-bottom: 30px;">
@@ -26,7 +26,7 @@
 					<td>{LI_SAVED}</td>
 					<td id='{LI_ID}'>
 							<div class='combo'>
-								<img data-tokenfile='{LI_TOKEN_FILE}' legenda='{keyFile_index_edit}'  style='cursor:pointer;' class='editar' src='/admin/App/Templates/img/websheep/layer--pencil.png'/>
+								<img data-tokenfile='{LI_TOKEN_FILE}' legenda='{keyFile_index_edit}'  style='cursor:pointer;' class='editar' src='./App/Templates/img/websheep/layer--pencil.png'/>
 							</div>
 						</td>
 					</tr>
@@ -65,7 +65,7 @@
 			}
 			$('#palco td .editar').unbind('click').bind("click",function(){
 					var tokenfile = $(this).data('tokenfile');
-					confirma({width:"auto",conteudo:"{keyFile_index_modal_loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+					confirma({width:"auto",conteudo:"{keyFile_index_modal_loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 					$("#conteudo").load("./{PATH}/links.php?tokenfile="+tokenfile,function(){
 					$("#ws_confirm").remove();
 					$("#body").removeClass("scrollhidden");

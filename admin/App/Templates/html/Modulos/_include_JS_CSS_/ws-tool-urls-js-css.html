@@ -3,7 +3,7 @@
 	window.id_item_selected		= '';
 	var barra_progresso 		= '';
 	var canvas_barra_progresso 	= '';
-	include_css ('/admin/App/Templates/css/websheep/modulos/_include_JS_CSS_/style.min.css','css_mod','All');
+	include_css ('./App/Templates/css/websheep/modulos/_include_JS_CSS_/style.min.css','css_mod','All');
 </script>
 <style type="text/css">
 	  .ui-state-highlight { 
@@ -85,7 +85,7 @@ function OrdenaItem(){
 			$.ajax({
 			  type: "POST",
 			  url: "./{PATH}/functions.php",
-			  beforeSend:function(){confirma({width:"auto",conteudo:"{includeJsCss_includeFiles_modal_sortItem}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+			  beforeSend:function(){confirma({width:"auto",conteudo:"{includeJsCss_includeFiles_modal_sortItem}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 			  data: {function:"OrdenaItem",positions:positions}
 			}).done(function(data) {
 				$("#ws_confirm").remove();
@@ -104,7 +104,7 @@ function reloadFunctions(){
 			$.ajax({
 				type: "POST",
 				url: "./{PATH}/functions.php",
-				beforeSend:function(){confirma({width:"auto",conteudo:"  {includeJsCss_includeFiles_modal_addingFile}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				beforeSend:function(){confirma({width:"auto",conteudo:"  {includeJsCss_includeFiles_modal_addingFile}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 				data: {function:"incluir",idPage:"{ID_PATH}",file:fileString}
 			}).done(function(data) {
 				if(data!="falha"){
@@ -152,7 +152,7 @@ function reloadFunctions(){
 		$.ajax({
 		  type: "POST",
 		  url: "./{PATH}/functions.php",
-		  beforeSend:function(){confirma({width:"auto",conteudo:"{includeJsCss_includeFiles_modal_savingInput}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+		  beforeSend:function(){confirma({width:"auto",conteudo:"{includeJsCss_includeFiles_modal_savingInput}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 		  data: {function 	:"salvar",id_file :id_file ,inputMedia:inputMedia ,inputID 	:inputID }
 		}).done(function(data) {
 			TopAlert({mensagem: "Input Salvo com sucesso!",type: 3})
@@ -169,7 +169,7 @@ function reloadFunctions(){
 		$.ajax({
 		  type: "POST",
 		  url: "./{PATH}/functions.php",
-		  beforeSend:function(){confirma({width:"auto",conteudo:"{includeJsCss_includeFiles_modal_deletingInput}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+		  beforeSend:function(){confirma({width:"auto",conteudo:"{includeJsCss_includeFiles_modal_deletingInput}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 		  data: {function :"excluir",id_file:id_file,id_url:id_url}
 		}).done(function(data) {
 			$("#ws_confirm").remove();

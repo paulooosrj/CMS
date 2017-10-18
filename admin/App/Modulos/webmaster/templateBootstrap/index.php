@@ -8,8 +8,8 @@
       <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.js?b45bc0"></script>
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js?b45bc0"></script>
     <![endif]-->
-    <link rel="stylesheet" href="/admin/App/Templates/css/fontes/fonts.css">
-    <link rel="stylesheet" href="/admin/App/Templates/css/perfect-scrollbar/perfect-scrollbar.min.css">
+    <link rel="stylesheet" href="./../../../Templates/css/fontes/fonts.css">
+    <link rel="stylesheet" href="./../../../Templates/css/perfect-scrollbar/perfect-scrollbar.min.css">
     <link rel="stylesheet" href="css/bigsky.aui.css">
     <link rel="stylesheet" href="css/styles.css">
     <link href="favicon.png" rel="shortcut icon" type="image/png">
@@ -85,9 +85,9 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="/admin/App/Vendor/prettify/r298/prettify.min.js"></script>
-    <script type="text/javascript" src="/admin/App/Vendor/beautify-html/beautify-html.js"></script>
-    <!-- <script type="text/javascript" src="/admin/App/Templates/js/websheep/websheep_full.js"></script> -->
+    <script type="text/javascript" src="./../../../Vendor/prettify/r298/prettify.min.js"></script>
+    <script type="text/javascript" src="./../../../Vendor/beautify-html/beautify-html.js"></script>
+    <!-- <script type="text/javascript" src="./../../../Templates/js/websheep/websheep_full.js"></script> -->
     <script type="text/javascript" src="./js/cljs.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){

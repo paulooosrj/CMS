@@ -1,7 +1,7 @@
 <!-- BEGIN DETALHES_LEAD -->
 
 <script>
-	include_css('/admin/App/Templates/css/websheep/modulos/_leads_/detalhes.min.css', 'css_mod', 'All');
+	include_css('./App/Templates/css/websheep/modulos/_leads_/detalhes.min.css', 'css_mod', 'All');
 </script>
 <div class="tapa_upload" style="display:none">
 	<div class="pct w1">{Leads_Details_PleaseWait}</div>
@@ -11,7 +11,7 @@
 </div>
 <div id="palco" class="palco_01">
 	<div class="label_separados w1">{Leads_Details_DataLead}</div>
-	<form id="UploadThumbmails" style="display:none" 	action="/admin/App/Core/ws-upload-files.php" 	method="post" enctype="multipart/form-data" name="formUpload">
+	<form id="UploadThumbmails" style="display:none" 	action="./App/Core/ws-upload-files.php" 	method="post" enctype="multipart/form-data" name="formUpload">
 		<input name="arquivo" accept="image/jpg,image/png,image/jpeg,image/gif" id="myfile" type="file" style="display:none">
 		<input type="hidden" name="id" 			value="{lead_id}">
 		<input type="hidden" name="token" 		value="{lead_token}">
@@ -101,13 +101,13 @@
 		<div class="label_input w1" style="height:36px;width:473px">{Leads_Details_ImageTop}</div>
 		<div class="label_input w1" style="height:36px;width:474px">{Leads_Details_Signature}</div>
 		<div class="thumbmail" data-datatype="topo_email" style="width:481px; height:97px;" data-width="481" data-height="97">
-			<div class="combo_upload"> <div class="pc" legenda="{Leads_Details_MyComputer}"><img src="/admin/App/Templates/img/websheep/up_m.png"> </div> 
-            <div class="bb" legenda="{Leads_Details_Library}"><img src="/admin/App/Templates/img/websheep/folder_m.png"> </div> </div> 
+			<div class="combo_upload"> <div class="pc" legenda="{Leads_Details_MyComputer}"><img src="./App/Templates/img/websheep/up_m.png"> </div> 
+            <div class="bb" legenda="{Leads_Details_Library}"><img src="./App/Templates/img/websheep/folder_m.png"> </div> </div> 
 			<img class="thumb_img" src="/ws-img/481/97/{lead_header_email}"> 
 		</div>
 		<div class="thumbmail" data-datatype="footer_email" style="width:476px; height:97px;" data-width="476" data-height="97">
-			<div class="combo_upload"> <div class="pc" legenda="{Leads_Details_MyComputer}"><img src="/admin/App/Templates/img/websheep/up_m.png"> </div> 
-            <div class="bb" legenda="{Leads_Details_Library}"><img src="/admin/App/Templates/img/websheep/folder_m.png"> </div> </div> 
+			<div class="combo_upload"> <div class="pc" legenda="{Leads_Details_MyComputer}"><img src="./App/Templates/img/websheep/up_m.png"> </div> 
+            <div class="bb" legenda="{Leads_Details_Library}"><img src="./App/Templates/img/websheep/folder_m.png"> </div> </div> 
 			<img class="thumb_img" src="/ws-img/476/97/{lead_footer_email}">
 		</div>
 	</form>
@@ -159,13 +159,13 @@ $(".insertTagResp").unbind('click tap press').bind('click tap press',function(e)
 		});
 		$('*[legenda]').LegendaOver();
 			$("#editarCampos").unbind("click tap press").bind('click tap press',function() {
-				confirma({width: "auto", conteudo: "{Leads_Details_Modal_AccessData}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 }); 
+				confirma({width: "auto", conteudo: "{Leads_Details_Modal_AccessData}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 }); 
 				$("#conteudo").load("{PATH}/campos.php?token_table={lead_token}", function() {
 					$("#ws_confirm").remove(); $("#body").removeClass("scrollhidden"); $("*").removeClass("blur"); 
 				});
 			})
 			$("#voltar").unbind("click tap press").bind('click tap press',function() {
-				confirma({width: "auto",conteudo: "{Leads_Details_Modal_Backing}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0});
+				confirma({width: "auto",conteudo: "{Leads_Details_Modal_Backing}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0});
 				$("#conteudo").load("{PATH}/index.php", function() {
 					$("#ws_confirm").remove();
 					$("#body").removeClass("scrollhidden");
@@ -176,7 +176,7 @@ $(".insertTagResp").unbind('click tap press').bind('click tap press',function(e)
 			var form = $("#form_dados_geral").serialize();
 			out(form)
 			$.ajax({
-				beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Details_Modal_Saving}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
+				beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Details_Modal_Saving}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag: false,bot1: 0,bot2: 0}) },
 				cache: false, type: "POST", url: "{PATH}/functions.php",
 				data: {
 					function: "SalvaLead",
@@ -269,7 +269,7 @@ $(".insertTagResp").unbind('click tap press').bind('click tap press',function(e)
 				multiple: 0,
 				onSelect: function(a) {
 					$.ajax({
-						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Details_Modal_Saving}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 }) }, cache: false, type: "POST", url: "{PATH}/functions.php",
+						beforeSend: function() {confirma({width: "auto", conteudo: "  {Leads_Details_Modal_Saving}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 }) }, cache: false, type: "POST", url: "{PATH}/functions.php",
 						data: {
 							function: "substituiThumb",
 							img: a[0],

@@ -1,6 +1,6 @@
 <!-- BEGIN FILES -->
 <script>
-	include_css ("/admin/App/Templates/css/websheep/modulos/_modulo_/style_files.min.css","css_mod","All");
+	include_css ("./App/Templates/css/websheep/modulos/_modulo_/style_files.min.css","css_mod","All");
 </script>
 <!-- BEGIN TOP_ALERT_RASCUNHO -->
 	<script>
@@ -34,7 +34,7 @@
 			<div id="bt_search_files" class="botao">Procurar arquivos</div>
 		</div>
 		<div class="c"></div>
-		<form name="formUpload" id="formUpload" action='/admin/App/Core/ws-upload-files.php' method="post" enctype="multipart/form-data" name="formUpload">
+		<form name="formUpload" id="formUpload" action='./App/Core/ws-upload-files.php' method="post" enctype="multipart/form-data" name="formUpload">
 		<!-- <form name="formUpload" id="formUpload" action='./App/Modulos/_modulo_/upload_files.php' method="post" enctype="multipart/form-data" name="formUpload"> -->
 
 			<input name="arquivo[]" id="myfile" type="file" multiple  style="display:none" />
@@ -54,9 +54,9 @@
 							<b>Nome Original:</b>{NOME}<br><b>Peso:</b>{PESO}<br><b>Filename:</b>{ARQUIVO}
 						</div>
 						<div id='detalhes_img'>
-						<span class='editar legenda mover' 	legenda ='Mover Posição'>		<img src='/admin/App/Templates/img/websheep/arrow-move.png'></span>
-						<span class='editar legenda' 		legenda ='Editar Informações'>	<img src='/admin/App/Templates/img/websheep/pencil.png'></span>
-						<span class='excluir legenda' 		legenda ='Excluir Arquivo'>		<img src='/admin/App/Templates/img/websheep/cross-button.png'></span>
+						<span class='editar legenda mover' 	legenda ='Mover Posição'>		<img src='./App/Templates/img/websheep/arrow-move.png'></span>
+						<span class='editar legenda' 		legenda ='Editar Informações'>	<img src='./App/Templates/img/websheep/pencil.png'></span>
+						<span class='excluir legenda' 		legenda ='Excluir Arquivo'>		<img src='./App/Templates/img/websheep/cross-button.png'></span>
 					</div>
 				</li>
 			<!-- END BLOCK_FILES_ITEM -->
@@ -81,8 +81,8 @@
 	 });
 
  $("#voltar_item").unbind("click").click(function(){
-	confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
- 	$("#conteudo").load("/admin/App/Modulos/_modulo_/detalhes.php?ws_id_ferramenta={WS_ID_FERRAMENTA}&token_group={TOKEN_GROUP}&id_item={ID_ITEM}&ws_nivel={WS_NIVEL}",function(){
+	confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+ 	$("#conteudo").load("./App/Modulos/_modulo_/detalhes.php?ws_id_ferramenta={WS_ID_FERRAMENTA}&token_group={TOKEN_GROUP}&id_item={ID_ITEM}&ws_nivel={WS_NIVEL}",function(){
 		$("#ws_confirm").remove();
 		$("#body").removeClass("scrollhidden");
 		$("*").removeClass("blur");
@@ -131,7 +131,7 @@ function reloadFunctions(){
 			  type: "POST",
 			  url: "./{PATH}/functions.php",
 			  data: {"function":"dados_file","idFile":iDimg,"token":token},
-			  beforeSend:function(){confirma({width:"auto",conteudo:"<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+			  beforeSend:function(){confirma({width:"auto",conteudo:"<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
 			}).done(function(e) {
 				var formImg = e;
 				confirma({
@@ -165,7 +165,7 @@ function reloadFunctions(){
 						  type: "POST",
 						  url: "./{PATH}/functions.php",
 						  data: {"function":"SalvarDadosFiles","idFile":idImg,"titulo":titulo,"texto":texto,"url":url,"download":download,"token":token},
-						  beforeSend:function(){confirma({width:"auto",conteudo:"<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+						  beforeSend:function(){confirma({width:"auto",conteudo:"<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
 						}).done(function(e) {
 								out(e)
 								if(e=='Ítem salvo com sucesso!'){var cor=3;}else{var cor=2;}
@@ -249,7 +249,7 @@ $("#formUpload").ajaxForm({
 			$('.tapa_upload').find('.bar').animate({width:percentComplete+"%"},50);
 		},
 		complete: function(e){
-			$("#conteudo").load("/admin/App/Modulos/_modulo_/files.php?ws_id_ferramenta={WS_ID_FERRAMENTA}&token_group={TOKEN_GROUP}&id_item={ID_ITEM}&ws_nivel={WS_NIVEL}")
+			$("#conteudo").load("./App/Modulos/_modulo_/files.php?ws_id_ferramenta={WS_ID_FERRAMENTA}&token_group={TOKEN_GROUP}&id_item={ID_ITEM}&ws_nivel={WS_NIVEL}")
 		}
 	})
 

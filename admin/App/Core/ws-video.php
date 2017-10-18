@@ -1,6 +1,6 @@
 <?
 	error_reporting(E_ALL) ;
-	@include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
+	@include_once(__DIR__.'/../Lib/class-ws-v1.php');
 	$_temp_ = new MySQL();
 	$_temp_->set_table(PREFIX_TABLES.'ws_video');
 	$_temp_->set_where('keyaccess="'.ws::urlPath(2,false).'"');

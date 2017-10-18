@@ -1,5 +1,5 @@
 <!-- BEGIN BLOCK_DOMAIN -->
-<script>include_css('/admin/App/Templates/css/websheep/modulos/_dominio_/style.min.css','css_mod','All');</script>
+<script>include_css('./App/Templates/css/websheep/modulos/_dominio_/style.min.css','css_mod','All');</script>
 <div id="topoModulo" class="TitTop bg05 w1b">{domainPanel_AccountDetails}</div>
 <div id="topo_upload" class="bg01" ></div>
 <div class='palco_01' id="palco">
@@ -53,20 +53,20 @@
 		<div class="tituloLabel w1" style="margin-bottom:30px;">{domainPanel_SplashScreen}:</div>
 		<div id="splash_ws_img" style="  background-repeat: no-repeat;background-image:url('/ws-img/395/325/100/{splash_img}')">
 			<div class="combo_upload">
-				<div class="pc" legenda="Meu computador"><img  src="/admin/App/Templates/img/websheep/up_m.png"/></div>
-				<div class="bb" legenda="Na biblioteca"><img  src="/admin/App/Templates/img/websheep/folder_m.png"/></div>
+				<div class="pc" legenda="Meu computador"><img  src="./App/Templates/img/websheep/up_m.png"/></div>
+				<div class="bb" legenda="Na biblioteca"><img  src="./App/Templates/img/websheep/folder_m.png"/></div>
 			</div>
 		</div>
 		<div class="c"></div>
 		<div class="botao"  id="salvar">{domainPanel_UpdateData}</div>
 </form>
 </div>
-<form id="Upload_File_topo"     style="display:none" action="/admin/App/Core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
+<form id="Upload_File_topo"     style="display:none" action="./App/Core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
 	<input name="arquivo"     id="myfile" type="file"   />
 	<button type="submit"     id="enviar_arquivos"></button>
 	<div id="bt_search_files"   style="dispaly:none;position: absolute;cursor: pointer;"></div>
 </form>
-<form id="Upload_File_Splash"   style="display:none" action="/admin/App/Core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
+<form id="Upload_File_Splash"   style="display:none" action="./App/Core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
 	<input name="type"     		type="hidden" value="splashScreen"   />
 	<input name="arquivo"     	id="myfile" type="file"   />
 	<button type="submit"     id="enviar_arquivos"></button>
@@ -107,10 +107,10 @@
 				multiple:0,
 				onSelect:function(a){
 					$.ajax({
-						beforeSend:function(){confirma({width:"auto",conteudo:"  {domainPanel_modal_Saving}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+						beforeSend:function(){confirma({width:"auto",conteudo:"  {domainPanel_modal_Saving}...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 						cache: false,
 						type: "POST",
-						url: "/admin/App/Modulos/_dominio_/functions.php",
+						url: "./App/Modulos/_dominio_/functions.php",
 						data: {function:"substituiTopo",img:a},
 					}).done(function(e) {
 								$("#ws_confirm").remove();
@@ -143,10 +143,10 @@
 				multiple:0,
 				onSelect:function(a){
 					$.ajax({
-						beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+						beforeSend:function(){confirma({width:"auto",conteudo:"  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
 						cache: false,
 						type: "POST",
-						url: "/admin/App/Modulos/_dominio_/functions.php",
+						url: "./App/Modulos/_dominio_/functions.php",
 						data: {function:"substituiSplash",img:a},
 					}).done(function(e) {
 						out(e)
@@ -168,11 +168,11 @@
 						newFun:function(){
 						// VERIFICA 
 								setTimeout(function(){
-									 confirma({width:"auto",conteudo:" {domainPanel_modal_Checking} ...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+									 confirma({width:"auto",conteudo:" {domainPanel_modal_Checking} ...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 									$.ajax({
 										type: "POST",
 										cache: false,
-										url: "/admin/App/Modulos/_dominio_/functions.php",
+										url: "./App/Modulos/_dominio_/functions.php",
 										data: {"function":"VerificaPacote" }
 									}).done(function(e) {
 										var json = jQuery.parseJSON(e);
@@ -201,9 +201,9 @@
 											drag:false, 
 											bot1:'{domainPanel_modal_Compact}',
 											newFun:function(){
-														setTimeout(function(){confirma({width:600,conteudo:" <div id='mensagemZIP'> {domainPanel_modal_Compacting}...</div><div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});},500)               
+														setTimeout(function(){confirma({width:600,conteudo:" <div id='mensagemZIP'> {domainPanel_modal_Compacting}...</div><div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});},500)               
 												$.ajax({
-													url: "/admin/App/Modulos/_dominio_/functions.php",
+													url: "./App/Modulos/_dominio_/functions.php",
 													data: {"function":"CompactarZIPtoFTP" },
 													type: "POST",
 													cache: false,
@@ -234,7 +234,7 @@
 																					$("#body").removeClass("scrollhidden");
 																					$("*").removeClass("blur");
 																					$.ajax({
-																						url: "/admin/App/Modulos/_dominio_/functions.php",
+																						url: "./App/Modulos/_dominio_/functions.php",
 																						data: {"function":"delZIPtoFTP",namefile:objJSON.namefile},
 																						type: "POST",
 																						cache: false,
@@ -265,7 +265,7 @@
 												$.ajax({
 													type: "POST",
 													cache: false,
-													url: "/admin/App/Modulos/_dominio_/functions.php",
+													url: "./App/Modulos/_dominio_/functions.php",
 													data: {"function":"getFtpConnection" }
 												}).done(function(e) {
 													out(e)
@@ -292,7 +292,7 @@
 					$.ajax({
 						type: "POST",
 						cache: false,
-						url: "/admin/App/Modulos/_dominio_/functions.php",
+						url: "./App/Modulos/_dominio_/functions.php",
 						data: {function:"salvaDominio", inputs:inputs }
 					}).done(function(e) {
 					if(e=='{domainPanel_modal_ItemSavedSucces}'){var cor=3;}else{var cor=2;}

@@ -3,8 +3,8 @@
 ############################################################################
 # IMPORTAMOS A CLASSE DO SISTEMA
 ############################################################################
-$r 		=	$_SERVER["DOCUMENT_ROOT"];
-include_once(((substr($r, -1) == '/') ? substr($r, 0, -1) : $r).'/admin/App/Lib/class-ws-v1.php');
+
+include_once(__DIR__.'/../../Lib/class-ws-v1.php');
 // _session(); 
 $session = new session();
 
@@ -13,13 +13,13 @@ $session = new session();
 
 ?>
 <!-- 
-	<script src="/admin/App/Templates/js/formatCode/javascriptobfuscator_unpacker.js"></script>
-	<script src="/admin/App/Templates/js/formatCode/urlencode_unpacker.js"></script>
-	<script src="/admin/App/Templates/js/formatCode/p_a_c_k_e_r_unpacker.js"></script>
-	<script src="/admin/App/Templates/js/formatCode/myobfuscate_unpacker.js"></script>
+	<script src="./App/Templates/js/formatCode/javascriptobfuscator_unpacker.js"></script>
+	<script src="./App/Templates/js/formatCode/urlencode_unpacker.js"></script>
+	<script src="./App/Templates/js/formatCode/p_a_c_k_e_r_unpacker.js"></script>
+	<script src="./App/Templates/js/formatCode/myobfuscate_unpacker.js"></script>
  -->
 <script type="text/javascript">
-	include_css('/admin/App/Templates/css/websheep/modulos/webmaster/style.min.css?<?=md5(uniqid(rand(), true))?>',  	'css_mod', 'All');
+	include_css('./App/Templates/css/websheep/modulos/webmaster/style.min.css?<?=md5(uniqid(rand(), true))?>',  	'css_mod', 'All');
 </script>
 <style type="text/css">
 	#container {
@@ -239,8 +239,8 @@ $session = new session();
 $(document).ready(function() {
 	confirma({width: "auto",conteudo: "  Carregando API...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 })
 
-	$.getScript('/admin/App/Vendor/ace/src-min-noconflict/ace.js', function() {
-		$.getScript('/admin/App/Vendor/ace/src-min-noconflict/ext-language_tools.js', function() {
+	$.getScript('./App/Vendor/ace/src-min-noconflict/ace.js', function() {
+		$.getScript('./App/Vendor/ace/src-min-noconflict/ext-language_tools.js', function() {
 
 				$("#ws_confirm").remove();
 				$("#body").removeClass("scrollhidden");
@@ -366,7 +366,7 @@ $(document).ready(function() {
 					window.htmEditor.resize();
 					//	$(".ace_scrollbar").animate({scrollTop: 0}, 200);
 				}
-				ace.config.set('basePath', '/admin/App/Vendor/ace/src-min-noconflict');// SETA LOCAL DOS ARQUIVOS DO EDITOR
+				ace.config.set('basePath', './App/Vendor/ace/src-min-noconflict');// SETA LOCAL DOS ARQUIVOS DO EDITOR
 				window.htmEditor = ace.edit("divEditor");
 				window.htmEditor.setTheme("ace/theme/websheep.0.3");
 				window.htmEditor.getSession().setMode("ace/mode/php");

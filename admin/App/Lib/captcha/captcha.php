@@ -77,7 +77,7 @@ if($lower==true){
 
 
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/admin/App/Lib/class-ws-v1.php');
+include_once('./class-ws-v1.php');
 @session_name('_WS_');
 @session_id($_COOKIE['_WS_']);
 @session_start();

@@ -1,8 +1,8 @@
 <!-- BEGIN ITEM_LIST -->
 <script>
 	window.id_item_selected		='';
-	include_css ("/admin/App/Templates/css/websheep/modulos/_modulo_/itens.css","css_mod","All");
-	include_css ("/admin/App/Templates/css/websheep/modulos/ws_log/newItens.min.css","css_mod","All");
+	include_css ("./App/Templates/css/websheep/modulos/_modulo_/itens.css","css_mod","All");
+	include_css ("./App/Templates/css/websheep/modulos/ws_log/newItens.min.css","css_mod","All");
 </script>
 <div id="topoModulo" class="TitTop bg05 w1b">{TITULO_TOOL}{KEYWORK}</div>
 <div id="topo_upload" class="bg01" >
@@ -11,7 +11,7 @@
 		<div id="bt_voltar_filters" class="botao">{modulo_itens_buttons_back}</div>
 		<script>
 			$("#bt_voltar_filters").unbind("click").click(function(){
-					confirma({width:"auto",conteudo:"  {modulo_itens_modal_back_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+					confirma({width:"auto",conteudo:"  {modulo_itens_modal_back_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 					$("#conteudo").load("{LINK_BACK}",function(){
 						$("#ws_confirm").remove();
 						$("#body").removeClass("scrollhidden");
@@ -75,7 +75,7 @@
 			var page 		= $(this).data("page");
 			var keywork 	= $('.search').val();
 			var paginate 	= $('#setLimit').chosen().val();
-			confirma({width:"auto",conteudo:"  {modulo_itens_modal_loading_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+			confirma({width:"auto",conteudo:"  {modulo_itens_modal_loading_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 			$("#conteudo").load("./{PATH}/index.php?PAGE="+page+"&LIMIT={LIMIT}",function(){
 				$("#ws_confirm").remove();
 				$("#body").removeClass("scrollhidden");
@@ -101,7 +101,7 @@
 		$('#setLimit').val("{LIMIT}").chosen({width: 200,disable_search_threshold:10}).change(function(event){
 			if(event.target == this){
 				var keywork = ($(this).val());
-				confirma({width:"auto",conteudo:"  {modulo_itens_modal_loading_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+				confirma({width:"auto",conteudo:"  {modulo_itens_modal_loading_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 				$("#conteudo").load("./{PATH}/itens.php?token_group={TOKEN_GROUP}&ws_id_ferramenta={ID_FERRAMENTA}&LIMIT="+encodeURI(keywork),function(){
 					$("#ws_confirm").remove();
 					$("#body").removeClass("scrollhidden");
@@ -128,7 +128,7 @@
 		$('#formsearch').submit(function(e){
 			e.preventDefault();
 			var keywork = $('.search').val();
-			confirma({width:"auto",conteudo:"  {modulo_itens_modal_loading_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+			confirma({width:"auto",conteudo:"  {modulo_itens_modal_loading_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 			$("#conteudo").load("./{PATH}/itens.php?PAGE={PAGE}&LIMIT={LIMIT}&token_group={TOKEN_GROUP}&ws_id_ferramenta={ID_FERRAMENTA}&keywork="+encodeURI(keywork),function(){
 				$("#ws_confirm").remove();
 				$("#body").removeClass("scrollhidden");
@@ -143,7 +143,7 @@
 
 		$('.editar').unbind('click').bind("click",function(){
 			var id_item = $(this).data('id');
-				confirma({width:"auto",conteudo:"  {modulo_itens_modal_loading_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
+				confirma({width:"auto",conteudo:"  {modulo_itens_modal_loading_content}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
 				$("#conteudo").load("./{PATH}/detalhes.php?PAGE={PAGE}&LIMIT={LIMIT}&token_group={TOKEN_GROUP}&ws_id_ferramenta={ID_FERRAMENTA}&id_cat={ID_CAT}&ws_nivel={WS_NIVEL}&id_item="+id_item,function(){
 				$("#ws_confirm").remove();
 				$("#body").removeClass("scrollhidden");
@@ -172,7 +172,7 @@
 						  type: "POST",
 						  data: {function:"excl_produto",id_item_direct:true,id_item:iDgaleria},
 						  url: "./{PATH}/functions.php",
-						  beforeSend:function(){confirma({width:"auto",conteudo:"  {modulo_itens_modal_delete_beforeContent}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
+						  beforeSend:function(){confirma({width:"auto",conteudo:"  {modulo_itens_modal_delete_beforeContent}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})}
 						}).done(function(e) {
 							$("#ws_confirm").css("line-height","20px");
 							$("#ws_confirm").remove();

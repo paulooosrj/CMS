@@ -40,6 +40,10 @@ Nossa intenção é melhorar cada vez mais o sistema, ampliar a cobertura de tes
 Versão PHP 5.6 ou superior.
 MySQL versão 5.0 ou superior.
 
+## ATENÇÃO!
+Para que o sistema funcione 100% é necessário ter um Virtual Host configurado em seu localhost ou diretamente na pasta /www/admin de uma hospedagem. 
+Ou seja, **não funciona** (ainda) assim: http://127.0.0.1/meu-site/admin 
+
 ## História
 O WebSheep foi idealizado no início de 2008 por **Israel Nogueira** e **Anereu Bighetti**, inicialmente seria um sistema de sites rápidos e barato chamado **Web Cheap**
 

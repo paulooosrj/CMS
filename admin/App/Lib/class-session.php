@@ -35,25 +35,34 @@ class session{
 					if(empty($_SESSION) && session_id()!=$this->preStr){
 						session_id($this->preStr);
 						session_name($this->preStr);
-						session_start();
+						$status = session_status();
+						if($status == PHP_SESSION_NONE){
+							session_start();
+						}
+
 					}
 				}else{
-						ini_set("session.cookie_secure",true);
-						ini_set("session.cookie_httponly",true);
-						ini_set("session.use_trans_sid", false);
+
+						@ini_set("session.cookie_secure",true);
+						@ini_set("session.cookie_httponly",true);
+						@ini_set("session.use_trans_sid", false);
 
 					 if(
 						 	(empty($_COOKIE[$this->CoockieIdSess])) ||
 						 	(isset($_COOKIE[$this->CoockieIdSess]) && $_COOKIE[$this->CoockieIdSess]!=$this->newName) 
 					 ){
+						$status = session_status();
 						session_id($this->newName);
 						session_name($this->newName);
-						session_start();
+						if($status == PHP_SESSION_NONE){session_start();}
 						setcookie($this->CoockieIdSess, $this->newName,$this->duratacookie,'/');	
 					}else{
+						$status = session_status();
 						session_id($_COOKIE[$this->CoockieIdSess]);
 						session_name($_COOKIE[$this->CoockieIdSess]);
-						session_start();
+						if($status == PHP_SESSION_NONE){
+							session_start();
+						}
 					}
 				}
 			}

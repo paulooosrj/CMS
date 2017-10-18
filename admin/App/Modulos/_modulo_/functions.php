@@ -992,8 +992,8 @@
 				echo "<li id='" . $file->fetch_array[0]['id'] . "'>	
 						<div id='combo'>
 							<div id='detalhes_img' class='bg02'>
-							<span><img class='editar' 	legenda='Editar Informações'	src='/admin/App/Templates/img/websheep/layer--pencil.png'></span>   
-							<span><img class='excluir'	legenda='Excluir Imagem'		src='/admin/App/Templates/img/websheep/cross-button.png'></span>   
+							<span><img class='editar' 	legenda='Editar Informações'	src='./App/Templates/img/websheep/layer--pencil.png'></span>   
+							<span><img class='excluir'	legenda='Excluir Imagem'		src='./App/Templates/img/websheep/cross-button.png'></span>   
 							</div>
 							<img class='thumb_exibicao' src='/ws-img/155/155/100/" . $file->fetch_array[0]['file'] . "'>
 						</div>
@@ -1649,10 +1649,10 @@
 		<span class='desc_item w2'>" . stripslashes(substr(strip_tags(urldecode($dado->fetch_array[0]['texto'])), 0, 100)) . "...</span>
 		<div id='combo'>
 		<div id='detalhes_img' class='bg02'>
-			<span><img class='mover_item' 		src='/admin/App/Templates/img/websheep/arrow-move.png'>	</span>
-			<span><img class='galeria'			src='/admin/App/Templates/img/websheep/images.png'>		</span>
-			<span><img class='editar' 			src='/admin/App/Templates/img/websheep/layer--pencil.png'>	</span>
-			<span><img class='excluir'			src='/admin/App/Templates/img/websheep/cross-button.png'>	</span>
+			<span><img class='mover_item' 		src='./App/Templates/img/websheep/arrow-move.png'>	</span>
+			<span><img class='galeria'			src='./App/Templates/img/websheep/images.png'>		</span>
+			<span><img class='editar' 			src='./App/Templates/img/websheep/layer--pencil.png'>	</span>
+			<span><img class='excluir'			src='./App/Templates/img/websheep/cross-button.png'>	</span>
 		</div>
 			<form name='formUpload' class='formUploadGaleria' action='./" . $_REQUEST['path'] . "/upload_files.php' method='post' enctype='multipart/form-data' name='formUpload'>
 				<input name='arquivo' id='myfile' type='file' style='display:none'/>
@@ -2251,7 +2251,7 @@
 	##########################################################################################################
 	clearstatcache();
 	ob_start();
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
+	include_once(__DIR__.'/../../Lib/class-ws-v1.php');
 	
 	##########################################################################################################
 	# INICIA A SESSÃO

@@ -3,8 +3,7 @@
 	##################################################################
 	# IMPORTAMOS A CLASSE PADRÃO DO SISTEMA 
 	##################################################################
-	$r 		=	$_SERVER["DOCUMENT_ROOT"];
-	include_once(((substr($r, -1) == '/') ? substr($r, 0, -1) : $r).'/admin/App/Lib/class-ws-v1.php');
+	include_once(__DIR__.'/../Lib/class-ws-v1.php');
 	##################################################################
 	# SETAMOS OS CABEÇALHOS DA APLICAÇÃO
 	# Security-Policy, Allow-Origin e Content-Type  

@@ -3,11 +3,11 @@
 		window.comboPlugins = [{COMBO_PLUGINS}];
 		window.id_item_selected = '';
 		window.typeColumns = [{TYPE_COLUMNS}];
-		include_js('/admin/App/Vendor/jquery-ui/1.12.1/jquery-ui.min.js', 'jqueryUI');
-		$.getScript('/admin/App/Vendor/ace/src-min-noconflict/ace.js', function() {
-			include_js('/admin/App/Vendor/ace/src-min-noconflict/ext-language_tools.js', 'ace-language-tools');
+		include_js('./App/Vendor/jquery-ui/1.12.1/jquery-ui.min.js', 'jqueryUI');
+		$.getScript('./App/Vendor/ace/src-min-noconflict/ace.js', function() {
+			include_js('./App/Vendor/ace/src-min-noconflict/ext-language_tools.js', 'ace-language-tools');
 		});
-		include_css("/admin/App/Templates/css/websheep/modulos/_modulo_/detalhes.min.css?v={RAND}", "css_mod", "All");
+		include_css("./App/Templates/css/websheep/modulos/_modulo_/detalhes.min.css?v={RAND}", "css_mod", "All");
 		window.styleCKEditor = {STYLE_CKEDITOR};
 		window.uploadIMGEditor = function(ID) {
 			functions({
@@ -99,7 +99,7 @@
 								beforeSend: function() {
 									confirma({
 										width: "auto",
-										conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+										conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 										drag: false,
 										bot1: 0,
 										bot2: 0
@@ -170,7 +170,7 @@
 								beforeSend: function() {
 									confirma({
 										width: "auto",
-										conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+										conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 										drag: false,
 										bot1: 0,
 										bot2: 0
@@ -251,19 +251,19 @@
 			</div>
 		</div>
 		<form name="formUpload" id="formUpload">
-				<div id="bt_SalvarItem" class="bg02 w1"><img src="/admin/App/Templates/img/websheep/disk-black.png" /> Salvar rascunho </div>
+				<div id="bt_SalvarItem" class="bg02 w1"><img src="./App/Templates/img/websheep/disk-black.png" /> Salvar rascunho </div>
 				<div>
 					<!-- BEGIN BLOCK_ADD_CAT -->
-					<div id="bt_AddCat" class="bg02 w1"><img src="/admin/App/Templates/img/websheep/category-group.png" />Categorias</div>
+					<div id="bt_AddCat" class="bg02 w1"><img src="./App/Templates/img/websheep/category-group.png" />Categorias</div>
 					<!-- END BLOCK_ADD_CAT -->
 
 					<!-- BEGIN BLOCK_LINK_BACK -->
-					<div id="bt_voltar_cat" class="bg02 w1"><img src="/admin/App/Templates/img/websheep/arrow-180.png" style="position: relative;float: left;top: 0px;margin-right: 10px;" />Voltar</div>
+					<div id="bt_voltar_cat" class="bg02 w1"><img src="./App/Templates/img/websheep/arrow-180.png" style="position: relative;float: left;top: 0px;margin-right: 10px;" />Voltar</div>
 					<script>
 						$("#bt_voltar_cat").unbind("click").click(function() {
 							confirma({
 								width: "auto",
-								conteudo: "  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+								conteudo: "  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 								drag: false,
 								bot1: 0,
 								bot2: 0
@@ -280,7 +280,7 @@
 		</div>
 		<div id="palco" class="palco_01">
 
-			<form id="UploadFile" style="display:none" action="/admin/App/Core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
+			<form id="UploadFile" style="display:none" action="./App/Core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
 				<input name="arquivo" id="myfile" type="file" style="display:none" />
 				<input type="hidden" name="type" 				value="item_detail_file" />
 				<input type="hidden" name="token_group" 		value="{TOKEN_GROUP}" />
@@ -294,7 +294,7 @@
 				<button type="submit" id="enviar_arquivos" style="dispaly:none;"></button>
 				<div id="bt_search_files" style="dispaly:none;position: absolute;cursor: pointer;"></div>
 			</form>
-			<form id="UploadThumbmails" style="display:none" action="/admin/App/Core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
+			<form id="UploadThumbmails" style="display:none" action="./App/Core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
 				<input name="arquivo" accept="image/jpg,image/png,image/jpeg,image/gif" id="myfile" type="file" style="display:none" />
 				<input type="hidden" name="type" 				value="item_detail_thumbnail" />
 				<input type="hidden" name="id_item" 			value="{ID_ITEM}" />
@@ -322,7 +322,7 @@
 							bot2: 0
 						})
 						$("#ws_confirm").css("line-height", "20px");
-						$("#conteudo").load("/admin/modulos/_modulo_/index.php?ws_id_ferramenta={VALUE}", function(response, status, xhr) {
+						$("#conteudo").load("./modulos/_modulo_/index.php?ws_id_ferramenta={VALUE}", function(response, status, xhr) {
 							$("#ws_confirm").remove();
 							$("#body").removeClass("scrollhidden");
 							$("*").removeClass("blur");
@@ -539,7 +539,7 @@
 								beforeSend: function() {
 									confirma({
 										width: "auto",
-										conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+										conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 										drag: false,
 										bot1: 0,
 										bot2: 0
@@ -574,7 +574,7 @@
 								beforeSend: function() {
 									confirma({
 										width: "auto",
-										conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+										conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 										drag: false,
 										bot1: 0,
 										bot2: 0
@@ -870,7 +870,7 @@
 							newFun: function() {
 								confirma({
 									width: "auto",
-									conteudo: "  Excluindo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+									conteudo: "  Excluindo...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 									drag: false,
 									bot1: 0,
 									bot2: 0
@@ -904,7 +904,7 @@
 									beforeSend: function() {
 										confirma({
 											width: "auto",
-											conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+											conteudo: "  Salvando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 											drag: false,
 											bot1: 0,
 											bot2: 0

@@ -28,7 +28,7 @@
 	# IMPORTA A CLASSE PADRÃO DO SISTEMA
 	#####################################################
 	ob_start();
-	include($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
+	include(__DIR__.'/../../Lib/class-ws-v1.php');
 	
 	#####################################################  
 	# DEFINIMOS O ID DA FERRAMENTA

@@ -622,7 +622,7 @@
 														var verifyBD = $.ajax({
 															type: "POST",
 															sync: true,
-															url: "/admin/App/Modulos/_tools_/functions.php",
+															url: "./App/Modulos/_tools_/functions.php",
 															data: { function: "excluirBibliotecaSelecionada", selectAntigo:selectAntigo}
 														}).done(function(msg) {
 															window.imgSelectedBiblioteca = Array();
@@ -804,11 +804,11 @@
 					<div class='w1 titulo'>" . $_tit_menu_ . "</div>
 					<div id='combo'>
 						<div id='detalhes_img'>
-							<span><img style='top:5px;position:relative;' 	class='limpar legenda' 		legenda='Limpar ferramenta' 			src='/admin/App/Templates/img/websheep/vassoura.png'></span>
-							<span><img 										class='mover_item legenda mover_sub_item' 	legenda='Mover' 						src='/admin/App/Templates/img/websheep/arrow-move.png'></span>
-							<span><img 										class='editar legenda' 		legenda='Editar' 		 				src='/admin/App/Templates/img/websheep/layer--pencil.png'></span>
-							<span><img 										class='exportar legenda' 	legenda='Exportar ferramenta' 		src='/admin/App/Templates/img/websheep/export_tool.png'></span>
-							<span><img 										class='excluir legenda' 	legenda='<img class=\"editar\" 			src=\"/admin/App/Templates/img/websheep/exclamation.png\" style=\"position: absolute;margin-top: -2px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excluir'		src='/admin/App/Templates/img/websheep/cross-button.png'></span>
+							<span><img style='top:5px;position:relative;' 	class='limpar legenda' 		legenda='Limpar ferramenta' 			src='./App/Templates/img/websheep/vassoura.png'></span>
+							<span><img 										class='mover_item legenda mover_sub_item' 	legenda='Mover' 						src='./App/Templates/img/websheep/arrow-move.png'></span>
+							<span><img 										class='editar legenda' 		legenda='Editar' 		 				src='./App/Templates/img/websheep/layer--pencil.png'></span>
+							<span><img 										class='exportar legenda' 	legenda='Exportar ferramenta' 		src='./App/Templates/img/websheep/export_tool.png'></span>
+							<span><img 										class='excluir legenda' 	legenda='<img class=\"editar\" 			src=\"./App/Templates/img/websheep/exclamation.png\" style=\"position: absolute;margin-top: -2px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excluir'		src='./App/Templates/img/websheep/cross-button.png'></span>
 					</div>
 				</div>
 			</div>";
@@ -2323,10 +2323,10 @@
 						<div class='c'>
 							<div id='combo'>
 									<div id='detalhes_img' class='bg02'>
-									<spam ><img class='mover_item legenda' legenda='Mover a posição do ítem' 	src='/admin/App/Templates/img/websheep/arrow-move.png'></spam>
-									<spam ><img class='editar legenda' legenda='Editar Informações' 		 	src=/admin/App/Templates/img/websheep/layer--pencil.png'></spam>
-									<spam ><img class='salvar legenda' legenda='Salvar ferramenta'				src=/admin/App/Templates/img/websheep/accept.png'></spam>
-									<spam ><img class='excluir legenda' legenda='<img class=\"editar\" 			src=\"/admin/App/Templates/img/websheep/exclamation.png\" style=\"position: absolute;margin-top: -2px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excluir ferramenta'		src='/admin/App/Templates/img/websheep/cross-button.png'></spam>
+									<spam ><img class='mover_item legenda' legenda='Mover a posição do ítem' 	src='./App/Templates/img/websheep/arrow-move.png'></spam>
+									<spam ><img class='editar legenda' legenda='Editar Informações' 		 	src=./App/Templates/img/websheep/layer--pencil.png'></spam>
+									<spam ><img class='salvar legenda' legenda='Salvar ferramenta'				src=./App/Templates/img/websheep/accept.png'></spam>
+									<spam ><img class='excluir legenda' legenda='<img class=\"editar\" 			src=\"./App/Templates/img/websheep/exclamation.png\" style=\"position: absolute;margin-top: -2px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excluir ferramenta'		src='./App/Templates/img/websheep/cross-button.png'></spam>
 							</div>
 					</div>
 				</li>";
@@ -2940,7 +2940,8 @@
 	//####################################################################################################################
 	//####################################################################################################################
 	//####################################################################################################################
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/admin/App/Lib/class-ws-v1.php');
+
+	include_once('./../../Lib/class-ws-v1.php');
 	//_session();
 	$session = new session();
 

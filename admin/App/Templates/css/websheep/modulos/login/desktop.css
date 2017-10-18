@@ -5,7 +5,7 @@
     color: #003d40;
     cursor: pointer;
     position: relative;
-    background-image: url(http:/admin/App/Templates/img/websheep/user-silhouette-question.png);
+    background-image: url(./../../../../img/websheep/user-silhouette-question.png);
     background-repeat: no-repeat;
     padding-left: 19px;
     font-family: 'Titillium Web', sans-serif;
@@ -21,7 +21,7 @@
     color: #003d40;
     cursor: pointer;
     position: relative;
-    background-image: url(http:/admin/App/Templates/img/websheep/magnifier.png);
+    background-image: url(./../../../../img/websheep/magnifier.png);
     background-repeat: no-repeat;
     padding-left: 19px;
     font-family: 'Titillium Web', sans-serif;
