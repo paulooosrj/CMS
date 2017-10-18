@@ -35,3 +35,14 @@ node_modules
 *.css.map
 
 # End of https://www.gitignore.io/api/macos,sass
+
+
+### Files add after instalation ###
+website
+ws-config.php
+.htaccess
+admin/App/Templates/js/websheep/funcionalidades.min.js
+admin/App/Templates/js/websheep/functionsws.min.js
+admin/App/Templates/json/ws-plugin-list.json
+ws-shortcodes/my-shortcode.php
+# End Files 
