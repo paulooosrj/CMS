@@ -2151,10 +2151,8 @@
 		if (!file_exists(ROOT_ADMIN . '/../.htaccess')) {
 			copy(ROOT_ADMIN . '/App/Templates/txt/ws-first-htaccess.txt', ROOT_ADMIN . '/../.htaccess');
 		}
-
 		$first = ROOT_ADMIN . '/App/Config/firstacess';
-
-		if (!file_exists($first) || unlink($first)) {
+		if (!file_exists($first) || file_put_contents($first,"false")) {
 			echo "sucesso";
 		} else {
 			echo "Falha ao excluir o FirstAccess!";
