@@ -173,9 +173,8 @@
 		@mkdir(ROOT_DOCUMENT 				.'/website/assets/template');
 		@mkdir(ROOT_DOCUMENT 				.'/website/assets/fonts');
 		@file_put_contents(ROOT_DOCUMENT 	.'/website/assets/.htaccess', 'RewriteEngine Off');
-
 		@mkdir(ROOT_DOCUMENT 				.'/ws-shortcodes');
-		@rename(ROOT_DOCUMENT."/admin/App/Lib/my-shortcode.php",ROOT_DOCUMENT."/ws-shortcodes/my-shortcode.php");
+		@copy(ROOT_DOCUMENT."/admin/App/Lib/my-shortcode.php",ROOT_DOCUMENT."/ws-shortcodes/my-shortcode.php");
 		
 		if (!file_exists(ROOT_DOCUMENT 		.'/website/includes/header.php')) 	@file_put_contents(ROOT_DOCUMENT . '/website/includes/header.php', 'Header<hr>');
 		if (!file_exists(ROOT_DOCUMENT 		.'/website/includes/erro404.php')) 	@file_put_contents(ROOT_DOCUMENT . '/website/includes/erro404.php', 'ERRO 404!');
