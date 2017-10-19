@@ -8,7 +8,7 @@
 	#####################################################  
 	# DEFINE O PATH DO MÓDULO 
 	#####################################################
-	define("PATH", 'App/Modulos/_leads_');
+	define("PATH", './App/Modulos/_leads_');
 		
 	#####################################################  
 	# LIMPA O CACHE INTERNO
@@ -50,7 +50,7 @@
 	#####################################################
 	$template           	= new Template(TEMPLATE_LINK, true);
 	$template->DOMINIO 		= ws::protocolURL().DOMINIO;
-	$template->PATH 		= 'App/Modulos/_leads_';
+	$template->PATH 		= './App/Modulos/_leads_';
 		
 	$s = new MySQL();
 	$s->set_table(PREFIX_TABLES.'ws_list_leads');
