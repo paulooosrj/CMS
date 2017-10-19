@@ -1919,6 +1919,7 @@ function _encripta( $plaintext, $key){
 	$hmac 			= hash_hmac('sha256', $ciphertext_raw, $key, $as_binary=true);
 	return base64_encode($iv.$hmac.$ciphertext_raw);
 }
+
 function _decripta( $ciphertext, $key) {	
 	$c 					= base64_decode($ciphertext);
 	$ivlen 				= openssl_cipher_iv_length($cipher="AES-128-CBC");
@@ -1927,6 +1928,20 @@ function _decripta( $ciphertext, $key) {
 	$ciphertext_raw		= substr($c, $ivlen+$sha2len);
 	$original_plaintext = openssl_decrypt($ciphertext_raw, $cipher, $key, $options=OPENSSL_RAW_DATA, $iv);
 	$calcmac 			= hash_hmac('sha256', $ciphertext_raw, $key, $as_binary=true);
+	if(!function_exists('hash_equals')){
+	    function hash_equals($str1, $str2){
+	        if(strlen($str1) != strlen($str2)){
+	            return false;
+	        }else{
+	            $res = $str1 ^ $str2;
+	            $ret = 0;
+	            for($i = strlen($res) - 1; $i >= 0; $i--){
+	                $ret |= ord($res[$i]);
+	            }
+	            return !$ret;
+	        }
+	    }
+	}
 	if (hash_equals($hmac, $calcmac)){
 	    return $original_plaintext;
 	}else{
