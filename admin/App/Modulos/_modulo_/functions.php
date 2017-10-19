@@ -1512,6 +1512,7 @@
 	#	ADICIONA UM ÍTEM A FERRAMENTA
 	###############################################################################################################################
 	function addItem() {
+		global $user;
 		$token = _token(PREFIX_TABLES . '_model_item', 'token');
 		$I     = new MySQL();
 		$I->set_table(PREFIX_TABLES . '_model_item');
