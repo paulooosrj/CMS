@@ -1,20 +1,20 @@
 <?php
 	include_once(__DIR__.'/../../../ws-config.php');
-	include_once(__DIR__.'/ws-connect-mysql.php');
-	include_once(__DIR__.'/class-ws-mysql.php');
-	include_once(__DIR__.'/class-ws-functions.php');
-	include_once(__DIR__.'/class-template.php');
-	include_once(__DIR__.'/class-cookie.php');
-	include_once(__DIR__.'/class-session.php');
-	include_once(__DIR__.'/class-ws-controller.php');
-	include_once(__DIR__.'/class-browser.php');
-	include_once(__DIR__.'/class-simple-html-dom.php');
-	include_once(__DIR__.'/class-base2n.php');
-	include_once(__DIR__.'/class-canvas.class.php');
-	include_once(__DIR__.'/class-ws-htmlprocess.php');
-	include_once(__DIR__.'/class-lipsum.php');
-	include_once(__DIR__.'/class-mobile-detect.php');
-	include_once(__DIR__.'/../Vendor/PHPMailer/PHPMailerAutoload.php');
+	include_once(ROOT_ADMIN.'/App/Lib/ws-connect-mysql.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-ws-mysql.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-ws-functions.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-template.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-cookie.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-session.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-ws-controller.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-browser.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-simple-html-dom.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-base2n.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-canvas.class.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-ws-htmlprocess.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-lipsum.php');
+	include_once(ROOT_ADMIN.'/App/Lib/class-mobile-detect.php');
+	include_once(ROOT_ADMIN.'/App/Vendor/PHPMailer/PHPMailerAutoload.php');
 
 	class WS {
 		public function __construct() {
