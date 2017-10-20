@@ -60,9 +60,8 @@ class session{
 						$status = session_status();
 						session_id($_COOKIE[$this->CoockieIdSess]);
 						session_name($_COOKIE[$this->CoockieIdSess]);
-						if($status == PHP_SESSION_NONE){
-							session_start();
-						}
+						@session_start();
+
 					}
 				}
 			}

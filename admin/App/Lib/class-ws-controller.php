@@ -34,7 +34,7 @@ class controller{
 		if(ws::urlPath()==""){
 			//agora verifica se existe caminho default pra ele
 				if(!in_array($this->init, $this->paths)){
-					self::_erro('Por favor, o caminho Default nao está definido ou não existe no sistema.');
+					self::_erro('Por favor, o caminho Default nao esta definido ou não existe no sistema.');
 				}else{
 					//se tiver caminho default, faz um foreach nos paths
 					foreach($this->paths as $path){
@@ -87,7 +87,7 @@ class controller{
 
 			//agora verifica se existe caminho default pra ele
 			if(!in_array($this->init, $this->paths)){
-				self::_erro('Por favor, o caminho Default nao está definido ou não existe no sistema.');
+				self::_erro('Por favor, o caminho Default nao esta definido ou não existe no sistema.');
 			}else{
 				//se tiver caminho default, faz um foreach nos paths
 				foreach($this->paths as $path){

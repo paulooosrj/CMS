@@ -21,7 +21,7 @@
 /** O nome do banco de dados do WebSheep */
 	
 	if(!defined("DOMINIO"))		define("DOMINIO",		"{DOMINIO}");
-	if(!defined("LANG"))		define("LANG", 			"pt");
+	if(!defined("LANG"))		define("LANG", 			"{LANG}");
 	if(!defined("CHARSET"))		define("CHARSET", 		"utf-8");
 	if(!defined("TIMEZONE"))	define("TIMEZONE", 		"America/Sao_Paulo");
 	if(!defined("SECURE"))		define("SECURE", TRUE);  //FALSE ESTRITAMENTE PARA DESENVOLVIMENTO!!!!

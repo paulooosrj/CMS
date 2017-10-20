@@ -83,7 +83,7 @@ ol {
 	font-weight: 100;
 	font-size: 13px;
 }
-form input {
+form input,form select {
 	position: relative;
 	float: left;
 	padding: 12px;

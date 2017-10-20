@@ -3,12 +3,13 @@
 	# ESTE É PRATICAMENTE O 1° ARQUIVO A SER ABERTO NO SISTEMA, QUE É A TELA DE INSTALAÇÃO
 	############################################################################################################################################
 	#
-	#
+	#			SIM, AINDA NÃO ESTÁ EM MVC!!!
+	#			Em breve cuidarei disso!
 	#
 	############################################################################################################################################
 	# CAPTAMOS A BASE DO SISTEMA
 	############################################################################################################################################
-		$path = basename(realpath(__DIR__ . '/../')) . PHP_EOL;
+		$path = basename(realpath(__DIR__ . '/../'));
 	############################################################################################################################################
 	# GERA UMA SENHA PARA OS CAMPOS DO ARQUIVO DE CONFIGURAÇÃO
 	############################################################################################################################################
@@ -68,6 +69,7 @@
 				"{ROOT_WEBSITE}",
 				"{ROOT_ADMIN}",
 				"{RECAPTCHA}",
+				"{LANG}",
 				"{ROOT_DOCUMENT}"
 			);
 			$porisso       = Array(
@@ -80,6 +82,7 @@
 				$data['ROOT_DOCUMENT'] . '/website',
 				$data['ROOT_DOCUMENT'] . '/admin',
 				str_replace(PHP_EOL, "", $data['RECAPTCHA']),
+				$data['LANG'],
 				$data['ROOT_DOCUMENT']
 			);
 			$isso_Password = array(
@@ -318,13 +321,26 @@ $(document).ready(function(){
 						<input	type="hidden" name="DOMINIO" 				value="<?= $_SERVER['HTTP_HOST'] ?>">
 						<input	type="hidden" name="DOMINIO_SEC" 			value="<?= $_SERVER['HTTP_HOST'] ?>">
 
-						<div style="width: 100%;text-align:left;" class="label">Token do Recaptcha do Google</div>
-
+						<div style="width: 47%;text-align:left;" class="label">Token do Recaptcha do Google</div>
+						<div style="width: 47%;text-align:left;" class="label">Idioma do sistema</div>
 						<input	name="RECAPTCHA" value="">
+						<select name="LANG"><?
+							$pasta = './App/Config/lang';
+							if(is_dir($pasta)){
+								$dh = opendir($pasta);
+								while($diretorio = readdir($dh)){
+									if($diretorio != '..' && $diretorio != '.'){
+										$lang = str_replace('.json',"",$diretorio);
+										echo '<option value="'.$lang.'">'.$lang.'</option>';
+									}
+								}
+							}
+							?></select>
+
 						<input	type="hidden" name="TOKEN_ACCESS" 			value="<?= _crypt() ?>"	readonly>
 						<input	type="hidden" name="TOKEN_USER" 			value="<?= _crypt() ?>"	readonly>
 						<input	type="hidden" name="TOKEN_DOMAIN" 			value="<?= _crypt() ?>" 	readonly>
-						<input	type="hidden" name="_PATCH_ADMIN_" 			value="<?= $path ?>" 		readonly>
+						<input	type="hidden" name="_PATCH_ADMIN_" 			value="<?= $path?>" 		readonly>
 						<input	type="hidden" name="ID_SESS" 				value="<?= substr(_crypt(), 0, 6) ?>" readonly>
 						<input	type="hidden" name="NAME_SESS" 				value="<?= substr(_crypt(), 0, 6) ?>" readonly>
 						<input	type="hidden" name="ROOT_DOCUMENT" 			value="<?= ROOT_DOCUMENT?>" readonly>
