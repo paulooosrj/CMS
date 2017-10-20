@@ -98,6 +98,6 @@ form input,form select {
 form .label {
 	position: relative;
 	float: left;
-	padding: 10px;
+	padding: 10px 0 ;
 	width: 380px;
 }

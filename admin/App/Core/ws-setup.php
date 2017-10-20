@@ -202,13 +202,13 @@
 <link type="image/x-icon" href="./img/favicon.png" rel="shortcut icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/global.css" />
 <link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/websheep/estrutura.min.css" />
 <link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/websheep/desktop.min.css" />
 <link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/install.css" />
 <link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/funcionalidades.css" />
 <link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/fontes/fonts.css" />
 <link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/theme_blue.min.css" />
+
 <script type = 'text/javascript' 												src="./App/Vendor/jquery/2.2.0/jquery.min.js"></script>
 <script type = 'text/javascript' 												src="./App/Templates/js/websheep/funcionalidades.js"></script>
 
@@ -291,8 +291,12 @@ $(document).ready(function(){
 	<div id='avisoTopo'></div>
 	<div id="container" style="width: 100%; left: 0; position: fixed; top: 0; height: 100%; overflow: auto;"> 
 	<div id="conteudo">
-		<div class="w1" style="border:solid 1px #CCC;position: relative;transform: translate(-50%,0);left: 50%;padding: 30px;width: 800px;float: left;top: 10px;">
+		<div class="w1" style="border:solid 1px #CCC;position: relative;transform: translate(-50%,0);left: 50%;padding: 30px;width: calc(100% - 100px );float: left;top: 10px;">
 			<div id='step0' style="position: relative;float: left;text-align: center;">
+
+				<img src="/admin/App/Templates/img/websheep/logo_ws_install.jpg" style="width: 80px;">
+
+				<div class="c"></div>
 				<strong style="font-family: 'Titillium Web', sans-serif;font-size: 30px;line-height">Bem-Vindo(a) ao WebSheep!</strong><br>
 				Notamos que você ainda nao tem um arquivo <strong>ws-config.php</strong><br>
 				Nele irá todos os dados do servidor e banco de dados. preencha o formulário e clique em avançar.
@@ -302,29 +306,37 @@ $(document).ready(function(){
 						<div class="label" style="width: 100%;">Nome do cliente licenciado:</div>
 						<div class="c"></div>
 						<input	name="CLIENT_NAME" 	value="" placeholder="ex: Empresa LTDA" style="width: 100%;">
+
+
 						<div class="c"></div>
 						<div class="label" style="width: 50%;">Login do webmaster:</div>
-						<div class="label" style="width: 44%;">Senha do webmaster:</div>
-						<input	name="LOG_WEBMASTER" 	value="admin" 						placeholder="" style="width: 50%;">
-						<input	name="PASS_WEBMASTER" 	value="admin123" 	type="password" placeholder="" style="width: 47%;">
+						<div class="label" style="width: 50%;">Senha do webmaster:</div>
+						<input	name="LOG_WEBMASTER" 	value="admin" 						placeholder="" style="width: calc(50% - 5px);margin-left: 0;">
+						<input	name="PASS_WEBMASTER" 	value="admin123" 	type="password" placeholder="" style="width: calc(50% - 5px);margin-right: 0;">
+
+
 						<div class="c"></div>
-						<div class="label">Nome do banco MySQL</div>
-						<div class="label">Nome do usuário MySQL</div>
-						<input	data-conect="mysql" name="NOME_BD" 					value="">
-						<input	data-conect="mysql" name="USUARIO_BD" 				value="root">
-						<div style="width: 244px;" class="label">Senha do MySQL</div>
-						<div style="width: 244px;" class="label">Nome do servidor MySQL</div>
-						<div style="width: 244px;" class="label">Prefixo das tabelas</div>
-						<input	style="width: 255px;" data-conect="mysql" name="SENHA_BD"		type="password" value="">
-						<input	style="width: 255px;" data-conect="mysql" name="SERVIDOR_BD"	value="localhost">
-						<input	style="width: 255px;" name="PREFIX_TABLES"	value="">
+						<div class="label" style="width: 50%;">Nome do banco MySQL</div>
+						<div class="label" style="width: 50%;">Nome do usuário MySQL</div>
+						<input	data-conect="mysql" name="NOME_BD" 					value="" 		style="width: calc(50% - 5px);margin-left: 0;">
+						<input	data-conect="mysql" name="USUARIO_BD" 				value="root" 	style="width: calc(50% - 5px);margin-right: 0;">
+
+
+						<div style="width: 33%;" class="label">Senha do MySQL</div>
+						<div style="width: 33%;" class="label">Nome do servidor MySQL</div>
+						<div style="width: 33%;" class="label">Prefixo das tabelas</div>
+						<input	style="width: calc(33.3333% - 5px);margin-left: 0;" 	data-conect="mysql" name="SENHA_BD"		type="password" value="">
+						<input	style="width: calc(33.3333% - 5px);margin-right: 0;margin-left: 0" 				data-conect="mysql" name="SERVIDOR_BD"	value="localhost">
+						<input	style="width: calc(33.3333% - 5px);margin-right: 0;" name="PREFIX_TABLES"	value="">
 						<input	type="hidden" name="DOMINIO" 				value="<?= $_SERVER['HTTP_HOST'] ?>">
 						<input	type="hidden" name="DOMINIO_SEC" 			value="<?= $_SERVER['HTTP_HOST'] ?>">
 
-						<div style="width: 47%;text-align:left;" class="label">Token do Recaptcha do Google</div>
-						<div style="width: 47%;text-align:left;" class="label">Idioma do sistema</div>
-						<input	name="RECAPTCHA" value="">
-						<select name="LANG"><?
+
+
+						<div style="width: 50%;text-align:left;" class="label">Token do Recaptcha do Google</div>
+						<div style="width: 50%;text-align:left;" class="label">Idioma do sistema</div>
+						<input	name="RECAPTCHA" value="" style="width: calc(50% - 5px);margin-left: 0;">
+						<select name="LANG" style="width: calc(50% - 5px);margin-right: 0;"><?
 							$pasta = './App/Config/lang';
 							if(is_dir($pasta)){
 								$dh = opendir($pasta);
