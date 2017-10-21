@@ -22,10 +22,18 @@
 	<div class="c"/>
 	<label class="w1 SMTP_Senha">{domainPanel_Password}:</label>
 	<label class="w1 hd">{domainPanel_HDspace}:</label>
+	<label class="w1" style="margin-left:63px;">{domainPanel_WsLang}:</label>
 	<div class="c"/>
 
 	<input  id="SMTP_Senha"    name="SMTP_Senha"      class="inputText w4"    type="password"  value="{smtp_senha}"      placeholder="">
 	<input  id="hd"   type="number" name="hd" class="inputText w4"  style="width:155px;"  value="{hd}">
+	<select id="ws_lang" name="ws_lang" class="inputText w4" style="padding: 9px; width: 590px; ">
+		<!-- BEGIN BLOCK_WS_LANG -->
+			<option value="{LANG}">{LANG}</option>
+		<!-- END BLOCK_WS_LANG -->
+	</select>
+
+
 	<div class="tituloLabel w1" >{domainPanel_DomainStatus}: </div>
 	<div class="c"/>
 	<label for="DomainStatus"     class="DomainStatus w4" style="padding:10px 59px;float:left">
@@ -74,10 +82,11 @@
 </form>
 <script type="text/javascript">
 	$(document).ready(function(){
-			$('#metaTags').bind('tap click press',function(){
-				$("#conteudo").load("./App/Modulos/_modulo_/metaTags.php?id_page=0");
-			})
-	
+
+		$('#ws_lang option[value={ATUAL_LANG}]').attr('selected','selected');
+		$('#metaTags').bind('tap click press',function(){
+			$("#conteudo").load("./App/Modulos/_modulo_/metaTags.php?id_page=0");
+		})
 		$('*[legenda]').LegendaOver();
 		$(document).off("mouseenter").off("mouseleave");
 		$(document).on("mouseenter", "#topo_ws_img", function() {

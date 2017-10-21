@@ -58,6 +58,7 @@
 	#####################################################
 	$_TEMPLATE->domainPanel_Password				= ws::getLang("domainPanel>Password");
 	$_TEMPLATE->domainPanel_HDspace					= ws::getLang("domainPanel>HDspace");
+	$_TEMPLATE->domainPanel_WsLang					= ws::getLang("domainPanel>WsLang");
 	$_TEMPLATE->domainPanel_Port					= ws::getLang("domainPanel>Port");
 	$_TEMPLATE->domainPanel_AccountDetails			= ws::getLang("domainPanel>AccountDetails");
 	$_TEMPLATE->domainPanel_Server					= ws::getLang("domainPanel>Server");
@@ -107,6 +108,23 @@
 	$_TEMPLATE->domainPanel_modal_GenerateNew		= ws::getLang("domainPanel>modal>GenerateNew");
 	$_TEMPLATE->domainPanel_modal_UseTheSame		= ws::getLang("domainPanel>modal>UseTheSame");
 	$_TEMPLATE->domainPanel_modal_ItemSavedSucces	= ws::getLang("domainPanel>modal>ItemSavedSucces");
+
+	#####################################################  
+	# CAPTAMOS AS TRADUÇÕES NO SERVIDOR 
+	#####################################################
+	$pasta = ROOT_ADMIN.'/App/Config/lang';
+	if(is_dir($pasta)){
+		$dh = opendir($pasta);
+		while($diretorio = readdir($dh)){
+			if($diretorio != '..' && $diretorio != '.'){
+				$lang = str_replace('.json',"",$diretorio);
+				$_TEMPLATE->LANG = $lang;
+				$_TEMPLATE->block("BLOCK_WS_LANG");
+			}
+		}
+	}
+
+				$_TEMPLATE->ATUAL_LANG = LANG;
 
 	#####################################################  
 	# RETIRNAMOS A STRING DO HTML 

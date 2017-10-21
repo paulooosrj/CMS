@@ -30,7 +30,7 @@
 
 	RewriteCond %{DOCUMENT_ROOT}/website/$1 -f 			[OR] 
 	RewriteCond %{DOCUMENT_ROOT}/website/$1 -d
-	RewriteRule ^(.*)$ 			/website/$1  		   [S=10]
+	RewriteRule ^(.*)$ 			/website/$1  		   [S=12]
 
 ##########################################################################################
 ##################################### URLS AMIGAVEIS E INTERNAS ##########################
@@ -45,6 +45,8 @@
 	RewriteRule ^ws-leads/(.*)$ 		/admin/App/Core/ws-leads.php 					[L]
 	RewriteRule ^ws-img/(.*)$ 			/admin/App/Core/ws-img.php 						[L]	
 	RewriteRule ^ws-rest/(.*)$ 			/admin/App/Core/ws-rest.php?rest=$1				[L]	
+	RewriteRule ^ws-branches$			/admin/App/Core/ws-branches.php 				[L]
+	RewriteRule ^ws-commits$			/admin/App/Core/ws-commits.php 					[L]
 	RewriteRule ^(.*)$ 					/admin/App/Core/ws-website.php					[L]
 
 ##########################################################################################

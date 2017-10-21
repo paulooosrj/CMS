@@ -67,6 +67,7 @@
 				"img_gal"
 			);
 		}
+
 		static function fb_count_comments($domain = null) {
 			if ($domain == null) {
 				$domain = ws::protocolURL() . DOMINIO . '/' . ws::urlPath();
@@ -102,6 +103,7 @@
 			}
 			return '(function(d, s, id) {' . '	var js, fjs = d.getElementsByTagName(s)[0];' . '	if (d.getElementById(id)) return;' . '	js = d.createElement(s); js.id = id;' . '	js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=' . $version . '' . $idFb . '";' . '	fjs.parentNode.insertBefore(js, fjs);' . '}(document, "script","facebook-jssdk"));';
 		}
+
 		public function insertVal($colum = null, $value = null) {
 			$this->setinsertcolum[] = array(
 				$colum,
@@ -229,47 +231,47 @@
 				}
 			}
 		}
-			static function compileJS(){
-					function compile($code, $level = 'SIMPLE_OPTIMIZATIONS'){
-						try {
-							$ch = curl_init('http://closure-compiler.appspot.com/compile'); 
-							curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-							curl_setopt($ch, CURLOPT_POST, 1);
-							curl_setopt($ch, CURLOPT_POSTFIELDS, 'output_info=compiled_code&output_format=text&compilation_level=' . $level . '&js_code=' . urlencode($code));
-							$minified = curl_exec($ch);
-							curl_close($ch);
-						} catch (Exception $e) {
-							$minified = $code;
-						}
-						return $minified;
+		static function compileJS(){
+				function compile($code, $level = 'SIMPLE_OPTIMIZATIONS'){
+					try {
+						$ch = curl_init('http://closure-compiler.appspot.com/compile'); 
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+						curl_setopt($ch, CURLOPT_POST, 1);
+						curl_setopt($ch, CURLOPT_POSTFIELDS, 'output_info=compiled_code&output_format=text&compilation_level=' . $level . '&js_code=' . urlencode($code));
+						$minified = curl_exec($ch);
+						curl_close($ch);
+					} catch (Exception $e) {
+						$minified = $code;
 					}
-					$path 				= ROOT_ADMIN."/App/Templates/js/websheep";
+					return $minified;
+				}
+				$path 				= ROOT_ADMIN."/App/Templates/js/websheep";
 
-					$funcionalidades 	= file_get_contents($path."/funcionalidades.js");
-					$functionws			= str_replace("{dataMinifiq}",date("Y-m-d H:i:s"),file_get_contents($path."/functionsws.js"));
+				$funcionalidades 	= file_get_contents($path."/funcionalidades.js");
+				$functionws			= str_replace("{dataMinifiq}",date("Y-m-d H:i:s"),file_get_contents($path."/functionsws.js"));
 
-					file_put_contents($path."/funcionalidades.min.js",	compile($funcionalidades));
-					file_put_contents($path."/functionsws.min.js",		compile($functionws));
-			}
+				file_put_contents($path."/funcionalidades.min.js",	compile($funcionalidades));
+				file_put_contents($path."/functionsws.min.js",		compile($functionws));
+		}
 
-			static function insertLog($id_user="",$id_ferramenta="" ,$id_item="",$linha="",$coluna="",$type="",$url="",$titulo="",$mensagem=""){
-				global $_conectMySQLi_;
-				##############################################################################
-				# INSERIMOS UM REGISTRO DE LOG
-				##############################################################################
-				$_temp_ = new MySQL();
-				$_temp_->set_table(PREFIX_TABLES.'ws_log');
-				$_temp_->set_insert('id_user',		$id_user);
-				$_temp_->set_insert('id_ferramenta',$id_ferramenta);
-				$_temp_->set_insert('id_item',		$id_item);
-				$_temp_->set_insert('linha',		$linha);
-				$_temp_->set_insert('coluna',		$coluna);
-				$_temp_->set_insert('type',			$type);
-				$_temp_->set_insert('url',			$url);
-				$_temp_->set_insert('titulo',		$titulo);
-				$_temp_->set_insert('mensagem',		mysqli_real_escape_string($_conectMySQLi_,$mensagem));
-				$_temp_->insert();
-			}	
+		static function insertLog($id_user="",$id_ferramenta="" ,$id_item="",$linha="",$coluna="",$type="",$url="",$titulo="",$mensagem=""){
+			global $_conectMySQLi_;
+			##############################################################################
+			# INSERIMOS UM REGISTRO DE LOG
+			##############################################################################
+			$_temp_ = new MySQL();
+			$_temp_->set_table(PREFIX_TABLES.'ws_log');
+			$_temp_->set_insert('id_user',		$id_user);
+			$_temp_->set_insert('id_ferramenta',$id_ferramenta);
+			$_temp_->set_insert('id_item',		$id_item);
+			$_temp_->set_insert('linha',		$linha);
+			$_temp_->set_insert('coluna',		$coluna);
+			$_temp_->set_insert('type',			$type);
+			$_temp_->set_insert('url',			$url);
+			$_temp_->set_insert('titulo',		$titulo);
+			$_temp_->set_insert('mensagem',		mysqli_real_escape_string($_conectMySQLi_,$mensagem));
+			$_temp_->insert();
+		}	
 		static function setTokenRest($timeout = "5 seconds") {
 			$Formats = array("seconds", "minutes", "hours", "days", "months", "years");
 			if (is_string($timeout)) {
@@ -340,7 +342,6 @@
 					return false;
 				}
 			}
-			
 		}
 		
 		###################################################################################
@@ -506,6 +507,7 @@
 				}
 			}
 		}
+
 		static function updateTool($id_tool = null) {
 			$session = new session();
 			##################################################################################
@@ -563,7 +565,6 @@
 				$s->set_update('_alterado_', '0');
 				$s->salvar();
 			}
-			
 		}
 
 		static function normalizePath($path) {
@@ -725,7 +726,7 @@
 					}
 				}
 			}
-		/*########################################*/
+			/*########################################*/
 			$controller = new controller();
 			$_temp_ = new MySQL();
 			$_temp_->set_table(PREFIX_TABLES . 'ws_pages');
@@ -966,12 +967,14 @@
 			}
 			return $linkFileList;
 		}
+
 		public static function wsInclude($include, $process = 1) {
 			ob_start();
 			include($include);
 			$get_contents = ob_get_clean();
 			echo htmlProcess::processHTML($get_contents);
 		}
+
 		static function GetDebugError($dados, $plus = "") {
 			return ("<br>" . $plus . "<br><br><hr style='border-bottom: dashed 1px;'><br><b>Arquivo:</b>" . $dados[0]['file'] . '<br><b>Linha</b>: ' . $dados[0]['line'] . ' <br><b>Função:</b>' . $dados[0]['class'] . $dados[0]['type'] . $dados[0]['function'] . '("' . implode($dados[0]['args'], ',') . '")<br><br><hr style="border-bottom: dashed 1px;"><br><hr>');
 		}
@@ -1030,6 +1033,36 @@
 			}
 			echo 'src="' . $file . $cache . '"></script>' . PHP_EOL;
 		}
+
+		#############################################################################################
+		# RETORNA JSON COM AS BRANCHES DO GITHUB
+		#############################################################################################
+
+		static function get_github_branches() {
+			$branches = curl_init();
+			curl_setopt($branches, CURLOPT_URL, 'https://api.github.com/repos/websheep/cms/branches');
+			curl_setopt($branches, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($branches, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($branches, CURLOPT_USERAGENT, "https://api.github.com/meta");
+			$json_branches = curl_exec($branches);
+			curl_close($branches);
+			return ($json_branches);
+		}
+
+		#############################################################################################
+		# RETORNA JSON COM OS COMMITS DO GITHUB
+		#############################################################################################
+		static function get_github_commits() {
+			$commits = curl_init();
+			curl_setopt($commits, CURLOPT_URL, 'https://api.github.com/repos/websheep/CMS/commits');
+			curl_setopt($commits, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($commits, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($commits, CURLOPT_USERAGENT, "https://api.github.com/meta");
+			$json_commits = curl_exec($commits);
+			curl_close($commits);
+			return ($json_commits);
+		}
+		
 		static function version_compare($ver1, $ver2, $operator = null) {
 			    $p = '#(\.0+)+($|-)#';
 			    $ver1 = preg_replace($p, '', $ver1);
@@ -1037,9 +1070,6 @@
 			    return isset($operator) ? 
 			        version_compare($ver1, $ver2, $operator) : 
 			        version_compare($ver1, $ver2);
-		}
-		static function activeImgResponsive() {
-			ws::script('/admin/js/responsive-img.js');
 		}
 		static function AnalyticsCode($id = null) {
 			if (!is_string($id)) {
@@ -1163,7 +1193,6 @@
 		
 		public function slug($slug) {
 			global $_conectMySQLi_;
-			
 			$pesquisa = mysqli_query($_conectMySQLi_, 'SELECT * FROM ' . PREFIX_TABLES . 'ws_ferramentas WHERE slug LIKE "' . $slug . '" ') or die(_erro(ws::GetDebugError(debug_backtrace(), mysqli_error($_conectMySQLi_))));
 			$row    = mysqli_num_rows($pesquisa);
 			$result = mysqli_fetch_array($pesquisa);

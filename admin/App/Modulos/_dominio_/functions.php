@@ -10,6 +10,21 @@
 	
 	$user = new Session();
 
+	function save_ws_lang($lang="pt-BR"){
+		$config = file_get_contents(ROOT_DOCUMENT.'/ws-config.php');
+		$linhas = explode(PHP_EOL,$config);
+		$newDoc = array();
+		$i 		= 0;
+		foreach ($linhas as $key => $value) {
+			if(strpos($value,'if(!defined("LANG"))')>-1){
+				$newDoc[]='	if(!defined("LANG"))		define("LANG",			"'.$lang.'");';
+			}else{
+				$newDoc[]=$value;
+			}
+			$i++;
+		}
+		file_put_contents(ROOT_DOCUMENT.'/ws-config.php', implode($newDoc,PHP_EOL));
+	}
 
 
 	function substituiTopo() {
@@ -256,8 +271,10 @@
 				mkdir($dir);
 			}
 		}
-
 		if ($S->salvar()) {
+
+			save_ws_lang($inputs['ws_lang']);
+
 			echo "Ítem salvo com sucesso!";
 			exit;
 		} else {
