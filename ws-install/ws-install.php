@@ -270,14 +270,14 @@
 	<div class="logo"><b><?php if(file_exists("./../admin")){echo "Update"; }else{echo "Setup";}?> WebSheep</b><br>
 	</div>
 	<div class="txt" id="txt">
-		<select id="branches">
+		<select id="branches" style="display:none">
 			<option value="null">Selecione uma versão</option>
 
 		</select>
 	</div>
 	<!--  -->
 
-	<div class="botao" id="botao">instalar WebSheep</div>
+	<div class="botao" id="botao" style="display:none">instalar WebSheep</div>
 	<div class="loader" id="loader" style="display:none"></div>
 
 </div>
@@ -293,23 +293,30 @@ $(document).ready(function(){
 			var realLink = baseLink.replace("__",c.name);
 			$("#branches").append('<option value="'+realLink+'">'+c.name+'</option>');
 		})
-		$("#botao").show();
+		$("#botao,#branches").show();
 	})
 	$("#botao").bind("click press tap",function(){
-		var path = $("#branches").val().split('/');
-		$("#loader").css("background-image","url(https://raw.githubusercontent.com/websheep/cms/"+path[path.length-1].slice(0,-4)+"/admin/App/Templates/img/websheep/loading322.gif)").show();
-		$("#txt,#botao").hide();
-		$.ajax({
-			url:"./<?php echo basename(__FILE__)?>",
-			data:{download:1,branche:$("#branches").val()},
-			beforeSend:function( xhr ) {}
-		}).done(function( data ) {
-			if(data=="sucesso"){
-				window.location = "/admin/";
-			}else{
-				alert(data);
-			}
-		});
+		var path 	= $("#branches").val().split('/');
+		var version = $("#branches").val();
+		
+		if(version=="null"){
+			alert("Selecio ne uma versão");
+
+		}else{
+			$("#loader").css("background-image","url(https://raw.githubusercontent.com/websheep/cms/"+path[path.length-1].slice(0,-4)+"/admin/App/Templates/img/websheep/loading322.gif)").show();
+			$("#txt,#botao").hide();
+			$.ajax({
+				url:"./<?php echo basename(__FILE__)?>",
+				data:{download:1,branche:$("#branches").val()},
+				beforeSend:function( xhr ) {}
+			}).done(function( data ) {
+				if(data=="sucesso"){
+					window.location = "/admin/";
+				}else{
+					alert(data);
+				}
+			});
+		}
 	});
 
 })
