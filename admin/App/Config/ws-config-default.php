@@ -24,8 +24,12 @@
 	if(!defined("LANG"))		define("LANG", 			"{LANG}");
 	if(!defined("CHARSET"))		define("CHARSET", 		"utf-8");
 	if(!defined("TIMEZONE"))	define("TIMEZONE", 		"America/Sao_Paulo");
-	if(!defined("SECURE"))		define("SECURE", TRUE);  //FALSE ESTRITAMENTE PARA DESENVOLVIMENTO!!!!
 
+
+####################################################################################
+# UTILIZE FALSE ESTRITAMENTE PARA DESENVOLVIMENTO!!!!
+####################################################################################
+	if(!defined("SECURE"))		define("SECURE", TRUE);  //FALSE ESTRITAMENTE PARA DESENVOLVIMENTO!!!!
 
 ######################################################################
 # Aqui vai o token do seu site para o Recaptcha do Google
@@ -45,10 +49,10 @@
 	if(!defined("ROOT_WEBSITE"))	define("ROOT_WEBSITE",		"{ROOT_WEBSITE}");
 	if(!defined("ROOT_DOCUMENT"))	define("ROOT_DOCUMENT",		"{ROOT_DOCUMENT}");
 
-############################################
+######################################################
 #	Direciona a pasta onde ficará as sessões
-############################################
-#ini_set('session.save_path',ROOT_ADMIN.'/App/Temp');
+######################################################
+#	ini_set('session.save_path',ROOT_DOCUMENT.'/ws-tmp');
 
 ############################################
 #	DEFINE CHARSET
@@ -64,7 +68,9 @@ header('Content-Type: charset=utf-8');
  * Isto irá forçar todos os usuários a fazerem login novamente.
  *
  */
+if(!defined("LOGGED_IN_SALT"))		define('LOGGED_IN_SALT',	'{LOGGED_IN_SALT}');
 if(!defined("ID_SESS"))				define("ID_SESS",			'{ID_SESS}');
+
 if(!defined("NAME_SESS"))			define("NAME_SESS",			'{NAME_SESS}');
 if(!defined("TOKEN_DOMAIN"))		define("TOKEN_DOMAIN",		'{TOKEN_DOMAIN}');
 if(!defined("TOKEN_ACCESS"))		define("TOKEN_ACCESS",		'{TOKEN_ACCESS}');
@@ -75,7 +81,6 @@ if(!defined("LOGGED_IN_KEY"))		define('LOGGED_IN_KEY',		'{LOGGED_IN_KEY}');
 if(!defined("NONCE_KEY"))			define('NONCE_KEY',			'{NONCE_KEY}');
 if(!defined("AUTH_SALT"))			define('AUTH_SALT',			'{AUTH_SALT}');
 if(!defined("SECURE_AUTH_SALT"))	define('SECURE_AUTH_SALT',	'{SECURE_AUTH_SALT}');
-if(!defined("LOGGED_IN_SALT"))		define('LOGGED_IN_SALT',	'{LOGGED_IN_SALT}');
 if(!defined("NONCE_SALT"))			define('NONCE_SALT',		'{NONCE_SALT}');
 
 

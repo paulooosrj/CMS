@@ -7,17 +7,17 @@ class session{
 	private $stringone;
 	private $duratacookie;
 	private $secret;
-	public function __construct ($name="ws-session2") {
+	public function __construct ($name="ws-session") {
 		$this->type 		= 	"session"; //cookie
 		$this->secury 		= 	1;
-		$this->preStr 		= 	$name; 
 		$this->prefix 		= 	"ws-"; 
+		$this->preStr 		= 	ID_SESS; 
 		$this->secret 		=	LOGGED_IN_SALT;		
 		$this->maxCookie	=	20;
 		$this->CoockieIdSess=	md5('ws-idsess');
 		$this->cookieLenght	=	3096;	
 		$this->duratacookie	=	(time() + ( 24 * 3600));	
-		$this->newName 		= 	strtolower($this->prefix.substr(str_replace(array("_","-","==","="),"",base64_encode(md5($this->preStr))),0,256));
+		$this->newName 		= 	strtolower($this->prefix.substr(str_replace(array("_","-","==","=","."," "),"",base64_encode(md5($this->preStr))),0,256));
 		$this->start();
 	}
 
@@ -29,6 +29,13 @@ class session{
 				}
 			} else {
 				if($this->secury==0){
+					####################################################################
+					# ALGUNS SERVIDORES VEM COM O DIRETÓRIO /TMP SEM PERMISSÃO PRA LEITURA OU ESCRITA
+					# ENTÃO PARA PREVINIR ISSO JÁ JOGAMOS A PERMISSÃO 0700
+					####################################################################
+					chmod(session_save_path().'/sess_'.session_id(), 0700);
+					
+					####################################################################
 					ini_set("session.gc_maxlifetime","432000");
 					ini_set("url_rewriter.tags","");
 					ini_set("session.use_trans_sid", false);
@@ -39,14 +46,11 @@ class session{
 						if($status == PHP_SESSION_NONE){
 							session_start();
 						}
-
 					}
 				}else{
-
-						@ini_set("session.cookie_secure",true);
-						@ini_set("session.cookie_httponly",true);
-						@ini_set("session.use_trans_sid", false);
-
+					@ini_set("session.cookie_secure",true);
+					@ini_set("session.cookie_httponly",true);
+					@ini_set("session.use_trans_sid", false);
 					 if(
 						 	(empty($_COOKIE[$this->CoockieIdSess])) ||
 						 	(isset($_COOKIE[$this->CoockieIdSess]) && $_COOKIE[$this->CoockieIdSess]!=$this->newName) 

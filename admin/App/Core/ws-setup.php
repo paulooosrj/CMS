@@ -163,6 +163,7 @@
 		@mkdir(ROOT_DOCUMENT 				.'/ws-update');
 		@mkdir(ROOT_DOCUMENT 				.'/ws-bkp');
 		@mkdir(ROOT_DOCUMENT 				.'/ws-cache');
+		@mkdir(ROOT_DOCUMENT 				.'/ws-tmp',0700);
 		@mkdir(ROOT_DOCUMENT 				.'/website/includes');
 		@mkdir(ROOT_DOCUMENT 				.'/website/plugins');
 		CopiaDir(ROOT_DOCUMENT 				.'/admin/App/Modulos/plugins', ROOT_DOCUMENT . '/website/plugins');
