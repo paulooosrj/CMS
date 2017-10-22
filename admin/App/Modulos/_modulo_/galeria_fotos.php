@@ -22,7 +22,7 @@
 	@define("ID_ITEM"			,$_GET['id_item']);
 	@define("BACK"				,$_GET['back']);
 	@define("TOKEN_GROUP"		,$_GET['token_group']);
-	@define("TITULO_FERRAMENTA"	,$session->get('_TITULO_FERRAMENTA_']));
+	@define("TITULO_FERRAMENTA"	,$session->get('_TITULO_FERRAMENTA_'));
 	@define("PATCH"				,'App/Modulos/_modulo_');
 
 ##################################################################################

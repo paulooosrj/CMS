@@ -82,6 +82,7 @@
 					url: "./App/Modulos/_modulo_/functions.php",
 					data: { function: "disEnabledPlugin",pathPlugin:pathPlugin}
 				}).done(function(e) {
+					console.log(e)
 					if(e=='on'){
 						$(DivItem).addClass('enabled')
 						$(DivItem).removeClass('disabled')

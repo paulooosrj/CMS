@@ -232,7 +232,7 @@
 			}
 		}
 		static function compileJS(){
-				function compile($code, $level = 'SIMPLE_OPTIMIZATIONS'){
+				function _compile($code, $level = 'SIMPLE_OPTIMIZATIONS'){
 					try {
 						$ch = curl_init('http://closure-compiler.appspot.com/compile'); 
 						curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -250,8 +250,8 @@
 				$funcionalidades 	= file_get_contents($path."/funcionalidades.js");
 				$functionws			= str_replace("{dataMinifiq}",date("Y-m-d H:i:s"),file_get_contents($path."/functionsws.js"));
 
-				file_put_contents($path."/funcionalidades.min.js",	compile($funcionalidades));
-				file_put_contents($path."/functionsws.min.js",		compile($functionws));
+				file_put_contents($path."/funcionalidades.min.js",	_compile($funcionalidades));
+				file_put_contents($path."/functionsws.min.js",		_compile($functionws));
 		}
 
 		static function insertLog($id_user="",$id_ferramenta="" ,$id_item="",$linha="",$coluna="",$type="",$url="",$titulo="",$mensagem=""){
@@ -500,7 +500,7 @@
 							));
 						}
 					}
-					$col = @mysqli_query($_conectMySQLi_, "SELECT   " . $campo['coluna_mysql'] . "  FROM  " . PREFIX_TABLES . "_model_item");
+					$col = @mysqli_query($_conectMySQLi_, "SELECT   " . mysqli_real_escape_string($_conectMySQLi_,$campo['coluna_mysql']) . "  FROM  " . PREFIX_TABLES . "_model_item");
 					if (!$col) {
 						$s->add_column();
 					}
@@ -855,7 +855,7 @@
 			###################################################################
 			# 
 			###################################################################
-			function ReplaceImages($urlFull) {
+			function ReplaceImages($urlFull) { 
 				$tagIMG      = $urlFull[0];
 				$urlOriginal = $urlFull[1];
 				if (substr($urlOriginal, 0, 7) == '/ws-img') {

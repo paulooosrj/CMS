@@ -83,6 +83,10 @@ if(return_bytes(@$config->php_ini->upload_max_filesize["global_value"]) <= 10485
 	echo "<div>• Aumente a opção 'upload_max_filesize' em seu php.ini, sugerimos no mínimo 2M</div>";
 }
 
+if(@$config->extensions->gettext !=1){
+	$bug = 1;
+	echo "<div>• É necessário habilitar em seu php.ini a extansão php_gettext</div>";
+}
 if(@$config->extensions->openssl !=1){
 	$bug = 1;
 	echo "<div>• É necessário habilitar em seu php.ini a extansão php_openssl</div>";

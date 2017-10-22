@@ -10,7 +10,7 @@
 <html lang="pt-br" class='bgradial01' id="html">
 <head>
 <meta charset="UTF-8">
-<link type="image/x-icon" href="/img/favicon.ico" rel="shortcut icon" />
+<link type="image/x-icon" href="/admin/App/Templates/img/websheep/favicon.ico" rel="shortcut icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 

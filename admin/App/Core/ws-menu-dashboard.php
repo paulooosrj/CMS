@@ -148,6 +148,7 @@
 	$menu_dashboard->label_hd 						= ws::getlang('dashboard>lateralMenu>HDManagement');
 	$menu_dashboard->logRecords 					= ws::getlang('dashboard>lateralMenu>logRecords');
 	$menu_dashboard->label_logout					= ws::getlang('dashboard>lateralMenu>Logout');
+	$menu_dashboard->label_reportBugs				= ws::getlang('dashboard>lateralMenu>reportBugs');
 
 	$menu_dashboard->block("MENU_DASHBOARD");
 	$menu_dashboard->show();

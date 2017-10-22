@@ -7,6 +7,7 @@
 	#  quando excluído, o plugin não é exibido 
 	###############################################################################################################################
 	function disEnabledPlugin() {
+		global $user;
 		$key        = ROOT_WEBSITE . '/' . $_REQUEST['pathPlugin'] . '/active';
 		$jsonConfig = ROOT_WEBSITE . '/' . $_REQUEST['pathPlugin'] . '/plugin.config.json';
 		$phpConfig  = ROOT_WEBSITE . '/' . $_REQUEST['pathPlugin'] . '/plugin.config.php';
@@ -40,7 +41,9 @@
 	#  Ao excluir o plugin, todos os arquivos dentro dele também serão excluídos 
 	###############################################################################################################################
 	function excluiPlugin() {
+		global $user;
 		function ExcluiDir($Dir) {
+			global $user;
 			$dd = opendir($Dir);
 			while (false !== ($Arq = readdir($dd))) {
 				if ($Arq != "." && $Arq != "..") {
@@ -189,6 +192,7 @@
 		}
 		if ($CAMPO_DATA['filtro'] == 'cat') {
 			function foreachCat($categoria, $listCat,$ws_id_ferramenta) {
+				global $user;
 				$cat_foreach = new MySQL();
 				$cat_foreach->set_table(PREFIX_TABLES . '_model_cat');
 				$cat_foreach->set_order('titulo', 'ASC');
@@ -251,6 +255,7 @@
 	# Função padrão para o campo interno do ítem 
 	###############################################################################################################################
 	function SaveLiveEditor() {
+		global $user;
 		global $_conectMySQLi_;
 		$sucesso          = false;
 		$_POST['content'] = mysqli_real_escape_string($_conectMySQLi_, urldecode($_POST['content']));
@@ -311,6 +316,7 @@
 	# Função padrão para o campo interno do ítem 
 	###############################################################################################################################
 	function saveURLvideo() {
+		global $user;
 		criaRascunho($_POST['ws_id_ferramenta'], $_POST['id_item']);
 		$linkVideo = new MySQL();
 		$linkVideo->set_table(PREFIX_TABLES . '_model_item');
@@ -345,6 +351,7 @@
 	# Função padrão para o campo interno do ítem 
 	###############################################################################################################################
 	function saveURLmp3() {
+		global $user;
 		#####################################################################################
 		# CRIA O RASCUNHO CASO NAO TENHA
 		#####################################################################################
@@ -408,6 +415,7 @@
 	# Função padrão para o campo interno do ítem 
 	###############################################################################################################################
 	function getURLmp3() {
+		global $user;
 		$token = $_POST['token'];
 		$campo = new MySQL();
 		$campo->set_table(PREFIX_TABLES . '_model_campos');
@@ -436,6 +444,7 @@
 	# Função padrão para o campo interno do ítem 
 	###############################################################################################################################	
 	function getURLvideo() {
+		global $user;
 		if (criaRascunho($_POST['ws_id_ferramenta'], $_POST['id_item'])) {
 			echo '
 				<script>
@@ -476,6 +485,7 @@
 	# SALVANDO O TÍTULO PADRÃO DA PÁGINA   
 	###############################################################################################################################
 	function salvaTitlePage() {
+		global $user;
 		global $_conectMySQLi_;
 		$titulo  = mysqli_real_escape_string($_conectMySQLi_, $_POST['titulo']);
 		$id_page = $_POST['id_page'];
@@ -507,6 +517,7 @@
 	# EXCLUINDO UMA META TAG   
 	###############################################################################################################################
 	function exclMetaTag() {
+		global $user;
 		$FERRA = new MySQL();
 		$FERRA->set_table(PREFIX_TABLES . 'meta_tags');
 		$FERRA->set_where('id="' . $_POST['idMeta'] . '"');
@@ -521,6 +532,7 @@
 	# EXCLUINDO VÁRIAS META TAG'S   
 	###############################################################################################################################
 	function exclMultiMetaTag() {
+		global $user;
 		$FERRA = new MySQL();
 		$FERRA->set_table(PREFIX_TABLES . 'meta_tags');
 		$FERRA->set_where('id<>"" AND (id="' . implode($_POST['metas'], '" OR id="') . '")');
@@ -537,6 +549,7 @@
 	# SALVA VÁRIAS META TAG'S   
 	###############################################################################################################################
 	function salvaMetaTag() {
+		global $user;
 		$FERRA = new MySQL();
 		$FERRA->set_table(PREFIX_TABLES . 'meta_tags');
 		$FERRA->set_where('id="' . $_POST['idMeta'] . '"');
@@ -554,6 +567,7 @@
 	# ADICIONANDO META TAG'S A UMA PÁGINA   
 	###############################################################################################################################
 	function addMetaTag() {
+		global $user;
 		$twitter   = array();
 		$twitter[] = "twitter:card";
 		$twitter[] = "twitter:site";
@@ -651,6 +665,7 @@
 	# ADICIONANDO META TAG'S A UMA PÁGINA   
 	###############################################################################################################################
 	function returnCategorias() {
+		global $user;
 		if (criaRascunho($_POST['ws_id_ferramenta'], $_POST['id_item'])) {
 			echo '
 			<script>
@@ -665,6 +680,7 @@
 			';
 		}
 		function foreachCat($categoria, $listCat) {
+			global $user;
 			$cat_foreach = new MySQL();
 			$cat_foreach->set_table(PREFIX_TABLES . '_model_cat');
 			$cat_foreach->set_order('titulo', 'ASC');
@@ -746,6 +762,7 @@
 	# Função padrão para o campo interno do ítem
 	###############################################################################################################################
 	function vinculaCategorias() {
+		global $user;
 		$variaveis = array();
 		parse_str($_POST['categorias'], $variaveis);
 		$categorias = new MySQL();
@@ -796,6 +813,7 @@
 	# Função padrão para o campo interno do ítem
 	###############################################################################################################################
 	function salvaEstilo() {
+		global $user;
 		$SETUP = new MySQL();
 		$SETUP->set_table(PREFIX_TABLES . 'setupdata');
 		$SETUP->set_where('id="1"');
@@ -811,6 +829,7 @@
 	# Função padrão para o campo interno do ítem
 	###############################################################################################################################
 	function ReturnEstiloPadrao() {
+		global $user;
 		$SETUP = new MySQL();
 		$SETUP->set_table(PREFIX_TABLES . 'setupdata');
 		$SETUP->set_where('id="1"');
@@ -824,6 +843,7 @@
 	# Função padrão para o campo interno do ítem
 	###############################################################################################################################
 	function salvaCss() {
+		global $user;
 		$SETUP = new MySQL();
 		$SETUP->set_table(PREFIX_TABLES . 'setupdata');
 		$SETUP->set_where('id="1"');
@@ -838,6 +858,7 @@
 	# Função padrão para o campo interno do ítem
 	###############################################################################################################################
 	function ReturnCSSPadrao() {
+		global $user;
 		$SETUP = new MySQL();
 		$SETUP->set_table(PREFIX_TABLES . 'setupdata');
 		$SETUP->set_where('id="1"');
@@ -852,6 +873,7 @@
 	###############################################################################################################################
 	
 	function loadInfosPlugin() {
+		global $user;
 		if (file_exists(ROOT_WEBSITE . $_REQUEST['dataFile'])) {
 			echo 'true';
 		} else {
@@ -864,6 +886,7 @@
 	# ATUALIZA O AVATAR DE UMA CATEGORIA    
 	###############################################################################################################################
 	function reloadThumbCategoria() {
+		global $user;
 		$U = new MySQL();
 		$U->set_table(PREFIX_TABLES . '_model_cat');
 		$U->set_where('id="' . $_REQUEST['idCat'] . '"');
@@ -877,6 +900,7 @@
 	# ATUALIZA O AVATAR DE UMA GALERIA    
 	###############################################################################################################################
 	function substituiThumbGaleria() {
+		global $user;
 		if (is_array($_REQUEST['img'])) {
 			$_REQUEST['img'] = $_REQUEST['img'][0];
 		}
@@ -894,7 +918,7 @@
 	# Função padrão para o campo interno do ítem    
 	###############################################################################################################################
 	function substituiThumb() {
-
+		global $user;
 		criaRascunho($_POST['ws_id_ferramenta'], $_POST['idItem']);
 		if (is_array($_POST['img'])) {
 			$_POST['img'] = $_POST['img'][0];
@@ -915,6 +939,7 @@
 	# Função padrão para o campo interno do ítem    
 	###############################################################################################################################
 	function excluiThumb() {
+		global $user;
 		criaRascunho($_POST['ws_id_ferramenta'], $_POST['idItem']);
 		$U = new MySQL();
 		$U->set_table(PREFIX_TABLES . '_model_item');
@@ -930,6 +955,7 @@
 	# Função padrão para o campo interno do ítem    
 	###############################################################################################################################
 	function addImagensBibliotecaItem() {
+		global $user;
 		criaRascunho($_POST['ws_id_ferramenta'], $_POST['id_item'],true);
 		$up = new MySQL();
 		$up->set_table(PREFIX_TABLES . 'ws_biblioteca');
@@ -962,6 +988,7 @@
 	# Função padrão para o campo interno do ítem    
 	###############################################################################################################################
 	function addImagensBibliotecaGaleriaInterna() {
+		global $user;
 		$up = new MySQL();
 		$up->set_table(PREFIX_TABLES . 'ws_biblioteca');
 		$up->set_colum('file');
@@ -1008,6 +1035,7 @@
 	# Função padrão para o campo interno do ítem    
 	###############################################################################################################################
 	function edita_selectbox() {
+		global $user;
 		$campos = new MySQL();
 		$campos->set_table(PREFIX_TABLES . '_model_campos');
 		$campos->set_where('id_campo="' . $_REQUEST['id_campo'] . '"');
@@ -1026,6 +1054,7 @@
 	# ORGANIZA A ORDEM DOS ARQUIVOS INTERNOS     
 	###############################################################################################################################
 	function ordena_files() {
+		global $user;
 		$array_id = explode(',', $_REQUEST['ids']);
 		$i        = 1;
 		foreach ($array_id as $id) {
@@ -1043,7 +1072,7 @@
 	# ORGANIZA A ORDEM DAS IMAGENS INTERNAS     
 	###############################################################################################################################	
 	function ordena_fotos_imgs() {
-
+		global $user;
 		$array_id = explode(',', $_REQUEST['ids']);
 		$i        = 1;
 		foreach ($array_id as $id) {

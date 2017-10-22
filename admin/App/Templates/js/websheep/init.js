@@ -139,12 +139,14 @@
 					window.CloseMenu();
 					window.refreshMenuDesktop = function(){
 						$.ajax({
-							beforeSend:function(){$("#menu_tools").html("");},
+							beforeSend:function(){
+								$("#menu_tools").html("").css({"backgroundImage":'url("/admin/App/Templates/img/websheep/preloaderMenuLeft.png")'});
+							},
 							type: "POST",
 							url: "./App/Modulos/_tools_/functions.php",
 							data:{"function":"refreshMenuDesktop"}
 						}).done(function(data) {
-							$("#menu_tools").html(data);
+							$("#menu_tools").html(data).css({"backgroundImage":"none"});
 							$('body').unbind("click contextmenu  tap press mousedown").bind("click contextmenu  tap press mousedown", function (e) {
 								if (!$("#menu_tools").has(e.target).length && e.target != $("#menu_tools")[0] && !$(e.target).is( "#menu_mobile" )){window.CloseMenu();}
 							});
@@ -258,6 +260,15 @@
 											}
 											return false;
 							});
+
+
+							$(".reportBugs").unbind("click tap press").bind("click tap press",function(e) {
+								e.preventDefault();
+								$('#conteudo').html('<iframe src="//api.websheep.com.br/report-bugs/" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;margin:0;"></iframe>');
+								return false;
+							});
+
+
 							$(".biblioteca").unbind("click tap press").bind("click tap press",function(e) {
 								e.preventDefault();
 								abreBiblioteca({

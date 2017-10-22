@@ -749,6 +749,8 @@ right: 193px;
 .menu_tools{
 	width: 260px;
 	.ease-out(300ms);
+    background-image: url("/admin/App/Templates/img/websheep/preloaderMenuLeft.png");
+	background-repeat: repeat-y;
 	&.closed{
 	    width:30px;
 	    left: 0px;
@@ -762,12 +764,11 @@ right: 193px;
 	    }
 	 }
 	&.open{	width: 260px;}
-
-
     height: ~'calc(100% - 76px)';
     top: 37px;
     position: fixed;
-    background-color: darken(@bgMenuL, 10%);
+    background-color: @bgMenuL;
+    color:@colorMenu;
     z-index: 2;
     border-right: 1px solid;
     padding: 10px;
@@ -778,7 +779,6 @@ right: 193px;
     font-style: normal;
     font-weight: 300;
     font-size: 14px;
-    color:@colorMenu;
 }
 .menu_tools .vertodos {
     position: relative;

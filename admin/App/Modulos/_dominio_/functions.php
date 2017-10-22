@@ -361,10 +361,10 @@
 		$tables[] = '_model_op_multiple';
 		$return   = "";
 		foreach ($tables as $table) {
-			$result     = mysqli_query($_conectMySQLi_, 'SELECT * FROM ' . $table);
+			$result     = mysqli_query($_conectMySQLi_, 'SELECT * FROM ' . mysqli_real_escape_string($_conectMySQLi_,$table));
 			$num_fields = mysqli_num_fields($result);
 			$return .= 'DROP TABLE IF EXISTS ' . $table . ';';
-			$row2 = mysqli_fetch_row(mysqli_query($_conectMySQLi_, 'SHOW CREATE TABLE ' . $table));
+			$row2 = mysqli_fetch_row(mysqli_query($_conectMySQLi_, 'SHOW CREATE TABLE ' . mysqli_real_escape_string($_conectMySQLi_,$table)));
 			$return .= PHP_EOL . $row2[1] . ";" . PHP_EOL;
 			for ($i = 0; $i < $num_fields; $i++) {
 				while ($row = mysqli_fetch_row($result)) {
