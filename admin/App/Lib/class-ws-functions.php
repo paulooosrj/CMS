@@ -1970,6 +1970,7 @@ function exec_SQL($filename=null)					{
 		$templine = '';
 		$filename 	= file_get_contents($filename);
 		$filename 	= str_replace('{_prefix_}',PREFIX_TABLES,$filename);
+		$filename 	= str_replace(array("\n","\r" ,PHP_EOL),PHP_EOL, $filename);
 		$lines 		= explode(PHP_EOL,$filename);
 
 
@@ -1986,6 +1987,7 @@ function exec_SQL($filename=null)					{
 	}elseif(is_string($filename)){
 		$templine 	= '';
 		$filename 	= str_replace('{_prefix_}',PREFIX_TABLES,$filename);
+		$filename 	= str_replace(array("\n","\r" ,PHP_EOL),PHP_EOL, $filename);
 		$lines 		= explode(PHP_EOL,$filename);
 
 		foreach($lines as $line_num => $line) {
@@ -2085,6 +2087,6 @@ function remoteFileExists($url) 				{
 function _getLangMsn($code,$isso="",$porisso=""){
 	$a 		= LANG; //pt
 	$wsmsn 	= json_decode(__LANG__);
-	return str_replace($isso,$porisso,$wsmsn->$code->$a);
+	return str_replace($isso,$porisso,$wsmsn->${code}->$a);
 }
 ?>

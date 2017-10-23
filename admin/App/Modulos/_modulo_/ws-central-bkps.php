@@ -64,7 +64,7 @@
 			$template->dataFILE			=	$diretorio;
 			$newSplashScreen= "";			
 			$template->titulo			=	$diretorio;
-			$template->label			=	_getLangMsn('ws000029');
+			$template->label			=	ws::getlang('centralBkp>restore');
 			##########################################################################################################
 			# ABRIMOS O ZIP PARA VERIFICAR O CONTEÚDO
 			##########################################################################################################
@@ -76,7 +76,7 @@
 					##########################################################################################################
 					if(strlen($zip->getFromName('ws-info.json'))){
 					  		$contents 				= json_decode(trim($zip->getFromName('ws-info.json')),true);
-					  		$thumb 					= base64_encode($zip->getFromName($contents['thumb']));
+					  		$thumb 					= base64_encode(@$zip->getFromName(@$contents['thumb']));
 					  		$template->titulo 		= $contents['title'];
 					    	$template->description 	= $contents['content'];
 
