@@ -110,8 +110,8 @@
 	$template->BAIRRO              = $CAMPO['bairro'];
 	$template->COLOR               = $CAMPO['color'];
 
-	$template->VALUES_OPT_CHECKBOX 			= ($CAMPO['values_opt'] == "1") 	? "checked" : "";
-	$template->VALUES_CHECKBOX_TOP_SUBTITLE = ($CAMPO['labelTop'] == "1") 		? "checked" : "";
+	$template->VALUES_OPT_CHECKBOX 			= (isset($CAMPO['values_opt']) && $CAMPO['values_opt'] == "1") 	? "checked" : "";
+	$template->VALUES_CHECKBOX_TOP_SUBTITLE = (isset($CAMPO['labelTop']) && $CAMPO['labelTop'] == "1") 		? "checked" : "";
 
 	$template->DISABLED            = ($CAMPO['disabled'] == "1") ? "checked" : "";
 	$template->PASSWORD            = ($CAMPO['password'] == "1") ? "checked" : "";

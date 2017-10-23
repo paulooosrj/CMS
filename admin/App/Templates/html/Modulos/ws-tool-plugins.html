@@ -133,9 +133,7 @@
 							if(target=="_self"){
 								window.location = dataFile;
 							}else if(target=="_blank"){
-		
 								window.open(dataFile,'_blank');
-		
 								$("#ws_confirm").remove();$("#body").removeClass("scrollhidden"); $("*").removeClass("blur");
 							}else if(target=="" || target=="inner" || target=="iframe"){
 									setTimeout(function(){

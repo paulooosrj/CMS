@@ -116,14 +116,15 @@
 						$TEMPLATE->LI_H 	= @$dataH;
 						$TEMPLATE->LI_TYPE 	= @$dataType;
 
+
 						if(@$dataType!="iframe"){
 							$TEMPLATE->LI_PATH 	= str_replace('/'.$setupdata['url_plugin'].'/',"", $contents->realPath);
 							$TEMPLATE->LI_FILE 	= $contents->painel;
 						}else{
 							$TEMPLATE->LI_PATH 	= $contents->realPath;
 							$TEMPLATE->LI_FILE 	= $contents->realPath.'/'.$contents->painel;
-							
 						}
+						$TEMPLATE->LI_HREF 	= $contents->realPath.'/'.$contents->painel;
 
 
 						if(isset($contents->icon) &&$contents->icon!="" &&file_exists(ROOT_WEBSITE.$contents->realPath.'/'.$contents->icon)){

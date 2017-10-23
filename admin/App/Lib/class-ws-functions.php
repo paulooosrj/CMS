@@ -1970,8 +1970,8 @@ function exec_SQL($filename=null)					{
 		$templine = '';
 		$filename 	= file_get_contents($filename);
 		$filename 	= str_replace('{_prefix_}',PREFIX_TABLES,$filename);
-		$filename 	= str_replace(array("\n","\r" ,PHP_EOL),PHP_EOL, $filename);
-		$lines 		= explode(PHP_EOL,$filename);
+ 		$filename   = str_replace(array("\n","\r" ,PHP_EOL),PHP_EOL, $filename); 
+ 		$lines 		= explode(PHP_EOL,$filename);
 
 
 		foreach($lines as $line_num => $line) {
@@ -1987,8 +1987,8 @@ function exec_SQL($filename=null)					{
 	}elseif(is_string($filename)){
 		$templine 	= '';
 		$filename 	= str_replace('{_prefix_}',PREFIX_TABLES,$filename);
-		$filename 	= str_replace(array("\n","\r" ,PHP_EOL),PHP_EOL, $filename);
-		$lines 		= explode(PHP_EOL,$filename);
+ 		$filename   = str_replace(array("\n","\r" ,PHP_EOL),PHP_EOL, $filename); 
+ 		$lines 		= explode(PHP_EOL,$filename);
 
 		foreach($lines as $line_num => $line) {
 			if (substr($line, 0, 2) != '--' && $line != '') {

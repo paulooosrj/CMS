@@ -199,6 +199,7 @@
 											e.preventDefault()
 											var titulo 				= $(this).html();
 											var id_ferramenta 		= $(this).data('id');
+											var href 				= $(this).attr('href');				
 											var path 				= $(this).data('path');				
 											var page 				= $(this).data('file');				
 											var dataType 			= $(this).data('type');
@@ -206,7 +207,7 @@
 											var dataW 				= $(this).data('w');
 											var dataH 				= $(this).data('h');
 											var plugin 				= $(this).data('plugin');
-
+											console.log(href)
 											if(plugin=="0"){
 												confirma({
 													width:"auto",
@@ -225,37 +226,10 @@
 													bot2:0
 												})
 											}else if(plugin=="1"){
-												out(page)
-
-												if(dataType=="" || dataType=="inner" || dataType=="iframe" ){
-														confirma({
-															width:"auto",
-															conteudo:"  {loading_loading}<br> <strong>"+titulo+"</strong>...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
-															drag:false,
-															posFn:function(){
-																$("#ws_confirm").css("line-height","20px");
-																setTimeout(function(){
-																		if(dataType=="iframe"){
-																			$( "#conteudo" ).html('<iframe src="'+page+'" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;margin:0;"></iframe>');
-																			$("#ws_confirm").remove();
-																			$("*").removeClass("scrollhidden").removeClass("blur");
-																			$('#container').perfectScrollbar('destroy');
-																			window.CloseMenu();
-																		}else{
-																			loadPluginFile({'pathname':path, 'filename':page})
-																		}
-
-
-
-																},1000)
-															},
-															bot1:0,
-															bot2:0
-														})
-												}else if(dataType=="popup"){
+												if(dataType=="popup"){
 														popup(page,dataW,dataH);
-												}else if (dataType=="modal"){
-														loadPluginFile({filename:page,type:"modal",dataW:dataW,dataH:dataH})
+												}else{
+														loadPluginFile({'filename':href,'type':dataType,'dataW':dataW,'dataH':dataH})
 												}
 											}
 											return false;

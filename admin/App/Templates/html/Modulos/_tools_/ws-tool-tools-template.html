@@ -694,7 +694,7 @@ function SetupTool(Base64Var){
 								$(DIV).css({backgroundColor: "#a7d35b"}).animate({ backgroundColor: "transparent" }, 2000);
 								window.refreshMenuDesktop();
 							}else{
-								TopAlert({mensagem: "{ToolsManager_Modal_ErrorInstall}",type: 2})
+								TopAlert({mensagem: "{ToolsManager_Modal_ErrorInstall}<br>"+data,type: 2})
 							}
 					});
 				}

@@ -30,17 +30,15 @@
 
 
 
+
 		$SETUP = new MySQL();
 		$SETUP->set_table(PREFIX_TABLES . 'setupdata');
 		$SETUP->set_where('id="1"');
 		$SETUP->select();
 		$SETUP = $SETUP->fetch_array[0];
 
-		define("PATH_PLUGINS", ROOT_WEBSITE . '/' . $SETUP['url_plugin']);
-
-
-		if (substr($_REQUEST['page'], 0, strlen($SETUP['url_plugin'])) == $SETUP['url_plugin']) {
-			$_REQUEST['page'] = substr($_REQUEST['page'], strlen($SETUP['url_plugin']));
+		if (substr($_REQUEST['page'], 0, 3) == '../') {
+			$_REQUEST['page'] = substr($_REQUEST['page'], 3);
 		}
 		if (substr($_REQUEST['page'], 0, 2) == '..') {
 			$_REQUEST['page'] = substr($_REQUEST['page'], 2);
@@ -51,29 +49,36 @@
 		if (substr($_REQUEST['page'], 0, 1) == '/') {
 			$_REQUEST['page'] = substr($_REQUEST['page'], 1);
 		}
-		
-		if (substr($_REQUEST['pathname'], 0, strlen($SETUP['url_plugin'])) == $SETUP['url_plugin']) {
-			$_REQUEST['pathname'] = substr($_REQUEST['pathname'], strlen($SETUP['url_plugin']));
+
+		$_REQUEST['page'] = substr($_REQUEST['page'], strlen($SETUP['url_plugin']));
+		if (substr($_REQUEST['page'], 0, 1) == '/') {
+			$_REQUEST['page'] = substr($_REQUEST['page'], 1);
+		}
+
+		$filename    	= explode('?', basename($_REQUEST['page']));
+		$_FileLoad_  	= '/'.$SETUP['url_plugin'].'/'.$_REQUEST['page'];
+		$pathname		= str_replace(ROOT_WEBSITE,"",dirname($_FileLoad_));
+		$_ConfigPHP_ 	= $pathname.'/plugin.config.php';
+
+		if (isset($filename[1]) && $filename[1] != "") {
+			parse_str($filename[1], $output);
+			$_GET = $_GET + $output;
 		}
 		
-		$_ConfigPHP_ = PATH_PLUGINS . '/'.$_REQUEST['pathname'] . '/plugin.config.php';
-		$filename    = explode('?', basename($_REQUEST['page']));
-		$_FileLoad_  = PATH_PLUGINS .'/'.  $_REQUEST['pathname'] . '/' . $filename[0];
+		if(strpos($_FileLoad_,'?')>-1){
+			$_FileLoad_  = substr($_FileLoad_,0, strpos($_FileLoad_,'?'));
+		}
 
-		if (!file_exists($_FileLoad_)) {
-			echo "Ops, parece que o arquivo <b>'/" . $SETUP['url_plugin'] . $_REQUEST['pathname'] . '/' . $filename[0] . "'</b> não existe...";
+		if (!file_exists(ROOT_WEBSITE.$_ConfigPHP_)) {
+			echo "Ops, parece que o arquivo <b>'" . $_FileLoad_. "'</b> não existe...";
 			exit;
 		} else {
 			ob_start();
-			if (isset($filename[1]) && $filename[1] != "") {
-				parse_str($filename[1], $output);
-				$_GET = $_GET + $output;
-			}
-			include($_ConfigPHP_);
+			include(ROOT_WEBSITE.$_ConfigPHP_);
 			$contents             = $plugin;
 			$contents->pathPlugin = $SETUP['url_plugin'];
-			$contents->pathFiles  = $_REQUEST['pathname'];
-			include($_FileLoad_);
+			$contents->pathFiles  = $pathname;	
+			include(ROOT_WEBSITE.$_FileLoad_);
 			$jsonRanderizado = ob_get_clean();
 			echo $jsonRanderizado;
 		}
@@ -98,6 +103,8 @@
 	function installToolPanel() {
 		parse_str($_REQUEST['ToolInstall'], $tool);
 		$_REQUEST['base64'] = $tool;
+
+		
 		if (installExternalTool()) { echo "sucesso";}
 		exit;
 	}
