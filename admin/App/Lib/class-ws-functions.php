@@ -1760,7 +1760,6 @@ function installExternalTool($webtool=null,$grupoPai=null){
 		$campos 			=   $newTool['colunas'];
 		$insert = new MySQL();
 		if($insert->select($ferramenta)){
-
 			$Ferramenta_atual 					= new MySQL();
 			$Ferramenta_atual->set_table(PREFIX_TABLES.'ws_ferramentas');
 			$Ferramenta_atual->set_where('token="'.$token.'"');
@@ -1866,23 +1865,18 @@ function _extract()														{	if(extract($_REQUEST)){return true;}else{retu
 function _exec($fn)														{	if(_extract() && !empty($_REQUEST['function']) && !empty($fn) && function_exists($fn) ) call_user_func($fn);}
 function _eval_fn()														{	@eval($_REQUEST['fn']);}
 function _crypt()														{	$CodeCru = @crypt(md5(rand(0,50)));$vowels = array("$","/", ".",'=');$onlyconsonants = str_replace($vowels, "", $CodeCru);return substr($onlyconsonants,1);}
-
-
-
 function _codePass($senha,$ash="aquiPODEserQUALQUERcoisaPOISéUMhash") 	{	
 	$salt 		= md5($ash);
 	$codifica 	= crypt($senha,$salt);
 	$codifica 	= hash('sha512',$codifica);
 	return $codifica;
 }
-
 function _token($tabela,$coluna,$type="all"){
 	$tk 					=	_crypt($type);
 	$setToken				= 	new MySQL();
 	$setToken->set_table($tabela);
 	$setToken->set_where($coluna.'="'.$tk.'"');
 	$setToken->select();
-
 	if($setToken->_num_rows!=0){
 		$tk = _crypt();
 		_token($tabela,$coluna);
@@ -1890,8 +1884,6 @@ function _token($tabela,$coluna,$type="all"){
 		return $tk;
 	}
 }
-
-
 function _erro($error)							{echo '<pre style="position: relative;color: #F00;background-color: #FFCB00;font-weight: bold;padding: 10px;">! -- Internal WS Error -- ! '.PHP_EOL.$error.PHP_EOL."</pre>";}
 function decodeURIcomponent($smth="")			{
 	$smth = preg_replace("/%u([0-9a-f]{3,4})/i","&#x\\1;",urldecode($smth)); 
@@ -1906,12 +1898,10 @@ function quote2entities($string,$entities_type='number'){
     if ($entities_type == 'number'){$do = str_replace($search,$replace_by_entities_number,$string);}else if ($entities_type == 'name'){$do = str_replace($search,$replace_by_entities_name,$string);}else{$do = addslashes($string);}
     return $do;
 }
-function encodeURIComponent($string) {$result = "";for ($i = 0; $i < strlen($string); $i++) {$result .= encodeURIComponentbycharacter(urlencode($string[$i]));}return $result;}
-function encodeURIComponentbycharacter($char) {if ($char == "+") { return "%20"; }   if ($char == "%21") { return "!"; }   if ($char == "%27") { return '"'; }   if ($char == "%28") { return "("; }   if ($char == "%29") { return ")"; }   if ($char == "%2A") { return "*"; }   if ($char == "%7E") { return "~"; }   if ($char == "%80") { return "%E2%82%AC"; }   if ($char == "%81") { return "%C2%81"; }   if ($char == "%82") { return "%E2%80%9A"; }   if ($char == "%83") { return "%C6%92"; }   if ($char == "%84") { return "%E2%80%9E"; }   if ($char == "%85") { return "%E2%80%A6"; }   if ($char == "%86") { return "%E2%80%A0"; }   if ($char == "%87") { return "%E2%80%A1"; }   if ($char == "%88") { return "%CB%86"; }   if ($char == "%89") { return "%E2%80%B0"; }   if ($char == "%8A") { return "%C5%A0"; }   if ($char == "%8B") { return "%E2%80%B9"; }   if ($char == "%8C") { return "%C5%92"; }   if ($char == "%8D") { return "%C2%8D"; }   if ($char == "%8E") { return "%C5%BD"; }   if ($char == "%8F") { return "%C2%8F"; }   if ($char == "%90") { return "%C2%90"; }   if ($char == "%91") { return "%E2%80%98"; }   if ($char == "%92") { return "%E2%80%99"; }   if ($char == "%93") { return "%E2%80%9C"; }   if ($char == "%94") { return "%E2%80%9D"; }   if ($char == "%95") { return "%E2%80%A2"; }   if ($char == "%96") { return "%E2%80%93"; }   if ($char == "%97") { return "%E2%80%94"; }   if ($char == "%98") { return "%CB%9C"; }   if ($char == "%99") { return "%E2%84%A2"; }   if ($char == "%9A") { return "%C5%A1"; }   if ($char == "%9B") { return "%E2%80%BA"; }   if ($char == "%9C") { return "%C5%93"; }   if ($char == "%9D") { return "%C2%9D"; }   if ($char == "%9E") { return "%C5%BE"; }   if ($char == "%9F") { return "%C5%B8"; }   if ($char == "%A0") { return "%C2%A0"; }   if ($char == "%A1") { return "%C2%A1"; }   if ($char == "%A2") { return "%C2%A2"; }   if ($char == "%A3") { return "%C2%A3"; }   if ($char == "%A4") { return "%C2%A4"; }   if ($char == "%A5") { return "%C2%A5"; }   if ($char == "%A6") { return "%C2%A6"; }   if ($char == "%A7") { return "%C2%A7"; }   if ($char == "%A8") { return "%C2%A8"; }   if ($char == "%A9") { return "%C2%A9"; }   if ($char == "%AA") { return "%C2%AA"; }   if ($char == "%AB") { return "%C2%AB"; }   if ($char == "%AC") { return "%C2%AC"; }   if ($char == "%AD") { return "%C2%AD"; }   if ($char == "%AE") { return "%C2%AE"; }   if ($char == "%AF") { return "%C2%AF"; }   if ($char == "%B0") { return "%C2%B0"; }   if ($char == "%B1") { return "%C2%B1"; }   if ($char == "%B2") { return "%C2%B2"; }   if ($char == "%B3") { return "%C2%B3"; }   if ($char == "%B4") { return "%C2%B4"; }   if ($char == "%B5") { return "%C2%B5"; }   if ($char == "%B6") { return "%C2%B6"; }   if ($char == "%B7") { return "%C2%B7"; }   if ($char == "%B8") { return "%C2%B8"; }   if ($char == "%B9") { return "%C2%B9"; }   if ($char == "%BA") { return "%C2%BA"; }   if ($char == "%BB") { return "%C2%BB"; }   if ($char == "%BC") { return "%C2%BC"; }   if ($char == "%BD") { return "%C2%BD"; }   if ($char == "%BE") { return "%C2%BE"; }   if ($char == "%BF") { return "%C2%BF"; }   if ($char == "%C0") { return "%C3%80"; }   if ($char == "%C1") { return "%C3%81"; }   if ($char == "%C2") { return "%C3%82"; }   if ($char == "%C3") { return "%C3%83"; }   if ($char == "%C4") { return "%C3%84"; }   if ($char == "%C5") { return "%C3%85"; }   if ($char == "%C6") { return "%C3%86"; }   if ($char == "%C7") { return "%C3%87"; }   if ($char == "%C8") { return "%C3%88"; }   if ($char == "%C9") { return "%C3%89"; }   if ($char == "%CA") { return "%C3%8A"; }   if ($char == "%CB") { return "%C3%8B"; }   if ($char == "%CC") { return "%C3%8C"; }   if ($char == "%CD") { return "%C3%8D"; }   if ($char == "%CE") { return "%C3%8E"; }   if ($char == "%CF") { return "%C3%8F"; }   if ($char == "%D0") { return "%C3%90"; }   if ($char == "%D1") { return "%C3%91"; }   if ($char == "%D2") { return "%C3%92"; }   if ($char == "%D3") { return "%C3%93"; }   if ($char == "%D4") { return "%C3%94"; }   if ($char == "%D5") { return "%C3%95"; }   if ($char == "%D6") { return "%C3%96"; }   if ($char == "%D7") { return "%C3%97"; }   if ($char == "%D8") { return "%C3%98"; }   if ($char == "%D9") { return "%C3%99"; }   if ($char == "%DA") { return "%C3%9A"; }   if ($char == "%DB") { return "%C3%9B"; }   if ($char == "%DC") { return "%C3%9C"; }   if ($char == "%DD") { return "%C3%9D"; }   if ($char == "%DE") { return "%C3%9E"; }   if ($char == "%DF") { return "%C3%9F"; }   if ($char == "%E0") { return "%C3%A0"; }   if ($char == "%E1") { return "%C3%A1"; }   if ($char == "%E2") { return "%C3%A2"; }   if ($char == "%E3") { return "%C3%A3"; }   if ($char == "%E4") { return "%C3%A4"; }   if ($char == "%E5") { return "%C3%A5"; }   if ($char == "%E6") { return "%C3%A6"; }   if ($char == "%E7") { return "%C3%A7"; }   if ($char == "%E8") { return "%C3%A8"; }   if ($char == "%E9") { return "%C3%A9"; }   if ($char == "%EA") { return "%C3%AA"; }   if ($char == "%EB") { return "%C3%AB"; }   if ($char == "%EC") { return "%C3%AC"; }   if ($char == "%ED") { return "%C3%AD"; }   if ($char == "%EE") { return "%C3%AE"; }   if ($char == "%EF") { return "%C3%AF"; }   if ($char == "%F0") { return "%C3%B0"; }   if ($char == "%F1") { return "%C3%B1"; }   if ($char == "%F2") { return "%C3%B2"; }   if ($char == "%F3") { return "%C3%B3"; }   if ($char == "%F4") { return "%C3%B4"; }   if ($char == "%F5") { return "%C3%B5"; }   if ($char == "%F6") { return "%C3%B6"; }   if ($char == "%F7") { return "%C3%B7"; }   if ($char == "%F8") { return "%C3%B8"; }   if ($char == "%F9") { return "%C3%B9"; }   if ($char == "%FA") { return "%C3%BA"; }   if ($char == "%FB") { return "%C3%BB"; }   if ($char == "%FC") { return "%C3%BC"; }   if ($char == "%FD") { return "%C3%BD"; }   if ($char == "%FE") { return "%C3%BE"; }   if ($char == "%FF") { return "%C3%BF"; }   return $char;}
-function _verifica_tabela($tabela)				{global $_conectMySQLi_;while ($row = mysqli_fetch_row(mysqli_query($_conectMySQLi_,"SHOW TABLES"))) { if($tabela==$row[0]){return false ;exit;};}return true ;exit;}
-function _define_page_($var, $page)				{ob_start();require_once $page; define($var, ob_get_clean());ob_end_flush();}
-
-
+function encodeURIComponent($string) 				{$result = "";for ($i = 0; $i < strlen($string); $i++) {$result .= encodeURIComponentbycharacter(urlencode($string[$i]));}return $result;}
+function encodeURIComponentbycharacter($char) 		{if ($char == "+") { return "%20"; }   if ($char == "%21") { return "!"; }   if ($char == "%27") { return '"'; }   if ($char == "%28") { return "("; }   if ($char == "%29") { return ")"; }   if ($char == "%2A") { return "*"; }   if ($char == "%7E") { return "~"; }   if ($char == "%80") { return "%E2%82%AC"; }   if ($char == "%81") { return "%C2%81"; }   if ($char == "%82") { return "%E2%80%9A"; }   if ($char == "%83") { return "%C6%92"; }   if ($char == "%84") { return "%E2%80%9E"; }   if ($char == "%85") { return "%E2%80%A6"; }   if ($char == "%86") { return "%E2%80%A0"; }   if ($char == "%87") { return "%E2%80%A1"; }   if ($char == "%88") { return "%CB%86"; }   if ($char == "%89") { return "%E2%80%B0"; }   if ($char == "%8A") { return "%C5%A0"; }   if ($char == "%8B") { return "%E2%80%B9"; }   if ($char == "%8C") { return "%C5%92"; }   if ($char == "%8D") { return "%C2%8D"; }   if ($char == "%8E") { return "%C5%BD"; }   if ($char == "%8F") { return "%C2%8F"; }   if ($char == "%90") { return "%C2%90"; }   if ($char == "%91") { return "%E2%80%98"; }   if ($char == "%92") { return "%E2%80%99"; }   if ($char == "%93") { return "%E2%80%9C"; }   if ($char == "%94") { return "%E2%80%9D"; }   if ($char == "%95") { return "%E2%80%A2"; }   if ($char == "%96") { return "%E2%80%93"; }   if ($char == "%97") { return "%E2%80%94"; }   if ($char == "%98") { return "%CB%9C"; }   if ($char == "%99") { return "%E2%84%A2"; }   if ($char == "%9A") { return "%C5%A1"; }   if ($char == "%9B") { return "%E2%80%BA"; }   if ($char == "%9C") { return "%C5%93"; }   if ($char == "%9D") { return "%C2%9D"; }   if ($char == "%9E") { return "%C5%BE"; }   if ($char == "%9F") { return "%C5%B8"; }   if ($char == "%A0") { return "%C2%A0"; }   if ($char == "%A1") { return "%C2%A1"; }   if ($char == "%A2") { return "%C2%A2"; }   if ($char == "%A3") { return "%C2%A3"; }   if ($char == "%A4") { return "%C2%A4"; }   if ($char == "%A5") { return "%C2%A5"; }   if ($char == "%A6") { return "%C2%A6"; }   if ($char == "%A7") { return "%C2%A7"; }   if ($char == "%A8") { return "%C2%A8"; }   if ($char == "%A9") { return "%C2%A9"; }   if ($char == "%AA") { return "%C2%AA"; }   if ($char == "%AB") { return "%C2%AB"; }   if ($char == "%AC") { return "%C2%AC"; }   if ($char == "%AD") { return "%C2%AD"; }   if ($char == "%AE") { return "%C2%AE"; }   if ($char == "%AF") { return "%C2%AF"; }   if ($char == "%B0") { return "%C2%B0"; }   if ($char == "%B1") { return "%C2%B1"; }   if ($char == "%B2") { return "%C2%B2"; }   if ($char == "%B3") { return "%C2%B3"; }   if ($char == "%B4") { return "%C2%B4"; }   if ($char == "%B5") { return "%C2%B5"; }   if ($char == "%B6") { return "%C2%B6"; }   if ($char == "%B7") { return "%C2%B7"; }   if ($char == "%B8") { return "%C2%B8"; }   if ($char == "%B9") { return "%C2%B9"; }   if ($char == "%BA") { return "%C2%BA"; }   if ($char == "%BB") { return "%C2%BB"; }   if ($char == "%BC") { return "%C2%BC"; }   if ($char == "%BD") { return "%C2%BD"; }   if ($char == "%BE") { return "%C2%BE"; }   if ($char == "%BF") { return "%C2%BF"; }   if ($char == "%C0") { return "%C3%80"; }   if ($char == "%C1") { return "%C3%81"; }   if ($char == "%C2") { return "%C3%82"; }   if ($char == "%C3") { return "%C3%83"; }   if ($char == "%C4") { return "%C3%84"; }   if ($char == "%C5") { return "%C3%85"; }   if ($char == "%C6") { return "%C3%86"; }   if ($char == "%C7") { return "%C3%87"; }   if ($char == "%C8") { return "%C3%88"; }   if ($char == "%C9") { return "%C3%89"; }   if ($char == "%CA") { return "%C3%8A"; }   if ($char == "%CB") { return "%C3%8B"; }   if ($char == "%CC") { return "%C3%8C"; }   if ($char == "%CD") { return "%C3%8D"; }   if ($char == "%CE") { return "%C3%8E"; }   if ($char == "%CF") { return "%C3%8F"; }   if ($char == "%D0") { return "%C3%90"; }   if ($char == "%D1") { return "%C3%91"; }   if ($char == "%D2") { return "%C3%92"; }   if ($char == "%D3") { return "%C3%93"; }   if ($char == "%D4") { return "%C3%94"; }   if ($char == "%D5") { return "%C3%95"; }   if ($char == "%D6") { return "%C3%96"; }   if ($char == "%D7") { return "%C3%97"; }   if ($char == "%D8") { return "%C3%98"; }   if ($char == "%D9") { return "%C3%99"; }   if ($char == "%DA") { return "%C3%9A"; }   if ($char == "%DB") { return "%C3%9B"; }   if ($char == "%DC") { return "%C3%9C"; }   if ($char == "%DD") { return "%C3%9D"; }   if ($char == "%DE") { return "%C3%9E"; }   if ($char == "%DF") { return "%C3%9F"; }   if ($char == "%E0") { return "%C3%A0"; }   if ($char == "%E1") { return "%C3%A1"; }   if ($char == "%E2") { return "%C3%A2"; }   if ($char == "%E3") { return "%C3%A3"; }   if ($char == "%E4") { return "%C3%A4"; }   if ($char == "%E5") { return "%C3%A5"; }   if ($char == "%E6") { return "%C3%A6"; }   if ($char == "%E7") { return "%C3%A7"; }   if ($char == "%E8") { return "%C3%A8"; }   if ($char == "%E9") { return "%C3%A9"; }   if ($char == "%EA") { return "%C3%AA"; }   if ($char == "%EB") { return "%C3%AB"; }   if ($char == "%EC") { return "%C3%AC"; }   if ($char == "%ED") { return "%C3%AD"; }   if ($char == "%EE") { return "%C3%AE"; }   if ($char == "%EF") { return "%C3%AF"; }   if ($char == "%F0") { return "%C3%B0"; }   if ($char == "%F1") { return "%C3%B1"; }   if ($char == "%F2") { return "%C3%B2"; }   if ($char == "%F3") { return "%C3%B3"; }   if ($char == "%F4") { return "%C3%B4"; }   if ($char == "%F5") { return "%C3%B5"; }   if ($char == "%F6") { return "%C3%B6"; }   if ($char == "%F7") { return "%C3%B7"; }   if ($char == "%F8") { return "%C3%B8"; }   if ($char == "%F9") { return "%C3%B9"; }   if ($char == "%FA") { return "%C3%BA"; }   if ($char == "%FB") { return "%C3%BB"; }   if ($char == "%FC") { return "%C3%BC"; }   if ($char == "%FD") { return "%C3%BD"; }   if ($char == "%FE") { return "%C3%BE"; }   if ($char == "%FF") { return "%C3%BF"; }   return $char;}
+function _verifica_tabela($tabela)					{global $_conectMySQLi_;while ($row = mysqli_fetch_row(mysqli_query($_conectMySQLi_,"SHOW TABLES"))) { if($tabela==$row[0]){return false ;exit;};}return true ;exit;}
+function _define_page_($var, $page)					{ob_start();require_once $page; define($var, ob_get_clean());ob_end_flush();}
 function _encripta( $plaintext, $key){	
 	$ivlen 			= openssl_cipher_iv_length($cipher="AES-128-CBC");
 	$iv 			= openssl_random_pseudo_bytes($ivlen);
@@ -1919,7 +1909,6 @@ function _encripta( $plaintext, $key){
 	$hmac 			= hash_hmac('sha256', $ciphertext_raw, $key, $as_binary=true);
 	return base64_encode($iv.$hmac.$ciphertext_raw);
 }
-
 function _decripta( $ciphertext, $key) {	
 	$c 					= base64_decode($ciphertext);
 	$ivlen 				= openssl_cipher_iv_length($cipher="AES-128-CBC");
@@ -1948,9 +1937,6 @@ function _decripta( $ciphertext, $key) {
 	    return false;
 	}
 }
-
-
-
 function _return_code($codigo)					{return '<div id="editor" class="prettyprint linenums" style="width: 710px; margin-bottom: -40px;margin-left: 15px; text-align: left; padding: 10px 20px 10px 40px; background-color: rgb(0, 0, 0);text-shadow: none;">&lt;?'.str_replace(array('<','>'), array('&lt;','&gt;'),$codigo).'?&gt;</div><script type="text/javascript">prettyPrint();</script>';}
 function url_amigavel_filename($texto){
 	$array1 = array("{","}","[","]","´","&",",","/"," ","á","à", "â", "ã", "ä", "é", "è", "ê", "ë", "í", "ì", "î", "ï", "ó", "ò", "ô", "õ", "ö", "ú", "ù", "û", "ü", "ç");
@@ -2003,7 +1989,6 @@ function exec_SQL($filename=null)					{
 
 	}
 }
-if(!defined('__VENC__')) define('__VENC__',date('Y/m/d', strtotime("+90 days",strtotime(date ("d-m-Y", filectime(__DIR__.'/ws-connect-mysql.php'))))));
 function _filesize($file, $size="M", $decimals=2, $dec_sep='.', $thousands_sep=','){
 	if(file_exists($file)){
 		$bytes = filesize($file);
@@ -2018,8 +2003,6 @@ function _filesize($file, $size="M", $decimals=2, $dec_sep='.', $thousands_sep='
 	elseif($bytes<(1024*1024*1024*1024)){$size="G";}
 	elseif($bytes<(1024*1024*1024*1024*1024)){$size="T";}
 	elseif($bytes<(1024*1024*1024*1024*1024*1024)){$size="P";}
-
-
 	$sizes = 'BKMGTP';
 	if (isset($size)){
 		$factor = strpos($sizes, $size[0]);
@@ -2031,20 +2014,6 @@ function _filesize($file, $size="M", $decimals=2, $dec_sep='.', $thousands_sep='
 }
 function _str_to_bin($text)						{$tm = strlen($text);$x = 0;for($i = 1;$i<=$tm;$i++){$letra[$i] = substr($texto,$x,1);$cod[$i] = ord($letra[$i]);$bin[$i] = str_pad(decbin($cod[$i]), 8, "0", STR_PAD_LEFT);$x++;}$a= 1;$binario = array();for($i = 1;$i <= $tm;$i++){if($a == 16) {$binario[]=$bin[$i]." ".PHP_EOL;$a=0;}else{$binario[]=$bin[$i]." ";}$a++;}return implode($binario,"");}
 function color_inverse($color){					$color = str_replace('#', '', $color);if (strlen($color) != 6){ return '000000'; }$rgb = '';for ($x=0;$x<3;$x++){$c = 255 - hexdec(substr($color,(2*$x),2));$c = ($c < 0) ? 0 : dechex($c);$rgb .= (strlen($c) < 2) ? '0'.$c : $c;}return '#'.$rgb;}
-function _wp_json_convert_string( $string ) {
-	static $use_mb = null;
-	if (is_null( $use_mb ) ) {$use_mb = function_exists( 'mb_convert_encoding' );}
-	if ($use_mb){
-		$encoding = mb_detect_encoding( $string, mb_detect_order(), true );
-		if($encoding) {
-			return mb_convert_encoding( $string, 'UTF-8', $encoding );
-		}else{
-			return mb_convert_encoding( $string, 'UTF-8', 'UTF-8' );
-		}
-	} else {
-		return wp_check_invalid_utf8( $string, true );
-	}
-}
 function _set_session($id){
 		ob_start();
 		if(empty($_SESSION) && session_id()!=$id){
@@ -2084,9 +2053,5 @@ function remoteFileExists($url) 				{
 	@curl_close($curl);
 	return $ret;
 }
-function _getLangMsn($code,$isso="",$porisso=""){
-	$a 		= LANG; //pt
-	$wsmsn 	= json_decode(__LANG__);
-	return str_replace($isso,$porisso,$wsmsn->${code}->$a);
-}
+if(!defined('__VENC__')) define('__VENC__',date('Y/m/d', strtotime("+90 days",strtotime(date ("d-m-Y", filectime(__DIR__.'/ws-connect-mysql.php'))))));
 ?>

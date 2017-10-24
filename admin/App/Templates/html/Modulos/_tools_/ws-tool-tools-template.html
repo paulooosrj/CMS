@@ -686,6 +686,7 @@ function SetupTool(Base64Var){
 						ToolInstall:ToolInstall
 					  }
 					}).done(function(data) { 
+						console.log(data)
 							$("#conteudo").load("./{PATH}/tools.php",function(){
 								setTimeout(function(){$("#exportarTodos,#excluir").hide();},1000)
 							});
