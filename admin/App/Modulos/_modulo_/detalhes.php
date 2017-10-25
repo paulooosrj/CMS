@@ -34,6 +34,11 @@
 
 	define("ID_FERRAMENTA", $_GET['ws_id_ferramenta']);
 
+	#####################################################  
+	# GRAVAMOS A LARGURA DO PALCO BASE
+	#####################################################
+	define("WSTAGE",1004);
+
 	if(empty($_GET['LIMIT'])){			$_GET['LIMIT']="50";														}
 	if(empty($_GET['PAGE'])){			$_GET['PAGE']="1";															}
 	if(empty($_GET['token_group'])){	$_GET['token_group']=_token(PREFIX_TABLES."ws_biblioteca","token_group");	}
@@ -235,7 +240,7 @@
 			$_SET_TEMPLATE_INPUT->PATH          = PATH;
 			$_SET_TEMPLATE_INPUT->ID_FERRAMENTA = ID_FERRAMENTA;
 			$_SET_TEMPLATE_INPUT->WS_NIVEL      = WS_NIVEL;
-			$_SET_TEMPLATE_INPUT->WIDTH         = $k['largura'] - 22;
+			$_SET_TEMPLATE_INPUT->WIDTH         = pxToPct(($k['largura'] - 22),980);
 			$_SET_TEMPLATE_INPUT->LABEL         = $k['label'];
 			$_SET_TEMPLATE_INPUT->ID            = $k['id_campo'];
 			$_SET_TEMPLATE_INPUT->WS_NIVEL      = $session->get('ws_nivel');
@@ -319,7 +324,7 @@
 
 			$_SET_TEMPLATE_INPUT->TOKEN  = $k['token'];
 			$_SET_TEMPLATE_INPUT->MYSQL  = $k['coluna_mysql'];
-			$_SET_TEMPLATE_INPUT->WIDTH  = $k['largura'] - $recuow - $margin;
+			$_SET_TEMPLATE_INPUT->WIDTH  = pxToPct(($k['largura'] - $recuow - $margin),WSTAGE);
 			$_SET_TEMPLATE_INPUT->HEIGHT = $k['altura'] - $recuoh - $margin;
 			$_SET_TEMPLATE_INPUT->SRC    = '/ws-img/' . ($k['largura'] - $recuow - $margin) . '/' . ($k['altura'] - $recuoh - $margin) . '/100/' . $produto[$k['coluna_mysql']];
 			$_SET_TEMPLATE_INPUT->block("BLOCK_THUMBMAIL");
@@ -547,7 +552,7 @@
 			$_SET_TEMPLATE_INPUT->LABELSUP   = $k['labelSup'];
 			$_SET_TEMPLATE_INPUT->LABEL      = $k['label'];
 			$_SET_TEMPLATE_INPUT->CARACTERES = $k['caracteres'];
-			$_SET_TEMPLATE_INPUT->WIDTH      = $k['largura'] + 4;
+			$_SET_TEMPLATE_INPUT->WIDTH      = pxToPct(($k['largura']),WSTAGE);
 
 
 			$_SET_TEMPLATE_INPUT->VALUE      = str_replace('"', "'", urldecode($produto[$k['coluna_mysql']]));
@@ -613,7 +618,7 @@
 			} else {
 				$_SET_TEMPLATE_INPUT->CARACTERES = $k['caracteres'];
 			}
-			$_SET_TEMPLATE_INPUT->WIDTH        = $k['largura'];
+			$_SET_TEMPLATE_INPUT->WIDTH        = pxToPct($k['largura'],WSTAGE);
 			$_SET_TEMPLATE_INPUT->HEIGHT       = $k['altura'] + $recuoh;
 			$_SET_TEMPLATE_INPUT->INPUT_WIDTH  = $k['largura'];
 			$_SET_TEMPLATE_INPUT->INPUT_HEIGHT = $k['altura'] + 3;

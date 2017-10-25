@@ -1016,6 +1016,14 @@ function rsearch($folder, $pattern) {
 	}
 
 #####################################################################
+# 	TRANSFORMA UM NUMERO EM PORCENTAGEM
+#####################################################################
+function pxToPct($elemento=100, $total=100){
+	return (100 / $total) * $elemento;
+}
+
+
+#####################################################################
 # 	COMPRIME OS ARQUIVOS DO SITE PARA GZIP
 #####################################################################
 	function gzipWebsite(){

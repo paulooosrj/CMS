@@ -25,7 +25,7 @@
 <!-- END BLOCK_KEYWORKS_ADD -->
 
 <!-- BEGIN BLOCK_THUMBMAIL -->
-	<div class="thumbmail" data-token="{TOKEN}" data-mysql="{MYSQL}" style="width:{WIDTH}px; height:{HEIGHT}px;" data-width="{WIDTH}" data-height="{HEIGHT}">
+	<div class="thumbmail" data-token="{TOKEN}" data-mysql="{MYSQL}" style="width:{WIDTH}%; height:{HEIGHT}px;" data-width="{WIDTH}" data-height="{HEIGHT}">
 		<div class="combo_upload">
 			<div class="pc" legenda="Meu computador"> <img src="./App/Templates/img/websheep/up_m.png" />
 			</div>
@@ -110,13 +110,10 @@
 <!-- END BLOCK_COLORPICKER -->
 <!-- BEGIN BLOCK_INPUT_TEXT -->
 
-	<div class="groupForm" style="height:auto; width:{WIDTH}px; position: relative; float: left;">
-	
-		<div class="label_input w1" style="height:36px;width: calc(100% - 24px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
-		
-
+	<div class="groupForm" style="height:auto; width: calc({WIDTH}% - 8px); position: relative; float: left;">
+		<div class="label_input w1" style="height:36px;width: calc(100% - 22px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
 		<div class="c"></div>
-		<input {FILTRO} {TYPE} {FINANCEIRO} {DISABLED} id="{ID}" {LEGENDA} class="inputText input_adicional" name="{NAME}" placeholder="{PLACE}" maxlength="{CARACTERES}" style="height:44px;width:calc({WIDTH}px - 3px);" value="{VALUE}"></input>
+		<input {FILTRO} {TYPE} {FINANCEIRO} {DISABLED} id="{ID}" {LEGENDA} class="inputText input_adicional" name="{NAME}" placeholder="{PLACE}" maxlength="{CARACTERES}" style="height:44px;width:calc(100% - 4px);" value="{VALUE}"></input>
 		<!-- BEGIN 	GOOGLE_API_PLACE -->
 		<style type="text/css">
 			.pac-logo:after,
@@ -196,12 +193,12 @@
 	</div>
 <!-- END BLOCK_INPUT_TEXT -->
 <!-- BEGIN BLOCK_TEXTAREA -->
-	<div class="groupForm" style="height:auto; width:{WIDTH}px; position: relative; float: left;margin-right: 6px;">
+	<div class="groupForm" style="height:auto; width:{WIDTH}%; position: relative; float: left;margin-right: 6px;">
 	
-		<div class="label_input w1" style="height:36px;width: calc(100% - 17px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
+		<div class="label_input w1" style="height:36px;width: calc(100% - 24px);padding: 12px 10px; {LABEL_TOP_INPUT}">{LABELSUP}</div>
 		
 		<div class="textarea_adicional" style="margin: 3px;position: relative;float: left;">
-			<textarea class="textarea_adicional" id="{ID}" data-editor="{EDITOR}" class="inputText input_adicional" name="{NAME}" placeholder="{PLACE}" style="height:{INPUT_HEIGHT}px;width:{INPUT_WIDTH}px;margin-top:0;"></textarea>
+			<textarea class="textarea_adicional" id="{ID}" data-editor="{EDITOR}" class="inputText input_adicional" name="{NAME}" placeholder="{PLACE}" style="height:{INPUT_HEIGHT}px;width:100%;margin-top:0;"></textarea>
 		</div>
 	</div>
 	<script type="text/javascript">
