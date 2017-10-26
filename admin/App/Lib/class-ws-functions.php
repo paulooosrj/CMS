@@ -1270,6 +1270,7 @@ function pxToPct($elemento=100, $total=100){
 				};
 			return true;
 	}
+	
 function criaRascunho($ws_id_ferramenta=0,$id_item=null, $imagens=false){
 		global $_conectMySQLi_;
 		##########################################################################################################

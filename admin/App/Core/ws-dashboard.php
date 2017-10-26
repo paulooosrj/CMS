@@ -62,7 +62,7 @@
 	##########################################################################################
 	#  ABRIMOS A PÁGINA INICIAL DO SISTEMA PARA WEBMASTER
 	##########################################################################################
-	$TEMPLATE->INIT_DASHBOARD = '<iframe src="//dashboard.websheep.com.br" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;margin:0;"></iframe>';
+	$TEMPLATE->INIT_DASHBOARD = '<iframe src="http://dashboard.websheep.com.br" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;margin:0;"></iframe>';
 
 
 	##########################################################################################
