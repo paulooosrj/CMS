@@ -2,14 +2,7 @@
 <script type="text/javascript">
 include_css("./App/Templates/css/websheep/modulos/_modulo_/templates.min.css","css_mod","All");
 </script>
-	<div id="topo_upload" class="bg01">
-		<div class="tapa_upload" style="display:none">
-			<div class="pct w1">{central_Bkp_wait}</div>
-			<div class="cont_up_center bg04">
-				<div class="bar bg05"></div>
-			</div>
-		</div>
-	</div>
+	<div id="topo_upload" class="bg01"></div>
 <div id="topoModulo" class="TitTop bg05 w1b">
 	<div class="comboTitleBot">
 	{central_Bkp_title}<div class="botTool 	bg06 w1">{central_Bkp_createBackup}</div>
@@ -115,7 +108,7 @@ $(function(){
 							$('.tapa_upload').show("fade", {}, 'fast');
 						},
 						uploadProgress: function(event, position, total, percentComplete, myForm) {
-							$('.tapa_upload').find('.pct').html(percentComplete + "%");
+							$('.tapa_upload').find('.pct').html(percentComplete + "%").css({"left":percentComplete + "%"});
 							$('.tapa_upload').find('.bar').animate({
 								width: percentComplete + "%"
 							}, 50);

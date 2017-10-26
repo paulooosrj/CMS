@@ -319,14 +319,17 @@
 		if($k['type'] == 'thumbmail') {
 			$recuow= 2; /* X */ $recuoh=-20; $margin = 3;
 			$_SET_TEMPLATE_INPUT         = new Template(TEMPLATE_INPUT_LINK, true);			
+			$width = ($k['largura'] - $recuow - $margin);
+
 
 			if($k['labelTop']==0){ $_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:none;";}else{$_SET_TEMPLATE_INPUT->LABEL_TOP_INPUT="display:block;";}
 
-			$_SET_TEMPLATE_INPUT->TOKEN  = $k['token'];
-			$_SET_TEMPLATE_INPUT->MYSQL  = $k['coluna_mysql'];
-			$_SET_TEMPLATE_INPUT->WIDTH  = pxToPct(($k['largura'] - $recuow - $margin),WSTAGE);
-			$_SET_TEMPLATE_INPUT->HEIGHT = $k['altura'] - $recuoh - $margin;
-			$_SET_TEMPLATE_INPUT->SRC    = '/ws-img/' . ($k['largura'] - $recuow - $margin) . '/' . ($k['altura'] - $recuoh - $margin) . '/100/' . $produto[$k['coluna_mysql']];
+			$_SET_TEMPLATE_INPUT->TOKEN  		= $k['token'];
+			$_SET_TEMPLATE_INPUT->MYSQL  		= $k['coluna_mysql'];
+			$_SET_TEMPLATE_INPUT->WIDTH  		= pxToPct($width,WSTAGE);
+			$_SET_TEMPLATE_INPUT->DATA_WIDTH  	= $width;
+			$_SET_TEMPLATE_INPUT->HEIGHT 		= $k['altura'] - $recuoh - $margin;
+			$_SET_TEMPLATE_INPUT->SRC    		= '/ws-img/' . ($k['largura'] - $recuow - $margin) . '/' . ($k['altura'] - $recuoh - $margin) . '/100/' . $produto[$k['coluna_mysql']];
 			$_SET_TEMPLATE_INPUT->block("BLOCK_THUMBMAIL");
 			$_IPUNT_CAMPOS .= $_SET_TEMPLATE_INPUT->parse();
 		}

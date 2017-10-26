@@ -1665,9 +1665,9 @@
 			}
 			if ($this->thisType == 'gal') {
 				if (count($this->setcolum) > 0) {
-					$_busca_->set_colum('(SELECT COUNT(*) FROM _model_img_gal WHERE tabela_modelo.id = _model_img_gal.id_galeria) as img_count');
+					$_busca_->set_colum('(SELECT COUNT(*) FROM '.PREFIX_TABLES .'_model_img_gal WHERE tabela_modelo.id = '.PREFIX_TABLES .'_model_img_gal.id_galeria) as img_count');
 				} else {
-					$_busca_->set_colum('*, (SELECT COUNT(*) FROM _model_img_gal WHERE tabela_modelo.id = _model_img_gal.id_galeria) as img_count');
+					$_busca_->set_colum('*, (SELECT COUNT(*) FROM '.PREFIX_TABLES .'_model_img_gal WHERE tabela_modelo.id = '.PREFIX_TABLES .'_model_img_gal.id_galeria) as img_count');
 				}
 			}
 			if ($this->ColumOrder != null && $this->OrderColum != null) {

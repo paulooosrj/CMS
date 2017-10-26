@@ -127,7 +127,7 @@ class MySQL {
 				if($this->url 		=='decode')	$var 	= urldecode($var);
 				if($this->slashes 	=='strip')	$var 	= stripslashes($var);
 				if($this->slashes 	=='add')	$var	= addslashes($var);
-				array_push ($this->Insert_Update , $colum.'="'.$var.'"' );
+				array_push($this->Insert_Update , $colum.'="'.$var.'"' );
 			}
 			#####################################################################################
 			public function debug($bolean){$this->debug=$bolean;	}
@@ -397,7 +397,12 @@ class MySQL {
 				$this->query='UPDATE ';
 				if($this->table!=null)	{$this->query .= $this->table;}else{exit;}
 				$this->query .= ' SET ';
-				if(count($this->Insert_Update)>0){$this->query .= implode(',',$this->Insert_Update);}else{exit;};
+				if(count($this->Insert_Update)>0){
+					$this->query .= implode(',',$this->Insert_Update);
+				}else{
+					return true;
+				};
+
 				if($this->set_where_not_exist==true){$not=" NOT EXISTS ";}else{$not="";}
 				if(!empty($this->where))	{$this->query .= ' WHERE'.$not.'('.$this->where.')';}
 				if($this->debug==true)	{

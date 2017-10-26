@@ -3,12 +3,6 @@
 	include_css ("./App/Templates/css/websheep/modulos/_modulo_/galerias.min.css?v=0.1","css_mod","All");
 </script>
 <div id="topo_upload" class="bg01" >
-	<div class="tapa_upload" style="display:none">
-		<div class="pct w1">Por favor, aguarde...</div>
-		<div class="cont_up_center bg04">
-			<div class="bar bg05"></div>
-		</div>
-	</div>
 	<div id="topoModulo" class="TitTop bg05 w1b">{_TITULO_FERRAMENTA_}</div>
 	<form name="formUpload" id="formUpload">
 		<!-- BEGIN BOT_BACK -->
@@ -208,9 +202,9 @@
 		},
 		uploadProgress: function(event, position, total, percentComplete, myForm){
 			if(percentComplete>=99){
-				$('#topo_upload .tapa_upload').find('.pct').html("Processando imagem...");
+				$('#topo_upload .tapa_upload').find('.pct').html("Processando imagem...").css({"left":percentComplete + "%"});
 			}else{
-				$('#topo_upload .tapa_upload').find('.pct').html(percentComplete+"%");
+				$('#topo_upload .tapa_upload').find('.pct').html(percentComplete+"%").css({"left":percentComplete + "%"});
 			}
 			$('#topo_upload .tapa_upload').find('.bar').animate({width:percentComplete+"%"},50);
 		},

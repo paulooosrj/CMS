@@ -3,12 +3,6 @@
 <script>
 	include_css('./App/Templates/css/websheep/modulos/_leads_/detalhes.min.css', 'css_mod', 'All');
 </script>
-<div class="tapa_upload" style="display:none">
-	<div class="pct w1">{Leads_Details_PleaseWait}</div>
-	<div class="cont_up_center bg04">
-		<div class="bar bg05"></div>
-	</div>
-</div>
 <div id="palco" class="palco_01">
 	<div class="label_separados w1">{Leads_Details_DataLead}</div>
 	<form id="UploadThumbmails" style="display:none" 	action="./App/Core/ws-upload-files.php" 	method="post" enctype="multipart/form-data" name="formUpload">
@@ -195,7 +189,7 @@ $(".insertTagResp").unbind('click tap press').bind('click tap press',function(e)
 				$('.tapa_upload').show("fade", {}, 'fast');
 			},
 			uploadProgress: function(event, position, total, percentComplete, myForm) {
-				$('.tapa_upload').find('.pct').html(percentComplete + "%");
+				$('.tapa_upload').find('.pct').html(percentComplete + "%").css({"left":percentComplete + "%"});
 				$('.tapa_upload').find('.bar').animate({
 					width: percentComplete + "%"
 				}, 50);
@@ -219,9 +213,9 @@ $(".insertTagResp").unbind('click tap press').bind('click tap press',function(e)
 			},
 			uploadProgress: function(event, position, total, percentComplete, myForm) {
 				if(percentComplete >= 99) {
-					$('.tapa_upload').find('.pct').html("{Leads_Details_Modal_ProcessImage}");
+					$('.tapa_upload').find('.pct').html("{Leads_Details_Modal_ProcessImage}").css({"left":percentComplete + "%"});
 				} else {
-					$('.tapa_upload').find('.pct').html(percentComplete + "%");
+					$('.tapa_upload').find('.pct').html(percentComplete + "%").css({"left":percentComplete + "%"});
 				}
 				$('.tapa_upload').find('.bar').animate({
 					width: percentComplete + "%"

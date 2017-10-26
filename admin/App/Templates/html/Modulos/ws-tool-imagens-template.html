@@ -3,8 +3,6 @@
 		include_css ("./App/Templates/css/websheep/modulos/_modulo_/imagens.min.css","css_mod","All");
 </script>
 <div id="topoModulo" class="TitTop bg05 w1b">{TITULO}</div>
-
-
 	<div id="topo_upload" class="bg01" >
 		<div class="centerTop">
 				<!-- BEGIN BOT_BACK -->
@@ -59,6 +57,9 @@
 					<div id="bt_search_biblioteca" class="botao">Biblioteca</div>
 				</form>
 		</div>
+
+
+
 	</div>
 
 	<div id="palco" class="palco_01" >
@@ -204,12 +205,20 @@ function reloadFunctions(){
 }
 	reloadFunctions();
 	$("#formUpload").ajaxForm({ 
-	beforeSend: function(){$("#topo_upload #progress_combo #progress_bar").show()},
-	uploadProgress: function(event, position, total, percentComplete){
-			var pVel = percentComplete + '%';
-			$("#topo_upload #progress_combo #progress_bar").animate({width:pVel},100)
+	beforeSend: function(xhr) {
+		$('.tapa_upload').show("fade", {}, 'fast');
 	},
-	success: function(e){$("#topo_upload #progress_combo #progress_bar").animate({width:0},100,function(){	$("#topo_upload #progress_combo #progress_bar").hide()	})},
+	uploadProgress: function(event, position, total, percentComplete, myForm) {
+		$('.tapa_upload').find('.pct').html(percentComplete + "%").css({"left":percentComplete + "%"});
+		$('.tapa_upload').find('.bar').animate({
+			width: percentComplete + "%"
+		}, 50);
+	},
+	success: function(e){
+		$("#topo_upload #progress_combo #progress_bar").animate({width:0},100,function(){	
+			$("#topo_upload .tapa_upload").hide()	
+		})
+	},
 	complete: function(e){
 			out(e.responseText)
 			if(e.responseText.indexOf('Warning')!=-1){

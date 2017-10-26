@@ -96,7 +96,7 @@
 		$("#Upload_File_topo").ajaxForm({
 				beforeSend: function(xhr) {$('.tapa_upload').show("fade", {}, 'fast');},
 				uploadProgress: function(event, position, total, percentComplete, myForm){
-					$('.tapa_upload').find('.pct').html(percentComplete+"%");
+					$('.tapa_upload').find('.pct').html(percentComplete+"%").css({"left":percentComplete + "%"});
 					$('.tapa_upload').find('.bar').animate({width:percentComplete+"%"},50);
 				},
 				complete: function(e){
@@ -134,7 +134,7 @@
 		$("#Upload_File_Splash").ajaxForm({
 			beforeSend: function(xhr) {$('.tapa_upload').show("fade", {}, 'fast');},
 			uploadProgress: function(event, position, total, percentComplete, myForm){
-					$('.tapa_upload').find('.pct').html(percentComplete+"%");
+					$('.tapa_upload').find('.pct').html(percentComplete+"%").css({"left":percentComplete + "%"});
 					$('.tapa_upload').find('.bar').animate({width:percentComplete+"%"},50);
 				},
 				complete: function(e){

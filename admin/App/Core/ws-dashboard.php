@@ -58,6 +58,13 @@
 	##########################################################################################
 	$TEMPLATE = new Template(ROOT_ADMIN . "/App/Templates/html/ws-dashboard-template.html", true);
 
+
+	##########################################################################################
+	#  ABRIMOS A PÁGINA INICIAL DO SISTEMA PARA WEBMASTER
+	##########################################################################################
+	$TEMPLATE->INIT_DASHBOARD = '<iframe src="//dashboard.websheep.com.br" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;margin:0;"></iframe>';
+
+
 	##########################################################################################
 	#  CASO NÃO TENHA NENHUM SPLASH CADASTRADO, PUXAMOS O PADRÃO DO SISTEMA
 	##########################################################################################

@@ -1841,11 +1841,9 @@
 	# SALVA RASCUINHO DE UM ÍTEM
 	##########################################################################################################
 	function SalvaDetalhes($vars = null) {
-		if ($vars != null) { $_POST = $vars;}
-
+		$_POST = ($vars != null) ? $vars : $_POST;
 
 		global $_conectMySQLi_;
-
 		$id_item 			= @$_POST['id_item'];
 		$function 			= @$_POST['function'];
 		$ws_session			= @$_POST['ws_session'];
@@ -1920,9 +1918,7 @@
 				$_SALVAR_->set_update($KEY, mysqli_real_escape_string($_conectMySQLi_, urldecode($POST)));
 			}
 		}
-
 		if ($vars != null) {
-
 			if (count($_POST) >= 1) {
 				if ($_SALVAR_->salvar()) {
 					return true;

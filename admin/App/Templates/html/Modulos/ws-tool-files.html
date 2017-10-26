@@ -15,14 +15,6 @@
 <!-- END TOP_ALERT_RASCUNHO -->
 
 
-
-<div class="tapa_upload" style="display:none">
-	<div class="pct w1">Por favor, aguarde...</div>
-	<div class="cont_up_center bg04">
-		<div class="bar bg05"></div>
-	</div>
-</div>
-
 <div id="topoModulo" class="TitTop bg05 w1b">Listagem de arquivos</div>
 		<div class="barra_botoes bg02" style="height: 40px;padding: 10px;">
 			
@@ -245,7 +237,7 @@ reloadFunctions();
 $("#formUpload").ajaxForm({
 		beforeSend: function(xhr) {$('.tapa_upload').show("fade", {}, 'fast');},
 		uploadProgress: function(event, position, total, percentComplete, myForm){
-			$('.tapa_upload').find('.pct').html(percentComplete+"%");
+			$('.tapa_upload').find('.pct').html(percentComplete+"%").css({"left":percentComplete + "%"});
 			$('.tapa_upload').find('.bar').animate({width:percentComplete+"%"},50);
 		},
 		complete: function(e){
