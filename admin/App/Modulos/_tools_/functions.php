@@ -2142,10 +2142,10 @@
 		$I->set_insert('nome', 'Administrador');
 		$I->set_insert('sobrenome', 'WebSheep');
 		$I->set_insert('email', 'suporte@websheep.ws');
-		$I->set_insert('login', 'admin');
+		$I->set_insert('login', $_getInput['LOG_WEBMASTER']);
 		$I->set_insert('admin', '1');
-		$I->set_insert('usuario', 'admin');
-		$I->set_insert('senha', _codePass('admin123'));
+		$I->set_insert('usuario', 	$_getInput['LOG_WEBMASTER']);
+		$I->set_insert('senha', 	_codePass($_getInput['PASS_WEBMASTER']));
 		$I->set_insert('token', TOKEN_USER);
 		$I->set_insert('id_status', 0);
 		$I->set_insert('ativo', 1);

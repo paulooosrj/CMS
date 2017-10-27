@@ -97,7 +97,7 @@
 	# BLOCO DE TRADUÇÃO
 	#####################################################
 	
-	$template->Leads_Details_PleaseWait		=	ws::getLang("Leads>Details>PleaseWait");
+	// $template->Leads_Details_PleaseWait		=	ws::getLang("Leads>Details>PleaseWait");
 	$template->Leads_Details_BackList		=	ws::getLang("Leads>Details>BackList");
 	$template->Leads_Details_SaveConfig		=	ws::getLang("Leads>Details>SaveConfig");
 	$template->Leads_Details_URLSend		=	ws::getLang("Leads>Details>URLSend");

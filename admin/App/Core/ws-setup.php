@@ -74,11 +74,11 @@
 			);
 			$porisso       = Array(
 				str_replace(PHP_EOL, "", $data['DOMINIO']),
-				str_replace(PHP_EOL, "", $data['PREFIX_TABLES']),
-				str_replace(PHP_EOL, "", $data['NOME_BD']),
+				str_replace(PHP_EOL, "", strtolower($data['PREFIX_TABLES'])),
+				str_replace(PHP_EOL, "", strtolower($data['NOME_BD'])),
 				str_replace(PHP_EOL, "", $data['USUARIO_BD']),
 				str_replace(PHP_EOL, "", $data['SENHA_BD']),
-				str_replace(PHP_EOL, "", $data['SERVIDOR_BD']),
+				str_replace(PHP_EOL, "", strtolower($data['SERVIDOR_BD'])),
 				$data['ROOT_DOCUMENT'] . '/website',
 				$data['ROOT_DOCUMENT'] . '/admin',
 				str_replace(PHP_EOL, "", $data['RECAPTCHA']),
