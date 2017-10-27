@@ -77,12 +77,12 @@
 							# Isto é útil para ter certeza que um usuário malicioso não está tentando levar o script a trabalhar 
 							# em arquivos que não deve estar trabalhando --- por exemplo, /etc/passwd.
 							##########################################################################################################
-							if(is_uploaded_file($__FILE__["tmp_name"][$i])){
+							if(is_uploaded_file(ROOT_DOCUMENT.'/'.$tmp_name)){
 
 								##########################################################################################################  
 								# MOVEMOS O ARQUIVO PARA O SERVIDOR
 								##########################################################################################################  
-							 	if(move_uploaded_file( $tmp_name ,UPLOAD_DIR.'/'.$token.'.'.$ext)){
+							 	if(move_uploaded_file( ROOT_DOCUMENT.'/'.$tmp_name ,UPLOAD_DIR.'/'.$token.'.'.$ext)){
 
 									##########################################################################################################  
 							 		# GUARDAMOS AS VARIÁVEIS DO ARQUIVO UPADO NA ARRAY
@@ -100,10 +100,12 @@
 											'token'		=>$token
 										)
 									);
-								 }						
+								 }else{
+									$_RETURN_FILES[] = json_encode(array('status'=>'falha','response'=>'Esse arquivo não pode ser upado', 'error'=>'move_uploaded_file','linha'=>__LINE__));
+								}					
 								
 							}else{
-								$_RETURN_FILES[] = json_encode(array('status'=>'falha','response'=>'Esse arquivo não pode ser upado', 'error'=>'is_uploaded_file','file'=>'null'));
+								$_RETURN_FILES[] = json_encode(array('status'=>'falha','response'=>'Esse arquivo não pode ser upado', 'error'=>'is_uploaded_file','linha'=>__LINE__));
 							}
 						}
 					}else{
@@ -142,17 +144,19 @@
 										'token'		=>$token
 									)
 								);
+							}else{
+								$_RETURN_FILES[] = json_encode(array('status'=>'falha','response'=>'Esse arquivo não pode ser upado', 'error'=>'move_uploaded_file','linha'=>__LINE__));
 							}
 						}else{
-							$_RETURN_FILES[] = json_encode(array('status'=>'falha','response'=>'Esse arquivo não pode ser upado', 'error'=>'is_uploaded_file','file'=>'null'));
+							$_RETURN_FILES[] = json_encode(array('status'=>'falha','response'=>'Esse arquivo não pode ser upado', 'error'=>'is_uploaded_file','linha'=>__LINE__));
 						}
 					}
 				}
 			}else{
-				$_RETURN_FILES[] = json_encode(array('status'=>'falha','response'=>'Não existem arquivos anexados', 'error'=>$errorUpload[8],'file'=>'null'));
+				$_RETURN_FILES[] = json_encode(array('status'=>'falha','response'=>'Não existem arquivos anexados', 'error'=>$errorUpload[8],'linha'=>__LINE__));
 			}
 		}else{
-			$_RETURN_FILES[] = json_encode(array('status'=>'falha','response'=>'Diretório inexistente ou não permite esta ação', 'error'=>'is not writable (is_writable)','file'=>'null'));
+			$_RETURN_FILES[] = json_encode(array('status'=>'falha','response'=>'Diretório inexistente ou não permite esta ação', 'error'=>'is not writable (is_writable)','linha'=>__LINE__));
 		}
 
 /*##########################################################################################################  
@@ -266,7 +270,14 @@ foreach($_RETURN_FILES AS $FILE){
 		$U->set_update($_POST['mysql'],$FILE['file']['newName']);
 		$U->salvar();
 		echo json_encode(array('status'=>'sucesso','original'=>$FILE['file']['name'], 'filename'=>$FILE['file']['newName']));
+		exit;
 
+
+
+	}elseif($_POST['type']=='uploadBKP'){	
+		$filename = ROOT_DOCUMENT.'/ws-bkp/bkp_(uploaded)_'.date("Y-m-d_H-i-s").'.zip';
+		rename(UPLOAD_DIR.'/'.$FILE['file']['newName'], $filename);
+		echo json_encode(array('status'=>'sucesso'));
 		exit;
 	}elseif($_POST['type']=='item_detail_thumbnail'){	
 

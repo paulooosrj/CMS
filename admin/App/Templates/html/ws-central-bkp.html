@@ -2,10 +2,22 @@
 <script type="text/javascript">
 include_css("./App/Templates/css/websheep/modulos/_modulo_/templates.min.css","css_mod","All");
 </script>
-	<div id="topo_upload" class="bg01"></div>
+	<div id="topo_upload" class="bg01">
+		<form id="UploadBKP" style="display:none" action="./App/Core/ws-upload-files.php" method="post" enctype="multipart/form-data" name="formUpload">
+			<input name="file" id="myfile" type="file" style="display:none" />
+			<input type="hidden" name="type" 			value="uploadBKP" />
+			<input type="hidden" name="newName" 		value="hauahuahauhauhauaha.zip" />
+			<button type="submit" id="enviar_arquivos" style="dispaly:none;"></button>
+		</form>
+	</div>
+
+
+
 <div id="topoModulo" class="TitTop bg05 w1b">
 	<div class="comboTitleBot">
-	{central_Bkp_title}<div class="botTool 	bg06 w1">{central_Bkp_createBackup}</div>
+		{central_Bkp_title}
+		<div class="botTool create	bg06 w1"><i class="fa fa-file-archive-o"></i>  {central_Bkp_createBackup}</div>
+		<div class="botTool upload	bg06 w1" style="right:180px;"><i class=" fa fa-cloud-upload" ></i>  {central_Bkp_uploadBKP}</div>
 	</div>
 </div>
 	<div id="palco" class="palco_01" >
@@ -76,7 +88,57 @@ $(function(){
 		})
 		return false;
 	})
-	$('.botTool').unbind('click tap press').bind('click tap press', function(e){
+
+
+
+
+
+
+
+
+
+
+
+		$("#UploadBKP").ajaxForm({
+			beforeSend: function(xhr) {
+				out("beforeSend")
+				$('.tapa_upload').fadeIn('fast');
+				// $('#cancelBtn').click(xhr.abort);
+			},
+			uploadProgress: function(event, position, total, percentComplete, myForm) {
+				out(percentComplete)
+				if(percentComplete >= 99) {
+					$('.tapa_upload').find('.pct').html("Processando BKP").css({"left":percentComplete + "%"});
+				} else {
+					$('.tapa_upload').find('.pct').html(percentComplete + "%").css({"left":percentComplete + "%"});
+				}
+				$('.tapa_upload').find('.bar').animate({
+					width: percentComplete + "%"
+				}, 50);
+			},
+			complete: function(e) {
+				out("complete")
+				var response = $.parseJSON(e.responseText);
+				if(response.status=="sucesso"){
+					$( "#conteudo" ).load( './{PATH}/ws-central-bkps.php' , function( response, status, xhr ) {
+						$("#ws_confirm").remove();
+						$("#body").removeClass("scrollhidden");
+						$("*").removeClass("blur");
+						$('.tapa_upload').fadeOut('fast');
+					});						
+				}
+			}
+		})
+
+	$("#UploadBKP #myfile").change(function() {$("#UploadBKP").submit();})
+	$('.botTool.upload').unbind('click tap press').bind('click tap press', function(e){
+		e.preventDefault();
+		$("#UploadBKP #myfile").click();
+		return false;
+	})
+
+
+	$('.botTool.create').unbind('click tap press').bind('click tap press', function(e){
 		e.preventDefault();
 		confirma({
 			width:600,

@@ -302,6 +302,7 @@
 	"centralBkp": {
 		"title": "Central de BKP",
 		"createBackup": "Criar backup",
+		"uploadBKP": "Upload de BKP existente",
 		"wait": "Por favor, aguarde...",
 		"loading": "Carregando...",
 		"mycomputer": "Meu computador",
@@ -316,7 +317,7 @@
 		"update": "Atualização efetuada com sucesso!",
 		"refresh": "Iremos recarregar seu painel para que as alterações sejam visualizadas.",
 		"recharge": "Recarregar browser",
-		"restore": "Restaurar bkp",
+		"restore": "Instalar",
 		"placeholderTitle": "Título",
 		"descrition": "Descrição",
 		"download": "Download",
