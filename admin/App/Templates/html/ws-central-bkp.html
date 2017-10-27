@@ -19,7 +19,8 @@ include_css("./App/Templates/css/websheep/modulos/_modulo_/templates.min.css","c
 						<!-- END avatarTemplate -->
 						<div class="plugin-title w1">{titulo}</div>
 						<div class="plugin-description w2" >{description}</div>
-						<div class="botao">{label}</div>
+						<div class="botao aplicar"><i class="fa fa-rocket"></i>  {label}</div>
+						<div class="botao download"><i class="fa fa-download"></i>  {central_Bkp_download}</div>
 					</div>
 				</div>
 			</li>
@@ -185,7 +186,24 @@ $(function(){
 		return false;
 	})
 
-	$('.pluginItem .botao').unbind('click tap press').bind('click tap press', function(e){
+	$('.pluginItem .botao.download').unbind('click tap press').bind('click tap press', function(e){
+			e.preventDefault();
+			$(".tapa_upload").fadeIn('fast');
+			var Filename = "/ws-bkp/"+$(this).parent().parent().parent().data('file');
+			ws.downloadFile({
+				file:Filename,
+				finish: function(e) {$(".tapa_upload").hide();},
+				progress: function(e) {
+					$(".tapa_upload .bar").css({"width":e+"%"});
+					$(".tapa_upload .pct").css({"left":e+"%"}).text(e+"%");
+				}
+			})
+
+
+
+			return false;
+	})
+	$('.pluginItem .botao.aplicar').unbind('click tap press').bind('click tap press', function(e){
 			e.preventDefault();
 			var dataFile = $(this).parent().parent().parent().data('file');
 			confirma({

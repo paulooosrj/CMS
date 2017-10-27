@@ -302,19 +302,9 @@
 	"centralBkp": {
 		"title": "Central de BKP",
 		"createBackup": "Criar backup",
-		"restoreModal": {
-			"aboutTheFiles": "Sobre os arquivos:",
-			"restore100": "Restaurar 100% o site, excluindo todos os arquivos atuais",
-			"applyReplace": "Aplica os arquivos substituindo os arquivos existentes atuais",
-			"applyIgnore": "Aplica BKP sobre o site atual pulando os arquivos existentes",
-			"tools": "Apenas utilizar as ferramentas como base",
-			"dataBase": "E em relação a base de dados?",
-			"dontTouchDataBase": "Não mexer na base",
-			"basicStructure": "Estrutura básica instalada",
-			"rememberIf": "* Lembre-se os plugins estarão incluídos nas exclusões ou substituições."
-		},
 		"wait": "Por favor, aguarde...",
 		"loading": "Carregando...",
+		"mycomputer": "Meu computador",
 		"mycomputer": "Meu computador",
 		"library": "Na biblioteca",
 		"delete": "Excluir",
@@ -329,7 +319,19 @@
 		"restore": "Restaurar bkp",
 		"placeholderTitle": "Título",
 		"descrition": "Descrição",
-		"creatingatemplate": "Criando um template/bkp"
+		"download": "Download",
+		"creatingatemplate": "Criando um template/bkp",
+		"restoreModal": {
+			"aboutTheFiles": "Sobre os arquivos:",
+			"restore100": "Restaurar 100% o site, excluindo todos os arquivos atuais",
+			"applyReplace": "Aplica os arquivos substituindo os arquivos existentes atuais",
+			"applyIgnore": "Aplica BKP sobre o site atual pulando os arquivos existentes",
+			"tools": "Apenas utilizar as ferramentas como base",
+			"dataBase": "E em relação a base de dados?",
+			"dontTouchDataBase": "Não mexer na base",
+			"basicStructure": "Estrutura básica instalada",
+			"rememberIf": "* Lembre-se os plugins estarão incluídos nas exclusões ou substituições."
+		}
 	},
 	"urlIncludes": {
 		"topTitle": "Includes de arquivos",

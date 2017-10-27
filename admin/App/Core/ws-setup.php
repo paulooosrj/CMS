@@ -176,7 +176,6 @@
 		@mkdir(ROOT_DOCUMENT 				.'/website/assets/img');
 		@mkdir(ROOT_DOCUMENT 				.'/website/assets/template');
 		@mkdir(ROOT_DOCUMENT 				.'/website/assets/fonts');
-		@file_put_contents(ROOT_DOCUMENT 	.'/website/assets/.htaccess', 'RewriteEngine Off');
 		@mkdir(ROOT_DOCUMENT 				.'/ws-shortcodes');
 		@copy(ROOT_DOCUMENT."/admin/App/Lib/my-shortcode.php",ROOT_DOCUMENT."/ws-shortcodes/my-shortcode.php");
 		
@@ -185,6 +184,9 @@
 		if (!file_exists(ROOT_DOCUMENT 		.'/website/includes/inicio.php')) 	@file_put_contents(ROOT_DOCUMENT . '/website/includes/inicio.php', 'Olá mundo!');
 		if (!file_exists(ROOT_DOCUMENT 		.'/website/includes/footer.php')) 	@file_put_contents(ROOT_DOCUMENT . '/website/includes/footer.php', '<hr>Footer');
 		if (file_exists(ROOT_DOCUMENT 		.'/website/index.php')) 			@rename(ROOT_DOCUMENT . '/website/index.php', ROOT_DOCUMENT . '/website/index_bkp.php');
+																				@file_put_contents(ROOT_DOCUMENT 	.'/ws-bkp/.htaccess', 'RewriteEngine Off');
+																				@file_put_contents(ROOT_DOCUMENT 	.'/website/assets/.htaccess', 'RewriteEngine Off');
+
 
 
 	############################################################################################################################################

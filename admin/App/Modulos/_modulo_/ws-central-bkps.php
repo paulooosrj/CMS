@@ -20,6 +20,7 @@
 	# DEFINIMOS AS STRINGS PRINCIPAIS PUXANDO DO JSON
 	##########################################################################################################
 	$template->PATH												=	PATH;
+	$template->central_Bkp_download								=	ws::getlang('centralBkp>download');
 	$template->central_Bkp_title								=	ws::getlang('centralBkp>title');
 	$template->central_Bkp_createBackup							=	ws::getlang('centralBkp>createBackup');
 	$template->central_Bkp_loading								=	ws::getlang('centralBkp>loading');

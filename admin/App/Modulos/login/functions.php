@@ -27,6 +27,8 @@ function login (){
 	$token	= $User['token'];
 	$hour  	= (time() + ( 24 * 3600));
 
+	############################################################################## 
+	# INICIA SESSÃO CRIPTADA DO USUÁRIO	
 	##############################################################################
 
 	$user = new Session();
@@ -49,27 +51,6 @@ function login (){
 	# gera os cookies pra sessão	
 	############################################################################## 
 	$cript_id	= (md5(ID_SESS.$User['id'].ID_SESS.$User['token'].ID_SESS));
-		// setcookie('ws_session', $cript_id,$hour,'/');
-		// setcookie('ws_log', 'true',$hour,'/');
-
-	##############################################################################
-	# ABRE A SESSION COM OS COOKIES	
-	##############################################################################
-	// _set_session($cript_id);
-
-	// $_SESSION['user']['id']						= $User['id'];
-	// $_SESSION['user']['id_status']				= $User['id_status'];
-	// $_SESSION['user']['token']					= $User['token'];
-	// $_SESSION['user']['nome']					= $User['nome'];
-	// $_SESSION['user']['usuario']				= $User['usuario'];
-	// $_SESSION['user']['avatar']					= $User['avatar'];
-	// $_SESSION['user']['admin']					= $User['admin'];
-	// $_SESSION['user']['ativo']					= $User['ativo'];
-	// $_SESSION['user']['add_user']				= $User['add_user'];	
-	// $_SESSION['user']['edit_only_own']			= $User['edit_only_own'];	
-	// $_SESSION['user']['leitura']				= $User['leitura'];	
-	// $_SESSION['user']['hora']					= $hour;	
-	// $_SESSION['ws_log']							= true;
 
 	$SetUserSession = new MySQL();
 	$SetUserSession->set_table(PREFIX_TABLES.'ws_usuarios');
@@ -77,7 +58,6 @@ function login (){
 	$SetUserSession->set_update('sessao', $cript_id);
 	$SetUserSession->salvar();
 	ws::insertLog($User['id'],0 ,0,"Login","Efetuou login no sistema","Efetuou login no sistema","","system");
-
 
 	echo "ok";
 	exit;
