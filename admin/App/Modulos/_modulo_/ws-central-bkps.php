@@ -22,7 +22,6 @@
 	$template->PATH												=	PATH;
 	$template->central_Bkp_title								=	ws::getlang('centralBkp>title');
 	$template->central_Bkp_createBackup							=	ws::getlang('centralBkp>createBackup');
-	$template->central_Bkp_wait									= 	ws::getlang('centralBkp>wait');
 	$template->central_Bkp_loading								=	ws::getlang('centralBkp>loading');
  	$template->central_Bkp_mycomputer							=	ws::getlang('centralBkp>mycomputer');
 	$template->central_Bkp_library								=	ws::getlang('centralBkp>library');
