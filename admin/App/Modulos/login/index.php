@@ -82,10 +82,13 @@ iframe{
 						confirma({width: "auto", conteudo: " <?=ws::getlang("login>loading");?><div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 })
 					}
 				}).done(function(e){
-					out(e)
 					if(e.indexOf('ok')!= -1){
 						window.location.reload();
 					}else{
+						$("#ws_confirm").fadeOut('fast',function(){
+							$("#ws_confirm").remove();
+							$("*").removeClass("blur");
+						});
 						$("#iniciarsessao").show('fast');
 						$("#iniciarsessao_disabled").hide('fast');
 						alert(e)

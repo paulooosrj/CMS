@@ -188,9 +188,10 @@
 				"ridingBKP": "Montando BKP..."
 			},
 			"logOut": {
-				"content": "Você tem certeza de que gostarioa sair? Não esqueça de salvar todas suas alterações.",
-				"bot1": "Efetuar atualizações",
-				"bot2": "Não obrigado"
+				"content": "Você tem certeza de que gostarioa sair?<br>Não esqueça de salvar todas suas alterações.",
+				"bot1": "Sim quero sair!",
+				"bot2": "Ops, cliquei errado",
+				"loading": "Deslogando..."
 			}
 		},
 		"lateralMenu": {

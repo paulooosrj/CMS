@@ -306,11 +306,17 @@
 								})
 							})	
 							$("#clicklogout").unbind("click tap press").bind("click tap press",function(e) {
+
+								var dashboard_modal_logOut_bot1 	= $(this).data("modal-logout-bot1");
+								var dashboard_modal_logOut_bot2 	= $(this).data("modal-logout-bot2");
+								var dashboard_modal_logOut_content 	= $(this).data("modal-logout-content");
+								var dashboard_modal_logOut_loading	= $(this).data("modal-logout-loading");
+
 								confirma({
-									conteudo:"{dashboard_modal_logOut_content}",
+									conteudo:dashboard_modal_logOut_content,
 									width:600,
-									bot1:"{dashboard_modal_logOut_bot1}",
-									bot2:"{dashboard_modal_logOut_bot2}",
+									bot1:dashboard_modal_logOut_bot1,
+									bot2:dashboard_modal_logOut_bot2,
 									divScroll:"body",
 									divBlur:"body #container",
 									Callback:function(){
@@ -323,7 +329,7 @@
 													$("#iniciarsessao").hide('fast')
 													$("#iniciarsessao_disabled").show('fast')
 													setTimeout(function(){
-														confirma({width: "auto", conteudo: "  {dashboard_wait}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 })
+														confirma({width: "auto", conteudo: dashboard_modal_logOut_loading+"<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>", drag: false, bot1: 0, bot2: 0 })
 													},1000)
 												}
 											}).done(function(e){
