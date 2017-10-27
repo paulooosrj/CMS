@@ -6,6 +6,18 @@
 	##########################################################################################
 	$ws_version = json_decode(@file_get_contents(ROOT_ADMIN."/App/Templates/json/ws-update.json"));
 
+	######################################################################################################################################
+	#  QUANDO SE UTILIZA UM ARQUIVO, NÃO PODEMOS FAZER ELE SE AUTO EXCLUIR, PORTANTO    
+	#  QUANDO FIZEMOS O INSTALL OU UPDATE, GRAVAMOS UMA CÓPIA NO ROOT, E AGORA SIM VAMOS SUBSTITUIR O WS-INSTALL (caso tenha)  
+	######################################################################################################################################	
+	if(file_exists(ROOT_DOCUMENT.'/ws-install.php')){
+		unlink(ROOT_DOCUMENT.'/ws-install/ws-install.php');
+		rename(ROOT_DOCUMENT.'/ws-install.php',ROOT_DOCUMENT.'/ws-install/ws-install.php');
+	}
+
+	######################################################################################################################################
+	######################################################################################################################################
+
 ?>
 <html lang="pt-br" class='bgradial01' id="html">
 <head>
