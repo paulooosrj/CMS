@@ -1,6 +1,7 @@
 <?
 ob_start();
 function login (){
+	global $_conectMySQLi_;
 	$_SERVER_											=  	$_SERVER['HTTP_HOST']; 
 	$domain												=  	"http://".$_SERVER_; 
 	$_root	 	 										= 	$domain.str_replace("/root.php","",$_SERVER['PHP_SELF']);
@@ -11,9 +12,19 @@ function login (){
 	$dia												=	time()+60*60*24*30;
 	parse_str($_POST['form'],$_FORM);
 
+	############################################################################## 
+	# LIMPAMOS A STRING DO USUÁRIO PARA EVITAR INJECT	
+	##############################################################################
+    $usuario	= (get_magic_quotes_gpc()) ? trim(stripslashes($_FORM['usuario'])) : trim($_FORM['usuario']);
+    $usuario	= mysqli_real_escape_string($_conectMySQLi_,$usuario);
+    $senha		= _codePass($_FORM['senha']);
+
+	############################################################################## 
+	# VERIFICAMOS AGORA NA BASE DE DADOS SE O USUÁRIO EXISTE E QUAL SEU STATUS	
+	##############################################################################
 	$checkUser					= new MySQL();
 	$checkUser->set_table(PREFIX_TABLES.'ws_usuarios');
-	$checkUser->set_where("login='".$_FORM['usuario']."' AND senha='"._codePass($_FORM['senha'])."' AND ativo=1");
+	$checkUser->set_where("login='".$usuario."' AND senha='". $senha."' AND ativo=1");
 	$checkUser->select();
 	if(	@$checkUser->_num_rows	==0)				{	echo "Ops, o login ou a senha estão incorretos.";													exit;}
 	if( @$checkUser->fetch_array[0]['id_status']==1){	echo "Você está com  o seu perfil bloqueado!";														exit;}

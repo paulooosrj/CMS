@@ -2135,22 +2135,31 @@
 		}
 		
 		
-		
-		$I = new MySQL();
-		$I->set_table(PREFIX_TABLES . 'ws_usuarios');
-		$I->set_insert('id', 1);
-		$I->set_insert('nome', 'Administrador');
-		$I->set_insert('sobrenome', 'WebSheep');
-		$I->set_insert('email', 'suporte@websheep.ws');
-		$I->set_insert('login', $_getInput['LOG_WEBMASTER']);
-		$I->set_insert('admin', '1');
-		$I->set_insert('usuario', 	$_getInput['LOG_WEBMASTER']);
-		$I->set_insert('senha', 	_codePass($_getInput['PASS_WEBMASTER']));
-		$I->set_insert('token', TOKEN_USER);
-		$I->set_insert('id_status', 0);
-		$I->set_insert('ativo', 1);
-		$I->debug(0);
-		$I->insert_or_replace();
+		if(isset($_getInput['LOG_WEBMASTER']) && $_getInput['PASS_WEBMASTER']){
+
+		    $usuario	= (get_magic_quotes_gpc()) ? trim(stripslashes($_getInput['LOG_WEBMASTER'])) : trim($_getInput['LOG_WEBMASTER']);
+		    $usuario	= mysqli_real_escape_string($_conectMySQLi_,$usuario);
+		    $senha		= _codePass($_getInput['PASS_WEBMASTER']);
+
+
+			$I = new MySQL();
+			$I->set_table(PREFIX_TABLES . 'ws_usuarios');
+			$I->set_insert('id', 1);
+			$I->set_insert('nome', 'Administrador');
+			$I->set_insert('sobrenome', 'WebSheep');
+			$I->set_insert('email', 'suporte@websheep.ws');
+			$I->set_insert('login', $usuario);
+			$I->set_insert('admin', '1');
+			$I->set_insert('usuario', $usuario);
+			$I->set_insert('senha', $senha);
+			$I->set_insert('token', TOKEN_USER);
+			$I->set_insert('id_status', 0);
+			$I->set_insert('ativo', 1);
+			$I->debug(0);
+			$I->insert_or_replace();
+		}
+
+
 		$t_ferramentas = new MySQL();
 		$t_ferramentas->set_table(PREFIX_TABLES . 'ws_ferramentas');
 		$t_ferramentas->debug(0);

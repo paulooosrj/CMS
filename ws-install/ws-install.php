@@ -88,11 +88,12 @@
 		    }
 		}
 		if(file_exists("./../ws-update.zip")){ unlink("./../ws-update.zip"); }
-		echo '<div id="progressBar" style="position: fixed; background-color: #4f6cc6; height: 100%; width: 100%; margin: 0; padding: 0; top: 0; left: 0; "></div>';
+		echo '<div id="progressBar" style="	-webkit-transition: all 1000ms ease-out; -moz-transition: all 1000ms ease-out; -ms-transition: all 1000ms ease-out; -o-transition: all 1000ms ease-out; transition: all 1000ms ease-out; position: fixed; background-color: #4f6cc6; height: 100%; width:0%; margin: 0; padding: 0; top: 0; left: 0; "></div>';
 		$ctx = stream_context_create();
 		stream_context_set_params($ctx, array("notification" => "stream_notification_callback"));
 		file_put_contents("./../ws-update.zip",file_get_contents($_GET['githubFile'], false, $ctx));
 		echo "<script>window.location='/ws-install/ws-install.php?install=question&githubFile=".$_GET['githubFile']."';</script>";
+		exit;
 	}
 
 ?>
@@ -289,7 +290,7 @@ $(document).ready(function(){
 			alert("Selecio ne uma versão");
 		}else{
 			$(".comboCentral .logo").text("Fazendo download do repositório");
-			$("#loader").show().html("<iframe id='iframe' src='./ws-install.php?type=progressBar&githubFile="+version+"&path="+path+"'></iframe>");
+			$("#loader").show().html("<iframe id='iframe' src='./ws-install.php?type=progressBar&githubFile="+version+"'></iframe>");
 			$("#txt,#botao").hide();
 		}
 	})
