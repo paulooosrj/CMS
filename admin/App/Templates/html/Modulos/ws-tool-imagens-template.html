@@ -10,7 +10,7 @@
 					<script>
 						 	 $("#bt_voltar_cat").unbind("click").click(function(){
 									confirma({width:"auto",conteudo:"  Voltando...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0});
-									$("#conteudo").load("./{PATH}/detalhes.php?token_group={TOKEN_GROUP}&ws_id_ferramenta={WS_ID_FERRAMENTA}&id_item={ID_ITEM}&id_cat={ID_CAT}&ws_nivel={ID_NIVEL}",function(){
+									$("#conteudo").load("./{PATH}/detalhes.php?token_group={TOKEN_GROUP}{BACK}&ws_id_ferramenta={WS_ID_FERRAMENTA}&id_item={ID_ITEM}&id_cat={ID_CAT}&ws_nivel={ID_NIVEL}",function(){
 										$("#ws_confirm").remove();
 										$("#body").removeClass("scrollhidden");
 										$("*").removeClass("blur");
@@ -235,8 +235,8 @@ function reloadFunctions(){
 						timer:5000,
 						type:3
 					})
+					$(".tapa_upload").fadeOut('fast');
 					$("#conteudo").load("./{PATH}/imagens.php?{HTTPVARS}")
-					//$("#conteudo").load("./App/Modulos/_modulo_/imagens.php?token_group={TOKEN_GROUP}&ws_id_ferramenta={WS_ID_FERRAMENTA}{BACK}&id_item={ID_ITEM}&ws_nivel={ID_NIVEL}&id_cat={ID_CAT}");
 			};
 		},
 		error:function(e){
