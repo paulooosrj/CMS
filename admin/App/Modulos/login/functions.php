@@ -13,18 +13,11 @@ function login (){
 	parse_str($_POST['form'],$_FORM);
 
 	############################################################################## 
-	# LIMPAMOS A STRING DO USUÁRIO PARA EVITAR INJECT	
-	##############################################################################
-		$usuario	= (get_magic_quotes_gpc()) ? trim(stripslashes($_FORM['usuario'])) : trim($_FORM['usuario']);
-		$usuario	= mysqli_real_escape_string($_conectMySQLi_,$usuario);
-		$senha		= _codePass($_FORM['senha']);
-
-	############################################################################## 
 	# VERIFICAMOS AGORA NA BASE DE DADOS SE O USUÁRIO EXISTE E QUAL SEU STATUS	
 	##############################################################################
 		$checkUser					= new MySQL();
 		$checkUser->set_table(PREFIX_TABLES.'ws_usuarios');
-		$checkUser->set_where("login='".$usuario."' AND senha='". $senha."' AND ativo=1");
+		$checkUser->set_where("login='".ws::preventMySQLInject($usuario)."' AND senha='". _codePass(ws::preventMySQLInject($_FORM['senha']))."' AND ativo=1");
 		$checkUser->select();
 		if(	@$checkUser->_num_rows	==0)				{	echo "Ops, o login ou a senha estão incorretos.";													exit;}
 		if( @$checkUser->fetch_array[0]['id_status']==1){	echo "Você está com  o seu perfil bloqueado!";														exit;}
@@ -62,7 +55,6 @@ function login (){
 	# gera os cookies pra sessão	
 	############################################################################## 
 		$cript_id	= (md5(ID_SESS.$User['id'].ID_SESS.$User['token'].ID_SESS));
-
 		$SetUserSession = new MySQL();
 		$SetUserSession->set_table(PREFIX_TABLES.'ws_usuarios');
 		$SetUserSession->set_where('id="'.$User['id'].'"');

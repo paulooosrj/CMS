@@ -83,6 +83,10 @@ ol {
 	font-weight: 100;
 	font-size: 13px;
 }
+form input.error,form select.error {
+	background-color: #fdeeee;
+	border: solid 1px #ff2900;
+}
 form input,form select {
 	position: relative;
 	float: left;

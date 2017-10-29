@@ -163,6 +163,14 @@
 			);
 			return $this;
 		}
+		########################################################################################### PREPARA INPUT PARA BASE
+		public static function preventMySQLInject($string){
+		    $script = array('OR','FROM','SELECT','INSERT','DELETE','WHERE','DROP TABLE','SHOW TABLES','*','--','=');
+	        $string = (!get_magic_quotes_gpc()) ? addslashes(str_ireplace($script,"",$string)) : str_ireplace($script,"",$string);
+	        return mysqli_real_escape_string($_conectMySQLi_,$string);
+		}
+
+		#####################################################################################################################
 		static	function closureCompilerJs($code, $level = 'SIMPLE_OPTIMIZATIONS'){
 			if(file_exists($code)){$code=file_get_contents($code);}
 			try {

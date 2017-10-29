@@ -187,8 +187,6 @@
 																				@file_put_contents(ROOT_DOCUMENT 	.'/ws-bkp/.htaccess', 'RewriteEngine Off');
 																				@file_put_contents(ROOT_DOCUMENT 	.'/website/assets/.htaccess', 'RewriteEngine Off');
 
-
-
 	############################################################################################################################################
 	# SIMPLES FUNÇÃO QUE RETORNA UMA SENHA CRYPT COM MD5
 	############################################################################################################################################
@@ -204,90 +202,104 @@
 <meta charset="UTF-8">
 <link type="image/x-icon" href="./img/favicon.png" rel="shortcut icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/websheep/estrutura.min.css" />
 <link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/websheep/desktop.min.css" />
 <link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/install.css" />
 <link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/funcionalidades.css" />
 <link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/fontes/fonts.css" />
 <link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/theme_blue.min.css" />
-
 <script type = 'text/javascript' 												src="./App/Vendor/jquery/2.2.0/jquery.min.js"></script>
 <script type = 'text/javascript' 												src="./App/Templates/js/websheep/funcionalidades.js"></script>
 
-
-
 <script type = 'text/javascript'>
-$(document).ready(function(){
-	$("input[readonly]").css({color:"#CCC"});
-	$("input[data-conect='mysql']").on("keyup",function(){
-		var NOME_BD 		=	$("input[name='NOME_BD']").val();
-		var USUARIO_BD 		=	$("input[name='USUARIO_BD']").val();
-		var SENHA_BD 		=	$("input[name='SENHA_BD']").val();
-		var SERVIDOR_BD 	=	$("input[name='SERVIDOR_BD']").val();
-		$.ajax({
-			type: "POST",cache: false,url: "./App/Core/ws-setup.php",
-			data: {function:"testMySQL",NOME_BD:NOME_BD,USUARIO_BD:USUARIO_BD,SENHA_BD:SENHA_BD,SERVIDOR_BD:SERVIDOR_BD,},
-			error: function (xhr, ajaxOptions, thrownError) {alert(xhr.status);alert(thrownError);}
-		}).done(function(data) { 
-			
-			if(data=='1'){
-				$("input[name='NOME_BD'],input[name='USUARIO_BD'],input[name='SENHA_BD'],input[name='SERVIDOR_BD']").css({borderColor:"#b0d000",paddingLeft:33,'background-image':"url('./App/Templates/img/websheep/tick-circle.png')",'background-position':10,'background-repeat':"no-repeat"})
-			}else{
-				$("input[name='NOME_BD'],input[name='USUARIO_BD'],input[name='SENHA_BD'],input[name='SERVIDOR_BD']").css({borderColor:"#d03b00",paddingLeft:33,'background-image':"url('./App/Templates/img/websheep/cross.png')",'background-position':10,'background-repeat':"no-repeat"})
-			}
-		});
-	})
-	window.criaWSConf = function(){
-		var formulario = $("#formulario").serialize();
-		$.ajax({
-			type: "POST",
-			cache: false,
-			url: "./App/Core/ws-setup.php",
-		    beforeSend:function(){confirma({width:"auto",conteudo:"  Criando ws-config...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
-			data: {function:"createWsConfig", form:formulario},
-		}).done(function(data) {
-					objJSON = JSON.parse(data)
-					console.log(data);
-					if(objJSON.status=="sucesso"){
-						$.ajax({
-								type: "POST",
-								cache: false,
-								beforeSend:function(){confirma({width:"auto",conteudo:"  Configurando MySQL...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
-								url: "./App/Modulos/_tools_/functions.php",
-								data: {function:"installSQLInit",formulario:formulario},
-								error: function (xhr, ajaxOptions, thrownError) {alert(xhr.status);alert(thrownError);}
-							}).done(function(data) {
-								console.log(data);
-								if(data=="sucesso"){
-									location.reload();
-								}else{
-									confirma({
-										conteudo:data,
-										bot1:'Ok',
-										bot2:false,
-										drag:false,
-										botclose:false,
-										width:500
-									})
-								}
-							});
-
-					}else{
+	$(document).ready(function(){
+		$("input[readonly]").css({color:"#CCC"});
+		$("input[data-conect='mysql']").on("keyup",function(){
+			var NOME_BD 		=	$("input[name='NOME_BD']").val();
+			var USUARIO_BD 		=	$("input[name='USUARIO_BD']").val();
+			var SENHA_BD 		=	$("input[name='SENHA_BD']").val();
+			var SERVIDOR_BD 	=	$("input[name='SERVIDOR_BD']").val();
+			$.ajax({
+				type: "POST",cache: false,url: "./App/Core/ws-setup.php",
+				data: {function:"testMySQL",NOME_BD:NOME_BD,USUARIO_BD:USUARIO_BD,SENHA_BD:SENHA_BD,SERVIDOR_BD:SERVIDOR_BD,},
+				error: function (xhr, ajaxOptions, thrownError) {alert(xhr.status);alert(thrownError);}
+			}).done(function(data) { 
+				if(data=='1'){
+					$("#formulario").removeClass("mysqlFail")
+					$("input[name='NOME_BD'],input[name='USUARIO_BD'],input[name='SENHA_BD'],input[name='SERVIDOR_BD']").css({borderColor:"#b0d000",paddingLeft:33,'background-image':"url('./App/Templates/img/websheep/tick-circle.png')",'background-position':10,'background-repeat':"no-repeat"})
+				}else{
+					$("#formulario").addClass("mysqlFail")
+					$("input[name='NOME_BD'],input[name='USUARIO_BD'],input[name='SENHA_BD'],input[name='SERVIDOR_BD']").css({borderColor:"#d03b00",paddingLeft:33,'background-image':"url('./App/Templates/img/websheep/cross.png')",'background-position':10,'background-repeat':"no-repeat"})
 				}
+			});
 		})
-	}
+		window.criaWSConf = function(){
+			var formulario = $("#formulario").serialize();
+			$.ajax({
+				type: "POST",
+				cache: false,
+				url: "./App/Core/ws-setup.php",
+			    beforeSend:function(){confirma({width:"auto",conteudo:"  Criando ws-config...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+				data: {function:"createWsConfig", form:formulario},
+			}).done(function(data) {
+						objJSON = JSON.parse(data)
+						console.log(data);
+						if(objJSON.status=="sucesso"){
+							$.ajax({
+									type: "POST",
+									cache: false,
+									beforeSend:function(){confirma({width:"auto",conteudo:"  Configurando MySQL...<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})},
+									url: "./App/Modulos/_tools_/functions.php",
+									data: {function:"installSQLInit",formulario:formulario},
+									error: function (xhr, ajaxOptions, thrownError) {alert(xhr.status);alert(thrownError);}
+								}).done(function(data) {
+									console.log(data);
+									if(data=="sucesso"){
+										location.reload();
+									}else{
+										confirma({
+											conteudo:data,
+											bot1:'Ok',
+											bot2:false,
+											drag:false,
+											botclose:false,
+											width:500
+										})
+									}
+								});
 
-	$('#vamosla').click(function(){
+						}else{
+					}
+			})
+		}
+
+		$('#vamosla').click(function(){
 			var formulario 		= 	$("#formulario").serialize();
 			var NOME_BD 		=	$("input[name='NOME_BD']").val();
 			var USUARIO_BD 		=	$("input[name='USUARIO_BD']").val();
 			var SENHA_BD 		=	$("input[name='SENHA_BD']").val();
 			var SERVIDOR_BD 	=	$("input[name='SERVIDOR_BD']").val();
 			var CLIENT_NAME 	=	$("input[name='CLIENT_NAME']").val();
-			window.criaWSConf();
+			var LOG_WEBMASTER 	=	$("input[name='LOG_WEBMASTER']").val();
+			var PASS_WEBMASTER 	=	$("input[name='PASS_WEBMASTER']").val();
+
+			if(CLIENT_NAME==""){		$("input[name='CLIENT_NAME']").addClass("error"); 		return false;}
+			if(LOG_WEBMASTER==""){		$("input[name='LOG_WEBMASTER']").addClass("error"); 	return false;}
+			if(PASS_WEBMASTER==""){		$("input[name='PASS_WEBMASTER']").addClass("error"); 	return false;}
+			if(NOME_BD==""){			$("input[name='NOME_BD']").addClass("error"); 			return false;}
+			if(USUARIO_BD==""){			$("input[name='USUARIO_BD']").addClass("error"); 		return false;}
+			if(SERVIDOR_BD==""){		$("input[name='SERVIDOR_BD']").addClass("error"); 		return false;}
+
+			if($("#formulario").hasClass("mysqlFail")){
+				alert("Os dados de conexão a base estão incorretos.")
+			}else{
+				window.criaWSConf();
+			}
+		});
+		$("#formulario input").focus(function() {
+			$(this).removeClass("error");
+		});
 	});
-});
 </script>
 
 <body id="body">
@@ -305,7 +317,7 @@ $(document).ready(function(){
 				Nele irá todos os dados do servidor e banco de dados. preencha o formulário e clique em avançar.
 				</p>
 				<hr style="margin:20px;">
-					<form id="formulario">
+					<form id="formulario" class="mysqlFail">
 						<div class="label" style="width: 100%;">Nome do cliente licenciado:</div>
 						<div class="c"></div>
 						<input	name="CLIENT_NAME" 	value="" placeholder="ex: Empresa LTDA" style="width: 100%;">
@@ -314,8 +326,8 @@ $(document).ready(function(){
 						<div class="c"></div>
 						<div class="label" style="width: 50%;">Login do webmaster:</div>
 						<div class="label" style="width: 50%;">Senha do webmaster:</div>
-						<input	name="LOG_WEBMASTER" 	value="admin" 						placeholder="" style="width: calc(50% - 5px);margin-left: 0;">
-						<input	name="PASS_WEBMASTER" 	value="admin123" 	type="password" placeholder="" style="width: calc(50% - 5px);margin-right: 0;">
+						<input	name="LOG_WEBMASTER" 	value="" 					placeholder="Login:" style="width: calc(50% - 5px);margin-left: 0;">
+						<input	name="PASS_WEBMASTER" 	value="" 	type="password" placeholder="Senha:" style="width: calc(50% - 5px);margin-right: 0;">
 
 
 						<div class="c"></div>
