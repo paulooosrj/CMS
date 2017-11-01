@@ -64,7 +64,6 @@
 					##########################################################################################################
 					if(is_array($__FILE__['name'])){
 						for ($i=0; $i < count($__FILE__['name']); $i++) { 
-
 							$tmp_name 	= $__FILE__["tmp_name"][$i];
 							$size 		= $__FILE__["size"][$i];
 							$type		= $__FILE__["type"][$i];
@@ -77,12 +76,12 @@
 							# Isto é útil para ter certeza que um usuário malicioso não está tentando levar o script a trabalhar 
 							# em arquivos que não deve estar trabalhando --- por exemplo, /etc/passwd.
 							##########################################################################################################
-							if(is_uploaded_file(ROOT_DOCUMENT.'/'.$tmp_name)){
+							if(is_uploaded_file($tmp_name)){
 
 								##########################################################################################################  
 								# MOVEMOS O ARQUIVO PARA O SERVIDOR
 								##########################################################################################################  
-							 	if(move_uploaded_file( ROOT_DOCUMENT.'/'.$tmp_name ,UPLOAD_DIR.'/'.$token.'.'.$ext)){
+							 	if(move_uploaded_file($tmp_name ,UPLOAD_DIR.'/'.$token.'.'.$ext)){
 
 									##########################################################################################################  
 							 		# GUARDAMOS AS VARIÁVEIS DO ARQUIVO UPADO NA ARRAY
@@ -105,7 +104,7 @@
 								}					
 								
 							}else{
-								$_RETURN_FILES[] = json_encode(array('status'=>'falha','response'=>'Esse arquivo não pode ser upado', 'error'=>'is_uploaded_file','linha'=>__LINE__));
+								$_RETURN_FILES[] = json_encode(array('status'=>'falha','response'=>'Esse arquivo não pode ser upado','arquivo'=>$tmp_name, 'error'=>'is_uploaded_file','linha'=>__LINE__));
 							}
 						}
 					}else{
