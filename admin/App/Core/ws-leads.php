@@ -280,7 +280,7 @@ enviaEmail:
 	$mail->AddEmbeddedImage(pathImg.'/'.topoEmail, "topo", topoEmail);
 	$mail->AddEmbeddedImage(pathImg.'/'.assEmail,  "assinatura", assEmail);
 	$mensagem ="";
-	if($_LEAD->header_email!="") 	$mensagem  .=  utf8_decode("<img alt='Fale comigo' src='cid:topo'><br>").PHP_EOL;
+	if($_LEAD->header_email!="") 	$mensagem  .=  utf8_decode("<img src='cid:topo'><br>").PHP_EOL;
 									$mensagem  .=  utf8_decode(str_replace($isso, $porissoIsso,$_LEAD->msng_resp)).PHP_EOL;
 	if($_LEAD->footer_email!="")  	$mensagem  .=  utf8_decode("<img src='cid:assinatura'>");
 	$mail->msgHTML(str_replace(PHP_EOL,"",$mensagem));
@@ -307,7 +307,7 @@ enviaEmail:
 				$mailResp->AddEmbeddedImage(pathImg.'/'.topoEmail, "topo", topoEmail);
 				$mailResp->AddEmbeddedImage(pathImg.'/'.assEmail,  "assinatura", assEmail);
 				$mensagem ="";
-				if($_LEAD->header_email!="") 	$mensagem  .=  utf8_decode("<img alt='Fale comigo' src='cid:topo'><br>").PHP_EOL;
+				if($_LEAD->header_email!="") 	$mensagem  .=  utf8_decode("<img src='cid:topo'><br>").PHP_EOL;
 												$mensagem  .=  utf8_decode(str_replace($isso, $porissoIsso,$_LEAD->msng_resp_user)).PHP_EOL;
 				if($_LEAD->footer_email!="")  	$mensagem  .=  utf8_decode("<img src='cid:assinatura'>");
 				$mailResp->msgHTML(str_replace(PHP_EOL,"",$mensagem));
