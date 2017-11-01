@@ -58,14 +58,21 @@ $bug = 0;
 // }
 
 
-if (version_compare(PHP_VERSION, '5.6.4') < 0) {
-	$bug = 1;
-	echo "<div>• A versão do PHP é ".PHP_VERSION.". Por favor, instale o php 5.6.4 ou superior para que o sistema funcione corretamente.</div>";
-}
 if(count($_GETURL)>3){
 	$bug = 1;
 	echo "<div>• O WebSheep não funciona dentro de subdiretórios. Instale o <b>WS</b> no root do seu servidor ou configure <b>O VIRTUALHOST</b> do seu servidor local. </div>";
 }
+
+if (version_compare(PHP_VERSION, '5.6.4') < 0) {
+	$bug = 1;
+	echo "<div>• A versão do PHP é ".PHP_VERSION.". Por favor, instale o php 5.6.4 ou superior para que o sistema funcione corretamente.</div>";
+}
+
+if (!date_default_timezone_get()) {
+	echo "<div>• date_default_timezone_set</div>";
+    $bug = 1;
+}
+
 if(@$config->php_ini->file_uploads["global_value"] != 1){
 	$bug = 1;
 	echo "<div>• É necessário habilitar em seu php.ini a função file_uploads</div>";
@@ -82,7 +89,10 @@ if(return_bytes(@$config->php_ini->upload_max_filesize["global_value"]) <= 10485
 	$bug = 1;
 	echo "<div>• Aumente a opção 'upload_max_filesize' em seu php.ini, sugerimos no mínimo 2M</div>";
 }
-
+if(@$config->extensions->mbstring !=1){
+	$bug = 1;
+	echo "<div>• É necessário habilitar em seu php.ini a extansão php_mbstring</div>";
+}
 if(@$config->extensions->gettext !=1){
 	$bug = 1;
 	echo "<div>• É necessário habilitar em seu php.ini a extansão php_gettext</div>";

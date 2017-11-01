@@ -222,9 +222,7 @@
 	
 if($_LEAD->finalidade=='Apenas enviar email'){				goto enviaEmail;};
 if($_LEAD->finalidade=='Apenas gravar na base'){			goto gravaNaBase;};
-
-gravaNaBase:
-
+	gravaNaBase:
 	$getPOSTs=array();
 	$local = new MySQL();
 	$local->set_table(PREFIX_TABLES.'wslead_'.$LeadsToken);
@@ -233,15 +231,11 @@ gravaNaBase:
 	##################################################### INSERT
 	$I 					= new MySQL();
 	$I->set_table(PREFIX_TABLES.'wslead_'.$LeadsToken);
-
-
-
-
 	foreach($getPOSTs as $coluna){
-
 		if(isset($_FORM[$coluna])){
 			$I->set_insert($coluna,$_FORM[$coluna]);
-		} }
+		} 
+	}
 	//$I->debug(0);
 	if($I->insert()){
 			if($_LEAD->finalidade=='Apenas gravar na base'){

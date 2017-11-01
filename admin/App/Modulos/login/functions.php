@@ -17,7 +17,7 @@ function login (){
 	##############################################################################
 		$checkUser					= new MySQL();
 		$checkUser->set_table(PREFIX_TABLES.'ws_usuarios');
-		$checkUser->set_where("login='".ws::preventMySQLInject($usuario)."' AND senha='". _codePass(ws::preventMySQLInject($_FORM['senha']))."' AND ativo=1");
+		$checkUser->set_where("login='".ws::preventMySQLInject($_FORM['usuario'])."' AND senha='". _codePass(ws::preventMySQLInject($_FORM['senha']))."' AND ativo=1");
 		$checkUser->select();
 		if(	@$checkUser->_num_rows	==0)				{	echo "Ops, o login ou a senha estão incorretos.";													exit;}
 		if( @$checkUser->fetch_array[0]['id_status']==1){	echo "Você está com  o seu perfil bloqueado!";														exit;}
