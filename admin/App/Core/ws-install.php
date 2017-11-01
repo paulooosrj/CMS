@@ -8,13 +8,26 @@
 
 	######################################################################################################################################
 	#  QUANDO SE UTILIZA UM ARQUIVO, NÃO PODEMOS FAZER ELE SE AUTO EXCLUIR, PORTANTO    
-	#  QUANDO FIZEMOS O INSTALL OU UPDATE, GRAVAMOS UMA CÓPIA NO ROOT, E AGORA SIM VAMOS SUBSTITUIR O WS-INSTALL (caso tenha)  
+	#  QUANDO FIZEMOS O INSTALL OU UPDATE EXCLUI O DIRETÓRIO CASO EXISTA
 	######################################################################################################################################	
-	if(file_exists(ROOT_DOCUMENT.'/ws-install.php')){
-		unlink(ROOT_DOCUMENT.'/ws-install/ws-install.php');
-		rename(ROOT_DOCUMENT.'/ws-install.php',ROOT_DOCUMENT.'/ws-install/ws-install.php');
+	function ws_delete_dir($Dir) {
+		if ($dd = opendir($Dir)) {
+			while (false !== ($Arq = readdir($dd))) {
+				if ($Arq != "." && $Arq != "..") {
+					$Path = "$Dir/$Arq";
+					if (is_dir($Path)) {
+						ws_delete_dir($Path);
+					} elseif (is_file($Path)) {
+						unlink($Path);
+					}
+				}
+			}
+			closedir($dd);
+		}
+		rmdir($Dir);
 	}
 
+	ws_delete_dir(ROOT_DOCUMENT.'/ws-install-master/');
 	######################################################################################################################################
 	######################################################################################################################################
 

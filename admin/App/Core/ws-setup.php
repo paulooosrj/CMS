@@ -23,6 +23,27 @@
 			return $result;
 		}
 
+	###########################################################################
+	#	FUNÇÃO PARA EXCLUSÃO DE DIRETÓRIOS INTEIROS 
+	###########################################################################
+	function deleteDir($Dir) {
+		if ($dd = opendir($Dir)) {
+			while (false !== ($Arq = readdir($dd))) {
+				if ($Arq != "." && $Arq != "..") {
+					$Path = "$Dir/$Arq";
+					if (is_dir($Path)) {
+						ws_delete_dir($Path);
+					} elseif (is_file($Path)) {
+						unlink($Path);
+					}
+				}
+			}
+			closedir($dd);
+		}
+		rmdir($Dir);
+	}
+
+
 	############################################################################################################################################
 	# COPIA UM DIRETÓRIO INTEIRO PARA OUTRO LOCAL
 	############################################################################################################################################
@@ -159,8 +180,8 @@
 	# CRIAMOS TODOS OS DIRETORIOS DO WEBSITE A SER MONTADO
 	############################################################################################################################################
 	
+		deleteDir(ROOT_DOCUMENT 			.'/ws-install-master');
 		@mkdir(ROOT_DOCUMENT 				.'/website');
-		@mkdir(ROOT_DOCUMENT 				.'/ws-update');
 		@mkdir(ROOT_DOCUMENT 				.'/ws-bkp');
 		@mkdir(ROOT_DOCUMENT 				.'/ws-cache');
 		@mkdir(ROOT_DOCUMENT 				.'/ws-tmp',0700);
@@ -177,8 +198,8 @@
 		@mkdir(ROOT_DOCUMENT 				.'/website/assets/template');
 		@mkdir(ROOT_DOCUMENT 				.'/website/assets/fonts');
 		@mkdir(ROOT_DOCUMENT 				.'/ws-shortcodes');
+
 		@copy(ROOT_DOCUMENT."/admin/App/Lib/my-shortcode.php",ROOT_DOCUMENT."/ws-shortcodes/my-shortcode.php");
-		
 		if (!file_exists(ROOT_DOCUMENT 		.'/website/includes/header.php')) 	@file_put_contents(ROOT_DOCUMENT . '/website/includes/header.php', 'Header<hr>');
 		if (!file_exists(ROOT_DOCUMENT 		.'/website/includes/erro404.php')) 	@file_put_contents(ROOT_DOCUMENT . '/website/includes/erro404.php', 'ERRO 404!');
 		if (!file_exists(ROOT_DOCUMENT 		.'/website/includes/inicio.php')) 	@file_put_contents(ROOT_DOCUMENT . '/website/includes/inicio.php', 'Olá mundo!');
