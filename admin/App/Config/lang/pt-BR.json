@@ -299,29 +299,50 @@
 			}
 		}
 	},
-	"centralBkp": {
-		"title": "Central de BKP",
-		"createBackup": "Criar backup",
-		"uploadBKP": "Upload de BKP existente",
-		"wait": "Por favor, aguarde...",
-		"loading": "Carregando...",
-		"mycomputer": "Meu computador",
-		"mycomputer": "Meu computador",
-		"library": "Na biblioteca",
-		"delete": "Excluir",
-		"creating": "Criando...",
-		"export": "Exportar",
-		"cancel": "Cancelar",
-		"error": "Houve um erro, que tipo de restauração você quer?",
-		"restoration": "Aplicando restauração...",
-		"update": "Atualização efetuada com sucesso!",
-		"refresh": "Iremos recarregar seu painel para que as alterações sejam visualizadas.",
-		"recharge": "Recarregar browser",
-		"restore": "Instalar",
-		"placeholderTitle": "Título",
-		"descrition": "Descrição",
-		"download": "Download",
-		"creatingatemplate": "Criando um template/bkp",
+	"centralBkp": {		
+		"title"					: "Central de BKP",
+		"createBackup"			: "Criar backup",
+		"exportBackup"			: "Exportar",
+		"importBackup"			: "Importar",
+		"uploadBKP"				: "Upload de BKP existente",
+		"wait"					: "Por favor, aguarde...",
+		"loading"				: "Carregando...",
+		"mycomputer"			: "Meu computador",
+		"library"				: "Na biblioteca",
+		"delete"				: "Excluir",
+		"creating"				: "Criando...",
+		"export"				: "Exportar",
+		"importing"				: "Importando",
+		"invalidLink"			: "Link invalido ou expirado, tente outra URL.",
+		"cancel"				: "Cancelar",
+		"error"					: "Houve um erro, que tipo de restauração você quer?",
+		"restoration"			: "Aplicando restauração...",
+		"update"				: "Atualização efetuada com sucesso!",
+		"refresh"				: "Iremos recarregar seu painel para que as alterações sejam visualizadas.",
+		"recharge"				: "Recarregar browser",
+		"restore"				: "Instalar",
+		"placeholderTitle"		: "Título",
+		"descrition"			: "Descrição",
+		"download"				: "Download",
+		"creatingatemplate"		: "Criando um template/bkp",
+		"importModal"			: {
+									"title"		: "Insira uma URL válida",
+									"bots"		: {
+										"import":"Importar template",
+										"cancel":"Cancelar"
+									}
+								},
+		"exportModal"			: {
+									"title":"Copie a URL de exportação:",
+									"sucessCopy":"URL copiada com sucesso!",
+									"bots"		: {
+										"createCode":"Gerar código",
+										"copyCode":"Fechar modal",
+										"cancel":"Gerar código"
+
+									}
+								},
+
 		"restoreModal": {
 			"aboutTheFiles": "Sobre os arquivos:",
 			"restore100": "Restaurar 100% o site, excluindo todos os arquivos atuais",

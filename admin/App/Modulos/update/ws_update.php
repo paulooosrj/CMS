@@ -1,21 +1,6 @@
 <?
 	error_reporting( E_ALL ); 
-
-
 	include_once(__DIR__.'/../../Lib/class-ws-v1.php');	
-
-######################################### tabelas basicas necessárias #################################
-
-	$tabelas = array();
-	$tabelas[]= "setupdata";
-	$tabelas[]= "ws_webmaster";
-	$tabelas[]= "ws_log";
-	$tabelas[]= "ws_usuarios";
-	$tabelas[]= "ws_ferramentas";
-	$tabelas[]= "ws_user_link_ferramenta";
-	$tabelas[]= "ws_biblioteca";
-	$tabelas[]= "ws_template";
-	$tabelas[]= "bkp_ws";
 
 ############################################### URL AMIGAVEIS PADRÃO ###############################
 
@@ -33,17 +18,16 @@
 	$RewriteRule[] 	= array('urlAmigavel'=>'^ws-commits$'				, 'filePath'=>'/admin/App/Core/ws-commits.php'						, 'type'=>'system'	,'alias'=>'ws-commits'				, 'title'=>'Captura todos os commits do sistema');      
 	$RewriteRule[] 	= array('urlAmigavel'=>'^ws-branches$'				, 'filePath'=>'/admin/App/Core/ws-branches.php'						, 'type'=>'system'	,'alias'=>'ws-branches'				, 'title'=>'Captura todos os branches do sistema');      
 	 			
-
-
 	############################################### SEPARA AS TABELAS EXISTENTES ###############################
-	$GLOBALS["ConfigSQL"] = "";
 
+	$GLOBALS["ConfigSQL"] = "";
 	function add_if_not_exist($tabela_setada,$coluna_setada,$tipo_setado){
 			$GLOBALS["ConfigSQL"] .= "SET @s = (SELECT IF((SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '".PREFIX_TABLES.$tabela_setada."' AND table_schema = DATABASE() AND column_name = '".$coluna_setada."') > 0,'SELECT 1','ALTER TABLE ".PREFIX_TABLES.$tabela_setada." ADD ".$coluna_setada." ".$tipo_setado."')); PREPARE stmt FROM @s;EXECUTE stmt;DEALLOCATE PREPARE stmt;";
 	}
 	function CreateTableIfNotExist($tabela_setada){
 			$GLOBALS["ConfigSQL"] .=  "CREATE TABLE IF NOT EXISTS ".PREFIX_TABLES.$tabela_setada." (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY) ENGINE=MyISAM  DEFAULT CHARSET=utf8;";
 	}
+
 ############################################### SEPARA AS TABELAS EXISTENTES ###############################
 
 	$old_tables=array();
@@ -55,38 +39,15 @@
 	foreach ($fetch_array as $tab) { 
 		$old_tables[]=$tab['Tables_in_'.NOME_BD];
 	}
-######################################## SE A TABELA NAO EXISTE NA ARRAY ELA CRIA  #########################
-	foreach ($tabelas as $tab) {
-		if(!in_array($tab, $old_tables)){
-			CreateTableIfNotExist($tab);
-		}
-	}
 
 ###############################################################################################################
-####################################### 	LINK DE INCLUDE DO ARQUIVO COM A URL 	###########################
+####################################### 	LINK DE IMPORTAÇÃO DE TEMPLATES 		###########################
 ###############################################################################################################
-	CreateTableIfNotExist('ws_dolly_questoes');
-		add_if_not_exist('ws_dolly_questoes',			'questao',		'varchar(500) 		NULL DEFAULT ""');
-
-	CreateTableIfNotExist('ws_dolly_dicionario');
-		add_if_not_exist('ws_dolly_dicionario',			'palavra',		'varchar(200) 		NULL DEFAULT ""');
-		add_if_not_exist('ws_dolly_dicionario',			'classe',		'varchar(100) 		NULL DEFAULT ""');
-		add_if_not_exist('ws_dolly_dicionario',			'curto',		'varchar(500) 		NULL DEFAULT ""');
-		add_if_not_exist('ws_dolly_dicionario',			'longo',		'TEXT 				NULL DEFAULT ""');
-
-
-	CreateTableIfNotExist('ws_dolly_fn');
-		add_if_not_exist('ws_dolly_fn',			'titulo',			'varchar(500) 		NULL DEFAULT ""');
-		add_if_not_exist("ws_dolly_fn",			'descricao',		'varchar(500) 		NULL DEFAULT ""');
-		add_if_not_exist("ws_dolly_fn",			'codigo',			'TEXT 				NULL DEFAULT ""');
-		add_if_not_exist("ws_dolly_fn",			'acao',				'varchar(500) 		NULL DEFAULT ""');
-		add_if_not_exist("ws_dolly_fn",			'local',			'varchar(500) 		NULL DEFAULT ""');
-		add_if_not_exist("ws_dolly_fn",			'parametros',		'varchar(500) 		NULL DEFAULT ""');
-		add_if_not_exist("ws_dolly_fn",			'confirma',			'varchar(500) 		NULL DEFAULT ""');
-		add_if_not_exist("ws_dolly_fn",			'sucesso',			'varchar(500) 		NULL DEFAULT ""');
-		add_if_not_exist("ws_dolly_fn",			'erro',				'varchar(500) 		NULL DEFAULT ""');
-		add_if_not_exist("ws_dolly_fn",			'desconexo',		'varchar(500) 		NULL DEFAULT ""');
-
+	CreateTableIfNotExist('ws_auth_template');
+	add_if_not_exist('ws_auth_template',			'token',		'varchar(500) 	NULL DEFAULT ""');
+	add_if_not_exist("ws_auth_template",			'filename',		'varchar(500) 	NULL DEFAULT ""');
+	add_if_not_exist("ws_auth_template",			'ws_timestamp',	'TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP');
+	add_if_not_exist("ws_auth_template",			'expire',		'DATETIME 	NOT NULL');
 
 
 ###############################################################################################################
@@ -97,7 +58,9 @@
 	add_if_not_exist("ws_auth_token",			'ws_timestamp',		'TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP');
 	add_if_not_exist("ws_auth_token",			'expire',			'DATETIME 	NOT NULL');
 
-
+###############################################################################################################
+####################################### 	LINK DE INCLUDE DO ARQUIVO COM A URL 	###########################
+###############################################################################################################
 	CreateTableIfNotExist('ws_link_url_file');
 	add_if_not_exist('ws_link_url_file',	'ws_author',			'int(11) 		NOT NULL DEFAULT FALSE');
 	add_if_not_exist('ws_link_url_file',	'position',				'int(11) 		NOT NULL DEFAULT FALSE');
@@ -192,16 +155,7 @@
 	add_if_not_exist('ws_direct_access'	,		'createin',		'timestamp		NOT NULL DEFAULT CURRENT_TIMESTAMP');
 	add_if_not_exist('ws_direct_access'	,		'keyaccess',	'varchar(128) 	NULL default ""' );
 	add_if_not_exist('ws_direct_access'	,		'expire',		'DATE 			NULL');
-
-
-// item
-// detalhes
-// categorias
-// galerias
-// imagens
-// arquivos
-
-
+	// item // detalhes // categorias // galerias // imagens // arquivos
 
 ###############################################################################################################
 ############################################# BKP WebSheep ###################################
@@ -456,10 +410,9 @@
 	add_if_not_exist('ws_pages'		,'typeList'				,'varchar(10)		NULL default ""');
 	add_if_not_exist('ws_pages'		,'alias'				,'varchar(350)		NULL default ""');
 
-##################################################### INSERT
-
-	//FERRAMENTAS
-
+	###############################################################################################################
+	################################################	FERRAMENTAS		###########################################
+	###############################################################################################################
 	$tab = "_model";
 	CreateTableIfNotExist($tab."_cat");
 	add_if_not_exist($tab."_cat",	'ws_author'			,'int(11) 			NOT NULL DEFAULT FALSE');
@@ -668,39 +621,5 @@
 	add_if_not_exist($tab."_campos",	'download'			,			'BOOLEAN 				NOT NULL DEFAULT FALSE'	);
 	add_if_not_exist($tab."_campos",	'ws_timestamp'		,			'TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP');
 
-
-
-
-/*	
-
-	ALTER TABLE umadc_ws_ferramentas    		CHANGE   clone_toll			clone_tool 			int(11)				NOT NULL 	default FALSE;
-	ALTER TABLE umadc_ws_ferramentas    		CHANGE   toll_pai			_tool_pai_ 			int(11) 			NOT NULL 	default FALSE;
-	ALTER TABLE umadc_ws_ferramentas    		CHANGE   image_toll			image_tool 			LONGTEXT  			NULL 		default NULL;
-	ALTER TABLE umadc_ws_pages     				CHANGE   id_toll			id_tool 			int(11) 			NOT NULL 	default 0;
-	ALTER TABLE umadc_ws_pages     				CHANGE   toll_master		tool_master 		varchar(500)		NULL 		default "";
-	ALTER TABLE umadc__model_cat    			CHANGE   ws_toll_id			ws_tool_id int 		(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_cat     			CHANGE   ws_toll_item		ws_tool_item int 	(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_item    			CHANGE   ws_toll_id			ws_tool_id int 		(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_item   			CHANGE   ws_toll_item		ws_tool_item int 	(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_gal    			CHANGE   ws_toll_id			ws_tool_id int 		(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_gal    			CHANGE   ws_toll_item		ws_tool_item int 	(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_img_gal    		CHANGE   ws_toll_id			ws_tool_id int 		(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_img_gal    		CHANGE   ws_toll_item		ws_tool_item int 	(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_files    			CHANGE   ws_toll_id			ws_tool_id int 		(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_files    			CHANGE   ws_toll_item		ws_tool_item int 	(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_img     			CHANGE   ws_toll_id			ws_tool_id int 		(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_img     			CHANGE   ws_toll_item		ws_tool_item int 	(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_op_multiple   		CHANGE   ws_toll_id			ws_tool_id int 		(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_op_multiple   		CHANGE   ws_toll_item		ws_tool_item int 	(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_link_op_multiple 	CHANGE   ws_toll_id			ws_tool_id int 		(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_link_op_multiple 	CHANGE   ws_toll_item		ws_tool_item int 	(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_link_prod_cat  	CHANGE   ws_toll_id			ws_tool_id int 		(11)  				NOT NULL 	default 0;
-	ALTER TABLE umadc__model_link_prod_cat  	CHANGE   ws_toll_item		ws_tool_item int 	(11)  				NOT NULL 	default 0;
-
-*/
-
-
-
-/**/
 	if(isset($_GET['debug']) && $_GET['debug']==1){echo '<pre>'; echo str_replace(';', ';'.PHP_EOL, $GLOBALS["ConfigSQL"]); exit;}
 ?>

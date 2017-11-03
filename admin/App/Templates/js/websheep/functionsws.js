@@ -40,6 +40,16 @@ ws = {
 		obj: function(newVal, valor) {
 			ws.get.obj[newVal] = valor;
 		},
+		clipboard:function(html){
+			var tempInput 	= document.createElement("input");
+			tempInput.value = html;
+			tempInput.style = "position:fixed;left:-90000px;top:-90000px";
+			document.body.appendChild(tempInput);
+			tempInput.select();
+			document.execCommand("copy");
+			document.body.removeChild(tempInput);
+			return true;
+		},
 		log:function(opcoes){
 			var options = $.extend({
 				url: '/admin/App/Modulos/ws_log/functions.php',
@@ -70,9 +80,14 @@ ws = {
 				}
 			});
 		}
-
 	},
 	verify: {
+		remoteFileExists:function(url){
+		    var http = new XMLHttpRequest();
+		    http.open('HEAD', url, false);
+		    http.send();
+		    return http.status != 404;
+		},
 		jquery: function() {
 			if(!window.jQuery && typeof jQuery === 'undefined') {
 				console.error("ERRO: Jquery necessário");
@@ -463,6 +478,30 @@ ws = {
 		}
 	},
 	encode: {
+		crypt: function(plaintext, password) {
+			if(typeof password=='undefined'){password='123';}
+		    if (plaintext.length == 0) return ('');
+		    var v = ws.string.strToLongs(ws.encode.utf8(plaintext));
+		    if (v.length <= 1) v[1] = 0;
+		    var k = ws.string.strToLongs(ws.encode.utf8(password).slice(0, 16));
+		    var n = v.length;
+		    var z = v[n - 1],
+		        y = v[0],
+		        delta = 0x9E3779B9;
+		    var mx, e, q = Math.floor(6 + 52 / n),
+		        sum = 0;
+		    while (q-- > 0) {
+		        sum += delta;
+		        e = sum >>> 2 & 3;
+		        for (var p = 0; p < n; p++) {
+		            y = v[(p + 1) % n];
+		            mx = (z >>> 5 ^ y << 2) + (y >>> 3 ^ z << 4) ^ (sum ^ y) + (k[p & 3 ^ e] ^ z);
+		            z = v[p] += mx;
+		        }
+		    }
+		    var ciphertext = ws.string.longsToStr(v);
+		    return ws.encode.base64(ciphertext);
+		},
 		utf8: function(e) {
 			e = e.replace(/\r\n/g, "\n");
 			var t = "";
@@ -506,6 +545,30 @@ ws = {
 		}
 	},
 	decode: {
+		crypt : function(ciphertext, password) {
+			if(typeof password=='undefined'){password='123';}
+		    if (ciphertext.length == 0) return ('');
+		    var v = ws.string.strToLongs(ws.decode.base64(ciphertext));
+		    var k = ws.string.strToLongs(ws.decode.utf8(password).slice(0, 16));
+		    var n = v.length;
+		    var z = v[n - 1],
+		        y = v[0],
+		        delta = 0x9E3779B9;
+		    var mx, e, q = Math.floor(6 + 52 / n),
+		        sum = q * delta;
+		    while (sum != 0) {
+		        e = sum >>> 2 & 3;
+		        for (var p = n - 1; p >= 0; p--) {
+		            z = v[p > 0 ? p - 1 : n - 1];
+		            mx = (z >>> 5 ^ y << 2) + (y >>> 3 ^ z << 4) ^ (sum ^ y) + (k[p & 3 ^ e] ^ z);
+		            y = v[p] -= mx;
+		        }
+		        sum -= delta;
+		    }
+		    var plaintext = ws.string.longsToStr(v);
+		    plaintext = plaintext.replace(/\0+$/, '');
+		    return ws.decode.utf8(plaintext);
+		},
 		utf8: function(e) {
 			var t = "";
 			var n = 0;
@@ -894,6 +957,21 @@ ws = {
 		});
 	},
 	string: {
+		strToLongs: function(s) {
+		    var l = new Array(Math.ceil(s.length / 4));
+		    for (var i = 0; i < l.length; i++) {
+		        l[i] = s.charCodeAt(i * 4) + (s.charCodeAt(i * 4 + 1) << 8) + (s.charCodeAt(i * 4 + 2) << 16) + (s.charCodeAt(i * 4 + 3) << 24);
+		    }
+		    return l; 
+		},
+		longsToStr: function(l) {
+		    var a = new Array(l.length);
+		    for (var i = 0; i < l.length; i++) {
+		        a[i] = String.fromCharCode(l[i] & 0xFF, l[i] >>> 8 & 0xFF, l[i] >>> 16 & 0xFF, l[i] >>> 24 & 0xFF);
+		    }
+		    return a.join('');
+		},
+
 		formatHTML: function(html) {
 			function getIndent(level) {
 				var result = '',
@@ -966,6 +1044,7 @@ ws = {
 			posClose: function() {},
 			bots: [
 				// {
+				// 		id			: "aceitar",
 				// 		label		: "Aceitar",
 				// 		class		: "",
 				// 		style 		: "",
@@ -991,6 +1070,8 @@ ws = {
 				return true
 			}
 		}, opcoes)
+
+
 		options.Init();
 		var BotClose = ""
 		var ArryBotoes = "";
@@ -1005,7 +1086,11 @@ ws = {
 		});
 		// MONTA OS BOTÕES DO ALERTA
 		$.each(options.bots, function(index, value) {
-			var id = "botConfirma_" + index + "_" + index_highest;
+			if(value.id){
+				var id = value.id;
+			}else{
+				var id = "botConfirma_" + index + "_" + index_highest;
+			}
 			if(!value.class || value.class=="undefined"){value.class="";}
 			if(!value.style || value.style=="undefined"){value.style="";}
 			ArryBotoes += "<div id='" + id + "' class='botao " + value.class + "' style='width:calc(" + largBot + "% - 6px);margin: 0 2px;float: left;position: relative;padding: 10px 0;" + value.style + "'>" + value.label + "</div>\n";
@@ -1040,7 +1125,6 @@ ws = {
 				var BotClose = "<div id='close' class='botao close' >x</div>";
 			}
 		}
-
 
 		if($.type(options.idModal) === "string") {
 			if(options.idModal.indexOf("#") == 0) {
@@ -1081,14 +1165,19 @@ ws = {
 		}
 		if(options.bots.length > 0) {
 			$.each(options.bots, function(index, value) {
+				if(value.id){
+					var idBot = value.id;
+				}else{
+					var idBot = "botConfirma_" + index + "_" + index_highest;
+				}
 				if(value.css) {
-					$("#botConfirma_" + index + "_" + index_highest).css(value.css)
+					$("#"+idBot).css(value.css)
 				}
 				if(value.style) {
-					var atualStyle = $("#botConfirma_" + index + "_" + index_highest).attr("style");
-					$("#botConfirma_" + index + "_" + index_highest).attr("style", atualStyle+value.style);
+					var atualStyle = $("#"+idBot).attr("style");
+					$("#"+idBot).attr("style", atualStyle+value.style);
 				}
-				$("#botConfirma_" + index + "_" + index_highest).unbind("click").bind("click", function() {
+				$("#"+idBot).unbind("click").bind("click", function() {
 					if(typeof(value.Check) == 'function') {
 						if(value.Check() === true) {
 							value.action();

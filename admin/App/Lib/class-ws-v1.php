@@ -67,7 +67,6 @@
 				"img_gal"
 			);
 		}
-
 		static function fb_count_comments($domain = null) {
 			if ($domain == null) {
 				$domain = ws::protocolURL() . DOMINIO . '/' . ws::urlPath();
@@ -281,6 +280,9 @@
 			$_temp_->set_insert('mensagem',		mysqli_real_escape_string($_conectMySQLi_,$mensagem));
 			$_temp_->insert();
 		}	
+		###################################################################################
+		# CRIAMOS UM TOKEN DE AUTORIZAÇÃO PARA VALIDAR QUALQUER COISA 
+		###################################################################################
 		static function setTokenRest($timeout = "5 seconds") {
 			$Formats = array("seconds", "minutes", "hours", "days", "months", "years");
 			if (is_string($timeout)) {
@@ -301,8 +303,8 @@
 			} else {
 				die("Formato de tempo não permitido");
 			}
-			
-			$now     = date("Y-m-d H:i:s") . PHP_EOL;
+
+			$now     = date("Y-m-d H:i:s");
 			$timeout = date("Y-m-d H:i:s", strtotime('+' . $timeout, strtotime(date("Y-m-d H:i:s"))));
 			$setTokenRest = _token(PREFIX_TABLES . 'ws_auth_token', 'token');
 			$_temp_       = new MySQL();
@@ -316,12 +318,11 @@
 				return null;
 			}
 		}
-		static function limit_words($texto = null, $limite = 0, $end = "...") {
-			$texto = explode(' ', ($texto));
-			$texto = array_slice($texto, 0, $limite);
-			return implode($texto, " ") . $end;
-		}
-		static function getTokenRest($setTokenRest,$die=true) {
+
+		###################################################################################
+		# AGORA VALIDAMOS O TOKEN CRIADO...E VEMOS SE ELE É VALIDO!
+		###################################################################################
+		static function getTokenRest($setTokenRest,$die=true,$firstAccess=false) {
 			##############################################################################
 			# BUSCAMOS NA BASE UM TOKEN DENTRO DO PRAZO ESTABELECIDO
 			##############################################################################
@@ -340,6 +341,16 @@
 			$_EXCL_->exclui();
 			
 			###################################################################################
+			# CASO SEJA PROGRAMADO PARA EXPIRAR AO ACESSAR
+			###################################################################################
+			if($firstAccess==true){
+				$_EXCL_ = new MySQL();
+				$_EXCL_->set_table(PREFIX_TABLES . 'ws_auth_token');
+				$_EXCL_->set_where('token="' . $setTokenRest . '"');
+				$_EXCL_->exclui();
+			}
+
+			###################################################################################
 			# VERIFICA SE EXISTE O TOKEN NA BASE, EXCLUI TODOS TOKENS VENCIDOS E RETORNA TRUE
 			###################################################################################
 			if ($_temp_->_num_rows >= 1) {
@@ -352,7 +363,14 @@
 				}
 			}
 		}
-		
+		###################################################################################
+		# LIMITA TEXTOS OU FRASES POR QUANTIDADE DE PALAVRAS
+		###################################################################################
+		static function limit_words($texto = null, $limite = 0, $end = "...") {
+			$texto = explode(' ', ($texto));
+			$texto = array_slice($texto, 0, $limite);
+			return implode($texto, " ") . $end;
+		}
 		###################################################################################
 		# RETORNA O PROTOCOLO DA URL
 		###################################################################################		

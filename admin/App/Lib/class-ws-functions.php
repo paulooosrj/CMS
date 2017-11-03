@@ -19,6 +19,7 @@ function rsearch($folder, $pattern) {
 	foreach($files as $file) {$fileList[] = $file[0];}
 	return $fileList;
 }
+
 #####################################################################
 # 	RETORNA ARQUIVOS CONFORMA O PATERN SETADO
 #####################################################################
@@ -2053,12 +2054,17 @@ function remoteFileExists($url) 				{
 	$result = @curl_exec($curl);$ret = false;
 	if ($result !== false) {
 		$statusCode = @curl_getinfo($curl, CURLINFO_HTTP_CODE);
+		@curl_close($curl);
+
 		if ($statusCode == 200) {
-			$ret = true;
+			return true;
+		}else{
+			return false;
 		}
+	}else{
+		@curl_close($curl);
+		return false;
 	}
-	@curl_close($curl);
-	return $ret;
 }
 if(!defined('__VENC__')) define('__VENC__',date('Y/m/d', strtotime("+90 days",strtotime(date ("d-m-Y", filectime(__DIR__.'/ws-connect-mysql.php'))))));
 ?>

@@ -1,4 +1,48 @@
 <?
+
+	###############################################################################################################################
+	#  GERANDO ASH PARA DOWNLOAD DE TEMPLATE
+	###############################################################################################################################
+	function importTemplate() {
+
+			$remote_file =$_POST['urlFile'];
+			$local_file = ROOT_DOCUMENT."/ws-bkp/".basename($remote_file).".zip";
+
+			if(remoteFileExists($remote_file)){
+				$ch = curl_init();
+				$fp = fopen ($local_file, 'w+');
+				$ch = curl_init($remote_file);
+				curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+				curl_setopt($ch, CURLOPT_FILE, $fp);
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+				curl_setopt($ch, CURLOPT_ENCODING, "");
+				curl_exec($ch);
+				curl_close($ch);
+				fclose($fp);
+				die("1");
+			}else{
+				die("0");
+			}
+	}
+	###############################################################################################################################
+	#  GERANDO ASH PARA DOWNLOAD DE TEMPLATE
+	###############################################################################################################################
+	function createAuthToken() {
+		$Filename 		= $_POST["Filename"];
+		$expireToken 	= $_POST["expireToken"]." minutes";
+		$getTokenRest 	= ws::setTokenRest($expireToken);
+		$now     		= date("Y-m-d H:i:s");
+		$timeout 		= date("Y-m-d H:i:s", strtotime('+' . $expireToken, strtotime(date("Y-m-d H:i:s"))));
+		$ws_auth_template = new MySQL();
+		$ws_auth_template->set_table(PREFIX_TABLES . 'ws_auth_template');
+		$ws_auth_template->set_insert('token', 			$getTokenRest);
+		$ws_auth_template->set_insert('filename', 		$Filename);
+		$ws_auth_template->set_insert('ws_timestamp', 	$now);
+		$ws_auth_template->set_insert('expire', 		$timeout);		
+		$ws_auth_template->insert();
+		echo ws::protocolURL().DOMINIO.'/ws-bkp/'.$getTokenRest;
+		exit;
+	}
 	
 	###############################################################################################################################
 	#  HABILITANDO E DESABILITANDO PLUGINS

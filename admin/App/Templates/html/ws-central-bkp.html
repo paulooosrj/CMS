@@ -15,9 +15,10 @@ include_css("./App/Templates/css/websheep/modulos/_modulo_/templates.min.css","c
 
 <div id="topoModulo" class="TitTop bg05 w1b">
 	<div class="comboTitleBot">
-		{central_Bkp_title}
-		<div class="botTool create	bg06 w1"><i class="fa fa-file-archive-o"></i>  {central_Bkp_createBackup}</div>
-		<div class="botTool upload	bg06 w1" style="right:180px;"><i class=" fa fa-cloud-upload" ></i>  {central_Bkp_uploadBKP}</div>
+		{centralBkp_title}
+		<div class="botTool create	bg06 w1"><i class="fa fa-file-archive-o"></i>  {centralBkp_createBackup}</div>
+		<div class="botTool upload	bg06 w1"><i class=" fa fa-cloud-upload" ></i>  {centralBkp_uploadBKP}</div>
+		<div class="botTool import	bg06 w1"><i class="fa fa-download"></i>  {centralBkp_importBackup}</div>
 	</div>
 </div>
 	<div id="palco" class="palco_01" >
@@ -30,9 +31,10 @@ include_css("./App/Templates/css/websheep/modulos/_modulo_/templates.min.css","c
 							<img src="{newSplashScreen}" height="80" width="80px" style="position: relative;float: left;"/>
 						<!-- END avatarTemplate -->
 						<div class="plugin-title w1">{titulo}</div>
-						<div class="plugin-description w2" >{description}</div>
-						<div class="botao aplicar"><i class="fa fa-rocket"></i>  {label}</div>
-						<div class="botao download"><i class="fa fa-download"></i>  {central_Bkp_download}</div>
+						<div class="plugin-description w2" >{description}<br>{ASHACCESS}</div>
+						<div class="botao exportar"><i class="fa fa-share-alt-square"></i>  	{centralBkp_exportBackup}</div>
+						<div class="botao aplicar"><i class="fa fa-rocket"></i>  	{label}</div>
+						<div class="botao download"><i class="fa fa-download"></i>  {centralBkp_download}</div>
 					</div>
 				</div>
 			</li>
@@ -73,7 +75,7 @@ $(function(){
 			var dataFile = $(this).data('href');
 			confirma({
 			width:"auto",
-			conteudo:"  {central_Bkp_loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
+			conteudo:"  {centralBkp_loading}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 68px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",
 			drag:false,
 			posFn:function(){
 				$("#ws_confirm").css("line-height","20px");
@@ -88,49 +90,92 @@ $(function(){
 		})
 		return false;
 	})
-
-
-
-
-
-
-
-
-
-
-
-		$("#UploadBKP").ajaxForm({
-			beforeSend: function(xhr) {
-				out("beforeSend")
-				$('.tapa_upload').fadeIn('fast');
-				// $('#cancelBtn').click(xhr.abort);
-			},
-			uploadProgress: function(event, position, total, percentComplete, myForm) {
-				out(percentComplete)
-				if(percentComplete >= 99) {
-					$('.tapa_upload').find('.pct').html("Processando BKP").css({"left":percentComplete + "%"});
-				} else {
-					$('.tapa_upload').find('.pct').html(percentComplete + "%").css({"left":percentComplete + "%"});
-				}
-				$('.tapa_upload').find('.bar').animate({
-					width: percentComplete + "%"
-				}, 50);
-			},
-			complete: function(e) {
-				out("complete")
-				var response = $.parseJSON(e.responseText);
-				if(response.status=="sucesso"){
-					$( "#conteudo" ).load( './{PATH}/ws-central-bkps.php' , function( response, status, xhr ) {
-						$("#ws_confirm").remove();
-						$("#body").removeClass("scrollhidden");
-						$("*").removeClass("blur");
-						$('.tapa_upload').fadeOut('fast');
-					});						
-				}
+	$("#UploadBKP").ajaxForm({
+		beforeSend: function(xhr) {
+			out("beforeSend")
+			$('.tapa_upload').fadeIn('fast');
+			// $('#cancelBtn').click(xhr.abort);
+		},
+		uploadProgress: function(event, position, total, percentComplete, myForm) {
+			out(percentComplete)
+			if(percentComplete >= 99) {
+				$('.tapa_upload').find('.pct').html("Processando BKP").css({"left":percentComplete + "%"});
+			} else {
+				$('.tapa_upload').find('.pct').html(percentComplete + "%").css({"left":percentComplete + "%"});
 			}
-		})
-
+			$('.tapa_upload').find('.bar').animate({
+				width: percentComplete + "%"
+			}, 50);
+		},
+		complete: function(e) {
+			out("complete")
+			var response = $.parseJSON(e.responseText);
+			if(response.status=="sucesso"){
+				$( "#conteudo" ).load( './{PATH}/ws-central-bkps.php' , function( response, status, xhr ) {
+					$("#ws_confirm").remove();
+					$("#body").removeClass("scrollhidden");
+					$("*").removeClass("blur");
+					$('.tapa_upload').fadeOut('fast');
+				});						
+			}
+		}
+	})
 	$("#UploadBKP #myfile").change(function() {$("#UploadBKP").submit();})
+
+	$('.botTool.import').unbind('click tap press').bind('click tap press', function(e){
+		e.preventDefault();
+		ws.confirm({
+			conteudo:'<div id="importTemplateTitle" class="w1" style="font-size: 22px;padding: 0px;">{centralBkp_importModal_title}:</div>'
+					+'<input id="importTemplateInput" class="inputText" style="padding: 10px 20px;width: calc(100% - 10px);margin-top: 20px;"></input>',
+			close:true,
+			bots:[{
+						label		: "{centralBkp_importModal_bots_import}",
+						class		: "",
+						id			: "bot_importar",
+						style 		: "",
+						css 		: {"color":"#FFF"},
+						ErrorCheck	: function() {
+							$.ajax({
+								type: "POST",
+								url: "{PATH}/functions.php",
+								data: {
+									"function":	"importTemplate",
+									"urlFile":	$('#importTemplateInput').val(),
+								},
+								beforeSend:function(){
+									$("#bot_importar,#bot_cancelar,#importTemplateInput").hide();
+									$("#importTemplateTitle").html("{centralBkp_importing}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top:62px;background-image:url(\"/admin/App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>");
+								},
+								cache: false,
+							}).done(function(e) {
+								if(e=='0'){
+									 $("#importTemplateTitle").html("<span style='color:#FF0000'>{centralBkp_invalidLink}<span>");
+									 $("#bot_importar,#bot_cancelar,#importTemplateInput").show();
+								}else{
+									$("#ws_confirm").remove();
+									$("*").removeClass("blur");
+									$("#conteudo").load("{PATH}/ws-central-bkps.php");
+								}
+							})
+						},
+						Check 		: function() {return false}
+				},{
+						label		: "{centralBkp_importModal_bots_cancel}",
+						id			: "bot_cancelar",
+						class		: "",
+						style 		: "",
+						css 		: {
+							"color":"#838383",
+							"font-weight":"700",
+							"background-color":"#bbbbbb"
+						},
+						ErrorCheck	: function() {},
+						Check 		: function() {return true},
+						action		: function(){},
+				}]
+		})
+		return false;
+	})
 	$('.botTool.upload').unbind('click tap press').bind('click tap press', function(e){
 		e.preventDefault();
 		$("#UploadBKP #myfile").click();
@@ -146,19 +191,19 @@ $(function(){
 			<form id='uploadfiles' action='./{PATH}/upload_avatar_bkp.php' method='post' enctype='multipart/form-data' name='formUpload'>\
 				<input type='file' name='arquivo' id='avatarbkp' style='display:none;'>\
 			</form>\
-			<div class='w1'style='font-size: 27px;font-weight:bold;width:100%;text-align: center;margin-bottom: 10px;'>{central_Bkp_creatingatemplate}</div>\
+			<div class='w1'style='font-size: 27px;font-weight:bold;width:100%;text-align: center;margin-bottom: 10px;'>{centralBkp_creatingatemplate}</div>\
 			<div class='c'></div>\
 			<div class='thumbmail' style='border: solid 5px #3f6daa;background-color: #FFF;width: 200px;height:200px;position: relative;float: left;'>\
 				<div class='combo_upload' style='display: none; opacity: 1;'>\
-					<div class='pc' legenda='{central_Bkp_mycomputer}'>	<img src='./App/Templates/img/websheep/up_m.png'></div>\
-					<div class='bb' legenda='{central_Bkp_library}'>	<img src='./App/Templates/img/websheep/folder_m.png'></div>\
-					<div class='excl' legenda='{central_Bkp_delete}'>		<img src='./App/Templates/img/websheep/delete.png' style='width:25px;margin-top:-1px;'></div>\
+					<div class='pc' legenda='{centralBkp_mycomputer}'>	<img src='./App/Templates/img/websheep/up_m.png'></div>\
+					<div class='bb' legenda='{centralBkp_library}'>	<img src='./App/Templates/img/websheep/folder_m.png'></div>\
+					<div class='excl' legenda='{centralBkp_delete}'>		<img src='./App/Templates/img/websheep/delete.png' style='width:25px;margin-top:-1px;'></div>\
 				</div>\
 			<img class='avatarBKP' src='/ws-img/200/200/null'></div>\
 			<input type='hidden' class='avatar' >\
-			<div class='w1' style='position: relative; padding: 10px; margin-left: 10px; width: 100%; max-width: 300px; float: left;padding-top:0px;'>{central_Bkp_placeholderTitle}:</div>\
+			<div class='w1' style='position: relative; padding: 10px; margin-left: 10px; width: 100%; max-width: 300px; float: left;padding-top:0px;'>{centralBkp_placeholderTitle}:</div>\
 			<input class='w1 inputText titleTemplate' style='position:relative;padding: 10px;margin-left: 10px;width: 100%;max-width: 330px;'>\
-			<div class='w1' style='position: relative; padding: 10px; margin-left: 10px; width: 100%; max-width: 300px; float: left;'>{central_Bkp_descrition}:</div>\
+			<div class='w1' style='position: relative; padding: 10px; margin-left: 10px; width: 100%; max-width: 300px; float: left;'>{centralBkp_descrition}:</div>\
 			<textarea  class='w1 inputText contentTemplate' style='position:relative;padding: 10px;margin-left: 10px;width: 100%;max-width: 330px;float: left;margin-bottom:10px;height: 100px;'></textarea>\
 			\</div>",
 			drag:false,
@@ -222,7 +267,7 @@ $(function(){
 						  url: "App/Modulos/_tools_/functions.php",
 						  beforeSend:function(){
 						  	setTimeout(function(){
-						  		confirma({width:"auto",conteudo:"{central_Bkp_creating}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
+						  		confirma({width:"auto",conteudo:"{centralBkp_creating}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
 						  	},1000)
 						  },
 						  cache: false,
@@ -242,12 +287,82 @@ $(function(){
 							});
 						})
 			},
-			bot1:'{central_Bkp_export}',
-			bot2:'{central_Bkp_cancel}'
+			bot1:'{centralBkp_export}',
+			bot2:'{centralBkp_cancel}'
 		})
 		return false;
 	})
 
+	$('.pluginItem .botao.exportar').unbind('click tap press').bind('click tap press', function(e){
+			e.preventDefault();
+			
+			var preload 	= '<div class="preloaderupdate" style="left: 50%;margin-left: -15px;position: absolute;width: 30px;height: 18px;top: 13px;background-image:url(./App/Templates/img/websheep/loader_thumb.gif);background-repeat:no-repeat;background-position: top center;"></div>';
+			var Filename 	= $(this).parent().parent().parent().data('file');
+			var content 	= '<div  class="w1" id="titleModal" style="font-size: 22px;margin-bottom: 10px;margin-left: 10px;font-weight: 600;">Gerando link válido:</div>'
+							+ '<div id="getLink"><div id="ashString"></div>O link deverá expirar em <input value="5" min="0" step="5" max="60" class="inputText" id="ashUser" type="number" style="padding: 10px 3px;width: 50px;"> minutos</div>';
+ 
+
+			ws.confirm({
+				conteudo: content,
+				width 	: 600,
+				bots:[{
+							id			: "id_gerar_code",
+							label		: "{centralBkp_exportModal_bots_createCode}",
+							class		: "",
+							style 		: "",
+							css 		: {"color":"#FFF"},
+							ErrorCheck	: function() {
+									var hour = $("#ashUser").val();
+
+									$.ajax({
+										type: "POST",
+										url: "{PATH}/functions.php",
+										data: {
+											"function"		:	"createAuthToken",
+											"expireToken"	:	hour,
+											"Filename"		:	Filename
+										},
+										beforeSend:function(){
+											$("#titleModal").hide();
+											$("#getLink").html(preload)
+										},
+										cache: false,
+									}).done(function(e){
+										$("#titleModal").html('{centralBkp_exportModal_title}').show();
+										$("#id_gerar_code").hide();
+										$("#id_cancel").css({width:'calc(100% - 6px)'}).text("{centralBkp_exportModal_bots_copyCode}");
+										$("#getLink")
+										.addClass("inputText")
+										.attr('style',"padding:10px;width:calc(100% - 50px);left:50%;position:relative;transform:translateX(-50%);")
+										.html(e)
+										.bind("click tap press",function(){
+											ws.set.clipboard($(this).text())
+											$("#getLink").selectText();
+											ws.alert.top({mensagem:"{centralBkp_exportModal_sucessCopy}",type:3});
+										});
+									})
+							},
+							Check 		: function() {return false},
+							action		: function(){},
+					},
+					{
+							id			: "id_cancel",
+							label		: "{centralBkp_exportModal_bots_cancel}",
+							class		: "",
+							style 		: "",
+							css 		: {"color":"#FFF"},
+							ErrorCheck	: function() {},
+							Check 		: function() {return true},
+							action		: function(){},
+					}]
+			})
+
+
+
+
+
+			return false;
+	})
 	$('.pluginItem .botao.download').unbind('click tap press').bind('click tap press', function(e){
 			e.preventDefault();
 			$(".tapa_upload").fadeIn('fast');
@@ -260,11 +375,10 @@ $(function(){
 					$(".tapa_upload .pct").css({"left":e+"%"}).text(e+"%");
 				}
 			})
-
-
-
 			return false;
 	})
+
+
 	$('.pluginItem .botao.aplicar').unbind('click tap press').bind('click tap press', function(e){
 			e.preventDefault();
 			var dataFile = $(this).parent().parent().parent().data('file');
@@ -277,7 +391,7 @@ $(function(){
 				$("input[name='dataBase'][value='none']").click();
 			},
 			ErrorCheck:function(){
-				TopAlert({mensagem: "{central_Bkp_error}", clickclose: true, height: 20, timer: 3000, type: 2, })
+				TopAlert({mensagem: "{centralBkp_error}", clickclose: true, height: 20, timer: 3000, type: 2, })
 			},
 			Check:function(){
 				if(!$("input[name='typebkp']:checked").val()){return false; }else{return true;}
@@ -290,7 +404,7 @@ $(function(){
 				  url: "App/Modulos/_tools_/functions.php",
 				  beforeSend:function(){
 				  	setTimeout(function(){
-				  		confirma({width:"auto",conteudo:"{central_Bkp_restoration}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
+				  		confirma({width:"auto",conteudo:"{centralBkp_restoration}<div class=\'preloaderupdate\' style=\'left: 50%;margin-left: -15px; position: absolute;width: 30px;height: 18px;top: 53px;background-image:url(\"./App/Templates/img/websheep/loader_thumb.gif\");background-repeat:no-repeat;background-position: top center;\'></div>",drag:false,bot1:0,bot2:0})
 				  	},1000)
 				  },
 				  cache: false,
@@ -308,8 +422,8 @@ $(function(){
 						});
 					}else if(e=='true'){
 						confirma({
-							conteudo	: 	'<strong>{central_Bkp_update}</strong><br>{central_Bkp_refresh}',
-							bot1		: 	"{central_Bkp_recharge}",
+							conteudo	: 	'<strong>{centralBkp_update}</strong><br>{centralBkp_refresh}',
+							bot1		: 	"{centralBkp_recharge}",
 							bot2		: 	0,
 							drag		: 	0,
 							botclose	: 	0,
@@ -321,8 +435,8 @@ $(function(){
 					}
 				})
 			},
-			bot1:'{central_Bkp_restore}',
-			bot2:'{central_Bkp_cancel}'
+			bot1:'{centralBkp_restore}',
+			bot2:'{centralBkp_cancel}'
 		})
 		return false;
 	});

@@ -1,6 +1,6 @@
 @charset "utf-8";
 /*##################################################  STAGE LIQUIDO  #####################################################################*/
-@import "D:/localhost/data/localweb/less/vars.less";
+@import "A:/Israel/localhost/data/localweb/less/vars.less";
 
 #ws_confirm{
 	#body{
@@ -89,12 +89,20 @@
     left: 50%;
     transform: translateX(-50%);
 	.botTool{
+		&.import{   
+			right: 322px;
+		}
+		&.upload{		
+			right: 120px;
+		}
+		&.create{		
+			right: 0px;
+		}
 		.pointer;
 		position: absolute;
 		top: 0px;
-		right: 10px;
 		font-size: 15px;
-		padding: 10px 30px;
+		padding: 10px;
 		float: right;
 		.radius(4px);
 	}
@@ -122,8 +130,11 @@
 		float: right;
 		right: 10px;
 		bottom: 10px;
+		&.exportar{
+			right: 247px!important;
+		}
 		&.download{
-			right: 170px!important;
+			right: 120px!important;
 		}
 	}
 
@@ -161,7 +172,7 @@
 			padding: 10px 20px;
 			float: right;
 			right: 10px;
-			bottom: 27px;
+			bottom: 32px;
 		}
    	}
 	.column-primary{

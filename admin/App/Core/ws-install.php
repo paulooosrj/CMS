@@ -11,7 +11,7 @@
 	#  QUANDO FIZEMOS O INSTALL OU UPDATE EXCLUI O DIRETÓRIO CASO EXISTA
 	######################################################################################################################################	
 	function ws_delete_dir($Dir) {
-		if ($dd = opendir($Dir)) {
+		if ($dd = @opendir($Dir)) {
 			while (false !== ($Arq = readdir($dd))) {
 				if ($Arq != "." && $Arq != "..") {
 					$Path = "$Dir/$Arq";
@@ -24,22 +24,24 @@
 			}
 			closedir($dd);
 		}
-		rmdir($Dir);
+		@rmdir($Dir);
 	}
-
 	ws_delete_dir(ROOT_DOCUMENT.'/ws-install-master/');
-	######################################################################################################################################
-	######################################################################################################################################
 
+	######################################################################################################################################
+	# CASO NÃO TENHA AINDA O ARQUIVOO NO LUGAR CERTO E ESTEJA FAZENDO UPDATE AO INVEZ DE INSTALL
+	######################################################################################################################################
+		file_put_contents(ROOT_DOCUMENT.'/ws-bkp/.htaccess', "<IfModule mod_rewrite.c>\nRewriteEngine On\nRewriteCond %{SCRIPT_FILENAME} !-f\nRewriteRule ^(.*)$ ws-download-template.php\n</IfModule>");
+		copy(ROOT_ADMIN."/App/Lib/ws-download-template.php", ROOT_DOCUMENT."/ws-bkp/ws-download-template.php");
+
+	######################################################################################################################################
+	######################################################################################################################################
 ?>
 <html lang="pt-br" class='bgradial01' id="html">
 <head>
 <meta charset="UTF-8">
 <link type="image/x-icon" href="/admin/App/Templates/img/websheep/favicon.ico" rel="shortcut icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<!-- <link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/global.css" /> -->
 <link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/websheep/estrutura.min.css" />
 <link	type="text/css" media="all"		rel="stylesheet" 						href="./App/Templates/css/websheep/desktop.min.css" />
 <link	type="text/css" media="all"		rel="stylesheet"						href="./App/Templates/css/websheep/install.css" />
