@@ -27,7 +27,7 @@
 	#	FUNÇÃO PARA EXCLUSÃO DE DIRETÓRIOS INTEIROS 
 	###########################################################################
 	function deleteDir($Dir) {
-		if ($dd = opendir($Dir)) {
+		if ($dd = @opendir($Dir)) {
 			while (false !== ($Arq = readdir($dd))) {
 				if ($Arq != "." && $Arq != "..") {
 					$Path = "$Dir/$Arq";
@@ -40,7 +40,7 @@
 			}
 			closedir($dd);
 		}
-		rmdir($Dir);
+		@rmdir($Dir);
 	}
 
 
