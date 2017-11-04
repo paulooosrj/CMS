@@ -205,8 +205,13 @@
 		if (!file_exists(ROOT_DOCUMENT 		.'/website/includes/inicio.php')) 	@file_put_contents(ROOT_DOCUMENT . '/website/includes/inicio.php', 'Olá mundo!');
 		if (!file_exists(ROOT_DOCUMENT 		.'/website/includes/footer.php')) 	@file_put_contents(ROOT_DOCUMENT . '/website/includes/footer.php', '<hr>Footer');
 		if (file_exists(ROOT_DOCUMENT 		.'/website/index.php')) 			@rename(ROOT_DOCUMENT . '/website/index.php', ROOT_DOCUMENT . '/website/index_bkp.php');
-																				@file_put_contents(ROOT_DOCUMENT 	.'/ws-bkp/.htaccess', 'RewriteEngine Off');
 																				@file_put_contents(ROOT_DOCUMENT 	.'/website/assets/.htaccess', 'RewriteEngine Off');
+
+	######################################################################################################################################
+	# CASO NÃO TENHA AINDA O ARQUIVOO NO LUGAR CERTO E ESTEJA FAZENDO UPDATE AO INVEZ DE INSTALL
+	######################################################################################################################################
+		file_put_contents(ROOT_DOCUMENT.'/ws-bkp/.htaccess', "<IfModule mod_rewrite.c>\nRewriteEngine On\nRewriteCond %{SCRIPT_FILENAME} !-f\nRewriteRule ^(.*)$ ws-download-template.php\n</IfModule>");
+		copy(ROOT_DOCUMENT."/admin/App/Lib/ws-download-template.php", ROOT_DOCUMENT."/ws-bkp/ws-download-template.php");
 
 	############################################################################################################################################
 	# SIMPLES FUNÇÃO QUE RETORNA UMA SENHA CRYPT COM MD5

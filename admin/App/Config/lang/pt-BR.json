@@ -338,7 +338,7 @@
 									"bots"		: {
 										"createCode":"Gerar código",
 										"copyCode":"Fechar modal",
-										"cancel":"Gerar código"
+										"cancel":"Cancelar"
 
 									}
 								},
